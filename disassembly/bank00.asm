@@ -1295,39 +1295,126 @@ CODE_00899F:
   REP #$20                                  ; $0089C9 |
   RTL                                       ; $0089CB |
 
-; pointer table (address - 1)
-; main ambient sprite routines
-ambient_sprite_main_routines:
-  dw $8CBE, $8D03, $8D36, $8D74             ; $0089CC |
-  dw $8D8E, $8DA4, $8DB1, $8DE6             ; $0089D4 |
-  dw $8DF7, $8E15, $8E36, $8E5D             ; $0089DC |
-  dw $8E7D, $8EEE, $8EFD, $8F0A             ; $0089E4 |
-  dw $8F3A, $8F69, $8F9A, $8FD1             ; $0089EC |
-  dw $9006, $9027, $9098, $90B9             ; $0089F4 |
-  dw $90C2, $AD09, $90F5, $912C             ; $0089FC |
-  dw $9153, $9518, $917A, $919F             ; $008A04 |
-  dw $91C6, $9219, $9253, $927C             ; $008A0C |
-  dw $92ED, $9375, $93A3, $93DD             ; $008A14 |
-  dw $9432, $9518, $9547, $955E             ; $008A1C |
-  dw $92AC, $92A4, $955E, $9518             ; $008A24 |
-  dw $9518, $9518, $9518, $9547             ; $008A2C |
-  dw $A7D9, $9530, $961A, $9530             ; $008A34 |
-  dw $9645, $95CB, $9530, $986C             ; $008A3C |
-  dw $986C, $9518, $958C, $986C             ; $008A44 |
-  dw $9575, $9575, $9518, $9547             ; $008A4C |
-  dw $9415, $9ADC, $9B12, $9530             ; $008A54 |
-  dw $9518, $9530, $9530, $955E             ; $008A5C |
-  dw $9B54, $9518, $9B87, $9BBB             ; $008A64 |
-  dw $9BE2, $9C1C, $9E91, $9518             ; $008A6C |
-  dw $9518, $951C, $A192, $A192             ; $008A74 |
-  dw $A550, $A56E, $A599, $9ADC             ; $008A7C |
-  dw $A6A8, $A6CD, $A834, $A6A8             ; $008A84 |
-  dw $A725, $9B54, $A758, $A775             ; $008A8C |
-  dw $9518, $A78C, $A7A3, $A7F6             ; $008A94 |
-  dw $9530, $9518, $A80D, $9518             ; $008A9C |
-  dw $8D95, $9219, $9518, $9518             ; $008AA4 |
-  dw $98AB, $9912, $9997, $9A18             ; $008AAC |
-  dw $9A65                                  ; $008AB4 |
+; ambient sprite routines
+; ambient sprite indices start from 1BA
+ambient_sprite_routines:
+  dw ambient_water_splash_transition-1      ; $0089CC | 1BA
+  dw ambient_water_splash_swimming-1        ; $0089CE | 1BB
+  dw ambient_bubble_in_water-1              ; $0089D0 | 1BC
+  dw ambient_eggshell-1                     ; $0089D2 | 1BD
+  dw ambient_small_bopping_ani-1            ; $0089D4 | 1BE
+  dw ambient_score_sprites-1                ; $0089D6 | 1BF
+  dw ambient_salvo_slime_smoke_puff-1       ; $0089D8 | 1C0
+  dw CODE_008DE7-1                          ; $0089DA | 1C1 - ?
+  dw ambient_transform_smoke_puff-1         ; $0089DC | 1C2
+  dw ambient_terrain_destroy_smoke_puff-1   ; $0089DE | 1C3
+  dw CODE_008E37-1                          ; $0089E0 | 1C4 - ?
+  dw ambient_train_enter_track_ani-1        ; $0089E2 | 1C5
+  dw ambient_train_transformation_smoke-1   ; $0089E4 | 1C6
+  dw ambient_floating_log_lava_drop-1       ; $0089E6 | 1C7
+  dw CODE_008EFE-1                          ; $0089E8 | 1C8 - ?
+  dw CODE_008F0B-1                          ; $0089EA | 1C9 - ?
+  dw ambient_snow_puff-1                    ; $0089EC | 1CA
+  dw CODE_008F6A-1                          ; $0089EE | 1CB - ?
+  dw ambient_dr_freezegood_bop-1            ; $0089F0 | 1CC
+  dw ambient_sparkles_1-1                   ; $0089F2 | 1CD
+  dw CODE_009007-1                          ; $0089F4 | 1CE - ?
+  dw CODE_009028-1                          ; $0089F6 | 1CF - ?
+  dw ambient_bubble_pop-1                   ; $0089F8 | 1D0
+  dw CODE_0090BA-1                          ; $0089FA | 1D1
+  dw ambient_lemon_drop_splatter-1          ; $0089FC | 1D2
+  dw ambient_bowser_aiming_reticle-1        ; $0089FE | 1D3
+  dw ambient_smoke_puff_1-1                 ; $008A00 | 1D4
+  dw ambient_bill_blaster_explosion-1       ; $008A02 | 1D5
+  dw ambient_lava_flames-1                  ; $008A04 | 1D6
+  dw CODE_009519-1                          ; $008A06 | 1D7 - bandit sweat drops
+  dw ambient_smoke_puff_ground-1            ; $008A08 | 1D8
+  dw CODE_0091A0-1                          ; $008A0A | 1D9 - ?
+  dw CODE_0091C7-1                          ; $008A0C | 1DA - ?
+  dw CODE_00921A-1                          ; $008A0E | 1DB - ?
+  dw ambient_ground_pound_smash_ani-1       ; $008A10 | 1DC
+  dw ambient_sparkles_2-1                   ; $008A12 | 1DD
+  dw CODE_0092EE-1                          ; $008A14 | 1DE - ?
+  dw ambient_smoke_puff_2-1                 ; $008A16 | 1DF
+  dw ambient_smoke_puff_lick-1              ; $008A18 | 1E0
+  dw ambient_baby_mario_bubble_burst-1      ; $008A1A | 1E1
+  dw ambient_aiming_reticle-1               ; $008A1C | 1E2
+  dw CODE_009519-1                          ; $008A1E | 1E3 - ?
+  dw CODE_009548-1                          ; $008A20 | 1E4 - Coin sparkle
+  dw CODE_00955F-1                          ; $008A22 | 1E5 - ?
+  dw ambient_large_smoke_puff-1             ; $008A24 | 1E6
+  dw CODE_0092A5-1                          ; $008A26 | 1E7 - checkered block activation splash effect
+  dw CODE_00955F-1                          ; $008A28 | 1E8 - Eggo-Dill (sprite $0EE) explosion splash
+  dw CODE_009519-1                          ; $008A2A | 1E9 - slugger hitting egg splash effect
+  dw CODE_009519-1                          ; $008A2C | 1EA - spear guy (sprites $0FB, $0FC) shield
+  dw CODE_009519-1                          ; $008A2E | 1EB - spear guy (sprites $0FB, $0FC) spear
+  dw CODE_009519-1                          ; $008A30 | 1EC - sparkle from bomb (sprite $060) falling
+  dw CODE_009548-1                          ; $008A32 | 1ED - Bomb (sprite $060) explosion
+  dw ambient_explosion_splash-1             ; $008A34 | 1EE
+  dw CODE_009531-1                          ; $008A36 | 1EF - Baron Von Zeppelin explosion
+  dw ambient_ice_watermelon_sparkle-1       ; $008A38 | 1F0
+  dw CODE_009531-1                          ; $008A3A | 1F1 - ?
+  dw ambient_ice_shards-1                   ; $008A3C | 1F2
+  dw ambient_crate_smash_planks-1           ; $008A3E | 1F3
+  dw CODE_009531-1                          ; $008A40 | 1F4 - flan (sprite $111) droplents
+  dw ambient_smoke_puff_3-1                 ; $008A42 | 1F5 - smoke from Snifit (sprite $113) breathing before shooting
+  dw ambient_smoke_puff_3-1                 ; $008A44 | 1F6 - puff from Snifit shooting
+  dw CODE_009519-1                          ; $008A46 | 1F7 - stilt guy's (sprite $0F2) stilt after jumping on it
+  dw ambient_lakitu_cloud_puff-1            ; $008A48 | 1F8
+  dw ambient_smoke_puff_3-1                 ; $008A4A | 1F9 - Puff from sprite $11A grabbing egg
+  dw ambient_lava_drop_fire-1               ; $008A4C | 1FA - from horiz lava drop (sprite $12F)
+  dw ambient_lava_drop_fire-1               ; $008A4E | 1FB - from vert lava drop (sprite $130)
+  dw CODE_009519-1                          ; $008A50 | 1FC - Fang (sprites $13D, $13E) path
+  dw CODE_009548-1                          ; $008A52 | 1FD - ?
+  dw CODE_009416-1                          ; $008A54 | 1FE - ?
+  dw CODE_009ADD-1                          ; $008A56 | 1FF - ?
+  dw ambient_arrow_cloud_arrow-1            ; $008A58 | 200
+  dw CODE_009531-1                          ; $008A5A | 201 - water splash (passing through current on ground/wall)
+  dw CODE_009519-1                          ; $008A5C | 202 - ?
+  dw CODE_009531-1                          ; $008A5E | 203 - ?
+  dw CODE_009531-1                          ; $008A60 | 204 - splash when hit by Spray fish's (sprite $143) water jet
+  dw CODE_00955F-1                          ; $008A62 | 205 - droplets when hit by Spray fish's jet
+  dw CODE_009B55-1                          ; $008A64 | 206 - bubbles at end of spray fish water jet
+  dw CODE_009519-1                          ; $008A66 | 207 - ?
+  dw ambient_bopping_ani-1                  ; $008A68 | 208
+  dw ambient_blowhard_stun_stars-1          ; $008A6A | 209
+  dw ambient_colored_block_break_puff-1     ; $008A6C | 20A
+  dw CODE_009C1D-1                          ; $008A6E | 20B - ?
+  dw ambient_break_stone_block_smoke_puff-1 ; $008A70 | 20C
+  dw CODE_009519-1                          ; $008A72 | 20D - Thunder Lakitu fireball growing
+  dw CODE_009519-1                          ; $008A74 | 20E - Thunder Lakitu fireball smoke puffs
+  dw ambient_lakitu_fireball_gen_flames-1   ; $008A76 | 20F
+  dw ambient_feather_like-1                 ; $008A78 | 210 - Crazee Dayzee petals
+  dw ambient_feather_like-1                 ; $008A7A | 211 - Para-koopa feathers
+  dw ambient_crazee_daisy_music_note-1      ; $008A7C | 212
+  dw ambient_ice_melting_ani-1              ; $008A7E | 213
+  dw ambient_snow_falling-1                 ; $008A80 | 214
+  dw CODE_009ADD-1                          ; $008A82 | 215
+  dw ambient_enemy_bopped_bones-1           ; $008A84 | 216 - Skeleton Goonie wings when jumped on
+  dw ambient_salvo_slime_drops-1            ; $008A86 | 217
+  dw ambient_baby_bowser_egg_explosion-1    ; $008A88 | 218
+  dw ambient_enemy_bopped_bones-1           ; $008A8A | 219 - Baby Mouser skull when jumped on
+  dw ambient_cork_smoke_puff-1              ; $008A8C | 21A
+  dw CODE_009B55-1                          ; $008A8E | 21B - Hot lips lava
+  dw CODE_00A759-1                          ; $008A90 | 21C - ?
+  dw CODE_00A776-1                          ; $008A92 | 21D - ?
+  dw CODE_009519-1                          ; $008A94 | 21E - Lava splash when spit lava hits Yoshi
+  dw CODE_00A78D-1                          ; $008A96 | 21F - ?
+  dw ambient_kamek_magic_sparkle-1          ; $008A98 | 220
+  dw ambient_froggy_stomach_acid_puff-1     ; $008A9A | 221
+  dw CODE_009531-1                          ; $008A9C | 222 - ?
+  dw CODE_009519-1                          ; $008A9E | 223 - Hookbill shell shards
+  dw ambient_red_switch_arrow-1             ; $008AA0 | 224
+  dw CODE_009519-1                          ; $008AA2 | 225
+  dw ambient_coin_get-1                     ; $008AA4 | 226
+  dw CODE_00921A-1                          ; $008AA6 | 227 - kamek 'anger' droplets (during baby bowser scene)
+  dw CODE_009519-1                          ; $008AA8 | 228 - ?
+  dw CODE_009519-1                          ; $008AAA | 229 - melon seed after hitting blocks
+  dw ambient_minigame_coin_cannon_puff-1    ; $008AAC | 22A
+  dw ambient_minigame_win_star_rising-1     ; $008AAE | 22B - spawns 22D
+  dw ambient_minigame_balloon_bop_loader-1  ; $008AB0 | 22C
+  dw ambient_minigame_win_full_star-1       ; $008AB2 | 22D
+  dw ambient_minigame_balloon_bop_effect-1  ; $008AB4 | 22E
 
 handle_ambient_sprites:
   PHB                                       ; $008AB6 |
@@ -1358,7 +1445,7 @@ execute_ambient_sprite_routine:
   ASL A                                     ; $008ADA |
   REP #$10                                  ; $008ADB |
   TAY                                       ; $008ADD |
-  LDA ambient_sprite_main_routines-$374,y   ; $008ADE |
+  LDA ambient_sprite_routines-($1BA*2),y    ; $008ADE |
   SEP #$10                                  ; $008AE1 |
   PHA                                       ; $008AE3 |
   RTS                                       ; $008AE4 |
@@ -1594,14 +1681,19 @@ CODE_008C7C:
   STA $7142,x                               ; $008C87 |
   RTS                                       ; $008C8A |
 
+DATA_008C8B:
   dw $0007, $0008, $0009, $000A             ; $008C8B |
   dw $0009, $0008, $0007, $0006             ; $008C93 |
   dw $0005, $0004, $0003, $0002             ; $008C9B |
-  dw $0001, $0003, $0004, $0005             ; $008CA3 |
-  dw $0004, $0003, $0003, $0003             ; $008CAB |
-  dw $0003, $0003, $0003, $0003             ; $008CB3 |
-  dw $0003, $0003                           ; $008CBB |
+  dw $0001                                  ; $008CA3 |
 
+DATA_008CA5:
+  dw $0003, $0004, $0005, $0004             ; $008CA5 |
+  dw $0003, $0003, $0003, $0003             ; $008CAD |
+  dw $0003, $0003, $0003, $0003             ; $008CB5 |
+  dw $0003                                  ; $008CBD |
+
+ambient_water_splash_transition:
   JSR CODE_008AE5                           ; $008CBF |
   LDA $7782,x                               ; $008CC2 |
   BNE CODE_008CDF                           ; $008CC5 |
@@ -1614,35 +1706,39 @@ CODE_008C7C:
 CODE_008CCF:
   STA $7E4C,x                               ; $008CCF |
   TAY                                       ; $008CD2 |
-  LDA $8C8B,y                               ; $008CD3 |
+  LDA DATA_008C8B,y                         ; $008CD3 |
   STA $73C2,x                               ; $008CD6 |
-  LDA $8CA5,y                               ; $008CD9 |
+  LDA DATA_008CA5,y                         ; $008CD9 |
   STA $7782,x                               ; $008CDC |
 
 CODE_008CDF:
   RTS                                       ; $008CDF |
 
+DATA_008CE0:
   dw $0000, $0002, $0001, $0001             ; $008CE0 |
   dw $0000, $0000, $0001, $0000             ; $008CE8 |
   dw $0000, $0000, $0000, $FFFF             ; $008CF0 |
   dw $0000, $0000, $FFFF, $FFFF             ; $008CF8 |
   dw $FFFE, $0000                           ; $008D00 |
 
+ambient_water_splash_swimming:
   JSR CODE_008AE5                           ; $008D04 |
-  LDA $7782,x                               ; $008D07 |
+  LDA $7782,x                               ; $008D07 | won't be 0 here, previous routine aborts by pulling return value if it is
   ASL A                                     ; $008D0A |
   TAY                                       ; $008D0B |
-  LDA $8CDE,y                               ; $008D0C |
+  LDA DATA_008CE0-2,y                       ; $008D0C |
   CLC                                       ; $008D0F |
   ADC $7142,x                               ; $008D10 |
   STA $7142,x                               ; $008D13 |
   RTS                                       ; $008D16 |
 
+DATA_008D17:
   dw $0001, $0000, $0000, $0000             ; $008D17 |
   dw $0000, $0000, $FFFF, $0000             ; $008D1F |
   dw $FFFF, $0000, $0000, $0000             ; $008D27 |
   dw $0000, $0000, $0001, $0000             ; $008D2F |
 
+ambient_bubble_in_water:
   JSR CODE_008AE5                           ; $008D37 |
   LDA $7822,x                               ; $008D3A |
   AND #$00FF                                ; $008D3D |
@@ -1668,10 +1764,11 @@ CODE_008D65:
   TAY                                       ; $008D69 |
   LDA $70A2,x                               ; $008D6A |
   CLC                                       ; $008D6D |
-  ADC $8D17,y                               ; $008D6E |
+  ADC DATA_008D17,y                         ; $008D6E |
   STA $70A2,x                               ; $008D71 |
   RTS                                       ; $008D74 |
 
+ambient_eggshell:
   JSR CODE_008AE5                           ; $008D75 |
   LDA $7782,x                               ; $008D78 |
   BNE CODE_008D89                           ; $008D7B |
@@ -1683,12 +1780,17 @@ CODE_008D65:
 CODE_008D89:
   RTS                                       ; $008D89 |
 
+DATA_008D8A:
   db $40,$40,$FF,$00,$00                    ; $008D8A |
 
+ambient_small_bopping_ani:
   JSR CODE_008AE5                           ; $008D8F |
   INC $73C2,x                               ; $008D92 |
   RTS                                       ; $008D95 |
 
+; red coin when collected
+; objects to coins at goal
+ambient_coin_get:
   JSR CODE_008AEC                           ; $008D96 |
   LDA $14                                   ; $008D99 |
   LSR A                                     ; $008D9B |
@@ -1698,12 +1800,17 @@ CODE_008D89:
   STA $73C2,x                               ; $008DA1 |
   RTS                                       ; $008DA4 |
 
+; +1 star sprite, 1up sprite
+ambient_score_sprites:
   JSR CODE_008AEC                           ; $008DA5 |
   RTS                                       ; $008DA8 |
 
-  db $02, $01, $00, $FF, $00, $06, $06, $06 ; $008DA9 |
-  db $03                                    ; $008DB1 |
+DATA_008DA9:
+  db $02, $01, $00, $FF, $00                ; $008DA9 |
+DATA_008DAE:
+  db $06, $06, $06, $03                     ; $008DAE |
 
+ambient_salvo_slime_smoke_puff:
   JSR CODE_008AE5                           ; $008DB2 |
   SEP #$20                                  ; $008DB5 |
   LDY $7E4C,x                               ; $008DB7 |
@@ -1719,11 +1826,11 @@ CODE_008D89:
   STA $7000,x                               ; $008DCE |
 
 CODE_008DD1:
-  LDA $8DAE,y                               ; $008DD1 |
+  LDA DATA_008DAE,y                         ; $008DD1 |
   STA $7782,x                               ; $008DD4 |
 
 CODE_008DD7:
-  LDA $8DA9,y                               ; $008DD7 |
+  LDA DATA_008DA9,y                         ; $008DD7 |
   STA $73C2,x                               ; $008DDA |
   BMI CODE_008DE1                           ; $008DDD |
   LDA #$06                                  ; $008DDF |
@@ -1735,6 +1842,7 @@ CODE_008DE4:
   REP #$20                                  ; $008DE4 |
   RTS                                       ; $008DE6 |
 
+CODE_008DE7:
   JSR CODE_008AE5                           ; $008DE7 |
   SEP #$20                                  ; $008DEA |
   LDA $7782,x                               ; $008DEC |
@@ -1745,6 +1853,7 @@ CODE_008DE4:
   REP #$20                                  ; $008DF5 |
   RTS                                       ; $008DF7 |
 
+ambient_transform_smoke_puff:
   DEC $7782,x                               ; $008DF8 |
   LDA $7782,x                               ; $008DFB |
   BNE CODE_008E03                           ; $008DFE |
@@ -1763,6 +1872,7 @@ CODE_008E0B:
   REP #$20                                  ; $008E13 |
   RTS                                       ; $008E15 |
 
+ambient_terrain_destroy_smoke_puff:
   JSR CODE_008AE5                           ; $008E16 |
   LDY $73C2,x                               ; $008E19 |
   LDA $7782,x                               ; $008E1C |
@@ -1780,6 +1890,7 @@ CODE_008E2F:
 
   db $09, $07, $06, $03, $02, $01, $00      ; $008E30 |
 
+CODE_008E37:
   JSR CODE_008AE5                           ; $008E37 |
   SEP #$20                                  ; $008E3A |
   LDY $7E4C,x                               ; $008E3C |
@@ -1800,6 +1911,7 @@ CODE_008E55:
 
   db $06, $06, $06, $06, $04, $03           ; $008E58 |
 
+ambient_train_enter_track_ani:
   JSR CODE_008AE5                           ; $008E5E |
   SEP #$20                                  ; $008E61 |
   LDY $73C2,x                               ; $008E63 |
@@ -1817,6 +1929,7 @@ CODE_008E77:
 
   db $06, $06, $05, $05                     ; $008E7A |
 
+ambient_train_transformation_smoke:
   JSR CODE_008AE5                           ; $008E7E |
   SEP #$20                                  ; $008E81 |
   LDY $73C2,x                               ; $008E83 |
@@ -1873,6 +1986,7 @@ CODE_008EB8:
   TYX                                       ; $008EED |
   RTS                                       ; $008EEE |
 
+ambient_floating_log_lava_drop:
   JSR CODE_008AE5                           ; $008EEF |
   LDA $71E2,x                               ; $008EF2 |
   BMI CODE_008EFD                           ; $008EF5 |
@@ -1882,6 +1996,7 @@ CODE_008EB8:
 CODE_008EFD:
   RTS                                       ; $008EFD |
 
+CODE_008EFE:
   JSR CODE_008AE5                           ; $008EFE |
   LDA $7782,x                               ; $008F01 |
   LSR A                                     ; $008F04 |
@@ -1890,6 +2005,7 @@ CODE_008EFD:
   STA $73C2,x                               ; $008F07 |
   RTS                                       ; $008F0A |
 
+CODE_008F0B:
   JSR CODE_008AE5                           ; $008F0B |
   LDA $7782,x                               ; $008F0E |
   CMP #$0008                                ; $008F11 |
@@ -1915,6 +2031,7 @@ CODE_008F2E:
   db $02, $02, $02, $01, $01, $01, $03, $03 ; $008F2F |
   db $03, $02, $02, $02                     ; $008F37 |
 
+ambient_snow_puff:
   JSR CODE_008AE5                           ; $008F3B |
   LDA $7782,x                               ; $008F3E |
   BNE CODE_008F5B                           ; $008F41 |
@@ -1936,6 +2053,7 @@ CODE_008F5B:
   db $05, $04, $03, $01, $01, $02, $01, $03 ; $008F5C |
   db $03, $03, $03, $03, $04, $04           ; $008F64 |
 
+CODE_008F6A:
   JSR CODE_008AE5                           ; $008F6A |
   LDA $7782,x                               ; $008F6D |
   BNE CODE_008F8A                           ; $008F70 |
@@ -1955,6 +2073,7 @@ CODE_008F8A:
   db $08, $07, $06, $05, $04, $03, $02, $01 ; $008F8B |
   db $40, $02, $02, $02, $02, $02, $02, $02 ; $008F93 |
 
+ambient_dr_freezegood_bop:
   JSR CODE_008AE5                           ; $008F9B |
   LDA $7782,x                               ; $008F9E |
   BNE CODE_008FBB                           ; $008FA1 |
@@ -1975,6 +2094,10 @@ CODE_008FBB:
   db $03, $02, $01, $04, $04, $04, $04, $04 ; $008FC4 |
   db $04, $03, $03, $02, $02, $01           ; $008FCC |
 
+; generated by getting a flower,
+; hitting ? cloud, GOAL disappearing,
+; using key
+ambient_sparkles_1:
   LDY $7E4E,x                               ; $008FD2 |
   BEQ CODE_008FE4                           ; $008FD5 |
   LDA $0B8F                                 ; $008FD7 |
@@ -2072,6 +2195,7 @@ CODE_00907A:
   db $02, $01, $05, $05, $05, $04, $04, $04 ; $00908D |
   db $03, $03, $02, $02                     ; $009095 |
 
+ambient_bubble_pop:
   JSR CODE_008AE5                           ; $009099 |
   LDA $7782,x                               ; $00909C |
   BNE CODE_0090B9                           ; $00909F |
@@ -2088,11 +2212,14 @@ CODE_00907A:
 CODE_0090B9:
   RTS                                       ; $0090B9 |
 
+; related to salvo slime boss
+CODE_0090BA:
   JSR CODE_008AEC                           ; $0090BA |
   RTS                                       ; $0090BD |
 
   db $06, $04, $04, $03, $03                ; $0090BE |
 
+ambient_lemon_drop_splatter:
   JSR CODE_008AE5                           ; $0090C3 |
   LDA $7782,x                               ; $0090C6 |
   BNE CODE_0090DF                           ; $0090C9 |
@@ -2112,7 +2239,10 @@ CODE_0090DF:
   db $0B, $0A, $09, $08, $07, $06, $05, $04 ; $0090E0 |
   db $03, $02, $01, $06, $06, $06, $06, $06 ; $0090E8 |
   db $06, $06, $03, $03, $03, $03           ; $0090F0 |
-
+; generated by winged clouds,
+; sprites to coins at goal,
+; transformation bubble when reappearing
+ambient_smoke_puff_1:
   LDY $7E4E,x                               ; $0090F6 |
   BEQ CODE_009100                           ; $0090F9 |
   JSR CODE_008AF2                           ; $0090FB |
@@ -2140,6 +2270,7 @@ CODE_009120:
   db $06, $05, $04, $03, $02, $01, $04, $08 ; $009121 |
   db $08, $08, $04, $02                     ; $009129 |
 
+ambient_bill_blaster_explosion:
   JSR CODE_008AE5                           ; $00912D |
   LDA $7782,x                               ; $009130 |
   BNE CODE_00914D                           ; $009133 |
@@ -2158,6 +2289,7 @@ CODE_00914D:
 
   db $03, $02, $01, $06, $04, $02           ; $00914E |
 
+ambient_lava_flames:
   JSR CODE_008AE5                           ; $009154 |
   LDA $7782,x                               ; $009157 |
   BNE CODE_009174                           ; $00915A |
@@ -2176,6 +2308,9 @@ CODE_009174:
 
   db $03, $02, $01, $06, $04, $02           ; $009175 |
 
+; puff from ground (pushing crates/pots,
+; baby bowser sliding)
+ambient_smoke_puff_ground:
   JSR CODE_008AE5                           ; $00917B |
   LDA $7782,x                               ; $00917E |
   BNE CODE_00919B                           ; $009181 |
@@ -2194,6 +2329,7 @@ CODE_00919B:
 
   db $02, $01, $0C, $08                     ; $00919C |
 
+CODE_0091A0:
   JSR CODE_008AE5                           ; $0091A0 |
   LDA $7782,x                               ; $0091A3 |
   BNE CODE_0091C0                           ; $0091A6 |
@@ -2212,6 +2348,7 @@ CODE_0091C0:
 
   db $03, $02, $01, $08, $08, $04           ; $0091C1 |
 
+CODE_0091C7:
   JSR CODE_008C12                           ; $0091C7 |
   LDA $75A0,x                               ; $0091CA |
   CMP $71E0,x                               ; $0091CD |
@@ -2254,6 +2391,7 @@ CODE_009213:
 
   db $03, $02, $01, $08, $08, $08           ; $009214 |
 
+CODE_00921A:
   JSR CODE_008C12                           ; $00921A |
   JSR CODE_008AF2                           ; $00921D |
   LDA $7782,x                               ; $009220 |
@@ -2275,6 +2413,7 @@ CODE_00923D:
   db $03, $02, $01, $01, $01, $01, $01, $01 ; $009246 |
   db $01, $01, $01, $01, $01, $02           ; $00924E |
 
+ambient_ground_pound_smash_ani:
   JSR CODE_008AE5                           ; $009254 |
   LDA $7782,x                               ; $009257 |
   BNE CODE_009274                           ; $00925A |
@@ -2293,6 +2432,13 @@ CODE_009274:
 
   db $04, $03, $02, $01, $06, $06, $06, $06 ; $009275 |
 
+
+; handles a lot of 'sparkles':
+; ground pound in air, baby mario flying
+; at goal, kamek magic, boss explosion,
+; transformation bubbles, minigame items,
+; stars
+ambient_sparkles_2:
   JSR CODE_008AE5                           ; $00927D |
   LDA $7782,x                               ; $009280 |
   BNE CODE_00929D                           ; $009283 |
@@ -2309,10 +2455,15 @@ CODE_009274:
 CODE_00929D:
   RTS                                       ; $00929D |
 
-  db $03, $03, $03, $03, $03, $03, $03, $AD ; $00929E |
-  db $8F, $0B, $F0, $03                     ; $0092A6 |
+DATA_00929E:
+  db $03, $03, $03, $03, $03, $03, $03      ; $00929E |
 
+CODE_0092A5:
+  LDA $0B8F                                 ; $0092A5 |
+  BEQ ambient_large_smoke_puff              ; $0092A8 |
   JSR CODE_008C12                           ; $0092AA |
+
+ambient_large_smoke_puff:
   JSR CODE_008AF2                           ; $0092AD |
   LDA $7782,x                               ; $0092B0 |
   BNE CODE_0092CB                           ; $0092B3 |
@@ -2322,7 +2473,7 @@ CODE_00929D:
   LDY $7E4C,x                               ; $0092BC |
   TYA                                       ; $0092BF |
   STA $73C2,x                               ; $0092C0 |
-  LDA $929E,y                               ; $0092C3 |
+  LDA DATA_00929E,y                         ; $0092C3 |
   STA $7782,x                               ; $0092C6 |
   REP #$20                                  ; $0092C9 |
 
@@ -2335,6 +2486,7 @@ CODE_0092CB:
   db $FE, $FF, $04, $00, $FE, $FF, $FC, $FF ; $0092E4 |
   db $FB, $FF                               ; $0092EC |
 
+CODE_0092EE:
   LDY $7E4E,x                               ; $0092EE |
   LDA !s_spr_facing_dir,y                   ; $0092F1 |
   STA $00                                   ; $0092F4 |
@@ -2411,7 +2563,9 @@ CODE_009370:
   RTS                                       ; $009370 |
 
   db $03, $02, $01, $00, $04                ; $009371 |
-
+; thrown egg, egg-spitting flower
+; lava death, burt flying away
+ambient_smoke_puff_2:
   LDY $7E4E,x                               ; $009376 |
   BEQ CODE_009380                           ; $009379 |
   JSR CODE_008AF2                           ; $00937B |
@@ -2438,6 +2592,9 @@ CODE_00939F:
 
   db $04, $03, $02, $01                     ; $0093A0 |
 
+; smoke puff generated when licking
+; something Yoshi can't eat
+ambient_smoke_puff_lick:
   JSR CODE_008AE5                           ; $0093A4 |
   LDA $7782,x                               ; $0093A7 |
   BNE CODE_0093C3                           ; $0093AA |
@@ -2459,6 +2616,7 @@ CODE_0093C3:
   db $03, $03, $02, $02, $02, $01, $03, $01 ; $0093D4 |
   db $01, $01                               ; $0093DC |
 
+ambient_baby_mario_bubble_burst:
   JSR CODE_008AF2                           ; $0093DE |
   LDA $7782,x                               ; $0093E1 |
   BNE CODE_00940F                           ; $0093E4 |
@@ -2488,6 +2646,7 @@ CODE_00940F:
 
   db $02, $04, $06, $0A, $06, $04           ; $009410 |
 
+CODE_009416:
   JSR CODE_008AE5                           ; $009416 |
   LDA $7782,x                               ; $009419 |
   BNE CODE_009432                           ; $00941C |
@@ -2504,6 +2663,7 @@ CODE_009426:
 CODE_009432:
   RTS                                       ; $009432 |
 
+ambient_aiming_reticle:
   LDA $7322,x                               ; $009433 |
   BPL CODE_009446                           ; $009436 |
   LDA $61CE                                 ; $009438 |
@@ -2620,9 +2780,11 @@ CODE_009515:
   STA $7E4C,x                               ; $009515 |
   RTS                                       ; $009518 |
 
+CODE_009519:
   JSR CODE_008AEC                           ; $009519 |
   RTS                                       ; $00951C |
 
+ambient_lakitu_fireball_gen_flames:
   JSR CODE_008AE5                           ; $00951D |
   LDA $7782,x                               ; $009520 |
   BNE CODE_00952D                           ; $009523 |
@@ -2636,7 +2798,7 @@ CODE_00952D:
 CODE_00952E:
   JMP CODE_008AF8                           ; $00952E |
 
-; an ambient sprite main routine
+CODE_009531:
   JSR CODE_008AE5                           ; $009531 |
   LDA $7782,x                               ; $009534 |
   BNE CODE_009544                           ; $009537 |
@@ -2651,7 +2813,7 @@ CODE_009544:
 CODE_009545:
   JMP CODE_008AF8                           ; $009545 |
 
-; an ambient sprite main routine
+CODE_009548:
   JSR CODE_008AE5                           ; $009548 |
   LDA $7782,x                               ; $00954B |
   BNE CODE_00955B                           ; $00954E |
@@ -2666,6 +2828,7 @@ CODE_00955B:
 CODE_00955C:
   JMP CODE_008AF8                           ; $00955C |
 
+CODE_00955F:
   JSR CODE_008AE5                           ; $00955F |
   LDA $7782,x                               ; $009562 |
   BNE CODE_009572                           ; $009565 |
@@ -2680,6 +2843,7 @@ CODE_009572:
 CODE_009573:
   JMP CODE_008AF8                           ; $009573 |
 
+ambient_lava_drop_fire:
   JSR CODE_008AE5                           ; $009576 |
   LDA $7782,x                               ; $009579 |
   BNE CODE_009589                           ; $00957C |
@@ -2694,6 +2858,7 @@ CODE_009589:
 CODE_00958A:
   JMP CODE_008AF8                           ; $00958A |
 
+ambient_lakitu_cloud_puff:
   JSR CODE_008AE5                           ; $00958D |
   LDA $7782,x                               ; $009590 |
   BNE CODE_0095A0                           ; $009593 |
@@ -2716,6 +2881,7 @@ CODE_0095A1:
   db $00, $00, $00, $00, $00, $00, $00, $00 ; $0095C0 |
   db $00, $80, $00, $80                     ; $0095C8 |
 
+ambient_crate_smash_planks:
   LDA $7322,x                               ; $0095CC |
   BMI CODE_0095F3                           ; $0095CF |
   LDY $7E4E,x                               ; $0095D1 |
@@ -2752,6 +2918,7 @@ CODE_009613:
 
   db $04, $03, $02, $01, $00, $00, $00      ; $009614 |
 
+ambient_ice_watermelon_sparkle:
   JSR CODE_008AE5                           ; $00961B |
   LDA $7782,x                               ; $00961E |
   BNE CODE_00963A                           ; $009621 |
@@ -2771,6 +2938,7 @@ CODE_00963A:
   db $04, $04, $04, $04, $04, $04, $04, $03 ; $00963B |
   db $03, $02, $02                          ; $009643 |
 
+ambient_ice_shards:
   PHX                                       ; $009646 |
   TXA                                       ; $009647 |
   AND #$00FF                                ; $009648 |
@@ -2883,6 +3051,7 @@ CODE_009687:
 
   db $08, $30, $44, $06, $00                ; $009868 |
 
+ambient_smoke_puff_3:
   JSR CODE_008AE5                           ; $00986D |
   LDA $7782,x                               ; $009870 |
   BNE CODE_009883                           ; $009873 |
@@ -2901,6 +3070,7 @@ CODE_009883:
   dw $0004, $0005, $0006, $0000             ; $00989C |
   dw $0001, $0002, $0001, $0003             ; $0098A4 |
 
+ambient_minigame_coin_cannon_puff:
   PHX                                       ; $0098AC |
   LDA $78C0,x                               ; $0098AD |
   STA !gsu_r1                               ; $0098B0 |  r1
@@ -2945,6 +3115,7 @@ CODE_00990F:
   STA $7782,x                               ; $00990F |
   RTS                                       ; $009912 |
 
+ambient_minigame_win_star_rising:
   JSR CODE_008AE5                           ; $009913 |
   LDA #$0001                                ; $009916 |
   STA $7782,x                               ; $009919 |
@@ -2997,6 +3168,7 @@ CODE_00995F:
   dw $0008, $0009, $000A, $000B             ; $00998A |
   dw $000C, $000E, $000D                    ; $009992 |
 
+ambient_minigame_balloon_bop_loader:
   JSR CODE_008AE5                           ; $009998 |
   LDA #$0002                                ; $00999B |
   STA $7782,x                               ; $00999E |
@@ -3052,6 +3224,7 @@ CODE_009A07:
   db $02, $03, $03, $03, $03, $20, $03, $03 ; $009A10 |
   db $03                                    ; $009A18 |
 
+ambient_minigame_win_full_star:
   JSR CODE_008AE5                           ; $009A19 |
   LDA #$0002                                ; $009A1C |
   STA $7782,x                               ; $009A1F |
@@ -3089,6 +3262,7 @@ CODE_009A61:
   STX $7E4A                                 ; $009A62 |
   RTS                                       ; $009A65 |
 
+ambient_minigame_balloon_bop_effect:
   JSR CODE_008AE5                           ; $009A66 |
   LDA #$0002                                ; $009A69 |
   STA $7782,x                               ; $009A6C |
@@ -3138,12 +3312,15 @@ CODE_009ABF:
   RTL                                       ; $009AD8 |
 
 DATA_009AD9:
-  db $40, $00, $C0, $FF, $20, $F2, $8A, $BD ; $009AD9 |
-  db $8E, $7E, $D0, $03                     ; $009AE1 |
+  db $40, $00, $C0, $FF                     ; $009AD9 |
 
-; dead code?
+CODE_009ADD:
+  JSR CODE_008AF2                           ; $009ADD |
+  LDA $7E8E,x                               ; $009AE0 |
+  BNE CODE_009AE8                           ; $009AE3 |
   JMP CODE_008AF8                           ; $009AE5 |
-; dead code?
+
+CODE_009AE8:
   CMP #$0040                                ; $009AE8 |
   BPL CODE_009AFA                           ; $009AEB |
   LDY #$FF                                  ; $009AED |
@@ -3168,8 +3345,8 @@ CODE_009AFA:
 
 CODE_009B12:
   RTS                                       ; $009B12 |
-; end dead code
 
+ambient_arrow_cloud_arrow:
   JSR CODE_008AE5                           ; $009B13 |
   LDY $7462,x                               ; $009B16 |
   CPY #$FF                                  ; $009B19 |
@@ -3204,21 +3381,30 @@ CODE_009B4F:
 CODE_009B52:
   RTS                                       ; $009B52 |
 
-  db $0C, $10, $20, $E5, $8A, $BD, $82, $77 ; $009B53 |
-  db $D0, $14, $DE, $C2, $73, $10, $03      ; $009B5B |
+DATA_009B53:
+  db $0C, $10                               ; $009B53 |
 
+CODE_009B55:
+  JSR CODE_008AE5                           ; $009B55 |
+  LDA $7782,x                               ; $009B58 |
+  BNE Return_009B71                         ; $009B5B |
+  DEC $73C2,x                               ; $009B5D |
+  BPL CODE_009B65                           ; $009B60 |
   JMP CODE_008AF8                           ; $009B62 |
 
+CODE_009B65:
   LDY $73C2,x                               ; $009B65 |
-  LDA $9B53,y                               ; $009B68 |
+  LDA DATA_009B53,y                         ; $009B68 |
   AND #$00FF                                ; $009B6B |
   STA $7782,x                               ; $009B6E |
+Return_009B71:
   RTS                                       ; $009B71 |
 
   db $03, $03, $03, $03, $03, $03, $03, $03 ; $009B72 |
   db $03, $02, $02, $02, $02, $02, $02, $02 ; $009B7A |
   db $02, $02, $02, $02, $02, $02           ; $009B82 |
 
+ambient_bopping_ani:
   JSR CODE_008AE5                           ; $009B88 |
   SEP #$20                                  ; $009B8B |
   LDA $7782,x                               ; $009B8D |
@@ -3250,6 +3436,7 @@ CODE_009BB6:
   REP #$20                                  ; $009BB9 |
   RTS                                       ; $009BBB |
 
+ambient_blowhard_stun_stars:
   JSR CODE_008AE5                           ; $009BBC |
   LDA $7782,x                               ; $009BBF |
   BNE CODE_009BC7                           ; $009BC2 |
@@ -3270,6 +3457,7 @@ CODE_009BDD:
 
   db $08, $06, $04, $02, $02                ; $009BDE |
 
+ambient_colored_block_break_puff:
   JSR CODE_008AE5                           ; $009BE3 |
   LDA $7782,x                               ; $009BE6 |
   BNE CODE_009C10                           ; $009BE9 |
@@ -3298,6 +3486,7 @@ CODE_009C10:
   db $03, $03, $03, $03, $03, $03           ; $009C11 |
   db $03, $02, $02, $02, $02, $02           ; $009C17 |
 
+CODE_009C1D:
   PHX                                       ; $009C1D |
   TXA                                       ; $009C1E |
   AND #$00FF                                ; $009C1F |
@@ -3423,6 +3612,7 @@ CODE_009C5E:
   db $03, $20, $44, $06, $00, $05, $25, $4F ; $009E88 |
   db $44, $00                               ; $009E90 |
 
+ambient_break_stone_block_smoke_puff:
   PHX                                       ; $009E92 |
   TXA                                       ; $009E93 |
   AND #$00FF                                ; $009E94 |
@@ -3568,6 +3758,7 @@ CODE_009ED2:
   db $04, $04, $04, $04, $04, $04, $04, $03 ; $00A184 |
   db $03, $03, $02, $02, $01, $01, $01      ; $00A18C |
 
+ambient_feather_like:
   PHX                                       ; $00A193 |
   TXA                                       ; $00A194 |
   STA !gsu_r10                              ; $00A195 |  r10
@@ -3741,8 +3932,10 @@ CODE_00A1D1:
 
   db $F9, $27, $01, $40, $00                ; $00A548 |
 
+DATA_00A54D:
   dw $F800, $0800                           ; $00A54D |
 
+ambient_crazee_daisy_music_note:
   JSR CODE_008AE5                           ; $00A551 |
   LDY #$00                                  ; $00A554 |
   LDA $7142,x                               ; $00A556 |
@@ -3752,12 +3945,14 @@ CODE_00A1D1:
   INY                                       ; $00A55F |
 
 CODE_00A560:
-  LDA $A54D,y                               ; $00A560 |
+  LDA DATA_00A54D,y                         ; $00A560 |
   STA $75A2,x                               ; $00A563 |
   RTS                                       ; $00A566 |
 
+DATA_00A567:
   db $07, $07, $05, $04, $04, $04, $04, $04 ; $00A567 |
 
+ambient_ice_melting_ani:
   JSR CODE_008AE5                           ; $00A56F |
   LDA $7782,x                               ; $00A572 |
   BNE CODE_00A58B                           ; $00A575 |
@@ -3767,7 +3962,7 @@ CODE_00A560:
 
 CODE_00A57F:
   LDY $73C2,x                               ; $00A57F |
-  LDA $A567,y                               ; $00A582 |
+  LDA DATA_00A567,y                         ; $00A582 |
   AND #$00FF                                ; $00A585 |
   STA $7782,x                               ; $00A588 |
 
@@ -3777,6 +3972,7 @@ CODE_00A58B:
   db $06, $06, $06, $06, $06, $05, $05, $05 ; $00A58C |
   db $05, $05, $05, $04, $04, $04           ; $00A594 |
 
+ambient_snow_falling:
   PHX                                       ; $00A59A |
   TXA                                       ; $00A59B |
   AND #$00FF                                ; $00A59C |
@@ -3862,6 +4058,7 @@ CODE_00A5DB:
   db $04, $1F, $F7, $46, $00                ; $00A69F |
   db $04, $21, $E1, $06, $00                ; $00A6A4 |
 
+ambient_enemy_bopped_bones:
   JSR CODE_008AE5                           ; $00A6A9 |
   LDA $7782,x                               ; $00A6AC |
   BNE CODE_00A6B4                           ; $00A6AF |
@@ -3884,6 +4081,7 @@ CODE_00A6CB:
 CODE_00A6CD:
   RTS                                       ; $00A6CD |
 
+ambient_salvo_slime_drops:
   JSR CODE_008AE5                           ; $00A6CE |
   LDA $7820,x                               ; $00A6D1 |
   AND #$0001                                ; $00A6D4 |
@@ -3914,33 +4112,44 @@ CODE_00A6FA:
 CODE_00A701:
   RTS                                       ; $00A701 |
 
+DATA_00A702:
   db $0A, $09, $08, $07, $06, $05, $04, $03 ; $00A702 |
   db $02, $01, $00, $00                     ; $00A70A |
 
+DATA_00A70E:
   db $04, $04, $03, $03, $02, $02, $01, $01 ; $00A70E |
   db $01, $01, $01, $01                     ; $00A716 |
 
+DATA_00A71A:
   db $01, $01, $01, $01, $01, $01, $01, $01 ; $00A71A |
-  db $01, $01, $FF, $01, $20, $E5, $8A, $BD ; $00A722 |
-  db $82, $77, $D0, $21, $DE, $4C, $7E, $10 ; $00A72A |
-  db $03                                    ; $00A732 |
+  db $01, $01, $FF, $01                     ; $00A722 |
 
+ambient_cork_smoke_puff:
+  JSR CODE_008AE5                           ; $00A726 |
+  LDA $7782,x                               ; $00A729 |
+  BNE CODE_00A74F                           ; $00A72C |
+  DEC $7E4C,x                               ; $00A72E |
+  BPL CODE_00A736                           ; $00A731 |
   JMP CODE_008AF8                           ; $00A733 |
 
+CODE_00A736:
   SEP #$20                                  ; $00A736 |
   LDY $7E4C,x                               ; $00A738 |
-  LDA $A702,y                               ; $00A73B |
+  LDA DATA_00A702,y                         ; $00A73B |
   STA $73C2,x                               ; $00A73E |
-  LDA $A70E,y                               ; $00A741 |
+  LDA DATA_00A70E,y                         ; $00A741 |
   STA $7782,x                               ; $00A744 |
-  LDA $A71A,y                               ; $00A747 |
+  LDA DATA_00A71A,y                         ; $00A747 |
   STA $7462,x                               ; $00A74A |
   REP #$20                                  ; $00A74D |
+CODE_00A74F:
   RTS                                       ; $00A74F |
 
+DATA_00A750:
   db $03, $03, $03, $03, $03, $03, $03, $02 ; $00A750 |
   db $02                                    ; $00A758 |
 
+CODE_00A759:
   JSR CODE_008AE5                           ; $00A759 |
   LDA $7782,x                               ; $00A75C |
   BNE CODE_00A775                           ; $00A75F |
@@ -3950,13 +4159,14 @@ CODE_00A701:
 
 CODE_00A769:
   LDY $73C2,x                               ; $00A769 |
-  LDA $A750,y                               ; $00A76C |
+  LDA DATA_00A750,y                         ; $00A76C |
   AND #$00FF                                ; $00A76F |
   STA $7782,x                               ; $00A772 |
 
 CODE_00A775:
   RTS                                       ; $00A775 |
 
+CODE_00A776:
   JSR CODE_008AE5                           ; $00A776 |
   LDA $7782,x                               ; $00A779 |
   BNE CODE_00A78C                           ; $00A77C |
@@ -3971,6 +4181,7 @@ CODE_00A786:
 CODE_00A78C:
   RTS                                       ; $00A78C |
 
+CODE_00A78D:
   JSR CODE_008AE5                           ; $00A78D |
   LDA $7782,x                               ; $00A790 |
   BNE CODE_00A7A3                           ; $00A793 |
@@ -3985,6 +4196,7 @@ CODE_00A79D:
 CODE_00A7A3:
   RTS                                       ; $00A7A3 |
 
+ambient_kamek_magic_sparkle:
   JSR CODE_008AE5                           ; $00A7A4 |
   LDA $7782,x                               ; $00A7A7 |
   BNE CODE_00A7D0                           ; $00A7AA |
@@ -4006,9 +4218,13 @@ CODE_00A7A3:
 CODE_00A7D0:
   RTS                                       ; $00A7D0 |
 
+DATA_00A7D1:
   db $03, $03, $02, $02, $02, $01, $01, $01 ; $00A7D1 |
   db $02                                    ; $00A7D9 |
 
+; splash effect from milde (sprite $0108)
+; or 1up balloon (sprite $08B) explosion
+ambient_explosion_splash:
   JSR CODE_008AE5                           ; $00A7DA |
   LDA $7782,x                               ; $00A7DD |
   BNE CODE_00A7F6                           ; $00A7E0 |
@@ -4018,13 +4234,14 @@ CODE_00A7D0:
 
 CODE_00A7EA:
   LDY $73C2,x                               ; $00A7EA |
-  LDA $A7D1,y                               ; $00A7ED |
+  LDA DATA_00A7D1,y                         ; $00A7ED |
   AND #$00FF                                ; $00A7F0 |
   STA $7782,x                               ; $00A7F3 |
 
 CODE_00A7F6:
   RTS                                       ; $00A7F6 |
 
+ambient_froggy_stomach_acid_puff:
   JSR CODE_008AE5                           ; $00A7F7 |
   LDA $7782,x                               ; $00A7FA |
   BNE CODE_00A80D                           ; $00A7FD |
@@ -4039,6 +4256,7 @@ CODE_00A807:
 CODE_00A80D:
   RTS                                       ; $00A80D |
 
+ambient_red_switch_arrow:
   JSR CODE_008AF2                           ; $00A80E |
   RTS                                       ; $00A811 |
 
@@ -4050,6 +4268,7 @@ CODE_00A80D:
   db $02, $02, $02, $02, $02, $02, $02, $02 ; $00A82C |
   db $02                                    ; $00A834 |
 
+ambient_baby_bowser_egg_explosion:
   LDY $7E4C,x                               ; $00A835 |
   LDA $A811,y                               ; $00A838 |
   BMI CODE_00A890                           ; $00A83B |
@@ -4367,6 +4586,7 @@ CODE_00A8AD:
   db $08, $FB, $E0, $02, $00                ; $00AD00 |
   db $03, $03, $7B, $07, $00                ; $00AD05 |
 
+ambient_bowser_aiming_reticle:
   LDA $7322,x                               ; $00AD0A |
   BMI CODE_00AD61                           ; $00AD0D |
   REP #$10                                  ; $00AD0F |
