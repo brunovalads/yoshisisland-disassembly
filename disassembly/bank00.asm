@@ -631,26 +631,26 @@ SPC700Upload:
 
 ; SPC data block pointers
 SPC_ptr:
-  dl $4E0000                                ; $0084AC |
-  dl $4E169C                                ; $0084AF |
-  dl $4E23BF                                ; $0084B2 |
-  dl $4E2C39                                ; $0084B5 |
-  dl $4E38D2                                ; $0084B8 |
-  dl $4ED0FE                                ; $0084BB |
-  dl $4ED5D0                                ; $0084BE |
-  dl $4EE279                                ; $0084C1 |
-  dl $4EEC85                                ; $0084C4 |
-  dl $4F4122                                ; $0084C7 |
-  dl $4F5C48                                ; $0084CA |
-  dl $4F6E5A                                ; $0084CD |
-  dl $4F82E6                                ; $0084D0 |
-  dl $4FFCB2                                ; $0084D3 |
-  dl $500342                                ; $0084D6 |
-  dl $4F33F0                                ; $0084D9 |
-  dl $4EFEC1                                ; $0084DC |
-  dl $4F205D                                ; $0084DF |
-  dl $4E3E90                                ; $0084E2 |
-  dl $4EBBEC                                ; $0084E5 |
+  dl hirom_mirror($1C8000)                  ; $0084AC |
+  dl hirom_mirror($1C969C)                  ; $0084AF |
+  dl hirom_mirror($1CA3BF)                  ; $0084B2 |
+  dl hirom_mirror($1CAC39)                  ; $0084B5 |
+  dl hirom_mirror($1CB8D2)                  ; $0084B8 |
+  dl hirom_mirror($1DD0FE)                  ; $0084BB |
+  dl hirom_mirror($1DD5D0)                  ; $0084BE |
+  dl hirom_mirror($1DE279)                  ; $0084C1 |
+  dl hirom_mirror($1DEC85)                  ; $0084C4 |
+  dl hirom_mirror($1EC122)                  ; $0084C7 |
+  dl hirom_mirror($1EDC48)                  ; $0084CA |
+  dl hirom_mirror($1EEE5A)                  ; $0084CD |
+  dl hirom_mirror($1F82E6)                  ; $0084D0 |
+  dl hirom_mirror($1FFCB2)                  ; $0084D3 |
+  dl hirom_mirror($208342)                  ; $0084D6 |
+  dl hirom_mirror($1EB3F0)                  ; $0084D9 |
+  dl hirom_mirror($1DFEC1)                  ; $0084DC |
+  dl hirom_mirror($1EA05D)                  ; $0084DF |
+  dl hirom_mirror($1CBE90)                  ; $0084E2 |
+  dl hirom_mirror($1DBBEC)                  ; $0084E5 |
 
 ; SPC data block sets (4 bytes per)
 spc_data_blocks:
@@ -775,7 +775,7 @@ upload_music_data:
 ; takes sound ID as argument in accumulator
 push_sound_queue:
   LDY !r_sound_queue_size                   ; $0085D2 |\
-  STA !r_sound_queue,y                      ; $0085D5 | | Push sound into sound queue
+  STA !r_sound_queue,y                      ; $0085D5 | | Push sound into sound queue according to queue size
   INC !r_sound_queue_size                   ; $0085D8 | | Increment queue size
   RTL                                       ; $0085DB |/
 
@@ -847,7 +847,7 @@ CODE_008640:
   LDA !s_spr_anim_frame,x                   ; $00864D |
   CMP #$0004                                ; $008650 |
   BNE CODE_008669                           ; $008653 |
-  LDA #$005B                                ; $008655 |\ play sound #$005B
+  LDA #$005B                                ; $008655 |\ play sound #$5B
   JSL push_sound_queue                      ; $008658 |/
   LDA #$0082                                ; $00865C |
   STA $704070                               ; $00865F |
@@ -3107,7 +3107,7 @@ CODE_009A8F:
   STA $7462,x                               ; $009AAB |
   LDA #$0040                                ; $009AAE |
   STA $7E8E,x                               ; $009AB1 |
-  LDA #$0008                                ; $009AB4 |\ play sound #$0008
+  LDA #$0008                                ; $009AB4 |\ play sound #$08
   JSL push_sound_queue                      ; $009AB7 |/
   STX $7E4A                                 ; $009ABB |
   RTL                                       ; $009ABE |
@@ -3118,7 +3118,7 @@ CODE_009A8F:
   STZ $7502,x                               ; $009AC8 |
   LDA #$0000                                ; $009ACB |
   STA $7462,x                               ; $009ACE |
-  LDA #$003F                                ; $009AD1 |\ play sound #$003F
+  LDA #$003F                                ; $009AD1 |\ play sound #$3F
   JSL push_sound_queue                      ; $009AD4 |/
   RTL                                       ; $009AD8 |
 
@@ -6261,33 +6261,33 @@ NMI:
   LDY !reg_rdnmi                            ; $00C010 | clear NMI flag
   LDX !r_interrupt_mode                     ; $00C013 |
   JSR ($C074,x)                             ; $00C016 |
-  LDA $4D                                   ; $00C019 |\ Check if music track to be played
+  LDA !r_apu_io_0_mirror_dp                 ; $00C019 |\ Check if music track to be played
   BNE play_music_track                      ; $00C01B |/
   LDX !reg_apu_port0                        ; $00C01D |\
-  CPX $4F                                   ; $00C020 | | If music track ID is same as previous frame, skip processing
+  CPX !r_apu_io_0_mirror_prev_dp            ; $00C020 | | If music track ID is same as previous frame, skip processing
   BNE handle_sound                          ; $00C022 |/
 
 play_music_track:
   STA !reg_apu_port0                        ; $00C024 |\  Send music track ID
-  STA $4F                                   ; $00C027 | | Copy to precious frame
-  STZ $4D                                   ; $00C029 |/  Clear music track ID
+  STA !r_apu_io_0_mirror_prev_dp            ; $00C027 | | Copy to precious frame
+  STZ !r_apu_io_0_mirror_dp                 ; $00C029 |/  Clear music track ID
 
 handle_sound:
-  LDA $51                                   ; $00C02B |\
+  LDA !r_apu_io_1_mirror_dp                 ; $00C02B |\
   STA !reg_apu_port1                        ; $00C02D | | Play pseudo-noise sound and clear mirror
-  STZ $51                                   ; $00C030 |/
+  STZ !r_apu_io_1_mirror_dp                 ; $00C030 |/
   LDA !reg_apu_port3                        ; $00C032 |\
-  CMP $55                                   ; $00C035 | | If current playing sound is same as previous frame then return
+  CMP !r_apu_io_2_mirror_prev_dp            ; $00C035 | | If current playing sound is same as previous frame then return
   BNE .ret                                  ; $00C037 |/
-  LDY $53                                   ; $00C039 |\
+  LDY !r_apu_io_2_mirror_dp                 ; $00C039 |\
   BEQ .check_sound_queue                    ; $00C03B |/  Check if immediate sound to be played this frame
-  CMP $53                                   ; $00C03D |\
+  CMP !r_apu_io_2_mirror_dp                 ; $00C03D |\
   BEQ .clear_sound                          ; $00C03F | | If sound ID is same as current, clear it
-  STZ $53                                   ; $00C041 | | Otherwise just play sound ID
+  STZ !r_apu_io_2_mirror_dp                 ; $00C041 | | Otherwise just play sound ID
   BRA .play_sound                           ; $00C043 |/
 
 .check_sound_queue
-  LDX $57                                   ; $00C045 |\
+  LDX !r_sound_queue_size_dp                ; $00C045 |\
   BEQ .play_sound                           ; $00C047 |/ Check if sound queue is empty
   CMP !r_sound_queue_dp                     ; $00C049 |\
   BNE .check_sound_queue_size               ; $00C04B |/ Check if sound ID is same as current sound
@@ -6303,20 +6303,20 @@ handle_sound:
   LDX #$06                                  ; $00C056 |/
 
 .process_sound_queue
-  STX $57                                   ; $00C058 | New sound queue size
+  STX !r_sound_queue_size_dp                ; $00C058 | New sound queue size
   LDY !r_sound_queue_dp                     ; $00C05A | Sound ID to be played
   LDX #$00                                  ; $00C05C |
 
 .pop_sound_queue
-  LDA $5A,x                                 ; $00C05E |\
+  LDA !r_sound_queue_dp+1,x                 ; $00C05E |\
   STA !r_sound_queue_dp,x                   ; $00C060 | | Shuffle all values down the queue
   INX                                       ; $00C062 | |
-  CPX $57                                   ; $00C063 |/
+  CPX !r_sound_queue_size_dp                ; $00C063 |/
   BCC .pop_sound_queue                      ; $00C065 |
 
 .play_sound
   STY !reg_apu_port3                        ; $00C067 | APU I/O 3 mirror (play sound)
-  STY $55                                   ; $00C06A | Copy to previous frame sound ID
+  STY !r_apu_io_2_mirror_prev_dp            ; $00C06A | Copy to previous frame sound ID
 
 .ret
   REP #$30                                  ; $00C06C |
@@ -6501,7 +6501,7 @@ CODE_00C1DF:
   STZ !reg_hdmaen                           ; $00C231 | Disable HDMA
   LDA $1139                                 ; $00C234 |
   BEQ CODE_00C23B                           ; $00C237 |
-  STA $51                                   ; $00C239 |
+  STA !r_apu_io_1_mirror_dp                 ; $00C239 |
 
 CODE_00C23B:
   LDA !r_reg_cgadsub_mirror                 ; $00C23B |
@@ -9462,7 +9462,7 @@ CODE_00DF7A:
   AND #$FFF0                                ; $00DF86 |
   STA $0002                                 ; $00DF89 |
   JSL $03A520                               ; $00DF8C |
-  LDA #$0009                                ; $00DF90 |\ play sound #$0009
+  LDA #$0009                                ; $00DF90 |\ play sound #$09
   JSL push_sound_queue                      ; $00DF93 |/
 
 CODE_00DF97:
@@ -9502,7 +9502,7 @@ CODE_00DFCD:
   RTS                                       ; $00DFE1 |
 
 CODE_00DFE2:
-  LDA #$0093                                ; $00DFE2 |
+  LDA #$0093                                ; $00DFE2 |\ play sound #$93
   INC !r_red_coins_amount                   ; $00DFE5 |
   LDY !r_red_coins_amount                   ; $00DFE8 |
   CPY #$0014                                ; $00DFEB |
@@ -9510,7 +9510,7 @@ CODE_00DFE2:
   INC A                                     ; $00DFF0 |
 
 CODE_00DFF1:
-  JSL push_sound_queue                      ; $00DFF1 |
+  JSL push_sound_queue                      ; $00DFF1 |/
   LDA #$0002                                ; $00DFF5 |
   STA $0006                                 ; $00DFF8 |
   SEP #$10                                  ; $00DFFB |
@@ -9859,8 +9859,8 @@ CODE_00E270:
   BCC CODE_00E2B3                           ; $00E27B |
 
 CODE_00E27D:
-  LDA #$0036                                ; $00E27D |
-  JSR CODE_00E372                           ; $00E280 |
+  LDA #$0036                                ; $00E27D |\ play sound #$36
+  JSR push_sound_queue_pres_x               ; $00E280 |/
   STZ $03A9                                 ; $00E283 |
   LDA !r_stars_amount                       ; $00E286 |
   CLC                                       ; $00E289 |
@@ -9912,8 +9912,8 @@ CODE_00E2CC:
   LDA !r_stars_amount                       ; $00E2E5 |
   CMP #$0064                                ; $00E2E8 |
   BNE CODE_00E32C                           ; $00E2EB |
-  LDA #$0032                                ; $00E2ED |
-  JSR CODE_00E372                           ; $00E2F0 |
+  LDA #$0032                                ; $00E2ED |\ play sound #$32
+  JSR push_sound_queue_pres_x               ; $00E2F0 |/
   BRA CODE_00E32C                           ; $00E2F3 |
 
 CODE_00E2F5:
@@ -9935,8 +9935,8 @@ CODE_00E2F5:
   AND #$00FF                                ; $00E31E |
   BNE CODE_00E32C                           ; $00E321 |
   INC $03AB                                 ; $00E323 |
-  LDA #$0024                                ; $00E326 |
-  JSR CODE_00E372                           ; $00E329 |
+  LDA #$0024                                ; $00E326 |\ play sound #$24 (empty?)
+  JSR push_sound_queue_pres_x               ; $00E329 |/
 
 CODE_00E32C:
   LDX #$0000                                ; $00E32C |
@@ -9978,12 +9978,14 @@ CODE_00E36F:
   SEP #$10                                  ; $00E36F |
   RTS                                       ; $00E371 |
 
-CODE_00E372:
-  PHX                                       ; $00E372 |
-  LDX $57                                   ; $00E373 |\
-  STA !r_sound_queue_dp,x                   ; $00E375 | | play sound
-  INC $57                                   ; $00E377 |/
-  PLX                                       ; $00E379 |
+; it's push_sound_queue but preserving X and using DP addressing
+; takes sound ID as argument in accumulator
+push_sound_queue_pres_x:
+  PHX                                       ; $00E372 |\  Preserve X
+  LDX !r_sound_queue_size_dp                ; $00E373 | | Get sound queue size
+  STA !r_sound_queue_dp,x                   ; $00E375 | | Push sound into queue according to queue size
+  INC !r_sound_queue_size_dp                ; $00E377 | | Increment queue size
+  PLX                                       ; $00E379 |/
   RTS                                       ; $00E37A |
 
 prepare_tilemap_dma_queue_l:
@@ -10030,9 +10032,10 @@ prepare_tilemap_dma_queue:
   RTS                                       ; $00E3CD |/ And return
 
 ; DMA queue address
-  dl $7E4800                                ; $00E3CE |
-  dl $11B72A                                ; $00E3D1 |
-  dl $11B744                                ; $00E3D4 |
+  dw $4800                                  ; $00E3CE |
+
+; DMA queue bank
+  db $7E,$2A,$B7,$11,$44,$B7,$11            ; $00E3D0 |
 
 process_vram_dma_queue_l:
   PHB                                       ; $00E3D7 |

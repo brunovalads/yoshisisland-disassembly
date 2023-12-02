@@ -781,8 +781,8 @@ CODE_108964:
   BRA CODE_108985                           ; $10897C |
 
 CODE_10897E:
-  LDA #$09                                  ; $10897E |
-  STA $53                                   ; $108980 |
+  LDA #$09                                  ; $10897E |\ play sound #$09
+  STA !r_apu_io_2_mirror_dp                 ; $108980 |/ bypassing push_sound_queue
   INC !r_game_mode                          ; $108982 |
 
 CODE_108985:
@@ -1023,7 +1023,7 @@ unpack_level_header:
   PHB                                       ; $108B61 |
   PHK                                       ; $108B62 |
   PLB                                       ; $108B63 |
-  JSL $109257                               ; $108B64 |
+  JSL CODE_109257                           ; $108B64 |
   REP #$20                                  ; $108B68 |
   PHB                                       ; $108B6A |
   LDX #$70                                  ; $108B6B |
@@ -2033,6 +2033,7 @@ load_partial_row:
   BNE load_partial_row                      ; $109254 |/ of the column
   RTS                                       ; $109256 |
 
+CODE_109257:
   LDA #$00                                  ; $109257 |
   STA $02                                   ; $109259 |
   REP #$30                                  ; $10925B |
@@ -2040,17 +2041,17 @@ load_partial_row:
 
 CODE_109260:
   STX $03                                   ; $109260 |
-  LDA $4CD61A,x                             ; $109262 |
+  LDA.l hirom_mirror(DATA_19D61A),x         ; $109262 |
   AND #$00FF                                ; $109266 |
   BEQ CODE_109292                           ; $109269 |
   TAY                                       ; $10926B |
-  LDA $4CD61B,x                             ; $10926C |
+  LDA.l hirom_mirror(DATA_19D61A+1),x       ; $10926C |
   STA $00                                   ; $109270 |
   LDA !r_header_bg1_tileset                 ; $109272 |
   ASL A                                     ; $109275 |
   ADC $03                                   ; $109276 |
   TAX                                       ; $109278 |
-  LDA $4CD61D,x                             ; $109279 |
+  LDA.l hirom_mirror(DATA_19D61A+3),x       ; $109279 |
   TYX                                       ; $10927D |
   LDY #$0000                                ; $10927E |
 
@@ -3060,7 +3061,7 @@ CODE_109A49:
   XBA                                       ; $109A53 |
   ASL A                                     ; $109A54 |
   TAX                                       ; $109A55 |
-  LDA $4C32A4,x                             ; $109A56 |
+  LDA hirom_mirror(map16_pg_data_offsets),x ; $109A56 |
   STA $00                                   ; $109A5A |
   TYA                                       ; $109A5C |
   AND #$00FF                                ; $109A5D |
@@ -4024,7 +4025,7 @@ CODE_10A3AA:
   INC A                                     ; $10A3B4 |
   CMP $A2E9,x                               ; $10A3B5 |
   BNE CODE_10A39A                           ; $10A3B8 |
-  LDA #$0020                                ; $10A3BA |\ play sound #$0020
+  LDA #$0020                                ; $10A3BA |\ play sound #$20
   JSL push_sound_queue                      ; $10A3BD |/
   LDX #$0000                                ; $10A3C1 |
   STX $10F0                                 ; $10A3C4 |
@@ -4131,7 +4132,7 @@ CODE_10A480:
   SBC #$0421                                ; $10A48C |
   STA !r_reg_coldata_mirror                 ; $10A48F |
   BNE CODE_10A4CB                           ; $10A492 |
-  LDA #$0046                                ; $10A494 |\ play sound #$0046
+  LDA #$0046                                ; $10A494 |\ play sound #$46
   JSL push_sound_queue                      ; $10A497 |/
   INC $10DE                                 ; $10A49B |
   LDY !r_bonus_game_type                    ; $10A49E |
@@ -4175,7 +4176,7 @@ CODE_10A4EB:
   STA $3B                                   ; $10A4F2 |
   STA $3F                                   ; $10A4F4 |
   BNE CODE_10A514                           ; $10A4F6 |
-  LDA #$0046                                ; $10A4F8 |\ play sound #$0046
+  LDA #$0046                                ; $10A4F8 |\ play sound #$46
   JSL push_sound_queue                      ; $10A4FB |/
   INC $10DE                                 ; $10A4FF |
   STZ $10EC                                 ; $10A502 |
@@ -4226,7 +4227,7 @@ CODE_10A534:
   STA $3B                                   ; $10A56B |
   STA $3F                                   ; $10A56D |
   BPL CODE_10A5A4                           ; $10A56F |
-  LDA #$0046                                ; $10A571 |\ play sound #$0046
+  LDA #$0046                                ; $10A571 |\ play sound #$46
   JSL push_sound_queue                      ; $10A574 |/
   STZ $10EA                                 ; $10A578 |
   STZ $3B                                   ; $10A57B |
@@ -4587,7 +4588,7 @@ CODE_10A838:
   LDA !r_joy1_hi_press                      ; $10A83A |
   AND #$0F                                  ; $10A83D |
   BEQ CODE_10A7FD                           ; $10A83F |
-  LDA #$5C                                  ; $10A841 |\ play sound #$005C
+  LDA #$5C                                  ; $10A841 |\ play sound #$5C
   JSL push_sound_queue                      ; $10A843 |/
   LDA !r_joy1_hi_press                      ; $10A847 |
   AND #$03                                  ; $10A84A |
@@ -4805,7 +4806,7 @@ CODE_10A9DC:
 CODE_10A9F0:
   SEP #$20                                  ; $10A9F0 |
   DEC $1102                                 ; $10A9F2 |
-  LDA #$08                                  ; $10A9F5 |\ play sound #$0008
+  LDA #$08                                  ; $10A9F5 |\ play sound #$08
   JSL push_sound_queue                      ; $10A9F7 |/
   REP #$20                                  ; $10A9FB |
   INC !r_extra_lives                        ; $10A9FD |
@@ -5012,7 +5013,7 @@ CODE_10AC4F:
   BRA CODE_10AC5C                           ; $10AC57 |
 
 CODE_10AC59:
-  LDA #$008F                                ; $10AC59 |\ play sound #$008F
+  LDA #$008F                                ; $10AC59 |\ play sound #$8F
 
 CODE_10AC5C:
   JSL push_sound_queue                      ; $10AC5C |/
@@ -5249,7 +5250,7 @@ CODE_10AE99:
   LDA !s_player_cur_anim_frame              ; $10AE99 |
   CMP #$0034                                ; $10AE9C |
   BNE CODE_10AEBE                           ; $10AE9F |
-  LDA #$004A                                ; $10AEA1 |\ play sound #$004A
+  LDA #$004A                                ; $10AEA1 |\ play sound #$4A
   JSL push_sound_queue                      ; $10AEA4 |/
   LDA !r_bonus_game_type                    ; $10AEA8 |
   CMP #$0006                                ; $10AEAB |
@@ -5302,7 +5303,7 @@ CODE_10AEF1:
   LDA $10DE                                 ; $10AF04 |
   CMP #$0011                                ; $10AF07 |
   BEQ CODE_10AF31                           ; $10AF0A |
-  LDA #$0067                                ; $10AF0C |\ play sound #$0067
+  LDA #$0067                                ; $10AF0C |\ play sound #$67
   JSL push_sound_queue                      ; $10AF0F |/
   INC $10DE                                 ; $10AF13 |
   BRA CODE_10AF31                           ; $10AF16 |
@@ -5363,7 +5364,7 @@ CODE_10AF5E:
   LDA #$0100                                ; $10AF79 |
   STA $10F4                                 ; $10AF7C |
   JSR CODE_10B54F                           ; $10AF7F |
-  LDA #$0008                                ; $10AF82 |\ play sound #$0008
+  LDA #$0008                                ; $10AF82 |\ play sound #$08
   JSL push_sound_queue                      ; $10AF85 |/
   LDA #$0011                                ; $10AF89 |
   STA $10DE                                 ; $10AF8C |
@@ -5464,7 +5465,7 @@ CODE_10B02D:
   REP #$30                                  ; $10B036 |
   LDA #$0100                                ; $10B038 |
   STA $10F4                                 ; $10B03B |
-  LDA #$0051                                ; $10B03E |\ play sound #$0051
+  LDA #$0051                                ; $10B03E |\ play sound #$51
   JSL push_sound_queue                      ; $10B041 |/
 
 CODE_10B045:
@@ -5491,7 +5492,7 @@ CODE_10B050:
   LDA $10F4                                 ; $10B065 |
   CMP #$0150                                ; $10B068 |
   BNE CODE_10B079                           ; $10B06B |
-  LDA #$0053                                ; $10B06D |\ play sound #$0053
+  LDA #$0053                                ; $10B06D |\ play sound #$53
   JSL push_sound_queue                      ; $10B070 |/
   INC $1184                                 ; $10B074 |
   BRA CODE_10B080                           ; $10B077 |
@@ -5508,7 +5509,7 @@ CODE_10B080:
   BNE CODE_10B09A                           ; $10B089 |
   INC $1186                                 ; $10B08B |
   INC $1188                                 ; $10B08E |
-  LDA #$0004                                ; $10B091 |\ play sound #$0004
+  LDA #$0004                                ; $10B091 |\ play sound #$04
   JSL push_sound_queue                      ; $10B094 |/
   BRA CODE_10B0A4                           ; $10B098 |
 
@@ -5574,7 +5575,7 @@ CODE_10B0D3:
   STA $118E                                 ; $10B10F |
   STZ $1190                                 ; $10B112 |
   JSR CODE_10AB3F                           ; $10B115 |
-  LDA #$0051                                ; $10B118 |\ play sound #$0051
+  LDA #$0051                                ; $10B118 |\ play sound #$51
   JSL push_sound_queue                      ; $10B11B |/
   INC $1184                                 ; $10B11F |
 
@@ -5641,7 +5642,7 @@ CODE_10B19A:
   LDA $1190                                 ; $10B19D |
   AND #$0001                                ; $10B1A0 |
   BNE CODE_10B1B1                           ; $10B1A3 |
-  LDA #$0007                                ; $10B1A5 |\ play sound #$0007
+  LDA #$0007                                ; $10B1A5 |\ play sound #$07
   JSL push_sound_queue                      ; $10B1A8 |/
   BRA CODE_10B1B1                           ; $10B1AC |
 
@@ -5951,7 +5952,7 @@ CODE_10B41F:
   STA $7224                                 ; $10B457 |
   LDA #$0200                                ; $10B45A |
   STA $7226                                 ; $10B45D |
-  LDA #$0019                                ; $10B460 |\ play sound #$0019
+  LDA #$0019                                ; $10B460 |\ play sound #$19
   JSL push_sound_queue                      ; $10B463 |/
   INC $1188                                 ; $10B467 |
 
@@ -6317,12 +6318,12 @@ CODE_10B82C:
   LDA $111E,x                               ; $10B833 |
   AND #$00FF                                ; $10B836 |
   BEQ CODE_10B844                           ; $10B839 |
-  LDA #$002A                                ; $10B83B |\ play sound #$002A
+  LDA #$002A                                ; $10B83B |\ play sound #$2A
   JSL push_sound_queue                      ; $10B83E |/
   BRA CODE_10B8B5                           ; $10B842 |
 
 CODE_10B844:
-  LDA #$0009                                ; $10B844 |\ play sound #$0009
+  LDA #$0009                                ; $10B844 |\ play sound #$09
   JSL push_sound_queue                      ; $10B847 |/
   LDY #$000A                                ; $10B84B |
   STY $10F0                                 ; $10B84E |
@@ -6448,7 +6449,7 @@ CODE_10B927:
   LDX $1114                                 ; $10B94B |
   LDY $1115,x                               ; $10B94E |
   BEQ CODE_10B955                           ; $10B951 |
-  LDA #$8F                                  ; $10B953 |\ play sound #$008F
+  LDA #$8F                                  ; $10B953 |\ play sound #$8F
 
 CODE_10B955:
   JSL push_sound_queue                      ; $10B955 |/
@@ -6500,11 +6501,11 @@ CODE_10B993:
   STZ $A4                                   ; $10B9B0 |
   STZ $A5                                   ; $10B9B2 |
   STZ $A6                                   ; $10B9B4 |
-  LDA $B9E4,y                               ; $10B9B6 |
-  CPY #$00                                  ; $10B9B9 |
-  BNE CODE_10B9C5                           ; $10B9BB |
-  PHY                                       ; $10B9BD |
-  JSL push_sound_queue                      ; $10B9BE |
+  LDA $B9E4,y                               ; $10B9B6 |\
+  CPY #$00                                  ; $10B9B9 | |
+  BNE CODE_10B9C5                           ; $10B9BB | | play sound according to Scratch and Match result
+  PHY                                       ; $10B9BD | |
+  JSL push_sound_queue                      ; $10B9BE |/
   PLY                                       ; $10B9C2 |
   BRA CODE_10B9C8                           ; $10B9C3 |
 
@@ -6527,8 +6528,10 @@ CODE_10B9C8:
 
   db $00, $01, $02, $05                     ; $10B9E0 |
 
-  db $7D, $05, $05, $05, $06, $00, $04, $00 ; $10B9E4 |
-  db $04, $00, $04, $00                     ; $10B9EC |
+
+  db $7D, $05, $05, $05                     ; $10B9E4 |
+
+  dw $0006, $0004, $0004, $0004             ; $10B9E8 | Yoshi state pointer index ($10F0) for Scratch and Match result 
 
   db $78, $78, $78, $78                     ; $10B9F0 |
 
@@ -6555,7 +6558,7 @@ CODE_10BA12:
   CPY #$03E7                                ; $10BA15 |
   BEQ CODE_10BA07                           ; $10BA18 |
   PHA                                       ; $10BA1A |
-  LDA #$0008                                ; $10BA1B |\ play sound #$0008
+  LDA #$0008                                ; $10BA1B |\ play sound #$08
   JSL push_sound_queue                      ; $10BA1E |/
   PLA                                       ; $10BA22 |
   LDY #$0030                                ; $10BA23 |
@@ -6742,7 +6745,7 @@ CODE_10BB5D:
   STA $10F6                                 ; $10BB60 |
   LDA $B638,y                               ; $10BB63 |
   STA $10F7                                 ; $10BB66 |
-  LDA #$5C                                  ; $10BB69 |\ play sound #$005C
+  LDA #$5C                                  ; $10BB69 |\ play sound #$5C
   JSL push_sound_queue                      ; $10BB6B |/
 
 CODE_10BB6F:
@@ -7131,7 +7134,7 @@ CODE_10BE6B:
   STX $1141                                 ; $10BE6B |
   CPX $00                                   ; $10BE6E |
   BEQ CODE_10BEBA                           ; $10BE70 |
-  LDA #$5C                                  ; $10BE72 |\ play sound #$005C
+  LDA #$5C                                  ; $10BE72 |\ play sound #$5C
   JSL push_sound_queue                      ; $10BE74 |/
   BRA CODE_10BEBA                           ; $10BE78 |
 
@@ -7149,7 +7152,7 @@ CODE_10BE88:
   BNE CODE_10BEBA                           ; $10BE8E |
   INC $114A,x                               ; $10BE90 |
   JSR CODE_10BECF                           ; $10BE93 |
-  LDA #$33                                  ; $10BE96 |\ play sound #$0033
+  LDA #$33                                  ; $10BE96 |\ play sound #$33
   JSL push_sound_queue                      ; $10BE98 |/
   REP #$30                                  ; $10BE9C |
   JSR CODE_10C33D                           ; $10BE9E |
@@ -7267,7 +7270,7 @@ CODE_10BF60:
   LDA $1133,y                               ; $10BF60 |
   CMP #$68                                  ; $10BF63 |
   BCC CODE_10BF7C                           ; $10BF65 |
-  LDA #$06                                  ; $10BF67 |\ play sound #$0006
+  LDA #$06                                  ; $10BF67 |\ play sound #$06
   JSL push_sound_queue                      ; $10BF69 |/
   JSR CODE_10BF82                           ; $10BF6D |
   TXA                                       ; $10BF70 |
@@ -7563,7 +7566,7 @@ CODE_10C1F7:
   BRA CODE_10C212                           ; $10C202 |
 
 CODE_10C204:
-  LDA #$7D                                  ; $10C204 |\ play sound #$007D
+  LDA #$7D                                  ; $10C204 |\ play sound #$7D
   JSL push_sound_queue                      ; $10C206 |/
   REP #$30                                  ; $10C20A |
   LDX #$0006                                ; $10C20C |
@@ -7594,7 +7597,7 @@ CODE_10C231:
   INC !r_extra_lives                        ; $10C23C |
   JSR CODE_109D74                           ; $10C23F |
   SEP #$20                                  ; $10C242 |
-  LDA #$08                                  ; $10C244 |\ play sound #$0008
+  LDA #$08                                  ; $10C244 |\ play sound #$08
   JSL push_sound_queue                      ; $10C246 |/
   REP #$20                                  ; $10C24A |
   LDA #$0030                                ; $10C24C |
@@ -7895,7 +7898,7 @@ CODE_10C4EF:
   SEP #$20                                  ; $10C4EF |
   LDA #$01                                  ; $10C4F1 |
   STA $1165                                 ; $10C4F3 |
-  LDA #$1C                                  ; $10C4F6 |\ play sound #$001C
+  LDA #$1C                                  ; $10C4F6 |\ play sound #$1C
   JSL push_sound_queue                      ; $10C4F8 |/
   REP #$30                                  ; $10C4FC |
   LDA #$0008                                ; $10C4FE |
@@ -7943,7 +7946,7 @@ CODE_10C53B:
   BEQ CODE_10C557                           ; $10C54C |
 
 CODE_10C54E:
-  LDA #$09                                  ; $10C54E |\ play sound #$0009
+  LDA #$09                                  ; $10C54E |\ play sound #$09
   JSL push_sound_queue                      ; $10C550 |/
 
 CODE_10C554:
@@ -8032,7 +8035,7 @@ CODE_10C5EA:
   BRA CODE_10C5F6                           ; $10C5EE |
 
 CODE_10C5F0:
-  LDA #$7D                                  ; $10C5F0 |\ play sound #$007D
+  LDA #$7D                                  ; $10C5F0 |\ play sound #$7D
   JSL push_sound_queue                      ; $10C5F2 |/
 
 CODE_10C5F6:
@@ -8479,7 +8482,7 @@ CODE_10C960:
 CODE_10C96C:
   TXY                                       ; $10C96C |
   PHY                                       ; $10C96D |
-  LDA #$50                                  ; $10C96E |\ play sound #$0050
+  LDA #$50                                  ; $10C96E |\ play sound #$50
   JSL push_sound_queue                      ; $10C970 |/
   PLY                                       ; $10C974 |
   LDA $1166,x                               ; $10C975 |
@@ -9160,7 +9163,7 @@ CODE_10CF43:
   LDA !r_joy1_lo_press                      ; $10CF65 |
   AND #$C080                                ; $10CF68 |
   BEQ CODE_10CF92                           ; $10CF6B |
-  LDA #$0009                                ; $10CF6D |\ play sound #$0009
+  LDA #$0009                                ; $10CF6D |\ play sound #$09
   JSL push_sound_queue                      ; $10CF70 |/
   LDY #$000A                                ; $10CF74 |
   STY $10F0                                 ; $10CF77 |
@@ -9230,7 +9233,7 @@ CODE_10CFDD:
   STA $10F6                                 ; $10CFE0 |
   LDA $CD83,y                               ; $10CFE3 |
   STA $10F7                                 ; $10CFE6 |
-  LDA #$5C                                  ; $10CFE9 |\ play sound #$005C
+  LDA #$5C                                  ; $10CFE9 |\ play sound #$5C
   JSL push_sound_queue                      ; $10CFEB |/
 
 CODE_10CFEF:
@@ -9242,7 +9245,7 @@ CODE_10CFEF:
   BNE CODE_10D006                           ; $10CFF7 |
   LDA #$20                                  ; $10CFF9 |
   STA $110F                                 ; $10CFFB |
-  LDA #$32                                  ; $10CFFE |\ play sound #$0032
+  LDA #$32                                  ; $10CFFE |\ play sound #$32
   JSL push_sound_queue                      ; $10D000 |/
   BRA CODE_10D009                           ; $10D004 |
 
@@ -9322,7 +9325,7 @@ CODE_10D076:
   BRA CODE_10D0A9                           ; $10D09D |
 
 CODE_10D09F:
-  LDA #$007D                                ; $10D09F |\ play sound #$007D
+  LDA #$007D                                ; $10D09F |\ play sound #$7D
   JSL push_sound_queue                      ; $10D0A2 |/
   LDY #$0006                                ; $10D0A6 |
 
@@ -9641,7 +9644,7 @@ CODE_10D30A:
   LDA #$00FF                                ; $10D31D |
   STA $1192                                 ; $10D320 |
   STA $1194                                 ; $10D323 |
-  LDA #$008F                                ; $10D326 |\ play sound #$008F
+  LDA #$008F                                ; $10D326 |\ play sound #$8F
   JSL push_sound_queue                      ; $10D329 |/
   LDA #$0090                                ; $10D32D |
   STA $10E0                                 ; $10D330 |
@@ -9659,13 +9662,13 @@ CODE_10D341:
   LDA $1184                                 ; $10D346 |
   CMP #$0002                                ; $10D349 |
   BNE CODE_10D35A                           ; $10D34C |
-  LDA #$007D                                ; $10D34E |\ play sound #$007D
+  LDA #$007D                                ; $10D34E |\ play sound #$7D
   JSL push_sound_queue                      ; $10D351 |/
   LDA #$000D                                ; $10D355 |
   BRA CODE_10D364                           ; $10D358 |
 
 CODE_10D35A:
-  LDA #$0090                                ; $10D35A |\ plays sound #$0090
+  LDA #$0090                                ; $10D35A |\ plays sound #$90
   JSL push_sound_queue                      ; $10D35D |/
   LDA #$000F                                ; $10D361 |
 
@@ -9883,7 +9886,7 @@ CODE_10D515:
   STX $10F8                                 ; $10D516 |
 
 CODE_10D519:
-  LDA #$5C                                  ; $10D519 |\ play sound #$005C
+  LDA #$5C                                  ; $10D519 |\ play sound #$5C
   JSL push_sound_queue                      ; $10D51B |/
   RTS                                       ; $10D51F |
 
@@ -10181,7 +10184,7 @@ CODE_10D770:
 CODE_10D78C:
   DEC $114E                                 ; $10D78C |
   INC !r_extra_lives                        ; $10D78F |
-  LDA #$0008                                ; $10D792 |\ play sound #$0008
+  LDA #$0008                                ; $10D792 |\ play sound #$08
   JSL push_sound_queue                      ; $10D795 |/
   JSR CODE_109D74                           ; $10D799 |
   LDA #$0030                                ; $10D79C |
@@ -10198,7 +10201,7 @@ CODE_10D7A2:
 CODE_10D7AD:
   DEC $1164                                 ; $10D7AD |
   BMI CODE_10D7BE                           ; $10D7B0 |
-  LDA #$0050                                ; $10D7B2 |\ play sound #$0050
+  LDA #$0050                                ; $10D7B2 |\ play sound #$50
   JSL push_sound_queue                      ; $10D7B5 |/
   INC $10DE                                 ; $10D7B9 |
   BRA CODE_10D7D3                           ; $10D7BC |
@@ -10410,7 +10413,7 @@ CODE_10D926:
   LDA $1156,x                               ; $10D955 |
   STA $10F3                                 ; $10D958 |
   JSR CODE_10D97A                           ; $10D95B |
-  LDA #$0050                                ; $10D95E |\ play sound #$0050
+  LDA #$0050                                ; $10D95E |\ play sound #$50
   JSL push_sound_queue                      ; $10D961 |/
   LDA #$0013                                ; $10D965 |
   BRA CODE_10D976                           ; $10D968 |
@@ -10469,7 +10472,7 @@ CODE_10D9C2:
   STA $1192                                 ; $10D9D3 |
   STZ $1164                                 ; $10D9D6 |
   JSR CODE_10D7D4                           ; $10D9D9 |
-  LDA #$0050                                ; $10D9DC |\ play sound #$0050
+  LDA #$0050                                ; $10D9DC |\ play sound #$50
   JSL push_sound_queue                      ; $10D9DF |/
   BRA CODE_10D9EE                           ; $10D9E3 |
 
@@ -10580,9 +10583,9 @@ CODE_10DAF8:
   LDA #$7FFF                                ; $10DAF8 |
   STA !s_cgram_mirror,x                     ; $10DAFB |
   STA $702D6C,x                             ; $10DAFF |
-  LDA $5FEC4A,x                             ; $10DB03 |
+  LDA hirom_mirror($3FEC4A),x               ; $10DB03 |
   STA $702F6C,x                             ; $10DB07 |
-  LDA $5FED4A,x                             ; $10DB0B |
+  LDA hirom_mirror($3FED4A),x               ; $10DB0B |
   STA $70306C,x                             ; $10DB0F |
   STA $702100,x                             ; $10DB13 |
   STA $702E6C,x                             ; $10DB17 |
@@ -11111,7 +11114,8 @@ CODE_10DF95:
 
   db $50, $50, $50, $50, $70, $70, $70, $70 ; $10DFAF |
 
-  db $43, $00, $2E, $00                     ; $10DFB7 |
+try_again_sounds_b10:
+  dw $0043, $002E                           ; $10DFB7 | Yes: Yoshi sound, No: Bucket sound
 
   LDA $37                                   ; $10DFBB |
   AND #$C0                                  ; $10DFBD |
@@ -11122,8 +11126,8 @@ CODE_10DF95:
   INC $8F                                   ; $10DFC7 |
   LDA #$5C                                  ; $10DFC9 |
   LDX $00C3                                 ; $10DFCB |
-  LDA $DFB7,x                               ; $10DFCE |
-  STA $53                                   ; $10DFD1 |
+  LDA try_again_sounds_b10,x                ; $10DFCE |\ play try again sounds from table (#$43 or #$2E)
+  STA !r_apu_io_2_mirror_dp                 ; $10DFD1 |/ bypassing push_sound_queue
   BRA CODE_10DFE7                           ; $10DFD3 |
 
 CODE_10DFD5:
@@ -11134,8 +11138,8 @@ CODE_10DFD5:
   EOR #$02                                  ; $10DFDD |
   AND #$02                                  ; $10DFDF |
   STA $C3                                   ; $10DFE1 |
-  LDA #$5C                                  ; $10DFE3 |
-  STA $53                                   ; $10DFE5 |
+  LDA #$5C                                  ; $10DFE3 |\ play sound #$5C
+  STA !r_apu_io_2_mirror_dp                 ; $10DFE5 |/ bypassing push_sound_queue
 
 CODE_10DFE7:
   REP #$20                                  ; $10DFE7 |
@@ -11422,7 +11426,7 @@ CODE_10E20B:
   LDX #$01FE                                ; $10E218 |
 
 CODE_10E21B:
-  LDA $5FEE4A,x                             ; $10E21B |
+  LDA hirom_mirror($3FEE4A),x               ; $10E21B |
   STA $701600,x                             ; $10E21F |
   STA $701800,x                             ; $10E223 |
   DEX                                       ; $10E227 |
@@ -11901,7 +11905,7 @@ CODE_10E5FE:
   LDX #$0000                                ; $10E626 |
 
 CODE_10E629:
-  LDA $5FF04A,x                             ; $10E629 |
+  LDA hirom_mirror($3FF04A),x               ; $10E629 |
   STA $701A00,x                             ; $10E62D |
   INX                                       ; $10E631 |
   INX                                       ; $10E632 |
@@ -11998,7 +12002,7 @@ CODE_10E6E6:
   LDX #$0000                                ; $10E6E9 |
 
 CODE_10E6EC:
-  LDA $5FF24A,x                             ; $10E6EC |
+  LDA hirom_mirror($3FF24A),x               ; $10E6EC |
   STA $701A00,x                             ; $10E6F0 |
   INX                                       ; $10E6F4 |
   INX                                       ; $10E6F5 |
@@ -12228,7 +12232,7 @@ CODE_10E876:
   LDX #$0000                                ; $10E8BA |
 
 CODE_10E8BD:
-  LDA $5FF24A,x                             ; $10E8BD |
+  LDA hirom_mirror($3FF24A),x               ; $10E8BD |
   STA $701A00,x                             ; $10E8C1 |
   INX                                       ; $10E8C5 |
   INX                                       ; $10E8C6 |
@@ -12237,13 +12241,13 @@ CODE_10E8BD:
   LDX #$0000                                ; $10E8CC |
 
 CODE_10E8CF:
-  LDA $5FF44A,x                             ; $10E8CF |
+  LDA hirom_mirror($3FF44A),x               ; $10E8CF |
   STA $701A80,x                             ; $10E8D3 |
   INX                                       ; $10E8D7 |
   INX                                       ; $10E8D8 |
   CPX #$0020                                ; $10E8D9 |
   BCC CODE_10E8CF                           ; $10E8DC |
-  LDA $5FF44A                               ; $10E8DE |
+  LDA hirom_mirror($3FF44A)                 ; $10E8DE |
   STA $701A00                               ; $10E8E2 |
   JSR CODE_10E5FE                           ; $10E8E6 |
   SEP #$10                                  ; $10E8E9 |
@@ -12282,7 +12286,7 @@ CODE_10E921:
   LDX #$0000                                ; $10E924 |
 
 CODE_10E927:
-  LDA $5FF24A,x                             ; $10E927 |
+  LDA hirom_mirror($3FF24A),x               ; $10E927 |
   STA $701A00,x                             ; $10E92B |
   INX                                       ; $10E92F |
   INX                                       ; $10E930 |
@@ -12295,7 +12299,7 @@ CODE_10E927:
   LDX #$00                                  ; $10E941 |
 
 CODE_10E943:
-  LDA $5FF1CA,x                             ; $10E943 |
+  LDA hirom_mirror($3FF1CA),x               ; $10E943 |
   STA $701A00,x                             ; $10E947 |
   INX                                       ; $10E94B |
   INX                                       ; $10E94C |

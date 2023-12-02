@@ -4,6 +4,9 @@ incsrc vars/ram_vars.asm
 incsrc vars/sram_vars.asm
 incsrc vars/sprite_table_vars.asm
 
+; also, functions
+incsrc macros.asm
+
 incsrc bank00.asm
 incsrc bank01.asm
 incsrc bank02.asm
