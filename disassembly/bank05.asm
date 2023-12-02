@@ -4877,6 +4877,7 @@ CODE_05A5E8:
   JSR CODE_05A990                           ; $05A5E8 |
   JSR CODE_05A800                           ; $05A5EB |
   JMP CODE_05A352                           ; $05A5EE |
+
   TYX                                       ; $05A5F1 |
   LDA !s_player_x                           ; $05A5F2 |
   CMP #$0300                                ; $05A5F5 |
@@ -14864,8 +14865,8 @@ CODE_05F2F6:
   STA !gsu_r1                               ; $05F327 |
   LDA !s_spr_wildcard_2_lo,x                ; $05F32A |
   STA !gsu_r6                               ; $05F32D |
-  LDX #$A90B                                ; $05F330 |
-  STA $85,x                                 ; $05F333 |
+  LDX #$0B                                  ; $05F330 |
+  LDA #$8595                                ; $05F332 |
   JSL r_gsu_init_1                          ; $05F335 | GSU init
   LDX $12                                   ; $05F339 |
   LDA !gsu_r1                               ; $05F33B |

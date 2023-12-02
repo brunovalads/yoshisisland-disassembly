@@ -5885,21 +5885,21 @@ CODE_0AD00D:
   db $FF	; IWT R15,#$xxxx
 
 CODE_0AD051:
-  dl $01D642                                ; $0AD051 |
-  dl $01D51C                                ; $0AD054 |
-  dl $01D61B                                ; $0AD057 |
-  dl $01D64B                                ; $0AD05A |
-  dl $01D669                                ; $0AD05D |
-  dl $01E20F                                ; $0AD060 |
-  dl $01E459                                ; $0AD063 |
-  dl $01E3C5                                ; $0AD066 |
-  dl $01E4BA                                ; $0AD069 |
-  dl $01DD9F                                ; $0AD06C |
-  dl $01D679                                ; $0AD06F |
-  dl $01DD91                                ; $0AD072 |
-  dl $01E385                                ; $0AD075 |
-  dl $01E148                                ; $0AD078 |
-  dl $01E580                                ; $0AD07B |
+  dw $D642 : NOP                            ; $0AD051 |
+  dw $D51C : NOP                            ; $0AD054 |
+  dw $D61B : NOP                            ; $0AD057 |
+  dw $D64B : NOP                            ; $0AD05A |
+  dw $D669 : NOP                            ; $0AD05D |
+  dw $E20F : NOP                            ; $0AD060 |
+  dw $E459 : NOP                            ; $0AD063 |
+  dw $E3C5 : NOP                            ; $0AD066 |
+  dw $E4BA : NOP                            ; $0AD069 |
+  dw $DD9F : NOP                            ; $0AD06C |
+  dw $D679 : NOP                            ; $0AD06F |
+  dw $DD91 : NOP                            ; $0AD072 |
+  dw $E385 : NOP                            ; $0AD075 |
+  dw $E148 : NOP                            ; $0AD078 |
+  dw $E580 : NOP                            ; $0AD07B |
 
 CODE_0AD07E:
   inc r1                                    ; $0AD07E |
