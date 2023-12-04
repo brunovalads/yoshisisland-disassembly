@@ -4,6 +4,7 @@ org $008000
 
 arch 65816
 
+yi_reset:
   SEI                                       ; $008000 |  Disable IRQ
   REP #$09                                  ; $008001 |\ Disable emulation mode
   XCE                                       ; $008003 |/
@@ -40,25 +41,25 @@ arch 65816
   LDA #$01FF                                ; $00804E |\ Set up the stack
   TCS                                       ; $008051 |/
   SEP #$20                                  ; $008052 |
-  JSL $0082D0                               ; $008054 |  init RAM and SRAM
+  JSL CODE_0082D0                           ; $008054 |  init RAM and SRAM
   LDX #$10                                  ; $008058 |\ Upload SPC engine
   JSL set_level_music                       ; $00805A |/
   REP #$20                                  ; $00805E |
   LDX #$0F                                  ; $008060 |\
 
 CODE_008062:
-  LDA $813F,x                               ; $008062 | |
+  LDA CODE_00813F,x                         ; $008062 | |
   STA $0100,x                               ; $008065 | | copy $008140~$00814E to $0101~$010F
   DEX                                       ; $008068 | |
   DEX                                       ; $008069 | |
   BPL CODE_008062                           ; $00806A |/
-  LDA #$C000                                ; $00806C |\
+  LDA #(NMI&$FFFF)                          ; $00806C |\
   STA $20                                   ; $00806F | |
   LDY #$7E                                  ; $008071 | |
   STY $22                                   ; $008073 | |
-  LDA #$C000                                ; $008075 | | DMA $00C000~$00FFFF to $7EC000~$7EFFFF
+  LDA.w #(NMI&$FFFF)                        ; $008075 | | DMA $00C000~$00FFFF to $7EC000~$7EFFFF
   STA $23                                   ; $008078 | |
-  LDY #$00                                  ; $00807A | |
+  LDY.b #(NMI>>16)                          ; $00807A | |
   STY $25                                   ; $00807C | |
   LDA #$4000                                ; $00807E | |
   JSL dma_wram_gen_purpose                  ; $008081 |/
@@ -105,7 +106,7 @@ CODE_0080C9:
   STA $707E76                               ; $0080DE | |
   STA $707E78                               ; $0080E2 | |
   STA $707E7A                               ; $0080E6 |/
-  JSL $108000                               ; $0080EA |  generate new checksum
+  JSL CODE_108000                           ; $0080EA |  generate new checksum
   SEP #$20                                  ; $0080EE |
 
 CODE_0080F0:
@@ -154,11 +155,12 @@ CODE_008130:
   REP #$20                                  ; $008130 |\
   INC !r_frame_counter_global_dp            ; $008132 | | Frame beginning
   SEP #$20                                  ; $008134 | |
-  JSL $008150                               ; $008136 |/ execute game mode code
+  JSL run_current_gamemode                  ; $008136 |/ execute game mode code
 
 CODE_00813A:
   DEC !r_game_loop_complete                 ; $00813A |\ end and begin new frame
   BRA GameLoop                              ; $00813D |/
+CODE_00813F:
   RTI                                       ; $00813F |
 
 ; this is data copied to RAM to be executed as code later
@@ -170,94 +172,99 @@ CODE_00813A:
   NOP                                       ; $008144 | | db $00,$C0,$7E,$5C,$E8,$C3,$7E
   NOP                                       ; $008145 | |
   NOP                                       ; $008146 | |
-  JML $7EC000                               ; $008147 | | jump to NMI
-  JML $7EC3E8                               ; $00814B |/ jump to IRQ
+  JML rom_to_wram_rt($7E,NMI)               ; $008147 | | jump to NMI
+  JML rom_to_wram_rt($7E,IRQ_Handler)       ; $00814B |/ jump to IRQ
+unused_interrupt:
   RTI                                       ; $00814F |
+
+run_current_gamemode:
   LDA !r_game_mode                          ; $008150 |\ get game mode pointer
   ASL A                                     ; $008153 | |
   ADC !r_game_mode                          ; $008154 | |
   TAX                                       ; $008157 | |
   PHB                                       ; $008158 | |
-  LDA $816C,x                               ; $008159 | |\
+  LDA.w game_mode_pointers+2,x              ; $008159 | |\
   PHA                                       ; $00815C | | | set pointer bank
   PHA                                       ; $00815D | | |
   PLB                                       ; $00815E | |/
-  LDA $00816B,x                             ; $00815F | |\
+  LDA.l game_mode_pointers+1,x              ; $00815F | |\
   PHA                                       ; $008163 | | | set pointer address
-  LDA $00816A,x                             ; $008164 | | |
+  LDA.l game_mode_pointers,x                ; $008164 | | |
   PHA                                       ; $008168 | |/
   RTL                                       ; $008169 |/ jump to game mode pointer
 
-GameModePtr:
-  dl $10838A                                ; $00816A | $00: Prepare Nintendo Presents
-  dl $10891D                                ; $00816D | $01: Load Nintendo Presents
-  dl $0083EF                                ; $008170 | $02: Fade into Nintendo Presents
-  dl $1083E6                                ; $008173 | $03: Nintendo Presents
-  dl $0083CC                                ; $008176 | $04: Fade out of Nintendo Presents
-  dl $0FBDBD                                ; $008179 | $05: Load cutscene
-  dl $0083CC                                ; $00817C | $06: Fade into cutscene
-  dl $0FBEB9                                ; $00817F | $07: Cutscene
-  dl $0083EF                                ; $008182 | $08: Fade out of cutscene
-  dl $1780D5                                ; $008185 | $09: Load title screen
-  dl $1787D4                                ; $008188 | $0A: Fade into title screen
-  dl $0083CC                                ; $00818B | $0B: Level fade out (after entering pipe)
-  dl $01AF8F                                ; $00818E | $0C: Level fade in + level name
-  dl $01B4E0                                ; $008191 | $0D: Level fade in after pipe/door
-  dl $108D4B                                ; $008194 | $0E: Level fade in (after level name)
-  dl $01C0D8                                ; $008197 | $0F: Level (with control)
-  dl $01B57F                                ; $00819A | $10: Victory cutscenes
-  dl $108E85                                ; $00819D | $11: Death
-  dl $0083CC                                ; $0081A0 | $12: Death from running out of stars
-  dl $0FBB79                                ; $0081A3 | $13: Prepare retry screen
-  dl $0083CC                                ; $0081A6 | $14: Retry screen cutscene fade in
-  dl $0FBC65                                ; $0081A9 | $15: Retry screen cutscene
-  dl $0083FB                                ; $0081AC | $16: Load end of world cutscene
-  dl $10E1C0                                ; $0081AF | $17: Final cinema sequence
-  dl $1780D5                                ; $0081B2 | $18: Load title screen
-  dl $1787D4                                ; $0081B5 | $19: World cutscene after bowser
-  dl $0083CC                                ; $0081B8 | $1A: Load credits?
-  dl $10E1D9                                ; $0081BB | $1B: Load/Fade to credits (?)
-  dl $10E356                                ; $0081BE | $1C: Beginning of credits (very slow fade in effect)
-  dl $10E3CA                                ; $0081C1 | $1D: Credits
-  dl $0083A7                                ; $0081C4 | $1E: Start+select level fade out
-  dl $0083EF                                ; $0081C7 | $1F: Level fade out to overworld
-  dl $17A58D                                ; $0081CA | $20: Prepare overworld
-  dl $0083CC                                ; $0081CD | $21: Fade into overworld
-  dl $17B3CC                                ; $0081D0 | $22: Overworld
-  dl $0083CC                                ; $0081D3 | $23: Fade to overworld after beating a level (not 100%)
-  dl $17B362                                ; $0081D6 | $24: Overworld level progression
-  dl $0083CC                                ; $0081D9 | $25: Fade to overworld after beating a level (100%)
-  dl $17AA19                                ; $0081DC | $26: Change level score on overworld
-  dl $0083CC                                ; $0081DF | $27: Fade into World score flip cutscene
-  dl $17A931                                ; $0081E2 | $28: World score flip cutscene
-  dl $0083EF                                ; $0081E5 | $29: Go to bonus game from high score screen (to 2A)
-  dl $109AE7                                ; $0081E8 | $2A: Prepare/load bonus game
-  dl $0083CC                                ; $0081EB | $2B: Fade in to bonus game or prepare/load bonus game ??
-  dl $10A13A                                ; $0081EE | $2C: In bonus game
-  dl $0083CC                                ; $0081F1 | $2D: Fade in Throwing balloons minigame
-  dl $117FFF                                ; $0081F4 | $2E:
-  dl $0083CC                                ; $0081F7 | $2F: Fade in ?
-  dl $1181D8                                ; $0081FA | $30:
-  dl $01E26C                                ; $0081FD | $31: Loading/fade to score screen from boss cutscene
-  dl $0083CC                                ; $008200 | $32: Fade in ?
-  dl $01E52C                                ; $008203 | $33:
-  dl $0083CC                                ; $008206 | $34: Fade in middle ring restart
-  dl $01E5E8                                ; $008209 | $35: Restart from the middle ring screen
-  dl $01E6EF                                ; $00820C | $36: Restart selection
-  dl $0083EF                                ; $00820F | $37: Fade out of title screen
-  dl $10DA32                                ; $008212 | $38: Load intro cutscene
-  dl $10DCAC                                ; $008215 | $39: Intro cutscene
-  dl $0083CC                                ; $008218 | $3A: Retry cutscene fade out
-  dl $01E6A1                                ; $00821B | $3B: Prepare retry screen
-  dl $0083CC                                ; $00821E | $3C: Fade into retry screen
-  dl $01E6B8                                ; $008221 | $3D: Retry screen
-  dl $01E6EF                                ; $008224 | $3E: Retry cutscene selection
-  dl $10DE3E                                ; $008227 | $3F: Load game over screen?
-  dl $10DF52                                ; $00822A | $40: Game over screen
-  dl $0083CC                                ; $00822D | $41: Fade in Error Screen
-  dl $108A99                                ; $008230 | $42: Controller Error Screen
-  dl $0083CC                                ; $008233 | $43: Fade in ?
-  dl $1088FA                                ; $008236 | $44:
+; as all these are accessed by pushing the value onto the stack and executing RTL,
+; (see directly above) the value 'returned to' must account for this
+game_mode_pointers:
+  dl gm00_ninpresents_prep-1                ; $00816A | $00: Prepare Nintendo Presents
+  dl gm01_ninpresents_load-1                ; $00816D | $01: Load Nintendo Presents
+  dl gm_fade_alt-1                          ; $008170 | $02: Fade into Nintendo Presents
+  dl gm03_ninpresents_show-1                ; $008173 | $03: Nintendo Presents
+  dl gm_fade_screen_in_out-1                ; $008176 | $04: Fade out of Nintendo Presents
+  dl gm05_load_cutscene-1                   ; $008179 | $05: Load cutscene
+  dl gm_fade_screen_in_out-1                ; $00817C | $06: Fade into cutscene
+  dl gm07_cutscene-1                        ; $00817F | $07: Cutscene
+  dl gm_fade_alt-1                          ; $008182 | $08: Fade out of cutscene
+  dl gm_load_title_screen-1                 ; $008185 | $09: Load title screen
+  dl gm_fade_to_title_screen-1              ; $008188 | $0A: Fade into title screen
+  dl gm_fade_screen_in_out-1                ; $00818B | $0B: Level fade out (after entering pipe)
+  dl gm0c_level_fadein_and_name-1           ; $00818E | $0C: Level fade in + level name
+  dl gm0d_level_fadein_post_pipe_or_door-1  ; $008191 | $0D: Level fade in after pipe/door
+  dl gm0e_level_fadein_to_control-1         ; $008194 | $0E: Level fade in (after level name)
+  dl gm0f_run_level-1                       ; $008197 | $0F: Level (with control)
+  dl gm10_victory_cutscene-1                ; $00819A | $10: Victory cutscenes
+  dl gm11_level_death-1                     ; $00819D | $11: Death
+  dl gm_fade_screen_in_out-1                ; $0081A0 | $12: Death from running out of stars
+  dl gm13_prepare_retry_screen-1            ; $0081A3 | $13: Prepare retry screen
+  dl gm_fade_screen_in_out-1                ; $0081A6 | $14: Retry screen cutscene fade in
+  dl gm15_retry_screen_cutscene-1           ; $0081A9 | $15: Retry screen cutscene
+  dl gm16_world_end_cutscene_load-1         ; $0081AC | $16: Load end of world cutscene
+  dl gm17_final_cinema_sequence-1           ; $0081AF | $17: Final cinema sequence
+  dl gm_load_title_screen-1                 ; $0081B2 | $18: Load title screen
+  dl gm_fade_to_title_screen-1              ; $0081B5 | $19: World cutscene after bowser
+  dl gm_fade_screen_in_out-1                ; $0081B8 | $1A: Load credits?
+  dl gm1b_load_credits-1                    ; $0081BB | $1B: Load/Fade to credits (?)
+  dl gm1c_credits_begin-1                   ; $0081BE | $1C: Beginning of credits (very slow fade in effect)
+  dl gm1d_credits-1                         ; $0081C1 | $1D: Credits
+  dl gm1e_start_select_level_fade-1         ; $0081C4 | $1E: Start+select level fade out
+  dl gm_fade_alt-1                          ; $0081C7 | $1F: Level fade out to overworld
+  dl gm20_prepare_overworld-1               ; $0081CA | $20: Prepare overworld
+  dl gm_fade_screen_in_out-1                ; $0081CD | $21: Fade into overworld
+  dl gm22_overworld-1                       ; $0081D0 | $22: Overworld
+  dl gm_fade_screen_in_out-1                ; $0081D3 | $23: Fade to overworld after beating a level (not 100%)
+  dl gm24_overworld_level_progression-1     ; $0081D6 | $24: Overworld level progression
+  dl gm_fade_screen_in_out-1                ; $0081D9 | $25: Fade to overworld after beating a level (100%)
+  dl gm26_level_score_update-1              ; $0081DC | $26: Change level score on overworld
+  dl gm_fade_screen_in_out-1                ; $0081DF | $27: Fade into World score flip cutscene
+  dl gm28_world_score_flip_cutscene-1       ; $0081E2 | $28: World score flip cutscene
+  dl gm_fade_alt-1                          ; $0081E5 | $29: Go to bonus game from high score screen (to 2A)
+  dl gm2a_load_bonus_game-1                 ; $0081E8 | $2A: Prepare/load bonus game
+  dl gm_fade_screen_in_out-1                ; $0081EB | $2B: Fade in to bonus game or prepare/load bonus game ??
+  dl gm2c_bonus_game-1                      ; $0081EE | $2C: In bonus game
+  dl gm_fade_screen_in_out-1                ; $0081F1 | $2D: Fade in Throwing balloons minigame
+  dl gm2e_main_bandit_minigame-1            ; $0081F4 | $2E: Bandit Minigames
+  dl gm_fade_screen_in_out-1                ; $0081F7 | $2F: Fade in ?
+  dl gm30_miniboss_battle-1                 ; $0081FA | $30: miniboss battle
+  dl gm31_fade_to_score_from_boss-1         ; $0081FD | $31: Loading/fade to score screen from boss cutscene
+  dl gm_fade_screen_in_out-1                ; $008200 | $32: Fade in ?
+  dl gm33_fade_to_midring_restart_screen-1  ; $008203 | $33: Fade out to middle ring restart screen
+  dl gm_fade_screen_in_out-1                ; $008206 | $34: Fade in middle ring restart
+  dl gm35_load_restart_from_midring-1       ; $008209 | $35: Restart from the middle ring screen
+  dl gm_retry_level_cutscene_select-1       ; $00820C | $36: Restart selection
+  dl gm_fade_alt-1                          ; $00820F | $37: Fade out of title screen
+  dl gm38_load_intro_cutscene-1             ; $008212 | $38: Load intro cutscene
+  dl gm39_intro_cutscene-1                  ; $008215 | $39: Intro cutscene
+  dl gm_fade_screen_in_out-1                ; $008218 | $3A: Retry cutscene fade out
+  dl gm3b_load_retry_screen-1               ; $00821B | $3B: Prepare retry screen
+  dl gm_fade_screen_in_out-1                ; $00821E | $3C: Fade into retry screen
+  dl gm3d_retry_screen-1                    ; $008221 | $3D: Retry screen
+  dl gm_retry_level_cutscene_select-1       ; $008224 | $3E: Retry cutscene selection
+  dl gm3f_load_game_over-1                  ; $008227 | $3F: Load game over screen?
+  dl gm40_game_over-1                       ; $00822A | $40: Game over screen
+  dl gm_fade_screen_in_out-1                ; $00822D | $41: Fade in Error Screen
+  dl gm42_controller_error-1                ; $008230 | $42: Controller Error Screen
+  dl gm_fade_screen_in_out-1                ; $008233 | $43: Fade in ?
+  dl gm44_unknown-1                         ; $008236 | $44:
 
 disable_nmi:
   STZ !reg_nmitimen                         ; $008239 | disable NMI
@@ -300,11 +307,11 @@ oam_high_buffer_to_table:
 ; called by routines loading new screens
 init_oam_and_bg3_tilemap:
   LDA #$03                                  ; $008277 |\ Set tilemap queue to DMA
+CODE_008279:
   STA $0127                                 ; $008279 |/ (BG3 init)
   JSL disable_nmi                           ; $00827C | disable NMI
   JSL init_oam                              ; $008280 | init OAM
   JML prepare_tilemap_dma_queue_l           ; $008284 |
-
 
 ; General purpose DMA to WRAM
 ; Arguments:
@@ -353,6 +360,7 @@ dma_init_gen_purpose:
   STX !reg_mdmaen                           ; $0082CC |
   RTL                                       ; $0082CF |
 
+CODE_0082D0:
   JSL disable_nmi                           ; $0082D0 |\
   REP #$20                                  ; $0082D4 | |
   LDY #$00                                  ; $0082D6 | |
@@ -413,7 +421,7 @@ clear_basic_states:
   SEP #$20                                  ; $008362 |
   RTL                                       ; $008364 |
 
-ExecutePtr:
+execute_ptr:
   STY $03                                   ; $008365 | preserve Y
   PLY                                       ; $008367 |\ pull the high byte and bank byte and store it in $00
   STY $00                                   ; $008368 |/ to create a pointer to the pointer table
@@ -430,7 +438,7 @@ ExecutePtr:
   LDY $03                                   ; $00837B |  restore Y
   JML [$0000]                               ; $00837D | jump to the pointer
 
-ExecutePtrLong:
+execute_ptr_long:
   STY $05                                   ; $008380 | preserve Y
   PLY                                       ; $008382 |\ pull the high byte and bank byte and store it in $02
   STY $02                                   ; $008383 |/ to create a pointer to the pointer table
@@ -456,18 +464,19 @@ ExecutePtrLong:
   LDY $05                                   ; $0083A3 |  restore Y
   JML [$0000]                               ; $0083A5 | jump to the pointer
 
+gm1e_start_select_level_fade:
   LDX $0201                                 ; $0083A8 |
   LDA !r_reg_inidisp_mirror                 ; $0083AB |
   AND #$0F                                  ; $0083AE |
-  CMP $83C6,x                               ; $0083B0 |
-  BNE fade_screen_in_out_add_fade           ; $0083B3 |
+  CMP fade_limit,x                          ; $0083B0 |
+  BNE gm_fade_screen_in_out_add_fade        ; $0083B3 |
   TXA                                       ; $0083B5 |
   EOR #$01                                  ; $0083B6 |
   AND #$01                                  ; $0083B8 |
   STA $0201                                 ; $0083BA |
   LDA #$20                                  ; $0083BD |\
   STA !r_game_mode                          ; $0083BF | | jump to prepare overworld game mode
-  BRA fade_screen_in_out_ret                ; $0083C2 |/
+  BRA gm_fade_screen_in_out_ret             ; $0083C2 |/
 
 fade_amount:
   db $01,$FF                                ; $0083C4 |
@@ -487,7 +496,7 @@ fade_limit:
 
 ; Gamemode for fading in or out
 ; When fade is done, go to next game mode
-fade_screen_in_out:
+gm_fade_screen_in_out:
   LDX $0201                                 ; $0083CD | Fade in/out type
   LDA !r_reg_inidisp_mirror                 ; $0083D0 |\
   AND #$0F                                  ; $0083D3 | |
@@ -509,19 +518,19 @@ fade_screen_in_out:
   PLB                                       ; $0083EE |
   RTL                                       ; $0083EF |
 
-gamemode1F:
+gm_fade_alt:
   DEC $0202                                 ; $0083F0 |
-  BPL fade_screen_in_out_ret                ; $0083F3 |
+  BPL gm_fade_screen_in_out_ret             ; $0083F3 |
   LDA #$02                                  ; $0083F5 |
   STA $0202                                 ; $0083F7 |
-  BRA fade_screen_in_out                    ; $0083FA |
+  BRA gm_fade_screen_in_out                 ; $0083FA |
 
-gamemode16:
+gm16_world_end_cutscene_load:
   DEC $0202                                 ; $0083FC |
-  BPL fade_screen_in_out_ret                ; $0083FF |
+  BPL gm_fade_screen_in_out_ret             ; $0083FF |
   LDA #$08                                  ; $008401 |
   STA $0202                                 ; $008403 |
-  BRA fade_screen_in_out                    ; $008406 |
+  BRA gm_fade_screen_in_out                 ; $008406 |
 
 ; RNG routine
 random_number_gen:
@@ -914,7 +923,7 @@ CODE_0086C2:
   STA $00                                   ; $0086D0 |
   LDA !s_spr_y_pixel_pos,x                  ; $0086D2 |
   STA $02                                   ; $0086D5 |
-  JSL $02E1A3                               ; $0086D7 |
+  JSL CODE_02E1A3                           ; $0086D7 |
   LDX $108A                                 ; $0086DB |
   JSL despawn_sprite_stage_ID               ; $0086DE |
   LDX $12                                   ; $0086E2 |
@@ -950,11 +959,12 @@ CODE_0086F2:
   INC !s_spr_bg_layer,x                     ; $008722 |
   RTL                                       ; $008725 |
 
+DATA_008726:
   db $E0,$FF,$20,$00                        ; $008726 |
 
 main_background_shyguy:
-  JSL $03AF23                               ; $00872A |
-  JSL $03A2C7                               ; $00872E |
+  JSL CODE_03AF23                           ; $00872A |
+  JSL CODE_03A2C7                           ; $00872E |
   BCC CODE_008738                           ; $008732 |
   JML despawn_sprite_free_slot              ; $008734 |
 
@@ -986,7 +996,7 @@ CODE_008767:
   LDY !s_spr_timer_3,x                      ; $008767 |
   BEQ CODE_008752                           ; $00876A |
   LDY !s_spr_facing_dir,x                   ; $00876C |
-  LDA $8726,y                               ; $00876F |
+  LDA DATA_008726,y                         ; $00876F |
   STA !s_spr_x_speed_lo,x                   ; $008772 |
   LDY !s_spr_timer_2,x                      ; $008775 |
   BNE CODE_008789                           ; $008778 |
@@ -1285,38 +1295,126 @@ CODE_00899F:
   REP #$20                                  ; $0089C9 |
   RTL                                       ; $0089CB |
 
-; pointer table (address - 1)
-; main ambient sprite routines
-  dw $8CBE, $8D03, $8D36, $8D74             ; $0089CC |
-  dw $8D8E, $8DA4, $8DB1, $8DE6             ; $0089D4 |
-  dw $8DF7, $8E15, $8E36, $8E5D             ; $0089DC |
-  dw $8E7D, $8EEE, $8EFD, $8F0A             ; $0089E4 |
-  dw $8F3A, $8F69, $8F9A, $8FD1             ; $0089EC |
-  dw $9006, $9027, $9098, $90B9             ; $0089F4 |
-  dw $90C2, $AD09, $90F5, $912C             ; $0089FC |
-  dw $9153, $9518, $917A, $919F             ; $008A04 |
-  dw $91C6, $9219, $9253, $927C             ; $008A0C |
-  dw $92ED, $9375, $93A3, $93DD             ; $008A14 |
-  dw $9432, $9518, $9547, $955E             ; $008A1C |
-  dw $92AC, $92A4, $955E, $9518             ; $008A24 |
-  dw $9518, $9518, $9518, $9547             ; $008A2C |
-  dw $A7D9, $9530, $961A, $9530             ; $008A34 |
-  dw $9645, $95CB, $9530, $986C             ; $008A3C |
-  dw $986C, $9518, $958C, $986C             ; $008A44 |
-  dw $9575, $9575, $9518, $9547             ; $008A4C |
-  dw $9415, $9ADC, $9B12, $9530             ; $008A54 |
-  dw $9518, $9530, $9530, $955E             ; $008A5C |
-  dw $9B54, $9518, $9B87, $9BBB             ; $008A64 |
-  dw $9BE2, $9C1C, $9E91, $9518             ; $008A6C |
-  dw $9518, $951C, $A192, $A192             ; $008A74 |
-  dw $A550, $A56E, $A599, $9ADC             ; $008A7C |
-  dw $A6A8, $A6CD, $A834, $A6A8             ; $008A84 |
-  dw $A725, $9B54, $A758, $A775             ; $008A8C |
-  dw $9518, $A78C, $A7A3, $A7F6             ; $008A94 |
-  dw $9530, $9518, $A80D, $9518             ; $008A9C |
-  dw $8D95, $9219, $9518, $9518             ; $008AA4 |
-  dw $98AB, $9912, $9997, $9A18             ; $008AAC |
-  dw $9A65                                  ; $008AB4 |
+; ambient sprite routines
+; ambient sprite indices start from 1BA
+ambient_sprite_routines:
+  dw ambient_water_splash_transition-1      ; $0089CC | 1BA
+  dw ambient_water_splash_swimming-1        ; $0089CE | 1BB
+  dw ambient_bubble_in_water-1              ; $0089D0 | 1BC
+  dw ambient_eggshell-1                     ; $0089D2 | 1BD
+  dw ambient_small_bopping_ani-1            ; $0089D4 | 1BE
+  dw ambient_score_sprites-1                ; $0089D6 | 1BF
+  dw ambient_salvo_slime_smoke_puff-1       ; $0089D8 | 1C0
+  dw CODE_008DE7-1                          ; $0089DA | 1C1 - ?
+  dw ambient_transform_smoke_puff-1         ; $0089DC | 1C2
+  dw ambient_terrain_destroy_smoke_puff-1   ; $0089DE | 1C3
+  dw CODE_008E37-1                          ; $0089E0 | 1C4 - ?
+  dw ambient_train_enter_track_ani-1        ; $0089E2 | 1C5
+  dw ambient_train_transformation_smoke-1   ; $0089E4 | 1C6
+  dw ambient_floating_log_lava_drop-1       ; $0089E6 | 1C7
+  dw CODE_008EFE-1                          ; $0089E8 | 1C8 - ?
+  dw CODE_008F0B-1                          ; $0089EA | 1C9 - ?
+  dw ambient_snow_puff-1                    ; $0089EC | 1CA
+  dw CODE_008F6A-1                          ; $0089EE | 1CB - ?
+  dw ambient_dr_freezegood_bop-1            ; $0089F0 | 1CC
+  dw ambient_sparkles_1-1                   ; $0089F2 | 1CD
+  dw CODE_009007-1                          ; $0089F4 | 1CE - ?
+  dw CODE_009028-1                          ; $0089F6 | 1CF - ?
+  dw ambient_bubble_pop-1                   ; $0089F8 | 1D0
+  dw CODE_0090BA-1                          ; $0089FA | 1D1
+  dw ambient_lemon_drop_splatter-1          ; $0089FC | 1D2
+  dw ambient_bowser_aiming_reticle-1        ; $0089FE | 1D3
+  dw ambient_smoke_puff_1-1                 ; $008A00 | 1D4
+  dw ambient_bill_blaster_explosion-1       ; $008A02 | 1D5
+  dw ambient_lava_flames-1                  ; $008A04 | 1D6
+  dw CODE_009519-1                          ; $008A06 | 1D7 - bandit sweat drops
+  dw ambient_smoke_puff_ground-1            ; $008A08 | 1D8
+  dw CODE_0091A0-1                          ; $008A0A | 1D9 - ?
+  dw CODE_0091C7-1                          ; $008A0C | 1DA - ?
+  dw CODE_00921A-1                          ; $008A0E | 1DB - ?
+  dw ambient_ground_pound_smash_ani-1       ; $008A10 | 1DC
+  dw ambient_sparkles_2-1                   ; $008A12 | 1DD
+  dw CODE_0092EE-1                          ; $008A14 | 1DE - ?
+  dw ambient_smoke_puff_2-1                 ; $008A16 | 1DF
+  dw ambient_smoke_puff_lick-1              ; $008A18 | 1E0
+  dw ambient_baby_mario_bubble_burst-1      ; $008A1A | 1E1
+  dw ambient_aiming_reticle-1               ; $008A1C | 1E2
+  dw CODE_009519-1                          ; $008A1E | 1E3 - ?
+  dw CODE_009548-1                          ; $008A20 | 1E4 - Coin sparkle
+  dw CODE_00955F-1                          ; $008A22 | 1E5 - ?
+  dw ambient_large_smoke_puff-1             ; $008A24 | 1E6
+  dw CODE_0092A5-1                          ; $008A26 | 1E7 - checkered block activation splash effect
+  dw CODE_00955F-1                          ; $008A28 | 1E8 - Eggo-Dill (sprite $0EE) explosion splash
+  dw CODE_009519-1                          ; $008A2A | 1E9 - slugger hitting egg splash effect
+  dw CODE_009519-1                          ; $008A2C | 1EA - spear guy (sprites $0FB, $0FC) shield
+  dw CODE_009519-1                          ; $008A2E | 1EB - spear guy (sprites $0FB, $0FC) spear
+  dw CODE_009519-1                          ; $008A30 | 1EC - sparkle from bomb (sprite $060) falling
+  dw CODE_009548-1                          ; $008A32 | 1ED - Bomb (sprite $060) explosion
+  dw ambient_explosion_splash-1             ; $008A34 | 1EE
+  dw CODE_009531-1                          ; $008A36 | 1EF - Baron Von Zeppelin explosion
+  dw ambient_ice_watermelon_sparkle-1       ; $008A38 | 1F0
+  dw CODE_009531-1                          ; $008A3A | 1F1 - ?
+  dw ambient_ice_shards-1                   ; $008A3C | 1F2
+  dw ambient_crate_smash_planks-1           ; $008A3E | 1F3
+  dw CODE_009531-1                          ; $008A40 | 1F4 - flan (sprite $111) droplents
+  dw ambient_smoke_puff_3-1                 ; $008A42 | 1F5 - smoke from Snifit (sprite $113) breathing before shooting
+  dw ambient_smoke_puff_3-1                 ; $008A44 | 1F6 - puff from Snifit shooting
+  dw CODE_009519-1                          ; $008A46 | 1F7 - stilt guy's (sprite $0F2) stilt after jumping on it
+  dw ambient_lakitu_cloud_puff-1            ; $008A48 | 1F8
+  dw ambient_smoke_puff_3-1                 ; $008A4A | 1F9 - Puff from sprite $11A grabbing egg
+  dw ambient_lava_drop_fire-1               ; $008A4C | 1FA - from horiz lava drop (sprite $12F)
+  dw ambient_lava_drop_fire-1               ; $008A4E | 1FB - from vert lava drop (sprite $130)
+  dw CODE_009519-1                          ; $008A50 | 1FC - Fang (sprites $13D, $13E) path
+  dw CODE_009548-1                          ; $008A52 | 1FD - ?
+  dw CODE_009416-1                          ; $008A54 | 1FE - ?
+  dw CODE_009ADD-1                          ; $008A56 | 1FF - ?
+  dw ambient_arrow_cloud_arrow-1            ; $008A58 | 200
+  dw CODE_009531-1                          ; $008A5A | 201 - water splash (passing through current on ground/wall)
+  dw CODE_009519-1                          ; $008A5C | 202 - ?
+  dw CODE_009531-1                          ; $008A5E | 203 - ?
+  dw CODE_009531-1                          ; $008A60 | 204 - splash when hit by Spray fish's (sprite $143) water jet
+  dw CODE_00955F-1                          ; $008A62 | 205 - droplets when hit by Spray fish's jet
+  dw CODE_009B55-1                          ; $008A64 | 206 - bubbles at end of spray fish water jet
+  dw CODE_009519-1                          ; $008A66 | 207 - ?
+  dw ambient_bopping_ani-1                  ; $008A68 | 208
+  dw ambient_blowhard_stun_stars-1          ; $008A6A | 209
+  dw ambient_colored_block_break_puff-1     ; $008A6C | 20A
+  dw CODE_009C1D-1                          ; $008A6E | 20B - ?
+  dw ambient_break_stone_block_smoke_puff-1 ; $008A70 | 20C
+  dw CODE_009519-1                          ; $008A72 | 20D - Thunder Lakitu fireball growing
+  dw CODE_009519-1                          ; $008A74 | 20E - Thunder Lakitu fireball smoke puffs
+  dw ambient_lakitu_fireball_gen_flames-1   ; $008A76 | 20F
+  dw ambient_feather_like-1                 ; $008A78 | 210 - Crazee Dayzee petals
+  dw ambient_feather_like-1                 ; $008A7A | 211 - Para-koopa feathers
+  dw ambient_crazee_daisy_music_note-1      ; $008A7C | 212
+  dw ambient_ice_melting_ani-1              ; $008A7E | 213
+  dw ambient_snow_falling-1                 ; $008A80 | 214
+  dw CODE_009ADD-1                          ; $008A82 | 215
+  dw ambient_enemy_bopped_bones-1           ; $008A84 | 216 - Skeleton Goonie wings when jumped on
+  dw ambient_salvo_slime_drops-1            ; $008A86 | 217
+  dw ambient_baby_bowser_egg_explosion-1    ; $008A88 | 218
+  dw ambient_enemy_bopped_bones-1           ; $008A8A | 219 - Baby Mouser skull when jumped on
+  dw ambient_cork_smoke_puff-1              ; $008A8C | 21A
+  dw CODE_009B55-1                          ; $008A8E | 21B - Hot lips lava
+  dw CODE_00A759-1                          ; $008A90 | 21C - ?
+  dw CODE_00A776-1                          ; $008A92 | 21D - ?
+  dw CODE_009519-1                          ; $008A94 | 21E - Lava splash when spit lava hits Yoshi
+  dw CODE_00A78D-1                          ; $008A96 | 21F - ?
+  dw ambient_kamek_magic_sparkle-1          ; $008A98 | 220
+  dw ambient_froggy_stomach_acid_puff-1     ; $008A9A | 221
+  dw CODE_009531-1                          ; $008A9C | 222 - ?
+  dw CODE_009519-1                          ; $008A9E | 223 - Hookbill shell shards
+  dw ambient_red_switch_arrow-1             ; $008AA0 | 224
+  dw CODE_009519-1                          ; $008AA2 | 225
+  dw ambient_coin_get-1                     ; $008AA4 | 226
+  dw CODE_00921A-1                          ; $008AA6 | 227 - kamek 'anger' droplets (during baby bowser scene)
+  dw CODE_009519-1                          ; $008AA8 | 228 - ?
+  dw CODE_009519-1                          ; $008AAA | 229 - melon seed after hitting blocks
+  dw ambient_minigame_coin_cannon_puff-1    ; $008AAC | 22A
+  dw ambient_minigame_win_star_rising-1     ; $008AAE | 22B - spawns 22D
+  dw ambient_minigame_balloon_bop_loader-1  ; $008AB0 | 22C
+  dw ambient_minigame_win_full_star-1       ; $008AB2 | 22D
+  dw ambient_minigame_balloon_bop_effect-1  ; $008AB4 | 22E
 
 handle_ambient_sprites:
   PHB                                       ; $008AB6 |
@@ -1331,7 +1429,7 @@ handle_ambient_sprites:
 CODE_008AC7:
   LDY $6EC0,x                               ; $008AC7 |
   BEQ CODE_008ACF                           ; $008ACA |
-  JSR CODE_008AD7                           ; $008ACC |
+  JSR execute_ambient_sprite_routine        ; $008ACC |
 
 CODE_008ACF:
   DEX                                       ; $008ACF |
@@ -1342,12 +1440,12 @@ CODE_008ACF:
   PLB                                       ; $008AD5 |
   RTL                                       ; $008AD6 |
 
-CODE_008AD7:
+execute_ambient_sprite_routine:
   LDA $7320,x                               ; $008AD7 |
   ASL A                                     ; $008ADA |
   REP #$10                                  ; $008ADB |
   TAY                                       ; $008ADD |
-  LDA $8658,y                               ; $008ADE |
+  LDA ambient_sprite_routines-($1BA*2),y    ; $008ADE |
   SEP #$10                                  ; $008AE1 |
   PHA                                       ; $008AE3 |
   RTS                                       ; $008AE4 |
@@ -1583,14 +1681,19 @@ CODE_008C7C:
   STA $7142,x                               ; $008C87 |
   RTS                                       ; $008C8A |
 
+DATA_008C8B:
   dw $0007, $0008, $0009, $000A             ; $008C8B |
   dw $0009, $0008, $0007, $0006             ; $008C93 |
   dw $0005, $0004, $0003, $0002             ; $008C9B |
-  dw $0001, $0003, $0004, $0005             ; $008CA3 |
-  dw $0004, $0003, $0003, $0003             ; $008CAB |
-  dw $0003, $0003, $0003, $0003             ; $008CB3 |
-  dw $0003, $0003                           ; $008CBB |
+  dw $0001                                  ; $008CA3 |
 
+DATA_008CA5:
+  dw $0003, $0004, $0005, $0004             ; $008CA5 |
+  dw $0003, $0003, $0003, $0003             ; $008CAD |
+  dw $0003, $0003, $0003, $0003             ; $008CB5 |
+  dw $0003                                  ; $008CBD |
+
+ambient_water_splash_transition:
   JSR CODE_008AE5                           ; $008CBF |
   LDA $7782,x                               ; $008CC2 |
   BNE CODE_008CDF                           ; $008CC5 |
@@ -1603,35 +1706,39 @@ CODE_008C7C:
 CODE_008CCF:
   STA $7E4C,x                               ; $008CCF |
   TAY                                       ; $008CD2 |
-  LDA $8C8B,y                               ; $008CD3 |
+  LDA DATA_008C8B,y                         ; $008CD3 |
   STA $73C2,x                               ; $008CD6 |
-  LDA $8CA5,y                               ; $008CD9 |
+  LDA DATA_008CA5,y                         ; $008CD9 |
   STA $7782,x                               ; $008CDC |
 
 CODE_008CDF:
   RTS                                       ; $008CDF |
 
+DATA_008CE0:
   dw $0000, $0002, $0001, $0001             ; $008CE0 |
   dw $0000, $0000, $0001, $0000             ; $008CE8 |
   dw $0000, $0000, $0000, $FFFF             ; $008CF0 |
   dw $0000, $0000, $FFFF, $FFFF             ; $008CF8 |
   dw $FFFE, $0000                           ; $008D00 |
 
+ambient_water_splash_swimming:
   JSR CODE_008AE5                           ; $008D04 |
-  LDA $7782,x                               ; $008D07 |
+  LDA $7782,x                               ; $008D07 | won't be 0 here, previous routine aborts by pulling return value if it is
   ASL A                                     ; $008D0A |
   TAY                                       ; $008D0B |
-  LDA $8CDE,y                               ; $008D0C |
+  LDA DATA_008CE0-2,y                       ; $008D0C |
   CLC                                       ; $008D0F |
   ADC $7142,x                               ; $008D10 |
   STA $7142,x                               ; $008D13 |
   RTS                                       ; $008D16 |
 
+DATA_008D17:
   dw $0001, $0000, $0000, $0000             ; $008D17 |
   dw $0000, $0000, $FFFF, $0000             ; $008D1F |
   dw $FFFF, $0000, $0000, $0000             ; $008D27 |
   dw $0000, $0000, $0001, $0000             ; $008D2F |
 
+ambient_bubble_in_water:
   JSR CODE_008AE5                           ; $008D37 |
   LDA $7822,x                               ; $008D3A |
   AND #$00FF                                ; $008D3D |
@@ -1657,10 +1764,11 @@ CODE_008D65:
   TAY                                       ; $008D69 |
   LDA $70A2,x                               ; $008D6A |
   CLC                                       ; $008D6D |
-  ADC $8D17,y                               ; $008D6E |
+  ADC DATA_008D17,y                         ; $008D6E |
   STA $70A2,x                               ; $008D71 |
   RTS                                       ; $008D74 |
 
+ambient_eggshell:
   JSR CODE_008AE5                           ; $008D75 |
   LDA $7782,x                               ; $008D78 |
   BNE CODE_008D89                           ; $008D7B |
@@ -1672,12 +1780,17 @@ CODE_008D65:
 CODE_008D89:
   RTS                                       ; $008D89 |
 
+DATA_008D8A:
   db $40,$40,$FF,$00,$00                    ; $008D8A |
 
+ambient_small_bopping_ani:
   JSR CODE_008AE5                           ; $008D8F |
   INC $73C2,x                               ; $008D92 |
   RTS                                       ; $008D95 |
 
+; red coin when collected
+; objects to coins at goal
+ambient_coin_get:
   JSR CODE_008AEC                           ; $008D96 |
   LDA $14                                   ; $008D99 |
   LSR A                                     ; $008D9B |
@@ -1687,12 +1800,17 @@ CODE_008D89:
   STA $73C2,x                               ; $008DA1 |
   RTS                                       ; $008DA4 |
 
+; +1 star sprite, 1up sprite
+ambient_score_sprites:
   JSR CODE_008AEC                           ; $008DA5 |
   RTS                                       ; $008DA8 |
 
-  db $02, $01, $00, $FF, $00, $06, $06, $06 ; $008DA9 |
-  db $03                                    ; $008DB1 |
+DATA_008DA9:
+  db $02, $01, $00, $FF, $00                ; $008DA9 |
+DATA_008DAE:
+  db $06, $06, $06, $03                     ; $008DAE |
 
+ambient_salvo_slime_smoke_puff:
   JSR CODE_008AE5                           ; $008DB2 |
   SEP #$20                                  ; $008DB5 |
   LDY $7E4C,x                               ; $008DB7 |
@@ -1708,11 +1826,11 @@ CODE_008D89:
   STA $7000,x                               ; $008DCE |
 
 CODE_008DD1:
-  LDA $8DAE,y                               ; $008DD1 |
+  LDA DATA_008DAE,y                         ; $008DD1 |
   STA $7782,x                               ; $008DD4 |
 
 CODE_008DD7:
-  LDA $8DA9,y                               ; $008DD7 |
+  LDA DATA_008DA9,y                         ; $008DD7 |
   STA $73C2,x                               ; $008DDA |
   BMI CODE_008DE1                           ; $008DDD |
   LDA #$06                                  ; $008DDF |
@@ -1724,6 +1842,7 @@ CODE_008DE4:
   REP #$20                                  ; $008DE4 |
   RTS                                       ; $008DE6 |
 
+CODE_008DE7:
   JSR CODE_008AE5                           ; $008DE7 |
   SEP #$20                                  ; $008DEA |
   LDA $7782,x                               ; $008DEC |
@@ -1734,6 +1853,7 @@ CODE_008DE4:
   REP #$20                                  ; $008DF5 |
   RTS                                       ; $008DF7 |
 
+ambient_transform_smoke_puff:
   DEC $7782,x                               ; $008DF8 |
   LDA $7782,x                               ; $008DFB |
   BNE CODE_008E03                           ; $008DFE |
@@ -1752,6 +1872,7 @@ CODE_008E0B:
   REP #$20                                  ; $008E13 |
   RTS                                       ; $008E15 |
 
+ambient_terrain_destroy_smoke_puff:
   JSR CODE_008AE5                           ; $008E16 |
   LDY $73C2,x                               ; $008E19 |
   LDA $7782,x                               ; $008E1C |
@@ -1769,6 +1890,7 @@ CODE_008E2F:
 
   db $09, $07, $06, $03, $02, $01, $00      ; $008E30 |
 
+CODE_008E37:
   JSR CODE_008AE5                           ; $008E37 |
   SEP #$20                                  ; $008E3A |
   LDY $7E4C,x                               ; $008E3C |
@@ -1789,6 +1911,7 @@ CODE_008E55:
 
   db $06, $06, $06, $06, $04, $03           ; $008E58 |
 
+ambient_train_enter_track_ani:
   JSR CODE_008AE5                           ; $008E5E |
   SEP #$20                                  ; $008E61 |
   LDY $73C2,x                               ; $008E63 |
@@ -1806,6 +1929,7 @@ CODE_008E77:
 
   db $06, $06, $05, $05                     ; $008E7A |
 
+ambient_train_transformation_smoke:
   JSR CODE_008AE5                           ; $008E7E |
   SEP #$20                                  ; $008E81 |
   LDY $73C2,x                               ; $008E83 |
@@ -1826,9 +1950,9 @@ CODE_008E9A:
   LSR A                                     ; $008E9F |
   TXY                                       ; $008EA0 |
   LDX $7E4C,y                               ; $008EA1 |
-  LDA $00E954,x                             ; $008EA4 |
+  LDA.l raphael_mode7_matrix_a_d,x          ; $008EA4 |
   STA !reg_m7a                              ; $008EA8 |
-  LDA $00E955,x                             ; $008EAB |
+  LDA.l raphael_mode7_matrix_a_d+1,x        ; $008EAB |
   STA !reg_m7a                              ; $008EAF |
   LDA #$FC                                  ; $008EB2 |
   BCC CODE_008EB8                           ; $008EB4 |
@@ -1845,7 +1969,7 @@ CODE_008EB8:
   ASL A                                     ; $008EC8 |
   ASL A                                     ; $008EC9 |
   STA $71E0,y                               ; $008ECA |
-  LDA $00E9D4,x                             ; $008ECD |
+  LDA.l raphael_mode7_matrix_b_c,x          ; $008ECD |
   SEP #$20                                  ; $008ED1 |
   STA !reg_m7a                              ; $008ED3 |
   XBA                                       ; $008ED6 |
@@ -1862,6 +1986,7 @@ CODE_008EB8:
   TYX                                       ; $008EED |
   RTS                                       ; $008EEE |
 
+ambient_floating_log_lava_drop:
   JSR CODE_008AE5                           ; $008EEF |
   LDA $71E2,x                               ; $008EF2 |
   BMI CODE_008EFD                           ; $008EF5 |
@@ -1871,6 +1996,7 @@ CODE_008EB8:
 CODE_008EFD:
   RTS                                       ; $008EFD |
 
+CODE_008EFE:
   JSR CODE_008AE5                           ; $008EFE |
   LDA $7782,x                               ; $008F01 |
   LSR A                                     ; $008F04 |
@@ -1879,6 +2005,7 @@ CODE_008EFD:
   STA $73C2,x                               ; $008F07 |
   RTS                                       ; $008F0A |
 
+CODE_008F0B:
   JSR CODE_008AE5                           ; $008F0B |
   LDA $7782,x                               ; $008F0E |
   CMP #$0008                                ; $008F11 |
@@ -1904,6 +2031,7 @@ CODE_008F2E:
   db $02, $02, $02, $01, $01, $01, $03, $03 ; $008F2F |
   db $03, $02, $02, $02                     ; $008F37 |
 
+ambient_snow_puff:
   JSR CODE_008AE5                           ; $008F3B |
   LDA $7782,x                               ; $008F3E |
   BNE CODE_008F5B                           ; $008F41 |
@@ -1925,6 +2053,7 @@ CODE_008F5B:
   db $05, $04, $03, $01, $01, $02, $01, $03 ; $008F5C |
   db $03, $03, $03, $03, $04, $04           ; $008F64 |
 
+CODE_008F6A:
   JSR CODE_008AE5                           ; $008F6A |
   LDA $7782,x                               ; $008F6D |
   BNE CODE_008F8A                           ; $008F70 |
@@ -1944,6 +2073,7 @@ CODE_008F8A:
   db $08, $07, $06, $05, $04, $03, $02, $01 ; $008F8B |
   db $40, $02, $02, $02, $02, $02, $02, $02 ; $008F93 |
 
+ambient_dr_freezegood_bop:
   JSR CODE_008AE5                           ; $008F9B |
   LDA $7782,x                               ; $008F9E |
   BNE CODE_008FBB                           ; $008FA1 |
@@ -1964,6 +2094,10 @@ CODE_008FBB:
   db $03, $02, $01, $04, $04, $04, $04, $04 ; $008FC4 |
   db $04, $03, $03, $02, $02, $01           ; $008FCC |
 
+; generated by getting a flower,
+; hitting ? cloud, GOAL disappearing,
+; using key
+ambient_sparkles_1:
   LDY $7E4E,x                               ; $008FD2 |
   BEQ CODE_008FE4                           ; $008FD5 |
   LDA $0B8F                                 ; $008FD7 |
@@ -1993,6 +2127,7 @@ CODE_009004:
 
   db $01, $11                               ; $009005 |
 
+CODE_009007:
   JSR CODE_008AE5                           ; $009007 |
   LDA $7782,x                               ; $00900A |
   BNE CODE_009027                           ; $00900D |
@@ -2009,6 +2144,7 @@ CODE_009004:
 CODE_009027:
   RTS                                       ; $009027 |
 
+CODE_009028:
   JSR CODE_008AE5                           ; $009028 |
   LDY $7E4C,x                               ; $00902B |
   LDA !s_spr_x_pixel_pos,y                  ; $00902E |
@@ -2025,7 +2161,7 @@ CODE_009027:
   STA $08                                   ; $009049 |
   LDA $7142,x                               ; $00904B |
   STA $0A                                   ; $00904E |
-  JSL $049B42                               ; $009050 |
+  JSL CODE_049B42                           ; $009050 |
   LDA $04                                   ; $009054 |
   STA $7E8C,x                               ; $009056 |
   BPL CODE_009061                           ; $009059 |
@@ -2059,6 +2195,7 @@ CODE_00907A:
   db $02, $01, $05, $05, $05, $04, $04, $04 ; $00908D |
   db $03, $03, $02, $02                     ; $009095 |
 
+ambient_bubble_pop:
   JSR CODE_008AE5                           ; $009099 |
   LDA $7782,x                               ; $00909C |
   BNE CODE_0090B9                           ; $00909F |
@@ -2075,11 +2212,14 @@ CODE_00907A:
 CODE_0090B9:
   RTS                                       ; $0090B9 |
 
+; related to salvo slime boss
+CODE_0090BA:
   JSR CODE_008AEC                           ; $0090BA |
   RTS                                       ; $0090BD |
 
   db $06, $04, $04, $03, $03                ; $0090BE |
 
+ambient_lemon_drop_splatter:
   JSR CODE_008AE5                           ; $0090C3 |
   LDA $7782,x                               ; $0090C6 |
   BNE CODE_0090DF                           ; $0090C9 |
@@ -2099,7 +2239,10 @@ CODE_0090DF:
   db $0B, $0A, $09, $08, $07, $06, $05, $04 ; $0090E0 |
   db $03, $02, $01, $06, $06, $06, $06, $06 ; $0090E8 |
   db $06, $06, $03, $03, $03, $03           ; $0090F0 |
-
+; generated by winged clouds,
+; sprites to coins at goal,
+; transformation bubble when reappearing
+ambient_smoke_puff_1:
   LDY $7E4E,x                               ; $0090F6 |
   BEQ CODE_009100                           ; $0090F9 |
   JSR CODE_008AF2                           ; $0090FB |
@@ -2127,6 +2270,7 @@ CODE_009120:
   db $06, $05, $04, $03, $02, $01, $04, $08 ; $009121 |
   db $08, $08, $04, $02                     ; $009129 |
 
+ambient_bill_blaster_explosion:
   JSR CODE_008AE5                           ; $00912D |
   LDA $7782,x                               ; $009130 |
   BNE CODE_00914D                           ; $009133 |
@@ -2145,6 +2289,7 @@ CODE_00914D:
 
   db $03, $02, $01, $06, $04, $02           ; $00914E |
 
+ambient_lava_flames:
   JSR CODE_008AE5                           ; $009154 |
   LDA $7782,x                               ; $009157 |
   BNE CODE_009174                           ; $00915A |
@@ -2163,6 +2308,9 @@ CODE_009174:
 
   db $03, $02, $01, $06, $04, $02           ; $009175 |
 
+; puff from ground (pushing crates/pots,
+; baby bowser sliding)
+ambient_smoke_puff_ground:
   JSR CODE_008AE5                           ; $00917B |
   LDA $7782,x                               ; $00917E |
   BNE CODE_00919B                           ; $009181 |
@@ -2181,6 +2329,7 @@ CODE_00919B:
 
   db $02, $01, $0C, $08                     ; $00919C |
 
+CODE_0091A0:
   JSR CODE_008AE5                           ; $0091A0 |
   LDA $7782,x                               ; $0091A3 |
   BNE CODE_0091C0                           ; $0091A6 |
@@ -2199,6 +2348,7 @@ CODE_0091C0:
 
   db $03, $02, $01, $08, $08, $04           ; $0091C1 |
 
+CODE_0091C7:
   JSR CODE_008C12                           ; $0091C7 |
   LDA $75A0,x                               ; $0091CA |
   CMP $71E0,x                               ; $0091CD |
@@ -2241,6 +2391,7 @@ CODE_009213:
 
   db $03, $02, $01, $08, $08, $08           ; $009214 |
 
+CODE_00921A:
   JSR CODE_008C12                           ; $00921A |
   JSR CODE_008AF2                           ; $00921D |
   LDA $7782,x                               ; $009220 |
@@ -2262,6 +2413,7 @@ CODE_00923D:
   db $03, $02, $01, $01, $01, $01, $01, $01 ; $009246 |
   db $01, $01, $01, $01, $01, $02           ; $00924E |
 
+ambient_ground_pound_smash_ani:
   JSR CODE_008AE5                           ; $009254 |
   LDA $7782,x                               ; $009257 |
   BNE CODE_009274                           ; $00925A |
@@ -2280,6 +2432,13 @@ CODE_009274:
 
   db $04, $03, $02, $01, $06, $06, $06, $06 ; $009275 |
 
+
+; handles a lot of 'sparkles':
+; ground pound in air, baby mario flying
+; at goal, kamek magic, boss explosion,
+; transformation bubbles, minigame items,
+; stars
+ambient_sparkles_2:
   JSR CODE_008AE5                           ; $00927D |
   LDA $7782,x                               ; $009280 |
   BNE CODE_00929D                           ; $009283 |
@@ -2296,10 +2455,15 @@ CODE_009274:
 CODE_00929D:
   RTS                                       ; $00929D |
 
-  db $03, $03, $03, $03, $03, $03, $03, $AD ; $00929E |
-  db $8F, $0B, $F0, $03                     ; $0092A6 |
+DATA_00929E:
+  db $03, $03, $03, $03, $03, $03, $03      ; $00929E |
 
+CODE_0092A5:
+  LDA $0B8F                                 ; $0092A5 |
+  BEQ ambient_large_smoke_puff              ; $0092A8 |
   JSR CODE_008C12                           ; $0092AA |
+
+ambient_large_smoke_puff:
   JSR CODE_008AF2                           ; $0092AD |
   LDA $7782,x                               ; $0092B0 |
   BNE CODE_0092CB                           ; $0092B3 |
@@ -2309,7 +2473,7 @@ CODE_00929D:
   LDY $7E4C,x                               ; $0092BC |
   TYA                                       ; $0092BF |
   STA $73C2,x                               ; $0092C0 |
-  LDA $929E,y                               ; $0092C3 |
+  LDA DATA_00929E,y                         ; $0092C3 |
   STA $7782,x                               ; $0092C6 |
   REP #$20                                  ; $0092C9 |
 
@@ -2322,6 +2486,7 @@ CODE_0092CB:
   db $FE, $FF, $04, $00, $FE, $FF, $FC, $FF ; $0092E4 |
   db $FB, $FF                               ; $0092EC |
 
+CODE_0092EE:
   LDY $7E4E,x                               ; $0092EE |
   LDA !s_spr_facing_dir,y                   ; $0092F1 |
   STA $00                                   ; $0092F4 |
@@ -2398,7 +2563,9 @@ CODE_009370:
   RTS                                       ; $009370 |
 
   db $03, $02, $01, $00, $04                ; $009371 |
-
+; thrown egg, egg-spitting flower
+; lava death, burt flying away
+ambient_smoke_puff_2:
   LDY $7E4E,x                               ; $009376 |
   BEQ CODE_009380                           ; $009379 |
   JSR CODE_008AF2                           ; $00937B |
@@ -2425,6 +2592,9 @@ CODE_00939F:
 
   db $04, $03, $02, $01                     ; $0093A0 |
 
+; smoke puff generated when licking
+; something Yoshi can't eat
+ambient_smoke_puff_lick:
   JSR CODE_008AE5                           ; $0093A4 |
   LDA $7782,x                               ; $0093A7 |
   BNE CODE_0093C3                           ; $0093AA |
@@ -2446,6 +2616,7 @@ CODE_0093C3:
   db $03, $03, $02, $02, $02, $01, $03, $01 ; $0093D4 |
   db $01, $01                               ; $0093DC |
 
+ambient_baby_mario_bubble_burst:
   JSR CODE_008AF2                           ; $0093DE |
   LDA $7782,x                               ; $0093E1 |
   BNE CODE_00940F                           ; $0093E4 |
@@ -2475,6 +2646,7 @@ CODE_00940F:
 
   db $02, $04, $06, $0A, $06, $04           ; $009410 |
 
+CODE_009416:
   JSR CODE_008AE5                           ; $009416 |
   LDA $7782,x                               ; $009419 |
   BNE CODE_009432                           ; $00941C |
@@ -2491,6 +2663,7 @@ CODE_009426:
 CODE_009432:
   RTS                                       ; $009432 |
 
+ambient_aiming_reticle:
   LDA $7322,x                               ; $009433 |
   BPL CODE_009446                           ; $009436 |
   LDA $61CE                                 ; $009438 |
@@ -2607,9 +2780,11 @@ CODE_009515:
   STA $7E4C,x                               ; $009515 |
   RTS                                       ; $009518 |
 
+CODE_009519:
   JSR CODE_008AEC                           ; $009519 |
   RTS                                       ; $00951C |
 
+ambient_lakitu_fireball_gen_flames:
   JSR CODE_008AE5                           ; $00951D |
   LDA $7782,x                               ; $009520 |
   BNE CODE_00952D                           ; $009523 |
@@ -2623,7 +2798,7 @@ CODE_00952D:
 CODE_00952E:
   JMP CODE_008AF8                           ; $00952E |
 
-; an ambient sprite main routine
+CODE_009531:
   JSR CODE_008AE5                           ; $009531 |
   LDA $7782,x                               ; $009534 |
   BNE CODE_009544                           ; $009537 |
@@ -2638,7 +2813,7 @@ CODE_009544:
 CODE_009545:
   JMP CODE_008AF8                           ; $009545 |
 
-; an ambient sprite main routine
+CODE_009548:
   JSR CODE_008AE5                           ; $009548 |
   LDA $7782,x                               ; $00954B |
   BNE CODE_00955B                           ; $00954E |
@@ -2653,6 +2828,7 @@ CODE_00955B:
 CODE_00955C:
   JMP CODE_008AF8                           ; $00955C |
 
+CODE_00955F:
   JSR CODE_008AE5                           ; $00955F |
   LDA $7782,x                               ; $009562 |
   BNE CODE_009572                           ; $009565 |
@@ -2667,6 +2843,7 @@ CODE_009572:
 CODE_009573:
   JMP CODE_008AF8                           ; $009573 |
 
+ambient_lava_drop_fire:
   JSR CODE_008AE5                           ; $009576 |
   LDA $7782,x                               ; $009579 |
   BNE CODE_009589                           ; $00957C |
@@ -2681,6 +2858,7 @@ CODE_009589:
 CODE_00958A:
   JMP CODE_008AF8                           ; $00958A |
 
+ambient_lakitu_cloud_puff:
   JSR CODE_008AE5                           ; $00958D |
   LDA $7782,x                               ; $009590 |
   BNE CODE_0095A0                           ; $009593 |
@@ -2703,6 +2881,7 @@ CODE_0095A1:
   db $00, $00, $00, $00, $00, $00, $00, $00 ; $0095C0 |
   db $00, $80, $00, $80                     ; $0095C8 |
 
+ambient_crate_smash_planks:
   LDA $7322,x                               ; $0095CC |
   BMI CODE_0095F3                           ; $0095CF |
   LDY $7E4E,x                               ; $0095D1 |
@@ -2739,6 +2918,7 @@ CODE_009613:
 
   db $04, $03, $02, $01, $00, $00, $00      ; $009614 |
 
+ambient_ice_watermelon_sparkle:
   JSR CODE_008AE5                           ; $00961B |
   LDA $7782,x                               ; $00961E |
   BNE CODE_00963A                           ; $009621 |
@@ -2758,6 +2938,7 @@ CODE_00963A:
   db $04, $04, $04, $04, $04, $04, $04, $03 ; $00963B |
   db $03, $02, $02                          ; $009643 |
 
+ambient_ice_shards:
   PHX                                       ; $009646 |
   TXA                                       ; $009647 |
   AND #$00FF                                ; $009648 |
@@ -2870,6 +3051,7 @@ CODE_009687:
 
   db $08, $30, $44, $06, $00                ; $009868 |
 
+ambient_smoke_puff_3:
   JSR CODE_008AE5                           ; $00986D |
   LDA $7782,x                               ; $009870 |
   BNE CODE_009883                           ; $009873 |
@@ -2888,6 +3070,7 @@ CODE_009883:
   dw $0004, $0005, $0006, $0000             ; $00989C |
   dw $0001, $0002, $0001, $0003             ; $0098A4 |
 
+ambient_minigame_coin_cannon_puff:
   PHX                                       ; $0098AC |
   LDA $78C0,x                               ; $0098AD |
   STA !gsu_r1                               ; $0098B0 |  r1
@@ -2932,6 +3115,7 @@ CODE_00990F:
   STA $7782,x                               ; $00990F |
   RTS                                       ; $009912 |
 
+ambient_minigame_win_star_rising:
   JSR CODE_008AE5                           ; $009913 |
   LDA #$0001                                ; $009916 |
   STA $7782,x                               ; $009919 |
@@ -2975,7 +3159,7 @@ CODE_00995F:
   STA $7142,y                               ; $00996F |
   PHX                                       ; $009972 |
   TYX                                       ; $009973 |
-  JSL $009A96                               ; $009974 |
+  JSL CODE_009A96                           ; $009974 |
   PLX                                       ; $009978 |
   RTS                                       ; $009979 |
 
@@ -2984,6 +3168,7 @@ CODE_00995F:
   dw $0008, $0009, $000A, $000B             ; $00998A |
   dw $000C, $000E, $000D                    ; $009992 |
 
+ambient_minigame_balloon_bop_loader:
   JSR CODE_008AE5                           ; $009998 |
   LDA #$0002                                ; $00999B |
   STA $7782,x                               ; $00999E |
@@ -3029,7 +3214,7 @@ CODE_0099D7:
   STA $7782,y                               ; $0099FD |
   PHX                                       ; $009A00 |
   TYX                                       ; $009A01 |
-  JSL $009ABF                               ; $009A02 |
+  JSL CODE_009ABF                           ; $009A02 |
   PLX                                       ; $009A06 |
 
 CODE_009A07:
@@ -3039,6 +3224,7 @@ CODE_009A07:
   db $02, $03, $03, $03, $03, $20, $03, $03 ; $009A10 |
   db $03                                    ; $009A18 |
 
+ambient_minigame_win_full_star:
   JSR CODE_008AE5                           ; $009A19 |
   LDA #$0002                                ; $009A1C |
   STA $7782,x                               ; $009A1F |
@@ -3067,7 +3253,7 @@ CODE_009A49:
   LDA #$0000                                ; $009A55 |
   PHA                                       ; $009A58 |
   PLD                                       ; $009A59 |
-  JSL $1191B8                               ; $009A5A |
+  JSL CODE_1191B8                           ; $009A5A |
   REP #$20                                  ; $009A5E |
   PLD                                       ; $009A60 |
 
@@ -3076,6 +3262,7 @@ CODE_009A61:
   STX $7E4A                                 ; $009A62 |
   RTS                                       ; $009A65 |
 
+ambient_minigame_balloon_bop_effect:
   JSR CODE_008AE5                           ; $009A66 |
   LDA #$0002                                ; $009A69 |
   STA $7782,x                               ; $009A6C |
@@ -3097,6 +3284,7 @@ CODE_009A8F:
   STA $73C2,x                               ; $009A92 |
   RTS                                       ; $009A95 |
 
+CODE_009A96:
   LDA #$0002                                ; $009A96 |
   STA $7782,x                               ; $009A99 |
   LDA #$0003                                ; $009A9C |
@@ -3112,6 +3300,7 @@ CODE_009A8F:
   STX $7E4A                                 ; $009ABB |
   RTL                                       ; $009ABE |
 
+CODE_009ABF:
   LDA #$0003                                ; $009ABF |
   STA $7782,x                               ; $009AC2 |
   STZ $7E4E,x                               ; $009AC5 |
@@ -3122,12 +3311,16 @@ CODE_009A8F:
   JSL push_sound_queue                      ; $009AD4 |/
   RTL                                       ; $009AD8 |
 
-  db $40, $00, $C0, $FF, $20, $F2, $8A, $BD ; $009AD9 |
-  db $8E, $7E, $D0, $03                     ; $009AE1 |
+DATA_009AD9:
+  db $40, $00, $C0, $FF                     ; $009AD9 |
 
-; dead code?
+CODE_009ADD:
+  JSR CODE_008AF2                           ; $009ADD |
+  LDA $7E8E,x                               ; $009AE0 |
+  BNE CODE_009AE8                           ; $009AE3 |
   JMP CODE_008AF8                           ; $009AE5 |
-; dead code?
+
+CODE_009AE8:
   CMP #$0040                                ; $009AE8 |
   BPL CODE_009AFA                           ; $009AEB |
   LDY #$FF                                  ; $009AED |
@@ -3147,13 +3340,13 @@ CODE_009AFA:
   EOR #$0002                                ; $009B05 |
   STA $73C0,x                               ; $009B08 |
   TAY                                       ; $009B0B |
-  LDA $9AD9,y                               ; $009B0C |
+  LDA DATA_009AD9,y                         ; $009B0C |
   STA $71E0,x                               ; $009B0F |
 
 CODE_009B12:
   RTS                                       ; $009B12 |
-; end dead code
 
+ambient_arrow_cloud_arrow:
   JSR CODE_008AE5                           ; $009B13 |
   LDY $7462,x                               ; $009B16 |
   CPY #$FF                                  ; $009B19 |
@@ -3188,21 +3381,30 @@ CODE_009B4F:
 CODE_009B52:
   RTS                                       ; $009B52 |
 
-  db $0C, $10, $20, $E5, $8A, $BD, $82, $77 ; $009B53 |
-  db $D0, $14, $DE, $C2, $73, $10, $03      ; $009B5B |
+DATA_009B53:
+  db $0C, $10                               ; $009B53 |
 
+CODE_009B55:
+  JSR CODE_008AE5                           ; $009B55 |
+  LDA $7782,x                               ; $009B58 |
+  BNE Return_009B71                         ; $009B5B |
+  DEC $73C2,x                               ; $009B5D |
+  BPL CODE_009B65                           ; $009B60 |
   JMP CODE_008AF8                           ; $009B62 |
 
+CODE_009B65:
   LDY $73C2,x                               ; $009B65 |
-  LDA $9B53,y                               ; $009B68 |
+  LDA DATA_009B53,y                         ; $009B68 |
   AND #$00FF                                ; $009B6B |
   STA $7782,x                               ; $009B6E |
+Return_009B71:
   RTS                                       ; $009B71 |
 
   db $03, $03, $03, $03, $03, $03, $03, $03 ; $009B72 |
   db $03, $02, $02, $02, $02, $02, $02, $02 ; $009B7A |
   db $02, $02, $02, $02, $02, $02           ; $009B82 |
 
+ambient_bopping_ani:
   JSR CODE_008AE5                           ; $009B88 |
   SEP #$20                                  ; $009B8B |
   LDA $7782,x                               ; $009B8D |
@@ -3234,6 +3436,7 @@ CODE_009BB6:
   REP #$20                                  ; $009BB9 |
   RTS                                       ; $009BBB |
 
+ambient_blowhard_stun_stars:
   JSR CODE_008AE5                           ; $009BBC |
   LDA $7782,x                               ; $009BBF |
   BNE CODE_009BC7                           ; $009BC2 |
@@ -3254,6 +3457,7 @@ CODE_009BDD:
 
   db $08, $06, $04, $02, $02                ; $009BDE |
 
+ambient_colored_block_break_puff:
   JSR CODE_008AE5                           ; $009BE3 |
   LDA $7782,x                               ; $009BE6 |
   BNE CODE_009C10                           ; $009BE9 |
@@ -3282,6 +3486,7 @@ CODE_009C10:
   db $03, $03, $03, $03, $03, $03           ; $009C11 |
   db $03, $02, $02, $02, $02, $02           ; $009C17 |
 
+CODE_009C1D:
   PHX                                       ; $009C1D |
   TXA                                       ; $009C1E |
   AND #$00FF                                ; $009C1F |
@@ -3407,6 +3612,7 @@ CODE_009C5E:
   db $03, $20, $44, $06, $00, $05, $25, $4F ; $009E88 |
   db $44, $00                               ; $009E90 |
 
+ambient_break_stone_block_smoke_puff:
   PHX                                       ; $009E92 |
   TXA                                       ; $009E93 |
   AND #$00FF                                ; $009E94 |
@@ -3552,6 +3758,7 @@ CODE_009ED2:
   db $04, $04, $04, $04, $04, $04, $04, $03 ; $00A184 |
   db $03, $03, $02, $02, $01, $01, $01      ; $00A18C |
 
+ambient_feather_like:
   PHX                                       ; $00A193 |
   TXA                                       ; $00A194 |
   STA !gsu_r10                              ; $00A195 |  r10
@@ -3725,8 +3932,10 @@ CODE_00A1D1:
 
   db $F9, $27, $01, $40, $00                ; $00A548 |
 
+DATA_00A54D:
   dw $F800, $0800                           ; $00A54D |
 
+ambient_crazee_daisy_music_note:
   JSR CODE_008AE5                           ; $00A551 |
   LDY #$00                                  ; $00A554 |
   LDA $7142,x                               ; $00A556 |
@@ -3736,12 +3945,14 @@ CODE_00A1D1:
   INY                                       ; $00A55F |
 
 CODE_00A560:
-  LDA $A54D,y                               ; $00A560 |
+  LDA DATA_00A54D,y                         ; $00A560 |
   STA $75A2,x                               ; $00A563 |
   RTS                                       ; $00A566 |
 
+DATA_00A567:
   db $07, $07, $05, $04, $04, $04, $04, $04 ; $00A567 |
 
+ambient_ice_melting_ani:
   JSR CODE_008AE5                           ; $00A56F |
   LDA $7782,x                               ; $00A572 |
   BNE CODE_00A58B                           ; $00A575 |
@@ -3751,7 +3962,7 @@ CODE_00A560:
 
 CODE_00A57F:
   LDY $73C2,x                               ; $00A57F |
-  LDA $A567,y                               ; $00A582 |
+  LDA DATA_00A567,y                         ; $00A582 |
   AND #$00FF                                ; $00A585 |
   STA $7782,x                               ; $00A588 |
 
@@ -3761,6 +3972,7 @@ CODE_00A58B:
   db $06, $06, $06, $06, $06, $05, $05, $05 ; $00A58C |
   db $05, $05, $05, $04, $04, $04           ; $00A594 |
 
+ambient_snow_falling:
   PHX                                       ; $00A59A |
   TXA                                       ; $00A59B |
   AND #$00FF                                ; $00A59C |
@@ -3846,6 +4058,7 @@ CODE_00A5DB:
   db $04, $1F, $F7, $46, $00                ; $00A69F |
   db $04, $21, $E1, $06, $00                ; $00A6A4 |
 
+ambient_enemy_bopped_bones:
   JSR CODE_008AE5                           ; $00A6A9 |
   LDA $7782,x                               ; $00A6AC |
   BNE CODE_00A6B4                           ; $00A6AF |
@@ -3868,6 +4081,7 @@ CODE_00A6CB:
 CODE_00A6CD:
   RTS                                       ; $00A6CD |
 
+ambient_salvo_slime_drops:
   JSR CODE_008AE5                           ; $00A6CE |
   LDA $7820,x                               ; $00A6D1 |
   AND #$0001                                ; $00A6D4 |
@@ -3898,33 +4112,44 @@ CODE_00A6FA:
 CODE_00A701:
   RTS                                       ; $00A701 |
 
+DATA_00A702:
   db $0A, $09, $08, $07, $06, $05, $04, $03 ; $00A702 |
   db $02, $01, $00, $00                     ; $00A70A |
 
+DATA_00A70E:
   db $04, $04, $03, $03, $02, $02, $01, $01 ; $00A70E |
   db $01, $01, $01, $01                     ; $00A716 |
 
+DATA_00A71A:
   db $01, $01, $01, $01, $01, $01, $01, $01 ; $00A71A |
-  db $01, $01, $FF, $01, $20, $E5, $8A, $BD ; $00A722 |
-  db $82, $77, $D0, $21, $DE, $4C, $7E, $10 ; $00A72A |
-  db $03                                    ; $00A732 |
+  db $01, $01, $FF, $01                     ; $00A722 |
 
+ambient_cork_smoke_puff:
+  JSR CODE_008AE5                           ; $00A726 |
+  LDA $7782,x                               ; $00A729 |
+  BNE CODE_00A74F                           ; $00A72C |
+  DEC $7E4C,x                               ; $00A72E |
+  BPL CODE_00A736                           ; $00A731 |
   JMP CODE_008AF8                           ; $00A733 |
 
+CODE_00A736:
   SEP #$20                                  ; $00A736 |
   LDY $7E4C,x                               ; $00A738 |
-  LDA $A702,y                               ; $00A73B |
+  LDA DATA_00A702,y                         ; $00A73B |
   STA $73C2,x                               ; $00A73E |
-  LDA $A70E,y                               ; $00A741 |
+  LDA DATA_00A70E,y                         ; $00A741 |
   STA $7782,x                               ; $00A744 |
-  LDA $A71A,y                               ; $00A747 |
+  LDA DATA_00A71A,y                         ; $00A747 |
   STA $7462,x                               ; $00A74A |
   REP #$20                                  ; $00A74D |
+CODE_00A74F:
   RTS                                       ; $00A74F |
 
+DATA_00A750:
   db $03, $03, $03, $03, $03, $03, $03, $02 ; $00A750 |
   db $02                                    ; $00A758 |
 
+CODE_00A759:
   JSR CODE_008AE5                           ; $00A759 |
   LDA $7782,x                               ; $00A75C |
   BNE CODE_00A775                           ; $00A75F |
@@ -3934,13 +4159,14 @@ CODE_00A701:
 
 CODE_00A769:
   LDY $73C2,x                               ; $00A769 |
-  LDA $A750,y                               ; $00A76C |
+  LDA DATA_00A750,y                         ; $00A76C |
   AND #$00FF                                ; $00A76F |
   STA $7782,x                               ; $00A772 |
 
 CODE_00A775:
   RTS                                       ; $00A775 |
 
+CODE_00A776:
   JSR CODE_008AE5                           ; $00A776 |
   LDA $7782,x                               ; $00A779 |
   BNE CODE_00A78C                           ; $00A77C |
@@ -3955,6 +4181,7 @@ CODE_00A786:
 CODE_00A78C:
   RTS                                       ; $00A78C |
 
+CODE_00A78D:
   JSR CODE_008AE5                           ; $00A78D |
   LDA $7782,x                               ; $00A790 |
   BNE CODE_00A7A3                           ; $00A793 |
@@ -3969,6 +4196,7 @@ CODE_00A79D:
 CODE_00A7A3:
   RTS                                       ; $00A7A3 |
 
+ambient_kamek_magic_sparkle:
   JSR CODE_008AE5                           ; $00A7A4 |
   LDA $7782,x                               ; $00A7A7 |
   BNE CODE_00A7D0                           ; $00A7AA |
@@ -3990,9 +4218,13 @@ CODE_00A7A3:
 CODE_00A7D0:
   RTS                                       ; $00A7D0 |
 
+DATA_00A7D1:
   db $03, $03, $02, $02, $02, $01, $01, $01 ; $00A7D1 |
   db $02                                    ; $00A7D9 |
 
+; splash effect from milde (sprite $0108)
+; or 1up balloon (sprite $08B) explosion
+ambient_explosion_splash:
   JSR CODE_008AE5                           ; $00A7DA |
   LDA $7782,x                               ; $00A7DD |
   BNE CODE_00A7F6                           ; $00A7E0 |
@@ -4002,13 +4234,14 @@ CODE_00A7D0:
 
 CODE_00A7EA:
   LDY $73C2,x                               ; $00A7EA |
-  LDA $A7D1,y                               ; $00A7ED |
+  LDA DATA_00A7D1,y                         ; $00A7ED |
   AND #$00FF                                ; $00A7F0 |
   STA $7782,x                               ; $00A7F3 |
 
 CODE_00A7F6:
   RTS                                       ; $00A7F6 |
 
+ambient_froggy_stomach_acid_puff:
   JSR CODE_008AE5                           ; $00A7F7 |
   LDA $7782,x                               ; $00A7FA |
   BNE CODE_00A80D                           ; $00A7FD |
@@ -4023,6 +4256,7 @@ CODE_00A807:
 CODE_00A80D:
   RTS                                       ; $00A80D |
 
+ambient_red_switch_arrow:
   JSR CODE_008AF2                           ; $00A80E |
   RTS                                       ; $00A811 |
 
@@ -4034,6 +4268,7 @@ CODE_00A80D:
   db $02, $02, $02, $02, $02, $02, $02, $02 ; $00A82C |
   db $02                                    ; $00A834 |
 
+ambient_baby_bowser_egg_explosion:
   LDY $7E4C,x                               ; $00A835 |
   LDA $A811,y                               ; $00A838 |
   BMI CODE_00A890                           ; $00A83B |
@@ -4351,6 +4586,7 @@ CODE_00A8AD:
   db $08, $FB, $E0, $02, $00                ; $00AD00 |
   db $03, $03, $7B, $07, $00                ; $00AD05 |
 
+ambient_bowser_aiming_reticle:
   LDA $7322,x                               ; $00AD0A |
   BMI CODE_00AD61                           ; $00AD0D |
   REP #$10                                  ; $00AD0F |
@@ -5033,6 +5269,7 @@ load_compressed_gfx_files:
   PLB                                       ; $00B3CD |
   RTL                                       ; $00B3CE |
 
+CODE_00B3CF:
   PHB                                       ; $00B3CF |
   PHK                                       ; $00B3D0 |
   PLB                                       ; $00B3D1 |
@@ -5058,6 +5295,7 @@ load_compressed_gfx_files_l:
   JMP load_compressed_gfx_files             ; $00B3F1 |
 
 ; tilemaps for each world map (2 bytes per world: BG1, BG2)
+bg1_bg2_world_map_tilemaps:
   db $7C, $7D                               ; $00B3F4 |
   db $7F, $80                               ; $00B3F6 |
   db $81, $82                               ; $00B3F8 |
@@ -5069,6 +5307,7 @@ load_compressed_gfx_files_l:
   db $6D                                    ; $00B408 |
 
 ; GFX for each world map (8 bytes per world)
+world_map_gfx:
   dw $9A99, $9C9B, $9E9D, $A09F             ; $00B409 |
   dw $9A99, $9C9B, $9E9D, $A09F             ; $00B411 |
   dw $9A99, $9C9B, $9E9D, $A09F             ; $00B419 |
@@ -5076,6 +5315,7 @@ load_compressed_gfx_files_l:
   dw $9A99, $9C9B, $9E9D, $A09F             ; $00B429 |
   dw $9A99, $9C9B, $9695, $9897             ; $00B431 |
 
+CODE_00B439:
   PHB                                       ; $00B439 |
   PHK                                       ; $00B43A |
   PLB                                       ; $00B43B |
@@ -5119,6 +5359,7 @@ CODE_00B45B:
   dw $9C9C, $9F9C, $9C9C, $A09C             ; $00B492 |
   dw $9CA1, $9C9C                           ; $00B49A |
 
+CODE_00B49E:
   PHB                                       ; $00B49E |
   PHK                                       ; $00B49F |
   PLB                                       ; $00B4A0 |
@@ -5725,6 +5966,7 @@ load_palettes:
 
   db $3C,$29,$7A,$29,$AE,$2C,$CC,$2C        ; $00BAE2 |
 
+CODE_00BAEA:
   PHB                                       ; $00BAEA |
   PHK                                       ; $00BAEB |
   PLB                                       ; $00BAEC |
@@ -5740,6 +5982,7 @@ load_palettes:
   LDX #$0026                                ; $00BAFF |
   JMP load_palettes                         ; $00BB02 |
 
+CODE_00BB05:
   PHB                                       ; $00BB05 |
   PHK                                       ; $00BB06 |
   PLB                                       ; $00BB07 |
@@ -5756,6 +5999,7 @@ load_palettes:
   dw $3CD2, $3CF0, $3D0E, $3D2C             ; $00BB37 |
   dw $3D4E, $3D6C, $3D8A, $3DA8             ; $00BB3F |
 
+CODE_00BB47:
   PHB                                       ; $00BB47 |
   PHK                                       ; $00BB48 |
   PLB                                       ; $00BB49 |
@@ -5777,6 +6021,7 @@ load_palettes:
   LDX #$006E                                ; $00BB6A |
   JMP load_palettes                         ; $00BB6D |
 
+CODE_00BB70:
   PHB                                       ; $00BB70 |
   PHK                                       ; $00BB71 |
   PLB                                       ; $00BB72 |
@@ -5969,9 +6214,9 @@ copy_division_lookup_to_sram:
   REP #$30                                  ; $00BE26 |
   PHB                                       ; $00BE28 |\
   LDY #$2200                                ; $00BE29 | |
-  LDX #$E552                                ; $00BE2C | | move $00E552~$00E952 to $702200~$7025FF
-  LDA #$03FF                                ; $00BE2F | |
-  MVN $70,$00                               ; $00BE32 | |
+  LDX.w #div_onebyx_lut                     ; $00BE2C | | move $00E552~$00E952 to $702200~$7025FF
+  LDA #(div_onebyx_lut_end-div_onebyx_lut)-1; $00BE2F | |
+  MVN $70,(div_onebyx_lut>>16)&$FF          ; $00BE32 | |
   PLB                                       ; $00BE35 |/
   SEP #$30                                  ; $00BE36 |
   RTL                                       ; $00BE38 |
@@ -5990,6 +6235,7 @@ copy_division_lookup_to_sram:
 ; D = long destination address
 ; S = long source address
 ; s = size
+CODE_00BE39:
   PHP                                       ; $00BE39 |
   REP #$30                                  ; $00BE3A |
   LDX $096D                                 ; $00BE3C |  argument store index
@@ -6026,6 +6272,7 @@ copy_division_lookup_to_sram:
 ; second word -> $0973,x
 ; third word -> $0975,x
 ; #$0000 -> $0977,x
+CODE_00BE71:
   PHP                                       ; $00BE71 |
   REP #$10                                  ; $00BE72 |
   LDX $096D                                 ; $00BE74 |\ store accumulator argument
@@ -6061,6 +6308,7 @@ copy_division_lookup_to_sram:
 ; video port control = $80
 ; DMA control = $01
 ; DMA dest reg = $2118
+CODE_00BEA6:
   PHB                                       ; $00BEA6 |
   PEA $7E48                                 ; $00BEA7 |\
   PLB                                       ; $00BEAA | | data bank $7E
@@ -6090,6 +6338,7 @@ copy_division_lookup_to_sram:
 ; video port control = $80
 ; DMA control = $09
 ; DMA dest reg = $2118
+CODE_00BEDA:
   PHB                                       ; $00BEDA |
   PEA $7E48                                 ; $00BEDB |\
   PLB                                       ; $00BEDE | | data bank $7E
@@ -6122,6 +6371,7 @@ copy_division_lookup_to_sram:
 ; video port control = $00
 ; DMA control = $00
 ; DMA dest reg = $2118
+CODE_00BF16:
   PHB                                       ; $00BF16 |
   PEA $7E48                                 ; $00BF17 |\
   PLB                                       ; $00BF1A | | data bank $7E
@@ -6151,6 +6401,7 @@ copy_division_lookup_to_sram:
 ; video port control = $00
 ; DMA control = $08
 ; DMA dest reg = $2118
+CODE_00BF4A:
   PHB                                       ; $00BF4A |
   PEA $7E48                                 ; $00BF4B |\
   PLB                                       ; $00BF4E | | data bank $7E
@@ -6183,6 +6434,7 @@ copy_division_lookup_to_sram:
 ; video port control = $80
 ; DMA control = $00
 ; DMA dest reg = $2119
+CODE_00BF86:
   PHB                                       ; $00BF86 |
   PEA $7E48                                 ; $00BF87 |\
   PLB                                       ; $00BF8A | | data bank $7E
@@ -6260,7 +6512,7 @@ NMI:
   PLB                                       ; $00C00F |/
   LDY !reg_rdnmi                            ; $00C010 | clear NMI flag
   LDX !r_interrupt_mode                     ; $00C013 |
-  JSR ($C074,x)                             ; $00C016 |
+  JSR (DATA_00C074,x)                       ; $00C016 |
   LDA !r_apu_io_0_mirror_dp                 ; $00C019 |\ Check if music track to be played
   BNE play_music_track                      ; $00C01B |/
   LDX !reg_apu_port0                        ; $00C01D |\
@@ -6327,9 +6579,17 @@ handle_sound:
   PLA                                       ; $00C072 |
   RTI                                       ; $00C073 | Return from NMI
 
-  dw $C084, $C10A, $C10A, $C22C             ; $00C074 |
-  dw $C10A, $C10A, $C10B, $C10A             ; $00C07C |
+DATA_00C074:
+  dw CODE_00C084                            ; $00C074 |
+  dw Return_00C10A                          ; $00C076 |
+  dw Return_00C10A                          ; $00C078 |
+  dw CODE_00C22C                            ; $00C07A |
+  dw Return_00C10A                          ; $00C07C |
+  dw Return_00C10A                          ; $00C07E |
+  dw CODE_00C10B                            ; $00C080 |
+  dw Return_00C10A                          ; $00C082 |
 
+CODE_00C084:
   LDY #$8F                                  ; $00C084 |\ Force blank
   STY !reg_inidisp                          ; $00C086 |/
   STZ !reg_hdmaen                           ; $00C089 | Disable HDMA
@@ -6388,8 +6648,10 @@ CODE_00C0FD:
   STA !reg_hdmaen                           ; $00C106 |
   RTS                                       ; $00C109 |
 
+Return_00C10A:
   RTS                                       ; $00C10A |
 
+CODE_00C10B:
   LDY #$8F                                  ; $00C10B |\ Force blank
   STY !reg_inidisp                          ; $00C10D |/
   STZ !reg_hdmaen                           ; $00C110 | Disable HDMA
@@ -6490,12 +6752,16 @@ CODE_00C1DF:
 
   db $63, $62                               ; $00C210 |
 
-  db $3F, $BF, $00, $50, $28, $00, $00, $00 ; $00C212 |
+  db $3F, $BF                               ; $00C212 |
+
+DATA_00C214:
+  db $00, $50, $28, $00, $00, $00           ; $00C214 |
   db $00, $00                               ; $00C21A |
 
   db $01, $00, $01, $00, $01, $00, $00, $00 ; $00C21C |
   db $FF, $FF, $FF, $00, $01, $01, $01, $00 ; $00C224 |
 
+CODE_00C22C:
   LDY #$8F                                  ; $00C22C |\ Force blank
   STY !reg_inidisp                          ; $00C22E |/
   STZ !reg_hdmaen                           ; $00C231 | Disable HDMA
@@ -6710,7 +6976,7 @@ IRQ_Start:
   PLB                                       ; $00C3F7 |/
   LDA !reg_timeup                           ; $00C3F8 |
   LDX !r_irq_setting                        ; $00C3FB |
-  JSR ($C40A,x)                             ; $00C3FE |  IRQ scanline mode
+  JSR (irq_kind,x)                          ; $00C3FE |  IRQ scanline mode
 
 IRQ_Return:
   REP #$30                                  ; $00C401 |
@@ -6720,15 +6986,15 @@ IRQ_Return:
   PLX                                       ; $00C406 |
   PLA                                       ; $00C407 |
   CLI                                       ; $00C408 |
+  RTI                                       ; $00C409 |
 
-EmptyHandler:
-  RTI                                       ; $00C409 |  Return from IRQ
+irq_kind:
+  dw irq_default                            ; $00C40A |  Default
+  dw irq_story_cutscene                     ; $00C40C |  Story Cutscene
+  dw irq_credits                            ; $00C40E |  Credits
+  dw irq_bonus_game                         ; $00C410 |  Bonus/Bandit Games
 
-  dw $C412                                  ; $00C40A |  Default
-  dw $C821                                  ; $00C40C |  Story Cutscene
-  dw $CA9A                                  ; $00C40E |  Credits
-  dw $D308                                  ; $00C410 |  Bonus/Bandit Games
-
+irq_default:
   LDA !r_irq_count                          ; $00C412 |\ IRQ counter
   BNE CODE_00C43D                           ; $00C415 |/
 
@@ -6757,6 +7023,7 @@ set_v_irq:
   STA !reg_vtimel                           ; $00C434 |
   LDA #$B1                                  ; $00C437 |\ Enable IRQ, NMI and auto-joypad reading
   STA !reg_nmitimen                         ; $00C439 |/
+.return:
   RTS                                       ; $00C43C |
 
 CODE_00C43D:
@@ -6782,7 +7049,7 @@ irq_1:
 
 CODE_00C45F:
   JSR next_irq                              ; $00C45F |\ level load intro (with name)
-  JMP ($C714,x)                             ; $00C462 |/
+  JMP (DATA_00C714,x)                       ; $00C462 |/
 
 ; IRQ = 2
 irq_2:
@@ -6796,20 +7063,22 @@ irq_2:
   STY !reg_inidisp                          ; $00C471 |/
   STZ !reg_hdmaen                           ; $00C474 | Disable HDMA
   LDX !r_interrupt_mode                     ; $00C477 |
-  JMP ($C47D,x)                             ; $00C47A |
+  JMP (irq_vram_tx_routines,x)              ; $00C47A |
 
 ; IRQ Mode pointers for VRAM transfer
 ; Modes that lead to RTS does transfer in NMI instead (except for $0E)
-  dw $C43C                                  ; $00C47D | Nintendo Logo
-  dw $C48D                                  ; $00C47F | Normal Level Mode
-  dw $C5FE                                  ; $00C481 | Offset-per-tile Level Modes (1-7/6-4)
-  dw $C43C                                  ; $00C483 | Island Scenes
-  dw $C87A                                  ; $00C485 | Story Cutscene / Credits
-  dw $C641                                  ; $00C487 | Raphael the Raven boss
-  dw $C43C                                  ; $00C489 | World Map
-  dw $C43C                                  ; $00C48B | Bonus & Bandit Games
+irq_vram_tx_routines:
+  dw set_v_irq_return                       ; $00C47D | Nintendo Logo
+  dw irq_normal_level_mode                  ; $00C47F | Normal Level Mode
+  dw irq_offset_per_tile_levels             ; $00C481 | Offset-per-tile Level Modes (1-7/6-4)
+  dw set_v_irq_return                       ; $00C483 | Island Scenes
+  dw irq_story_cutscene_credits             ; $00C485 | Story Cutscene / Credits
+  dw irq_raphael_the_raven_boss             ; $00C487 | Raphael the Raven boss
+  dw set_v_irq_return                       ; $00C489 | World Map
+  dw set_v_irq_return                       ; $00C48B | Bonus & Bandit Games
 
 ; Normal Level Mode
+irq_normal_level_mode:
   LDA !r_game_loop_complete                 ; $00C48D |\
   BNE CODE_00C495                           ; $00C490 | | Is game mode still running?
   JMP CODE_00C6CC                           ; $00C492 |/  If so, jump
@@ -6979,6 +7248,7 @@ CODE_00C57E:
   LDA #$06                                  ; $00C5F9 |
   JMP set_v_irq                             ; $00C5FB |
 
+irq_offset_per_tile_levels:
   LDA !r_game_loop_complete                 ; $00C5FE |
   BNE CODE_00C606                           ; $00C601 |
   JMP CODE_00C6CC                           ; $00C603 |
@@ -7007,6 +7277,7 @@ CODE_00C606:
   LDA !s_opt_cam_x                          ; $00C63B |
   JMP CODE_00C4A2                           ; $00C63E |
 
+irq_raphael_the_raven_boss:
   LDA !r_game_loop_complete                 ; $00C641 |
   BNE CODE_00C649                           ; $00C644 |
   JMP CODE_00C6CC                           ; $00C646 |
@@ -7094,18 +7365,22 @@ CODE_00C6F9:
   STA !reg_bg1vofs                          ; $00C70E |
   JMP CODE_00C57E                           ; $00C711 |
 
-  dw $C718, $C719                           ; $00C714 |
+DATA_00C714:
+  dw CODE_00C718, CODE_00C719               ; $00C714 |
 
+CODE_00C718:
   RTS                                       ; $00C718 |
 
-  JSL $00C71E                               ; $00C719 | execute gamemode 0F stuff
+CODE_00C719:
+  JSL CODE_00C71E                           ; $00C719 | execute gamemode 0F stuff
   RTS                                       ; $00C71D | during level intro
 
-  JSL $008259                               ; $00C71E |
-  JSL $0394D3                               ; $00C722 |
+CODE_00C71E:
+  JSL init_oam_buffer                       ; $00C71E |
+  JSL spr_edge_despawn_draw_check_warp      ; $00C722 |
   JSL draw_player                           ; $00C726 |
-  JSL $04DD9E                               ; $00C72A |
-  JSL $0397D3                               ; $00C72E |
+  JSL main_player                           ; $00C72A |
+  JSL handle_sprites                        ; $00C72E |
   REP #$20                                  ; $00C732 |
   LDX #$08                                  ; $00C734 |
   LDA #$B1EF                                ; $00C736 |
@@ -7127,18 +7402,19 @@ CODE_00C75D:
   LDA $0D25                                 ; $00C75D |
   AND #$0003                                ; $00C760 |
   BEQ CODE_00C769                           ; $00C763 |
-  JML $00C7C8                               ; $00C765 |
+  JML CODE_00C7C8                           ; $00C765 |
 
 CODE_00C769:
   REP #$10                                  ; $00C769 |
   LDX #$0000                                ; $00C76B |
   LDY !r_cur_stage                          ; $00C76E |
-  JML $00C778                               ; $00C771 |
+  JML CODE_00C778                           ; $00C771 |
 
 CODE_00C775:
   SEP #$20                                  ; $00C775 |
   RTL                                       ; $00C777 |
 
+CODE_00C778:
   REP #$20                                  ; $00C778 |
   PHB                                       ; $00C77A |
   PHK                                       ; $00C77B |
@@ -7169,6 +7445,8 @@ CODE_00C775:
   PLB                                       ; $00C7C1 |
   LDA #$5038                                ; $00C7C2 |
   STA $0D1B                                 ; $00C7C5 |
+
+CODE_00C7C8:
   REP #$10                                  ; $00C7C8 |
   LDA #$AAAA                                ; $00C7CA |
   STA !s_oam_hi_table_mirror                ; $00C7CD |
@@ -7210,6 +7488,7 @@ CODE_00C7DE:
   SEP #$10                                  ; $00C81E |
   RTL                                       ; $00C820 |
 
+irq_story_cutscene:
   LDA !r_irq_count                          ; $00C821 |
   BNE CODE_00C842                           ; $00C824 |
 
@@ -7260,8 +7539,9 @@ CODE_00C867:
   STY !reg_inidisp                          ; $00C86E |
   STZ !reg_hdmaen                           ; $00C871 |
   LDX !r_interrupt_mode                     ; $00C874 |
-  JMP ($C47D,x)                             ; $00C877 |
+  JMP (irq_vram_tx_routines,x)              ; $00C877 |
 
+irq_story_cutscene_credits:
   LDA !r_game_loop_complete                 ; $00C87A |
   BNE CODE_00C882                           ; $00C87D |
   JMP CODE_00CA10                           ; $00C87F |
@@ -7499,9 +7779,9 @@ CODE_00CA10:
 
   db $50, $52                               ; $00CA98 |
 
-CODE_00CA9A:
+irq_credits:
   BIT !reg_hvbjoy                           ; $00CA9A |
-  BVS CODE_00CA9A                           ; $00CA9D |
+  BVS irq_credits                           ; $00CA9D |
 
 CODE_00CA9F:
   BIT !reg_hvbjoy                           ; $00CA9F |
@@ -7951,6 +8231,7 @@ CODE_00CC50:
   dw $D1A6, $D1BE, $D1E0, $D20A             ; $00D2FA |
   dw $D22C, $D290, $D2B2                    ; $00D302 |
 
+irq_bonus_game:
   LDA !r_irq_count                          ; $00D308 |
   BNE CODE_00D329                           ; $00D30B |
 
@@ -8953,6 +9234,7 @@ tile_animation_11:
   JMP tile_animation_0C                     ; $00DB91 |/  Water anim @ 3/4 frames
 
 
+CODE_00DB94:
   REP #$20                                  ; $00DB94 |
   PHD                                       ; $00DB96 |
   LDA #$420B                                ; $00DB97 |
@@ -9391,7 +9673,7 @@ CODE_00DEEA:
 CODE_00DF04:
   BEQ CODE_00DF1F                           ; $00DF04 |  end GSU execution if r0 is zero
   STZ !gsu_scmr                             ; $00DF06 |  give SCPU ROM/RAM bus access
-  JSR ($DF26,x)                             ; $00DF09 |  x = r0 ($0002~$001A)
+  JSR (DATA_00DF28-2,x)                     ; $00DF09 |  x = r0 ($0002~$001A)
   SEP #$20                                  ; $00DF0C |
   LDA $012E                                 ; $00DF0E |\ set SCMR
   STA !gsu_scmr                             ; $00DF11 |/
@@ -9410,22 +9692,24 @@ CODE_00DF1F:
 ; pointer table
 ; index is r0 after a GSU routine is called by $7EDECF
 ; when r0 returns positive and non-zero
-  dw $DF68                                  ; $00DF28 | r0 = #$0002
-  dw $E04F                                  ; $00DF2A | r0 = #$0004
-  dw $E0A9                                  ; $00DF2C | r0 = #$0006
-  dw $E0CD                                  ; $00DF2E | r0 = #$0008
-  dw $DFC3                                  ; $00DF30 | r0 = #$000A
-  dw $E023                                  ; $00DF32 | r0 = #$000C
-  dw $E017                                  ; $00DF34 | r0 = #$000E
-  dw $E0D7                                  ; $00DF36 | r0 = #$0010
-  dw $E0E6                                  ; $00DF38 | r0 = #$0012
-  dw $E0F2                                  ; $00DF3A | r0 = #$0014
-  dw $DF44                                  ; $00DF3C | r0 = #$0016
-  dw $E068                                  ; $00DF3E | r0 = #$0018
-  dw $E101                                  ; $00DF40 | r0 = #$001A
-  dw $E126                                  ; $00DF42 | r0 = #$001C
+DATA_00DF28:
+  dw CODE_00DF68                            ; $00DF28 | r0 = #$0002
+  dw CODE_00E04F                            ; $00DF2A | r0 = #$0004
+  dw CODE_00E0A9                            ; $00DF2C | r0 = #$0006
+  dw CODE_00E0CD                            ; $00DF2E | r0 = #$0008
+  dw CODE_00DFC3                            ; $00DF30 | r0 = #$000A
+  dw CODE_00E023                            ; $00DF32 | r0 = #$000C
+  dw CODE_00E017                            ; $00DF34 | r0 = #$000E
+  dw CODE_00E0D7                            ; $00DF36 | r0 = #$0010
+  dw CODE_00E0E6                            ; $00DF38 | r0 = #$0012
+  dw CODE_00E0F2                            ; $00DF3A | r0 = #$0014
+  dw CODE_00DF44                            ; $00DF3C | r0 = #$0016
+  dw CODE_00E068                            ; $00DF3E | r0 = #$0018
+  dw CODE_00E101                            ; $00DF40 | r0 = #$001A
+  dw CODE_00E126                            ; $00DF42 | r0 = #$001C
 
 ; r0 = #$0016
+CODE_00DF44:
   PHY                                       ; $00DF44 |
   LDA !r_cur_stage                          ; $00DF45 |
   CMP #$000B                                ; $00DF48 |
@@ -9435,16 +9719,17 @@ CODE_00DF1F:
   STA !r_game_mode                          ; $00DF53 |
   LDA #$0001                                ; $00DF56 |
   STA $022D                                 ; $00DF59 |
-  JSL $01B2B7                               ; $00DF5C |
+  JSL save_egg_inventory                    ; $00DF5C |
   PLY                                       ; $00DF60 |
   RTS                                       ; $00DF61 |
 
 CODE_00DF62:
-  JSL $02A4B5                               ; $00DF62 |
+  JSL CODE_02A4B5                           ; $00DF62 |
   PLY                                       ; $00DF66 |
   RTS                                       ; $00DF67 |
 
 ; r0 = #$0002
+CODE_00DF68:
   PHY                                       ; $00DF68 |
   SEP #$10                                  ; $00DF69 |
   LDA !gsu_r6                               ; $00DF6B |  r6
@@ -9461,7 +9746,7 @@ CODE_00DF7A:
   LDA $6002                                 ; $00DF83 |
   AND #$FFF0                                ; $00DF86 |
   STA $0002                                 ; $00DF89 |
-  JSL $03A520                               ; $00DF8C |
+  JSL CODE_03A520                           ; $00DF8C |
   LDA #$0009                                ; $00DF90 |\ play sound #$09
   JSL push_sound_queue                      ; $00DF93 |/
 
@@ -9519,17 +9804,21 @@ CODE_00DFF1:
   STA $0000                                 ; $00E003 |
   LDA $6002                                 ; $00E006 |
   AND #$FFF0                                ; $00E009 |
-  JSL $03A4F5                               ; $00E00C |
+  JSL CODE_03A4F5                           ; $00E00C |
   REP #$10                                  ; $00E010 |
   RTS                                       ; $00E012 |
 
+CODE_00E013:
   JSR CODE_00DFE2                           ; $00E013 |
   RTL                                       ; $00E016 |
 
 ; r0 = #$000E
+CODE_00E017:
   LDA !gsu_r5                               ; $00E017 |  r5
   STA $0095                                 ; $00E01A |
   BRA CODE_00DFC9                           ; $00E01D |
+
+CODE_00E01F:
   JSR CODE_00E023                           ; $00E01F |
   RTL                                       ; $00E022 |
 
@@ -9554,6 +9843,7 @@ CODE_00E023:
   RTS                                       ; $00E04E |
 
 ; r0 = #$0004
+CODE_00E04F:
   PHY                                       ; $00E04F |
   LDA $6000                                 ; $00E050 |
   STA $0091                                 ; $00E053 |
@@ -9566,6 +9856,7 @@ CODE_00E023:
   RTS                                       ; $00E067 |
 
 ; r0 = #$0018
+CODE_00E068:
   PHY                                       ; $00E068 |
   LDA $6000                                 ; $00E069 |
   STA $0091                                 ; $00E06C |
@@ -9577,6 +9868,7 @@ CODE_00E023:
   PLY                                       ; $00E07F |
   RTS                                       ; $00E080 |
 
+DATA_00E081:
   dw $0000, $0000, $0000, $2A0D             ; $00E081 |
   dw $0000, $0000, $0000, $2A1C             ; $00E089 |
   dw $0000, $0000, $0000, $2A2B             ; $00E091 |
@@ -9584,12 +9876,13 @@ CODE_00E023:
   dw $0000, $0000, $0000, $964C             ; $00E0A1 |
 
 ; r0 = #$0006
+CODE_00E0A9:
   PHY                                       ; $00E0A9 |
   LDA !gsu_r6                               ; $00E0AA |  r6
   AND #$00FF                                ; $00E0AD |
   ASL A                                     ; $00E0B0 |
   TAX                                       ; $00E0B1 |
-  LDA $00E081,x                             ; $00E0B2 |
+  LDA.l DATA_00E081,x                       ; $00E0B2 |
   STA $95                                   ; $00E0B6 |
   LDA $6000                                 ; $00E0B8 |
   STA $91                                   ; $00E0BB |
@@ -9602,44 +9895,50 @@ CODE_00E023:
   RTS                                       ; $00E0CC |
 
 ; r0 = #$0008
+CODE_00E0CD:
   PHY                                       ; $00E0CD |
   LDX !gsu_r1                               ; $00E0CE |  r1
-  JSL $03BF87                               ; $00E0D1 |
+  JSL CODE_03BF87                           ; $00E0D1 |
   PLY                                       ; $00E0D5 |
   RTS                                       ; $00E0D6 |
 
 ; r0 = #$0010
+CODE_00E0D7:
   LDA !r_header_bg3_tileset                 ; $00E0D7 |
   CMP #$000A                                ; $00E0DA |
   BNE CODE_00E0E5                           ; $00E0DD |
   PHY                                       ; $00E0DF |
-  JSL $04F1F6                               ; $00E0E0 |
+  JSL CODE_04F1F6                           ; $00E0E0 |
   PLY                                       ; $00E0E4 |
 
 CODE_00E0E5:
   RTS                                       ; $00E0E5 |
 
 ; r0 = #$0012
+CODE_00E0E6:
   LDA $0CCA                                 ; $00E0E6 |
   BNE CODE_00E0F1                           ; $00E0E9 |
   PHY                                       ; $00E0EB |
-  JSL $04AC9C                               ; $00E0EC |
+  JSL player_death_spike                    ; $00E0EC |
   PLY                                       ; $00E0F0 |
 
 CODE_00E0F1:
   RTS                                       ; $00E0F1 |
 
 ; r0 = #$0014
+CODE_00E0F2:
   PHY                                       ; $00E0F2 |
   SEP #$10                                  ; $00E0F3 |
-  JSL $03A853                               ; $00E0F5 |
+  JSL player_hit                            ; $00E0F5 |
   REP #$10                                  ; $00E0F9 |
   PLY                                       ; $00E0FB |
   RTS                                       ; $00E0FC |
 
+DATA_00E0FD:
   dw $0080, $FF80                           ; $00E0FD |
 
 ; r0 = #$001A
+CODE_00E101:
   LDA $0CCA                                 ; $00E101 |
   BNE CODE_00E125                           ; $00E104 |
   PHY                                       ; $00E106 |
@@ -9648,7 +9947,7 @@ CODE_00E0F1:
   LDA #$FB00                                ; $00E10E |
   STA !s_player_y_speed                     ; $00E111 |
   LDX !s_player_direction                   ; $00E114 |
-  LDA $00E0FD,x                             ; $00E117 |
+  LDA.l DATA_00E0FD,x                       ; $00E117 |
   STA !s_player_x_speed_prev                ; $00E11B |
   LDA #$0020                                ; $00E11E |
   STA $61F6                                 ; $00E121 |
@@ -9658,6 +9957,7 @@ CODE_00E125:
   RTS                                       ; $00E125 |
 
 ; r0 = #$001C
+CODE_00E126:
   PHY                                       ; $00E126 |
   LDA $6000                                 ; $00E127 |
   STA $007972                               ; $00E12A |
@@ -9668,15 +9968,15 @@ CODE_00E125:
   BEQ CODE_00E144                           ; $00E137 |
   CMP #$0065                                ; $00E139 |
   BNE CODE_00E14A                           ; $00E13C |
-  JSL $0CEA92                               ; $00E13E |
+  JSL CODE_0CEA92                           ; $00E13E |
   BRA CODE_00E14E                           ; $00E142 |
 
 CODE_00E144:
-  JSL $04CA27                               ; $00E144 |
+  JSL CODE_04CA27                           ; $00E144 |
   BRA CODE_00E14E                           ; $00E148 |
 
 CODE_00E14A:
-  JSL $0EB499                               ; $00E14A |
+  JSL CODE_0EB499                           ; $00E14A |
 
 CODE_00E14E:
   REP #$10                                  ; $00E14E |
@@ -10257,7 +10557,9 @@ CODE_00E535:
   RTS                                       ; $00E551 |
 
 ; 1024 bytes moved to $702200
+;   (or $701200 during the credits sequence)
 ; division lookup table for gsu: 1/x
+div_onebyx_lut:
   dw $FFFF, $FFFF, $8000, $5555             ; $00E552 |
   dw $4000, $3333, $2AAA, $2492             ; $00E55A |
   dw $2000, $1C71, $1999, $1745             ; $00E562 |
@@ -10386,7 +10688,9 @@ CODE_00E535:
   dw $0083, $0082, $0082, $0082             ; $00E93A |
   dw $0082, $0081, $0081, $0081             ; $00E942 |
   dw $0081, $0080, $0080, $0080             ; $00E94A |
-  dw $0080                                  ; $00E952 |
+.end
+
+  dw $0080                                  ; $00E952 | This word is not copied along with the rest of the table above
 
 ; mode 7 stuff?
 ; indexed by rotation value in Raphael boss fight
@@ -10407,6 +10711,7 @@ raphael_mode7_matrix_a_d:
   dw $004A, $0044, $003E, $0038             ; $00E9BC |
   dw $0032, $002C, $0026, $001F             ; $00E9C4 |
   dw $0019, $0013, $000D, $0006             ; $00E9CC |
+
 raphael_mode7_matrix_b_c:
   dw $0000, $FFFA, $FFF3, $FFED             ; $00E9D4 |
   dw $FFE7, $FFE1, $FFDA, $FFD4             ; $00E9DC |
@@ -10781,17 +11086,17 @@ ROMSpecs:
   db $00                                    ; $00FFDB | Version 1.0
   dw $ECD3                                  ; $00FFDC | Checksum complement
   dw $132C                                  ; $00FFDE | Checksum
-  dw $814F,$814F                            ; $00FFE0 | unused native vectors
-  dw $814F                                  ; $00FFE4 | Native COP vector (unused)
-  dw $814F                                  ; $00FFE6 | Native BRK vector (unused)
-  dw $814F                                  ; $00FFE8 | Native ABORT vector (unused)
+  dw unused_interrupt,unused_interrupt      ; $00FFE0 | unused native vectors
+  dw unused_interrupt                       ; $00FFE4 | Native COP vector (unused)
+  dw unused_interrupt                       ; $00FFE6 | Native BRK vector (unused)
+  dw unused_interrupt                       ; $00FFE8 | Native ABORT vector (unused)
   dw $0108                                  ; $00FFEA | Native NMI vector (v-blank)
-  dw $814F                                  ; $00FFEC | Native RESET vector (unused)
+  dw unused_interrupt                       ; $00FFEC | Native RESET vector (unused)
   dw $010C                                  ; $00FFEE | Native IRQ vector
-  dw $814F,$814F                            ; $00FFF0 | unused emulation vectors
-  dw $814F                                  ; $00FFF4 | Emulation COP vector (unused)
-  dw $814F                                  ; $00FFF6 | Emulation BRK vector (unused)
-  dw $814F                                  ; $00FFF8 | Emulation ABORT vector (unused)
-  dw $814F                                  ; $00FFFA | Emulation NMI vector (unused)
-  dw $8000                                  ; $00FFFC | Emulation RESET vector (start game)
-  dw $814F                                  ; $00FFFE | Emulation IRQ vector (unused)
+  dw unused_interrupt,unused_interrupt      ; $00FFF0 | unused emulation vectors
+  dw unused_interrupt                       ; $00FFF4 | Emulation COP vector (unused)
+  dw unused_interrupt                       ; $00FFF6 | Emulation BRK vector (unused)
+  dw unused_interrupt                       ; $00FFF8 | Emulation ABORT vector (unused)
+  dw unused_interrupt                       ; $00FFFA | Emulation NMI vector (unused)
+  dw yi_reset                               ; $00FFFC | Emulation RESET vector (start game)
+  dw unused_interrupt                       ; $00FFFE | Emulation IRQ vector (unused)

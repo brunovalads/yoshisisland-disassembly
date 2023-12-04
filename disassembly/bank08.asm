@@ -14470,14 +14470,15 @@ CODE_08DA03:
 
 ; pointers to icon sets for each world
 map_icon_gfx_ptrs:
-  dw $DA2E, $DA52                           ; $08DA16 |
-  dw $DA76, $DA9A                           ; $08DA1A |
-  dw $DABE, $DAE2                           ; $08DA1E |
-  dw $DB06, $DB2A                           ; $08DA22 |
-  dw $DB4E, $DB72                           ; $08DA26 |
-  dw $DB96, $DBBA                           ; $08DA2A |
+  dw w1_map_icon_gfx_t, w1_map_icon_gfx_b   ; $08DA16 |
+  dw w2_map_icon_gfx_t, w2_map_icon_gfx_b   ; $08DA1A |
+  dw w3_map_icon_gfx_t, w3_map_icon_gfx_b   ; $08DA1E |
+  dw w4_map_icon_gfx_t, w4_map_icon_gfx_b   ; $08DA22 |
+  dw w5_map_icon_gfx_t, w5_map_icon_gfx_b   ; $08DA26 |
+  dw w6_map_icon_gfx_t, w6_map_icon_gfx_b   ; $08DA2A |
 
 ; icon GFX pointers (super FX)
+w1_map_icon_gfx_t:
   dl hirom_mirror($268404)                  ; $08DA2E |
   dl hirom_mirror($268420)                  ; $08DA31 |
   dl hirom_mirror($26843C)                  ; $08DA34 |
@@ -14490,6 +14491,7 @@ map_icon_gfx_ptrs:
   dl hirom_mirror($26C4C8)                  ; $08DA49 |
   dl hirom_mirror($26E420)                  ; $08DA4C |
   dl hirom_mirror($26E490)                  ; $08DA4F |
+w1_map_icon_gfx_b:
   dl hirom_mirror($26A404)                  ; $08DA52 |
   dl hirom_mirror($26A420)                  ; $08DA55 |
   dl hirom_mirror($26A43C)                  ; $08DA58 |
@@ -14502,6 +14504,7 @@ map_icon_gfx_ptrs:
   dl hirom_mirror($26C4E4)                  ; $08DA6D |
   dl hirom_mirror($26E420)                  ; $08DA70 |
   dl hirom_mirror($26E490)                  ; $08DA73 |
+w2_map_icon_gfx_t:
   dl hirom_mirror($26C404)                  ; $08DA76 |
   dl hirom_mirror($26C420)                  ; $08DA79 |
   dl hirom_mirror($26C43C)                  ; $08DA7C |
@@ -14514,6 +14517,7 @@ map_icon_gfx_ptrs:
   dl hirom_mirror($26E404)                  ; $08DA91 |
   dl hirom_mirror($26E420)                  ; $08DA94 |
   dl hirom_mirror($26E490)                  ; $08DA97 |
+w2_map_icon_gfx_b:
   dl hirom_mirror($26E404)                  ; $08DA9A |
   dl hirom_mirror($26E420)                  ; $08DA9D |
   dl hirom_mirror($26E43C)                  ; $08DAA0 |
@@ -14526,6 +14530,7 @@ map_icon_gfx_ptrs:
   dl hirom_mirror($26E4AC)                  ; $08DAB5 |
   dl hirom_mirror($26E420)                  ; $08DAB8 |
   dl hirom_mirror($26E490)                  ; $08DABB |
+w3_map_icon_gfx_t:
   dl hirom_mirror($268404)                  ; $08DABE |
   dl hirom_mirror($268420)                  ; $08DAC1 |
   dl hirom_mirror($26843C)                  ; $08DAC4 |
@@ -14538,6 +14543,7 @@ map_icon_gfx_ptrs:
   dl hirom_mirror($26E4C8)                  ; $08DAD9 |
   dl hirom_mirror($26E420)                  ; $08DADC |
   dl hirom_mirror($26E490)                  ; $08DADF |
+w3_map_icon_gfx_b:
   dl hirom_mirror($26A404)                  ; $08DAE2 |
   dl hirom_mirror($26A420)                  ; $08DAE5 |
   dl hirom_mirror($26A43C)                  ; $08DAE8 |
@@ -14550,6 +14556,7 @@ map_icon_gfx_ptrs:
   dl hirom_mirror($26E4E4)                  ; $08DAFD |
   dl hirom_mirror($26E420)                  ; $08DB00 |
   dl hirom_mirror($26E490)                  ; $08DB03 |
+w4_map_icon_gfx_t:
   dl hirom_mirror($26E43C)                  ; $08DB06 |
   dl hirom_mirror($26E458)                  ; $08DB09 |
   dl hirom_mirror($26E474)                  ; $08DB0C |
@@ -14562,6 +14569,7 @@ map_icon_gfx_ptrs:
   dl hirom_mirror($26E458)                  ; $08DB21 |
   dl hirom_mirror($27C43C)                  ; $08DB24 |
   dl hirom_mirror($26C404)                  ; $08DB27 |
+w4_map_icon_gfx_b:
   dl hirom_mirror($278404)                  ; $08DB2A |
   dl hirom_mirror($278420)                  ; $08DB2D |
   dl hirom_mirror($27843C)                  ; $08DB30 |
@@ -14574,6 +14582,7 @@ map_icon_gfx_ptrs:
   dl hirom_mirror($27A4AC)                  ; $08DB45 |
   dl hirom_mirror($27A4C8)                  ; $08DB48 |
   dl hirom_mirror($27A4E4)                  ; $08DB4B |
+w5_map_icon_gfx_t:
   dl hirom_mirror($26C404)                  ; $08DB4E |
   dl hirom_mirror($26C420)                  ; $08DB51 |
   dl hirom_mirror($26C43C)                  ; $08DB54 |
@@ -14586,6 +14595,7 @@ map_icon_gfx_ptrs:
   dl hirom_mirror($26E420)                  ; $08DB69 |
   dl hirom_mirror($26E420)                  ; $08DB6C |
   dl hirom_mirror($26E490)                  ; $08DB6F |
+w5_map_icon_gfx_b:
   dl hirom_mirror($278404)                  ; $08DB72 |
   dl hirom_mirror($278420)                  ; $08DB75 |
   dl hirom_mirror($27843C)                  ; $08DB78 |
@@ -14598,6 +14608,7 @@ map_icon_gfx_ptrs:
   dl hirom_mirror($27A404)                  ; $08DB8D |
   dl hirom_mirror($27A420)                  ; $08DB90 |
   dl hirom_mirror($27A43C)                  ; $08DB93 |
+w6_map_icon_gfx_t:
   dl hirom_mirror($27A458)                  ; $08DB96 |
   dl hirom_mirror($27A474)                  ; $08DB99 |
   dl hirom_mirror($27A490)                  ; $08DB9C |
@@ -14610,6 +14621,7 @@ map_icon_gfx_ptrs:
   dl hirom_mirror($27A458)                  ; $08DBB1 |
   dl hirom_mirror($27A474)                  ; $08DBB4 |
   dl hirom_mirror($27A490)                  ; $08DBB7 |
+w6_map_icon_gfx_b:
   dl hirom_mirror($27A43C)                  ; $08DBBA |
   dl hirom_mirror($278420)                  ; $08DBBD |
   dl hirom_mirror($27843C)                  ; $08DBC0 |
