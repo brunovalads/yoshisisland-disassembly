@@ -2033,43 +2033,45 @@ load_partial_row:
   BNE load_partial_row                      ; $109254 |/ of the column
   RTS                                       ; $109256 |
 
+; this uses DATA_19D61A to setup a bunch of small areas of memory
+; depending on the BG1 tileset
 CODE_109257:
   LDA #$00                                  ; $109257 |
-  STA $02                                   ; $109259 |
-  REP #$30                                  ; $10925B |
+  STA $02                                   ; $109259 | dest bank $00
+  REP #$30                                  ; $10925B | using 16 bit regs
   LDX #$0000                                ; $10925D |
 
-CODE_109260:
-  STX $03                                   ; $109260 |
-  LDA.l hirom_mirror(DATA_19D61A),x         ; $109262 |
-  AND #$00FF                                ; $109266 |
-  BEQ CODE_109292                           ; $109269 |
-  TAY                                       ; $10926B |
-  LDA.l hirom_mirror(DATA_19D61A+1),x       ; $10926C |
-  STA $00                                   ; $109270 |
-  LDA !r_header_bg1_tileset                 ; $109272 |
-  ASL A                                     ; $109275 |
-  ADC $03                                   ; $109276 |
-  TAX                                       ; $109278 |
-  LDA.l hirom_mirror(DATA_19D61A+3),x       ; $109279 |
-  TYX                                       ; $10927D |
-  LDY #$0000                                ; $10927E |
+.outerloop
+  STX $03                                   ; $109260 |\
+  LDA.l hirom_mirror(DATA_19D61A),x         ; $109262 | | load the length byte
+  AND #$00FF                                ; $109266 | | just the byte
+  BEQ .ret                                  ; $109269 | | return if it is zero
+  TAY                                       ; $10926B | |
+  LDA.l hirom_mirror(DATA_19D61A+1),x       ; $10926C | | get the dest address
+  STA $00                                   ; $109270 | | store it to be used with the fill loop
+  LDA !r_header_bg1_tileset                 ; $109272 | | load the BG1 tileset number
+  ASL A                                     ; $109275 | | double it since it will be used to index words
+  ADC $03                                   ; $109276 | | add the current list index
+  TAX                                       ; $109278 | |
+  LDA.l hirom_mirror(DATA_19D61A+3),x       ; $109279 | | load the start word from the table
+  TYX                                       ; $10927D | |
+  LDY #$0000                                ; $10927E | |\
 
-CODE_109281:
-  STA [$00],y                               ; $109281 |
-  INC A                                     ; $109283 |
-  INY                                       ; $109284 |
-  INY                                       ; $109285 |
-  DEX                                       ; $109286 |
-  BNE CODE_109281                           ; $109287 |
-  LDA $03                                   ; $109289 |
-  CLC                                       ; $10928B |
-  ADC #$0023                                ; $10928C |
-  TAX                                       ; $10928F |
-  BRA CODE_109260                           ; $109290 |
+.fillloop
+  STA [$00],y                               ; $109281 | | | fill the destination
+  INC A                                     ; $109283 | | | with increasing words
+  INY                                       ; $109284 | | |
+  INY                                       ; $109285 | | |
+  DEX                                       ; $109286 | | | until the end of the destination is reached
+  BNE .fillloop                             ; $109287 | |/
+  LDA $03                                   ; $109289 | |\
+  CLC                                       ; $10928B | | |
+  ADC #$0023                                ; $10928C | | | go to the next list entry
+  TAX                                       ; $10928F | |/
+  BRA .outerloop                            ; $109290 |/
 
-CODE_109292:
-  SEP #$30                                  ; $109292 |
+.ret
+  SEP #$30                                  ; $109292 | go back to 8 bit regs
   RTL                                       ; $109294 |
 
 ; long subroutine
