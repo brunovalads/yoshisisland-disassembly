@@ -1,0 +1,42 @@
+name: test-build
+
+on: [pull_request, workflow_dispatch]
+
+jobs:
+    build-and-verify-yi:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  path: yi
+
+            - name: Cache Asar
+              id: ca
+              uses: actions/cache@v4
+              with:
+                  path: /usr/local/bin/asar
+                  key: asarbin-${{ runner.os }}-${{ runner.arch }}
+
+            - if: ${{ steps.ca.outputs.cache-hit != 'true' }}
+              name: Checkout Asar
+              uses: actions/checkout@v4
+              with:
+                  repository: RPGHacker/asar
+                  path: asar
+
+            - if: ${{ steps.ca.outputs.cache-hit != 'true' }}
+              name: Build and install Asar
+              run: |
+                cmake src
+                make
+                sudo make install
+              working-directory: ./asar
+
+            - name: Build yi.smc
+              run: asar disassembly/assemble.asm yi.sfc
+              working-directory: ./yi
+
+            - name: Verify yi.smc
+              run: sha256sum -c yi.sha256sum
+              working-directory: ./yi
