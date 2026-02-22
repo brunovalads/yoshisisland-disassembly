@@ -8791,13 +8791,36 @@ CODE_01C9DB:
   db $9A, $24, $28, $31                     ; $01CA35 |
   db $AA, $24, $2A, $31                     ; $01CA39 |
 
-  dw $0400, $0C08, $FC10, $FC04             ; $01CA3D |
-  dw $FC04, $FC04, $FC04, $FC04             ; $01CA45 |
-  dw $0001, $3420, $3420, $3420             ; $01CA4D |
-  dw $3420, $3420, $3420, $0400             ; $01CA55 |
-  dw $40FF, $0010, $0201, $0403             ; $01CA5D |
-  dw $3010, $7050, $5010, $5050             ; $01CA65 |
-  dw $7050                                  ; $01CA6D |
+pause_init_timer:
+  db $00, $04, $08, $0C                     ; $01CA3D |
+  db $10                                    ; $01CA41 |
+
+pause_letter_delta_size:
+  db $FC, $04, $FC, $04                     ; $01CA42 |
+  db $FC, $04, $FC, $04                     ; $01CA46 |
+  db $FC, $04, $FC, $01                     ; $01CA4A |
+  db $00                                    ; $01CA4E |
+
+pause_letter_final_size:
+  db $20, $34, $20, $34                     ; $01CA4F |
+  db $20, $34, $20, $34                     ; $01CA53 |
+  db $20, $34, $20, $34                     ; $01CA57 |
+  db $00                                    ; $01CA5B |
+
+pause_letter_delta_rotate:
+  db $04, $FF                               ; $01CA5C |
+
+pause_letter_max_rotate:
+  db $40, $10                               ; $01CA5E |
+
+  db $00, $01, $02, $03                     ; $01CA60 |
+  db $04                                    ; $01CA64 |
+
+  db $10, $30, $50, $70                     ; $01CA65 |
+  db $70                                    ; $01CA69 |
+
+  db $50, $10, $50, $50                     ; $01CA6A |
+  db $50, $70                               ; $01CA6E |
 
 pause_sounds:
   dw $0001, $0002                           ; $01CA6F |
@@ -9115,41 +9138,41 @@ CODE_01CCBB:
 CODE_01CCC6:
   ORA $38                                   ; $01CCC6 |
   AND #$90                                  ; $01CCC8 |
-  BEQ CODE_01CCCF                           ; $01CCCA |
+  BEQ pause_letters                         ; $01CCCA |
 
 CODE_01CCCC:
   JSR CODE_01CE5D                           ; $01CCCC |
 
-CODE_01CCCF:
+pause_letters:
   LDX #$04                                  ; $01CCCF |
 
-CODE_01CCD1:
+.loop
   LDA $0B42,x                               ; $01CCD1 |
-  BEQ CODE_01CCE1                           ; $01CCD4 |
+  BEQ .animate                              ; $01CCD4 |
   LDA !r_frame_counter_global_dp            ; $01CCD6 |
   AND #$03                                  ; $01CCD8 |
-  BNE CODE_01CD50                           ; $01CCDA |
+  BNE .next                                 ; $01CCDA |
   DEC $0B42,x                               ; $01CCDC |
-  BRA CODE_01CD50                           ; $01CCDF |
+  BRA .next                                 ; $01CCDF |
 
-CODE_01CCE1:
+.animate
   LDY $0B3C,x                               ; $01CCE1 |
   LDA !r_frame_counter_global_dp            ; $01CCE4 |
   AND #$03                                  ; $01CCE6 |
-  BNE CODE_01CCFC                           ; $01CCE8 |
+  BNE .keep_size                            ; $01CCE8 |
   LDA $0B36,x                               ; $01CCEA |
   CLC                                       ; $01CCED |
-  ADC $CA42,y                               ; $01CCEE |
+  ADC pause_letter_delta_size,y             ; $01CCEE |
   STA $0B36,x                               ; $01CCF1 |
-  CMP $CA4F,y                               ; $01CCF4 |
-  BNE CODE_01CCFC                           ; $01CCF7 |
+  CMP pause_letter_final_size,y             ; $01CCF4 |
+  BNE .keep_size                            ; $01CCF7 |
   INC $0B3C,x                               ; $01CCF9 |
 
-CODE_01CCFC:
+.keep_size
   CPY #$0B                                  ; $01CCFC |
-  BCC CODE_01CD50                           ; $01CCFE |
+  BCC .next                                 ; $01CCFE |
   LDA $0B1E,x                               ; $01CD00 |
-  CMP $CA53,y                               ; $01CD03 |
+  CMP pause_letter_max_rotate-$0B,y         ; $01CD03 |
   BNE CODE_01CD21                           ; $01CD06 |
   CPY #$0B                                  ; $01CD08 |
   BEQ CODE_01CD30                           ; $01CD0A |
@@ -9168,7 +9191,7 @@ CODE_01CD21:
   BCS CODE_01CD30                           ; $01CD24 |
   LDA $0B1E,x                               ; $01CD26 |
   CLC                                       ; $01CD29 |
-  ADC $CA51,y                               ; $01CD2A |
+  ADC pause_letter_delta_rotate-$0B,y       ; $01CD2A |
   STA $0B1E,x                               ; $01CD2D |
 
 CODE_01CD30:
@@ -9195,10 +9218,10 @@ CODE_01CD4A:
   ADC $0B12,x                               ; $01CD4A |
   STA $0B12,x                               ; $01CD4D |
 
-CODE_01CD50:
+.next
   DEX                                       ; $01CD50 |
   BMI CODE_01CD56                           ; $01CD51 |
-  JMP CODE_01CCD1                           ; $01CD53 |
+  JMP .loop                                 ; $01CD53 |
 
 CODE_01CD56:
   REP #$20                                  ; $01CD56 |
