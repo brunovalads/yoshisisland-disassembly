@@ -272,7 +272,7 @@ enable_nmi:
   RTL                                       ; $00824A |/
 
 init_oam:
-  REP #$20                                  ; init_oam|
+  REP #$20                                  ; $00824B |
   LDX #$08                                  ; $00824D |\
   LDA #$BD16                                ; $00824F | | GSU: initialize OAM routine
   JSL r_gsu_init_1                          ; $008252 |/
