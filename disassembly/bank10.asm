@@ -3553,7 +3553,7 @@ CODE_109E5F:
   LDY #$01                                  ; $109EEB |
   STY !reg_mdmaen                           ; $109EED |
   REP #$10                                  ; $109EF0 |
-  JSR CODE_10A68F                           ; $109EF2 |
+  JSR flip_cards_shuffle_items              ; $109EF2 |
   RTS                                       ; $109EF5 |
 
   SEP #$10                                  ; $109EF6 |
@@ -4339,86 +4339,90 @@ CODE_10A643:
 CODE_10A64E:
   RTS                                       ; $10A64E |
 
-  dw $060A, $0805, $0900, $0102             ; $10A64F |
-  dw $060A, $0807, $0900, $0101             ; $10A657 |
-  dw $0A0A, $0207, $0B03, $0101             ; $10A65F |
-  dw $0A0A, $0706, $0506, $0101             ; $10A667 |
-  dw $070A, $0302, $010B, $0101             ; $10A66F |
-  dw $0A0A, $070A, $0707, $0101             ; $10A677 |
-  dw $060A, $0006, $0109, $0101             ; $10A67F |
-  dw $0A0A, $0606, $0907, $0101             ; $10A687 |
+; Flip Cards Bonus item lots, containing items from #$00 to #$0B, including Toadies and Kameks
+flip_cards_item_lots:
+  dw $060A, $0805, $0900, $0102             ; $10A64F | Lot #0
+  dw $060A, $0807, $0900, $0101             ; $10A657 | Lot #1
+  dw $0A0A, $0207, $0B03, $0101             ; $10A65F | Lot #2
+  dw $0A0A, $0706, $0506, $0101             ; $10A667 | Lot #3
+  dw $070A, $0302, $010B, $0101             ; $10A66F | Lot #4
+  dw $0A0A, $070A, $0707, $0101             ; $10A677 | Lot #5
+  dw $060A, $0006, $0109, $0101             ; $10A67F | Lot #6
+  dw $0A0A, $0606, $0907, $0101             ; $10A687 | Lot #7
 
-CODE_10A68F:
-  JSL random_number_gen                     ; $10A68F |
-  SEP #$30                                  ; $10A693 |
-  LDA !s_rng                                ; $10A695 |
-  AND #$07                                  ; $10A698 |
-  TAX                                       ; $10A69A |
-  LDA #$00                                  ; $10A69B |
+flip_cards_shuffle_items:
+  JSL random_number_gen                     ; $10A68F | Call RNG
+  SEP #$30                                  ; $10A693 | 8 bit A/X/Y
+  LDA !s_rng                                ; $10A695 | A = low RNG
+  AND #$07                                  ; $10A698 | Mod 8, because 8 item lots
+  TAX                                       ; $10A69A | X = item lot index
+  LDA #$00                                  ; $10A69B | Reset A
 
-CODE_10A69D:
-  DEX                                       ; $10A69D |
-  BMI CODE_10A6A5                           ; $10A69E |
-  CLC                                       ; $10A6A0 |
-  ADC #$08                                  ; $10A6A1 |
-  BRA CODE_10A69D                           ; $10A6A3 |
+.loop_table_offset
+  DEX                                       ; $10A69D |\
+  BMI .shuffle_items_continue               ; $10A69E | |
+  CLC                                       ; $10A6A0 | | Calculate 8 byte offset to item lots table
+  ADC #$08                                  ; $10A6A1 | |
+  BRA .loop_table_offset                    ; $10A6A3 |/
 
-CODE_10A6A5:
-  TAY                                       ; $10A6A5 |
-  REP #$20                                  ; $10A6A6 |
-  LDA $A64F,y                               ; $10A6A8 |
-  STA $00                                   ; $10A6AB |
-  LDA $A651,y                               ; $10A6AD |
-  STA $02                                   ; $10A6B0 |
-  LDA $A653,y                               ; $10A6B2 |
-  STA $04                                   ; $10A6B5 |
-  LDA $A655,y                               ; $10A6B7 |
-  STA $06                                   ; $10A6BA |
-  LDA $A657,y                               ; $10A6BC |
-  STA $08                                   ; $10A6BF |
-  SEP #$20                                  ; $10A6C1 |
-  LDA #$08                                  ; $10A6C3 |
-  STA $0A                                   ; $10A6C5 |
-  LDY #$00                                  ; $10A6C7 |
+.shuffle_items_continue
+  TAY                                       ; $10A6A5 | Y = offset to item lots table
+  REP #$20                                  ; $10A6A6 | 16 bit A
+  LDA flip_cards_item_lots+0,y              ; $10A6A8 |\ 
+  STA $00                                   ; $10A6AB | |
+  LDA flip_cards_item_lots+2,y              ; $10A6AD | |
+  STA $02                                   ; $10A6B0 | | Read all 8 items from the lot
+  LDA flip_cards_item_lots+4,y              ; $10A6B2 | | and store in scratch ram $00~$07
+  STA $04                                   ; $10A6B5 | |
+  LDA flip_cards_item_lots+6,y              ; $10A6B7 | |
+  STA $06                                   ; $10A6BA |/
+  LDA flip_cards_item_lots+8,y              ; $10A6BC |\ Useless: read the first 2 items from the next lot
+  STA $08                                   ; $10A6BF |/ and store it in scratch ram $08~$09
+  SEP #$20                                  ; $10A6C1 | 8 bit A
+  LDA #$08                                  ; $10A6C3 |\ Scratch $0A = #$08 = remaining item list
+  STA $0A                                   ; $10A6C5 |/
+  LDY #$00                                  ; $10A6C7 | Clear Y (item slot)
 
-CODE_10A6C9:
-  JSL random_number_gen                     ; $10A6C9 |
-  LDA $0A                                   ; $10A6CD |
-  STA !reg_wrmpya                           ; $10A6CF |
-  LDA !s_rng                                ; $10A6D2 |
-  STA !reg_wrmpyb                           ; $10A6D5 |
-  NOP                                       ; $10A6D8 |
-  NOP                                       ; $10A6D9 |
-  NOP                                       ; $10A6DA |
-  NOP                                       ; $10A6DB |
-  REP #$20                                  ; $10A6DC |
-  LDA !reg_rdmpyl                           ; $10A6DE |
-  XBA                                       ; $10A6E1 |
-  SEP #$20                                  ; $10A6E2 |
-  AND #$0F                                  ; $10A6E4 |
-  TAX                                       ; $10A6E6 |
-  LDA $00,x                                 ; $10A6E7 |
-  STA $1104,y                               ; $10A6E9 |
-  INY                                       ; $10A6EC |
-  CPY #$07                                  ; $10A6ED |
-  BEQ CODE_10A6FE                           ; $10A6EF |
-  DEC $0A                                   ; $10A6F1 |
+; Similar to $10BD2D
+.shuffle_loop
+  JSL random_number_gen                     ; $10A6C9 |\
+  LDA $0A                                   ; $10A6CD | |
+  STA !reg_wrmpya                           ; $10A6CF | | 
+  LDA !s_rng                                ; $10A6D2 | | 
+  STA !reg_wrmpyb                           ; $10A6D5 | | Multiply $0A by low RNG
+  NOP                                       ; $10A6D8 | |
+  NOP                                       ; $10A6D9 | |
+  NOP                                       ; $10A6DA | |
+  NOP                                       ; $10A6DB |/
+  REP #$20                                  ; $10A6DC | 16 bit A
+  LDA !reg_rdmpyl                           ; $10A6DE | Get mult result
+  XBA                                       ; $10A6E1 | Switch low and high byte
+  SEP #$20                                  ; $10A6E2 | 8 bit A
+  AND #$0F                                  ; $10A6E4 | Mod 16
+  TAX                                       ; $10A6E6 | X = A
+  LDA $00,x                                 ; $10A6E7 |\ Read random item in scratch ram
+  STA $1104,y                               ; $10A6E9 |/ and store it in the current item slot
+  INY                                       ; $10A6EC | Increment item slot
+  CPY #$07                                  ; $10A6ED |\ Finish if item slot index is bigger than 7
+  BEQ .finish_fill_items                    ; $10A6EF |/
+  DEC $0A                                   ; $10A6F1 | Decrement size of remaning item list
 
-CODE_10A6F3:
-  CPX $0A                                   ; $10A6F3 |
-  BEQ CODE_10A6C9                           ; $10A6F5 |
-  LDA $01,x                                 ; $10A6F7 |
-  STA $00,x                                 ; $10A6F9 |
-  INX                                       ; $10A6FB |
-  BRA CODE_10A6F3                           ; $10A6FC |
+; Similar to $10BD49
+.remove_random_item_loop
+  CPX $0A                                   ; $10A6F3 |\
+  BEQ .shuffle_loop                         ; $10A6F5 | | 
+  LDA $01,x                                 ; $10A6F7 | | Removes the current random item from the list
+  STA $00,x                                 ; $10A6F9 | | by replacing X with X+1
+  INX                                       ; $10A6FB | |
+  BRA .remove_random_item_loop              ; $10A6FC |/
 
-CODE_10A6FE:
-  TXA                                       ; $10A6FE |
-  EOR #$01                                  ; $10A6FF |
-  TAX                                       ; $10A701 |
-  LDA $00,x                                 ; $10A702 |
-  STA $110B                                 ; $10A704 |
-  REP #$30                                  ; $10A707 |
+.finish_fill_items
+  TXA                                       ; $10A6FE |\
+  EOR #$01                                  ; $10A6FF | |
+  TAX                                       ; $10A701 | | Read last remaining item in scratch ram
+  LDA $00,x                                 ; $10A702 | | and store it the last item slot
+  STA $110B                                 ; $10A704 |/
+  REP #$30                                  ; $10A707 | 16 bit A/X/Y
   RTS                                       ; $10A709 |
 
   SEP #$30                                  ; $10A70A |
