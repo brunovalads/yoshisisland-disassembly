@@ -7,20 +7,20 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
               with:
                   path: yi
 
             - name: Cache Asar
               id: ca
-              uses: actions/cache@v4
+              uses: actions/cache@v5
               with:
                   path: /usr/local/bin/asar
                   key: asarbin-${{ runner.os }}-${{ runner.arch }}
 
             - if: ${{ steps.ca.outputs.cache-hit != 'true' }}
               name: Checkout Asar
-              uses: actions/checkout@v4
+              uses: actions/checkout@v5
               with:
                   repository: RPGHacker/asar
                   path: asar
