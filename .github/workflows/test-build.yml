@@ -33,10 +33,10 @@ jobs:
                 sudo make install
               working-directory: ./asar
 
-            - name: Build yi.smc
+            - name: Build yi.sfc
               run: asar disassembly/assemble.asm yi.sfc
               working-directory: ./yi
 
-            - name: Verify yi.smc
+            - name: Verify yi.sfc
               run: sha256sum -c yi.sha256sum
               working-directory: ./yi
