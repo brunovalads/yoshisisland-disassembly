@@ -9172,11 +9172,11 @@ pause_letters:
   BCC .next                                 ; $01CCFE |
   LDA $0B1E,x                               ; $01CD00 |
   CMP pause_letter_max_rotate-$0B,y         ; $01CD03 |
-  BNE CODE_01CD21                           ; $01CD06 |
+  BNE .CODE_01CD21                          ; $01CD06 |
   CPY #$0B                                  ; $01CD08 |
-  BEQ CODE_01CD30                           ; $01CD0A |
+  BEQ .CODE_01CD30                          ; $01CD0A |
   LDA $0B12,x                               ; $01CD0C |
-  BNE CODE_01CD30                           ; $01CD0F |
+  BNE .CODE_01CD30                          ; $01CD0F |
   STZ $0B3C,x                               ; $01CD11 |
   STZ $0B1E,x                               ; $01CD14 |
   STZ $0B2A,x                               ; $01CD17 |
@@ -9184,16 +9184,16 @@ pause_letters:
   STA $0B42,x                               ; $01CD1C |
   BRA CODE_01CD56                           ; $01CD1F |
 
-CODE_01CD21:
+.CODE_01CD21
   LDA !r_frame_counter_global_dp            ; $01CD21 |
   LSR A                                     ; $01CD23 |
-  BCS CODE_01CD30                           ; $01CD24 |
+  BCS .CODE_01CD30                          ; $01CD24 |
   LDA $0B1E,x                               ; $01CD26 |
   CLC                                       ; $01CD29 |
   ADC pause_letter_delta_rotate-$0B,y       ; $01CD2A |
   STA $0B1E,x                               ; $01CD2D |
 
-CODE_01CD30:
+.CODE_01CD30
   LDA $0B1E,x                               ; $01CD30 |
   TAY                                       ; $01CD33 |
   ASL A                                     ; $01CD34 |
@@ -9210,10 +9210,10 @@ CODE_01CD30:
   LSR A                                     ; $01CD43 |
   LSR A                                     ; $01CD44 |
   PLP                                       ; $01CD45 |
-  BPL CODE_01CD4A                           ; $01CD46 |
+  BPL .CODE_01CD4A                          ; $01CD46 |
   ORA #$F0                                  ; $01CD48 |
 
-CODE_01CD4A:
+.CODE_01CD4A
   ADC $0B12,x                               ; $01CD4A |
   STA $0B12,x                               ; $01CD4D |
 
