@@ -13161,8 +13161,9 @@ CODE_08CA92:
   db $3A, $D5, $3A, $CB, $3A, $C0, $3A, $B6 ; $08D2D6 |
   db $3A, $AC, $3A, $A2, $3A, $98, $3A, $8D ; $08D2DE |
   db $3A, $83, $3A, $79, $3A, $6F, $3A, $65 ; $08D2E6 |
-  db $3A, $5A, $3A, $60                     ; $08D2EE |
+  db $3A, $5A, $3A                          ; $08D2EE |
 
+  sub r0                                    ; $08D2F1 |
   cache                                     ; $08D2F2 |
   move  r13,r15                             ; $08D2F3 |
   stw   (r1)                                ; $08D2F5 |
@@ -19345,15 +19346,19 @@ CODE_08F495:
   stop                                      ; $08F498 |
   nop                                       ; $08F499 |
 
-  db $2D, $20, $E0, $0C, $00, $2D, $2D, $08 ; $08F49A |
-  db $2D, $E0, $20, $08, $20, $CA, $F7, $08 ; $08F4A2 |
-  db $E0, $F7, $CA, $08, $E2, $F4, $38, $F5 ; $08F4AA |
-  db $8C, $F5, $DC, $F5, $24, $F6, $FD, $FC ; $08F4B2 |
-  db $67, $FD, $89, $F6, $EC, $F6, $0A, $F7 ; $08F4BA |
-  db $56, $F7, $B3, $F7, $18, $F8, $8E, $F8 ; $08F4C2 |
-  db $F3, $F8, $3B, $F9, $DD, $F9, $3E, $FA ; $08F4CA |
-  db $71, $FA, $E5, $FA, $DC, $FD, $1C, $FB ; $08F4D2 |
-  db $8C, $FB, $8F, $FC, $ED, $FB, $26, $FC ; $08F4DA |
+  db $2D, $20, $E0, $0C                     ; $08F49A |
+  db $00, $2D, $2D, $08                     ; $08F49E |
+  db $2D, $E0, $20, $08                     ; $08F4A2 |
+  db $20, $CA, $F7, $08                     ; $08F4A6 |
+  db $E0, $F7, $CA, $08                     ; $08F4AA |
+
+  dw $F4E2, $F538, $F58C, $F5DC, $F624      ; $08F4AE |
+  dw $FCFD, $FD67, $F689, $F6EC, $F70A      ; $08F4B8 |
+  dw $F756, $F7B3, $F818, $F88E, $F8F3      ; $08F4C2 |
+  dw $F93B, $F9DD, $FA3E, $FA71, $FAE5      ; $08F4CC |
+  dw $FDDC, $FB1C, $FB8C, $FC8F, $FBED      ; $08F4D6 |
+  dw $FC26                                  ; $08F4E0 |
+
   db $0C, $10, $C0, $E7, $CC, $D0, $D0, $30 ; $08F4E2 |
   db $D0, $ED, $E0, $10, $E0, $30, $F0, $F4 ; $08F4EA |
   db $F8, $20, $00, $FE, $10, $E0, $40, $10 ; $08F4F2 |

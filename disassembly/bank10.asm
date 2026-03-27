@@ -11173,7 +11173,7 @@ CODE_10E002:
   LDA game_over_vram_x,y                    ; $10E01B |
   AND #$00FF                                ; $10E01E |
   STA !gsu_r4                               ; $10E021 |
-  LDA game_over_vram_x,y                    ; $10E024 |
+  LDA game_over_vram_y,y                    ; $10E024 |
   AND #$00FF                                ; $10E027 |
   STA !gsu_r5                               ; $10E02A |
   LDA $C1                                   ; $10E02D |
