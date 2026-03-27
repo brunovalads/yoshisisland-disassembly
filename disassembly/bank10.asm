@@ -11112,10 +11112,13 @@ CODE_10DF95:
   JSR CODE_10DFE7                           ; $10DF9B |
   RTS                                       ; $10DF9E |
 
+game_over_letters:
   db $15, $01, $16, $04, $17, $18, $04, $19 ; $10DF9F |
 
+game_over_vram_x:
   db $10, $30, $50, $70, $10, $30, $50, $70 ; $10DFA7 |
 
+game_over_vram_y:
   db $50, $50, $50, $50, $70, $70, $70, $70 ; $10DFAF |
 
 try_again_sounds_b10:
@@ -11158,7 +11161,7 @@ CODE_10DFE7:
   LDY #$07                                  ; $10E000 |
 
 CODE_10E002:
-  LDA $DF9F,y                               ; $10E002 |
+  LDA game_over_letters,y                   ; $10E002 |
   AND #$00FF                                ; $10E005 |
   STA !gsu_r1                               ; $10E008 |
   LDA $91,x                                 ; $10E00B |
@@ -11167,10 +11170,10 @@ CODE_10E002:
   LDA $99,x                                 ; $10E013 |
   AND #$00FF                                ; $10E015 |
   STA !gsu_r3                               ; $10E018 |
-  LDA $DFA7,y                               ; $10E01B |
+  LDA game_over_vram_x,y                    ; $10E01B |
   AND #$00FF                                ; $10E01E |
   STA !gsu_r4                               ; $10E021 |
-  LDA $DFAF,y                               ; $10E024 |
+  LDA game_over_vram_x,y                    ; $10E024 |
   AND #$00FF                                ; $10E027 |
   STA !gsu_r5                               ; $10E02A |
   LDA $C1                                   ; $10E02D |
