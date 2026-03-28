@@ -6004,7 +6004,7 @@ CODE_0BA973:
   ibt   r7,#$0018                           ; $0BA99D |
   add   r7                                  ; $0BA99F |
   link  #4                                  ; $0BA9A0 |
-  iwt   r15,#$D320                          ; $0BA9A1 |
+  iwt   r15,#get_MAP16_pg_inf_check_OPT+1   ; $0BA9A1 |
   lm    r0,($F800)                          ; $0BA9A4 |
   and   r7                                  ; $0BA9A8 |
   iwt   r5,#$4800                           ; $0BA9A9 |
@@ -6078,7 +6078,7 @@ CODE_0BAA0F:
   add   r10                                 ; $0BAA21 |
   move  r10,r0                              ; $0BAA22 |
   link  #4                                  ; $0BAA24 |
-  iwt   r15,#$D320                          ; $0BAA25 |
+  iwt   r15,#get_MAP16_pg_inf_check_OPT+1   ; $0BAA25 |
   lm    r0,($F800)                          ; $0BAA28 |
   and   r7                                  ; $0BAA2C |
   iwt   r5,#$4800                           ; $0BAA2D |
@@ -6159,7 +6159,7 @@ CODE_0BAA9A:
   from r10                                  ; $0BAAA0 |
   add   #7                                  ; $0BAAA1 |
   link  #4                                  ; $0BAAA3 |
-  iwt   r15,#$D320                          ; $0BAAA4 |
+  iwt   r15,#get_MAP16_pg_inf_check_OPT+1   ; $0BAAA4 |
   alt1                                      ; $0BAAA7 |
 
   and   #3                                  ; $0BAAA8 |
@@ -6411,7 +6411,7 @@ CODE_0BABF3:
   add   r10                                 ; $0BAC10 |
   move  r0,r10                              ; $0BAC11 |
   link  #4                                  ; $0BAC13 |
-  iwt   r15,#$D320                          ; $0BAC14 |
+  iwt   r15,#get_MAP16_pg_inf_check_OPT+1   ; $0BAC14 |
   lm    r0,($F800)                          ; $0BAC17 |
   and   r7                                  ; $0BAC1B |
   iwt   r5,#$4800                           ; $0BAC1C |
@@ -9386,7 +9386,7 @@ CODE_0BC235:
   from r7                                   ; $0BC24F |
   lsr                                       ; $0BC250 |
   link  #4                                  ; $0BC251 |
-  iwt   r15,#$D320                          ; $0BC252 |
+  iwt   r15,#get_MAP16_pg_inf_check_OPT+1   ; $0BC252 |
   lm    r15,($D295)                         ; $0BC255 |
   nop                                       ; $0BC259 |
   sms   ($006C),r11                         ; $0BC25A |
@@ -9605,7 +9605,7 @@ CODE_0BC387:
   add   r5                                  ; $0BC38E |
   add   r10                                 ; $0BC38F |
   link  #4                                  ; $0BC390 |
-  iwt   r15,#$D320                          ; $0BC391 |
+  iwt   r15,#get_MAP16_pg_inf_check_OPT+1   ; $0BC391 |
   lm    r15,($D295)                         ; $0BC394 |
   nop                                       ; $0BC398 |
   sms   ($0062),r11                         ; $0BC399 |
@@ -9634,7 +9634,7 @@ CODE_0BC387:
 
 CODE_0BC3BC:
   link  #4                                  ; $0BC3BC |
-  iwt   r15,#$D320                          ; $0BC3BD |
+  iwt   r15,#get_MAP16_pg_inf_check_OPT+1   ; $0BC3BD |
   lm    r15,($D3FC)                         ; $0BC3C0 |
   nop                                       ; $0BC3C4 |
   lm    r1,($0072)                          ; $0BC3C5 |
@@ -14145,7 +14145,7 @@ CODE_0BDD6C:
   ibt   r7,#$0010                           ; $0BDD8E |
   sub   r7                                  ; $0BDD90 |
   link  #4                                  ; $0BDD91 |
-  iwt   r15,#$D320                          ; $0BDD92 |
+  iwt   r15,#get_MAP16_pg_inf_check_OPT+1   ; $0BDD92 |
   alt1                                      ; $0BDD95 |
 
   from r6                                   ; $0BDD96 |
@@ -14313,7 +14313,7 @@ CODE_0BDE84:
   lms   r0,($0002)                          ; $0BDE90 |
   add   r5                                  ; $0BDE93 |
   link  #4                                  ; $0BDE94 |
-  iwt   r15,#$D320                          ; $0BDE95 |
+  iwt   r15,#get_MAP16_pg_inf_check_OPT+1   ; $0BDE95 |
   alt1                                      ; $0BDE98 |
 
   from r7                                   ; $0BDE99 |
@@ -14517,6 +14517,7 @@ CODE_0BDF7F:
   jmp   r11                                 ; $0BDFE3 |
   nop                                       ; $0BDFE4 |
 
+prepare_ground_pound:
   sms   ($0064),r11                         ; $0BDFE5 |
   link  #4                                  ; $0BDFE8 |
   iwt   r15,#$E31C                          ; $0BDFE9 |
@@ -14528,7 +14529,7 @@ CODE_0BDF7F:
   sub   #0                                  ; $0BDFFB |
   beq CODE_0BE004                           ; $0BDFFD |
   nop                                       ; $0BDFFF |
-  iwt   r15,#$E088                          ; $0BE000 |
+  iwt   r15,#CODE_0BE088                    ; $0BE000 |
   nop                                       ; $0BE003 |
 
 CODE_0BE004:
@@ -15085,7 +15086,7 @@ CODE_0BE327:
   lms   r8,($015A)                          ; $0BE32A |
   lms   r0,($015C)                          ; $0BE32D |
   link  #4                                  ; $0BE330 |
-  iwt   r15,#$D320                          ; $0BE331 |
+  iwt   r15,#get_MAP16_pg_inf_check_OPT+1   ; $0BE331 |
   alt1                                      ; $0BE334 |
 
   lms   r3,($0168)                          ; $0BE335 |
@@ -16163,7 +16164,7 @@ CODE_0BE91C:
   from r7                                   ; $0BE953 |
   add   #8                                  ; $0BE954 |
   link  #4                                  ; $0BE956 |
-  iwt   r15,#$D320                          ; $0BE957 |
+  iwt   r15,#get_MAP16_pg_inf_check_OPT+1   ; $0BE957 |
   alt1                                      ; $0BE95A |
 
   and   #2                                  ; $0BE95B |
@@ -16496,7 +16497,7 @@ CODE_0BEB05:
   from r7                                   ; $0BEB44 |
   add   #8                                  ; $0BEB45 |
   link  #4                                  ; $0BEB47 |
-  iwt   r15,#$D320                          ; $0BEB48 |
+  iwt   r15,#get_MAP16_pg_inf_check_OPT+1   ; $0BEB48 |
   alt1                                      ; $0BEB4B |
 
   and   #2                                  ; $0BEB4C |
