@@ -11447,6 +11447,7 @@ CODE_02E526:
   BPL CODE_02E526                           ; $02E530 |
   RTL                                       ; $02E532 |
 
+naval_state_ptr:
   dw $E905                                  ; $02E533 |
   dw $EA2C                                  ; $02E535 |
   dw $EB2D                                  ; $02E537 |
@@ -11486,6 +11487,7 @@ CODE_02E526:
   dw $F273                                  ; $02E57B |
   dw $F310                                  ; $02E57D |
 
+main_naval_piranha:
   JSR CODE_02E5E4                           ; $02E57F |
   JSL $03AF23                               ; $02E582 |
   LDY !s_spr_wildcard_4_lo_dp,x             ; $02E586 |
@@ -11494,7 +11496,7 @@ CODE_02E526:
   LDA !s_spr_wildcard_5_lo_dp,x             ; $02E58B |
   ASL A                                     ; $02E58D |
   TAX                                       ; $02E58E |
-  JSR ($E533,x)                             ; $02E58F |
+  JSR (naval_state_ptr,x)                   ; $02E58F |
   LDY !s_spr_draw_priority,x                ; $02E592 |
   BMI CODE_02E5C1                           ; $02E595 |
   LDY $1084                                 ; $02E597 |
@@ -12074,6 +12076,7 @@ CODE_02EA1F:
 CODE_02EA2B:
   RTS                                       ; $02EA2B |
 
+naval_wait:
   TYX                                       ; $02EA2C |
   LDY $105A                                 ; $02EA2D |
   CPY #$02                                  ; $02EA30 |
