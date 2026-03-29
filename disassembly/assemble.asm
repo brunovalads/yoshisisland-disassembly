@@ -1,3 +1,6 @@
+; Minimum asar version, to force modern syntaxes and stay up to date
+asar 1.90
+
 ; variables
 incsrc vars/reg_vars.asm
 incsrc vars/ram_vars.asm
