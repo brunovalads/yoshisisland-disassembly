@@ -7,10 +7,10 @@ incbin lz16-005-4bpp-4kb.bin
 incbin lz16-006-4bpp-4kb.bin
 incbin lz16-007-4bpp-4kb.bin
 incbin lz16-008-4bpp-4kb.bin
-incbin lz16-009-4bpp-4kb.bin:0000-00F5
+incbin lz16-009-4bpp-4kb.bin:$0000..$00F5
 
 org $3A8000
-incbin lz16-009-4bpp-4kb.bin:00F5-05E2
+incbin lz16-009-4bpp-4kb.bin:$00F5..$05E2
 incbin lz16-00A-4bpp-4kb.bin
 incbin lz16-00B-4bpp-4kb.bin
 incbin lz16-00C-4bpp-4kb.bin
@@ -39,10 +39,10 @@ incbin lz16-022-4bpp-1kb.bin
 incbin lz16-023-4bpp-1kb.bin
 incbin lz16-024-4bpp-1kb.bin
 incbin lz16-025-4bpp-1kb.bin
-incbin lz16-026-4bpp-1kb.bin:0000-01A9
+incbin lz16-026-4bpp-1kb.bin:$0000..$01A9
 
 org $3B8000
-incbin lz16-026-4bpp-1kb.bin:01A9-024C
+incbin lz16-026-4bpp-1kb.bin:$01A9..$024C
 incbin lz16-027-4bpp-1kb.bin
 incbin lz16-028-4bpp-1kb.bin
 incbin lz16-029-4bpp-1kb.bin
@@ -118,10 +118,10 @@ incbin lz16-06E-4bpp-1kb.bin
 incbin lz16-06F-4bpp-1kb.bin
 incbin lz16-070-4bpp-1kb.bin
 incbin lz16-071-4bpp-1kb.bin
-incbin lz16-072-4bpp-8kb.bin:0000-07FC
+incbin lz16-072-4bpp-8kb.bin:$0000..$07FC
 
 org $3C8000
-incbin lz16-072-4bpp-8kb.bin:07FC-0BCF
+incbin lz16-072-4bpp-8kb.bin:$07FC..$0BCF
 incbin lz16-073-4bpp-2kb.bin
 incbin lz16-074-4bpp-2kb.bin
 incbin lz16-075-4bpp-2kb.bin
@@ -141,10 +141,10 @@ incbin lz16-082-4bpp-4kb.bin
 incbin lz16-083-4bpp-4kb.bin
 incbin lz16-084-4bpp-4kb.bin
 incbin lz16-085-4bpp-4kb.bin
-incbin lz16-086-4bpp-4kb.bin:0000-0803
+incbin lz16-086-4bpp-4kb.bin:$0000..$0803
 
 org $3D8000
-incbin lz16-086-4bpp-4kb.bin:0803-0AA2
+incbin lz16-086-4bpp-4kb.bin:$0803..$0AA2
 incbin lz16-087-4bpp-8kb.bin
 incbin lz16-088-4bpp-8kb.bin
 incbin lz16-089-4bpp-8kb.bin
@@ -160,10 +160,10 @@ incbin lz16-092-4bpp-2kb.bin
 incbin lz16-093-4bpp-2kb.bin
 incbin lz16-094-4bpp-2kb.bin
 incbin lz16-095-4bpp-2kb.bin
-incbin lz16-096-4bpp-2kb.bin:0000-0101
+incbin lz16-096-4bpp-2kb.bin:$0000..$0101
 
 org $3E8000
-incbin lz16-096-4bpp-2kb.bin:0101-02FF
+incbin lz16-096-4bpp-2kb.bin:$0101..$02FF
 incbin lz16-097-4bpp-2kb.bin
 incbin lz16-098-4bpp-2kb.bin
 incbin lz16-099-4bpp-2kb.bin
@@ -197,9 +197,9 @@ incbin lz16-0B4-4bpp-4kb.bin
 incbin lz16-0B5-4bpp-2kb.bin
 incbin lz16-0B6-4bpp-2kb.bin
 incbin lz16-0B7-4bpp-2kb.bin
-incbin lz16-0B8-4bpp-2kb.bin:0000-015A
+incbin lz16-0B8-4bpp-2kb.bin:$0000..$015A
 
 org $3F8000
-incbin lz16-0B8-4bpp-2kb.bin:015A-0212
+incbin lz16-0B8-4bpp-2kb.bin:$015A..$0212
 incbin lz16-0B9-4bpp-4kb.bin
 incbin lz16-0BA-4bpp-4kb.bin

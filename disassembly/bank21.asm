@@ -1,9 +1,9 @@
 ; Waves crashing SFX (BRR)
 org $20B0B6  
 	incbin "samples/titlescreen/00_WAVES.brr"			; $20B0B6 |
-	incbin "samples/titlescreen/01_GULLS.brr":0-10D1	; $20EF2F |
+	incbin "samples/titlescreen/01_GULLS.brr":$0..$10D1	; $20EF2F |
 org $218000
-	incbin "samples/titlescreen/01_GULLS.brr":10D1-1B48	; $218000 | Bank-Crossing requires a split
+	incbin "samples/titlescreen/01_GULLS.brr":$10D1..$1B48	; $218000 | Bank-Crossing requires a split
 	incbin "samples/titlescreen/02_XYLOPHONE.brr"  		; $218A77 |
 	incbin "samples/titlescreen/03_VIBRAPHONE.brr" 		; $219422 | Used for menu sfx on the title screen
 	incbin "samples/titlescreen/04_PANFLUTE.brr"		; $2195B7 |

@@ -17,9 +17,9 @@
   incbin "samples/ending/05_PANFLUTE.brr"           ; $1CE511 |
   incbin "samples/ending/06_PIZZSTRINGS.brr"        ; $1CE976 |
   incbin "samples/ending/07_TIMPANI.brr"            ; $1CEC19 |
-  incbin "samples/ending/08_ORCBRASS.brr":0-844     ; $1CF7BC |
+  incbin "samples/ending/08_ORCBRASS.brr":$0..$844  ; $1CF7BC |
 org $1D8000 
-  incbin "samples/ending/08_ORCBRASS.brr":844-A0E   
+  incbin "samples/ending/08_ORCBRASS.brr":$844..$A0E   
   incbin "samples/ending/09_GLOCKENSPIEL.brr"       ; $1D81C8 |
   incbin "samples/ending/0A_PIANOHIGH.brr"          ; $1D82C2 |
   incbin "samples/ending/0B_CELLO.brr"              ; $1D9C70 |

@@ -3,10 +3,10 @@ incbin lz1-001-4bpp-4kb.bin
 incbin lz1-002-4bpp-4kb.bin
 incbin lz1-003-4bpp-4kb.bin
 incbin lz1-004-4bpp-4kb.bin
-incbin lz1-005-4bpp-4kb.bin:0000-0707
+incbin lz1-005-4bpp-4kb.bin:$0000..$0707
 
 org $2F8000
-incbin lz1-005-4bpp-4kb.bin:0707-0973
+incbin lz1-005-4bpp-4kb.bin:$0707..$0973
 incbin lz1-006-4bpp-4kb.bin
 incbin lz1-007-4bpp-4kb.bin
 incbin lz1-008-4bpp-4kb.bin
@@ -19,10 +19,10 @@ incbin lz1-00E-4bpp-4kb.bin
 incbin lz1-00F-4bpp-4kb.bin
 incbin lz1-010-2bpp-2kb.bin
 incbin lz1-011-2bpp-2kb.bin
-incbin lz1-012-2bpp-2kb.bin:0000-0216
+incbin lz1-012-2bpp-2kb.bin:$0000..$0216
 
 org $308000
-incbin lz1-012-2bpp-2kb.bin:0216-0473
+incbin lz1-012-2bpp-2kb.bin:$0216..$0473
 incbin lz1-013-2bpp-2kb.bin
 incbin lz1-014-2bpp-2kb.bin
 incbin lz1-015-2bpp-2kb.bin
@@ -43,10 +43,10 @@ incbin lz1-023-4bpp-4kb.bin
 incbin lz1-024-4bpp-4kb.bin
 incbin lz1-025-4bpp-4kb.bin
 incbin lz1-026-4bpp-4kb.bin
-incbin lz1-027-2bpp-2kb.bin:0000-01DF
+incbin lz1-027-2bpp-2kb.bin:$0000..$01DF
 
 org $318000
-incbin lz1-027-2bpp-2kb.bin:01DF-058E
+incbin lz1-027-2bpp-2kb.bin:$01DF..$058E
 incbin lz1-028-2bpp-2kb.bin
 incbin lz1-029-2bpp-2kb.bin
 incbin lz1-02A-2bpp-2kb.bin
@@ -62,10 +62,10 @@ incbin lz1-033-4bpp-4kb.bin
 incbin lz1-034-4bpp-4kb.bin
 incbin lz1-035-4bpp-4kb.bin
 incbin lz1-036-4bpp-4kb.bin
-incbin lz1-037-4bpp-4kb.bin:0000-06D8
+incbin lz1-037-4bpp-4kb.bin:$0000..$06D8
 
 org $328000
-incbin lz1-037-4bpp-4kb.bin:06D8-0983
+incbin lz1-037-4bpp-4kb.bin:$06D8..$0983
 incbin lz1-038-4bpp-4kb.bin
 incbin lz1-039-4bpp-4kb.bin
 incbin lz1-03A-4bpp-4kb.bin
@@ -76,10 +76,10 @@ incbin lz1-03E-4bpp-4kb.bin
 incbin lz1-03F-4bpp-4kb.bin
 incbin lz1-040-4bpp-4kb.bin
 incbin lz1-041-4bpp-4kb.bin
-incbin lz1-042-4bpp-4kb.bin:0000-00EC
+incbin lz1-042-4bpp-4kb.bin:$0000..$00EC
 
 org $338000
-incbin lz1-042-4bpp-4kb.bin:00EC-0BA7
+incbin lz1-042-4bpp-4kb.bin:$00EC..$0BA7
 incbin lz1-043-4bpp-4kb.bin
 incbin lz1-044-4bpp-4kb.bin
 incbin lz1-045-4bpp-4kb.bin
@@ -88,10 +88,10 @@ incbin lz1-047-4bpp-4kb.bin
 incbin lz1-048-4bpp-4kb.bin
 incbin lz1-049-4bpp-4kb.bin
 incbin lz1-04A-4bpp-8kb.bin
-incbin lz1-04B-4bpp-8kb.bin:0000-1262
+incbin lz1-04B-4bpp-8kb.bin:$0000..$1262
 
 org $348000
-incbin lz1-04B-4bpp-8kb.bin:1262-1826
+incbin lz1-04B-4bpp-8kb.bin:$1262..$1826
 incbin lz1-04C-4bpp-4kb.bin
 incbin lz1-04D-2bpp-2kb.bin
 incbin lz1-04E-2bpp-2kb.bin
@@ -111,10 +111,10 @@ incbin lz1-05B-2bpp-2kb.bin
 incbin lz1-05C-2bpp-2kb.bin
 incbin lz1-05D-4bpp-2kb.bin
 incbin lz1-05E-4bpp-2kb.bin
-incbin lz1-05F-4bpp-4kb.bin:0000-066C
+incbin lz1-05F-4bpp-4kb.bin:$0000..$066C
 
 org $358000
-incbin lz1-05F-4bpp-4kb.bin:066C-0DB4
+incbin lz1-05F-4bpp-4kb.bin:$066C..$0DB4
 incbin lz1-060-4bpp-4kb.bin
 incbin lz1-061-2bpp-2kb.bin
 incbin lz1-062-2bpp-2kb.bin
@@ -129,10 +129,10 @@ incbin lz1-06A-4bpp-4kb.bin
 incbin lz1-06B-4bpp-4kb.bin
 incbin lz1-06C-4bpp-4kb.bin
 incbin lz1-06D-4bpp-4kb.bin
-incbin lz1-06E-4bpp-2kb.bin:0000-01D8
+incbin lz1-06E-4bpp-2kb.bin:$0000..$01D8
 
 org $368000
-incbin lz1-06E-4bpp-2kb.bin:01D8-0598
+incbin lz1-06E-4bpp-2kb.bin:$01D8..$0598
 incbin lz1-06F-4bpp-2kb.bin
 incbin lz1-070-4bpp-2kb.bin
 incbin lz1-071-2bpp-2kb.bin
@@ -174,10 +174,10 @@ incbin lz1-094-tmap-4kb.bin
 incbin lz1-095-tmap-1kb.bin
 incbin lz1-096-tmap-2kb.bin
 incbin lz1-097-tmap-2kb.bin
-incbin lz1-098-tmap-2kb.bin:0000-0144
+incbin lz1-098-tmap-2kb.bin:$0000..$0144
 
 org $378000
-incbin lz1-098-tmap-2kb.bin:0144-01B4
+incbin lz1-098-tmap-2kb.bin:$0144..$01B4
 incbin lz1-099-tmap-2kb.bin
 incbin lz1-09A-tmap-4kb.bin
 incbin lz1-09B-tmap-4kb.bin
@@ -215,10 +215,10 @@ incbin lz1-0BA-tmap-2kb.bin
 incbin lz1-0BB-tmap-2kb.bin
 incbin lz1-0BC-tmap-2kb.bin
 incbin lz1-0BD-tmap-4kb.bin
-incbin lz1-0BE-tmap-4kb.bin:0000-0358
+incbin lz1-0BE-tmap-4kb.bin:$0000..$0358
 
 org $388000
-incbin lz1-0BE-tmap-4kb.bin:0358-0BEA
+incbin lz1-0BE-tmap-4kb.bin:$0358..$0BEA
 incbin lz1-0BF-tmap-4kb.bin
 incbin lz1-0C0-tmap-4kb.bin
 incbin lz1-0C1-tmap-4kb.bin
@@ -264,10 +264,10 @@ incbin lz1-0E8-tmap-2kb.bin
 incbin lz1-0E9-tmap-2kb.bin
 incbin lz1-0EA-tmap-2kb.bin
 incbin lz1-0EB-tmap-2kb.bin
-incbin lz1-0EC-tmap-2kb.bin:0000-002D
+incbin lz1-0EC-tmap-2kb.bin:$0000..$002D
 
 org $398000
-incbin lz1-0EC-tmap-2kb.bin:002D-050A
+incbin lz1-0EC-tmap-2kb.bin:$002D..$050A
 incbin lz1-0ED-tmap-2kb.bin
 incbin lz1-0EE-tmap-2kb.bin
 incbin lz1-0EF-tmap-2kb.bin
