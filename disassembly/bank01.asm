@@ -9259,8 +9259,8 @@ CODE_01CD6F:
   AND #$00FF                                ; $01CD99 |
   STA !gsu_r6                               ; $01CD9C |
   PHX                                       ; $01CD9F |
-  LDX #$08                                  ; $01CDA0 |
-  LDA #$F165                                ; $01CDA2 |
+  LDX.b #bank(gsu_render_3d_letter)         ; $01CDA0 |
+  LDA.w #gsu_render_3d_letter               ; $01CDA2 |
   JSL r_gsu_init_1                          ; $01CDA5 | GSU init
   PLX                                       ; $01CDA9 |
   DEX                                       ; $01CDAA |

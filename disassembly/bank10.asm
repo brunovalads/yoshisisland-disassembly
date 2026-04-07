@@ -11185,8 +11185,8 @@ CODE_10E002:
   STA !gsu_r6                               ; $10E02F |
   PHY                                       ; $10E032 |
   PHX                                       ; $10E033 |
-  LDX #$08                                  ; $10E034 |
-  LDA #$F165                                ; $10E036 |
+  LDX.b #bank(gsu_render_3d_letter)         ; $01CDA0 |
+  LDA.w #gsu_render_3d_letter               ; $01CDA2 |
   JSL r_gsu_init_1                          ; $10E039 | GSU init
   PLX                                       ; $10E03D |
   PLY                                       ; $10E03E |

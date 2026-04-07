@@ -18707,7 +18707,7 @@ CODE_08F106:
   add   r0                                  ; $08F136 |
   with r5                                   ; $08F137 |
   add   r0                                  ; $08F138 |
-  bra CODE_08F165+1                         ; $08F139 |
+  bra gsu_render_3d_letter+1                ; $08F139 |
 
   sms   ($003C),r4                          ; $08F13B |
   cache                                     ; $08F13E |
@@ -18739,7 +18739,15 @@ CODE_08F106:
   with r5                                   ; $08F162 |
   add   #8                                  ; $08F163 |
 
-CODE_08F165:
+; Render 3D letters
+; Renders a 3D letter using a 2D vector image
+;
+; Parameters:
+; r1: Index to model
+; r2: Angle θ (rotation around the X axis)
+; r3: Angle φ (rotation around the Y axis)
+gsu_render_3d_letter:
+.prepare
   sms   ($003C),r4                          ; $08F165 |
   sms   ($003E),r5                          ; $08F168 |
   sms   ($003A),r6                          ; $08F16B |
@@ -18747,39 +18755,41 @@ CODE_08F165:
   cmode                                     ; $08F16F |
   ibt   r0,#$0008                           ; $08F171 |
   romb                                      ; $08F173 |
-  ibt   r6,#$0010                           ; $08F175 |
+  ibt   r6,#$0010                           ; $08F175 | Letter width
   iwt   r13,#cosine_8                       ; $08F177 |
   from r13                                  ; $08F17A |
   to r14                                    ; $08F17B |
   add   r2                                  ; $08F17C |
   getb                                      ; $08F17D |
-  sms   ($0000),r0                          ; $08F17E |
+  sms   ($0000),r0                          ; $08F17E | $0000 = cos(θ)
   move  r9,r0                               ; $08F181 |
   from r13                                  ; $08F183 |
   to r14                                    ; $08F184 |
   add   r3                                  ; $08F185 |
   getb                                      ; $08F186 |
-  sms   ($0002),r0                          ; $08F187 |
+  sms   ($0002),r0                          ; $08F187 | $0002 = cos(φ)
   move  r7,r0                               ; $08F18A |
   mult  r6                                  ; $08F18C |
-  sms   ($0004),r0                          ; $08F18D |
+  sms   ($0004),r0                          ; $08F18D | $0004 = cos(φ) * 2
   iwt   r13,#sine_8                         ; $08F190 |
   from r13                                  ; $08F193 |
   to r14                                    ; $08F194 |
   add   r2                                  ; $08F195 |
   getb                                      ; $08F196 |
-  sms   ($0006),r0                          ; $08F197 |
+  sms   ($0006),r0                          ; $08F197 | $0006 = sin(θ)
   move  r10,r0                              ; $08F19A |
   from r13                                  ; $08F19C |
   to r14                                    ; $08F19D |
   add   r3                                  ; $08F19E |
   getb                                      ; $08F19F |
-  sms   ($0008),r0                          ; $08F1A0 |
+  sms   ($0008),r0                          ; $08F1A0 | $0008 = sin(φ)
   move  r8,r0                               ; $08F1A3 |
   mult  r6                                  ; $08F1A5 |
-  sms   ($000A),r0                          ; $08F1A6 |
-  iwt   r14,#$F49A                          ; $08F1A9 |
-  ibt   r4,#$0020                           ; $08F1AC |
+  sms   ($000A),r0                          ; $08F1A6 | $000A = sin(φ)
+
+.calculate_colors
+  iwt   r14,#letter_3d_colors               ; $08F1A9 |
+  ibt   r4,#$0020                           ; $08F1AC | Color buffer
   ibt   r12,#$0005                          ; $08F1AE |
   cache                                     ; $08F1B0 |
   move  r13,r15                             ; $08F1B1 |
@@ -18791,7 +18801,7 @@ CODE_08F165:
   inc   r14                                 ; $08F1BA |
   mult  r7                                  ; $08F1BB |
   sub   r11                                 ; $08F1BC |
-  add   r0                                  ; $08F1BD |
+  add   r0                                  ; $08F1BD | This presumably offsets the trigonometric values
   add   r0                                  ; $08F1BE |
   hib                                       ; $08F1BF |
   sex                                       ; $08F1C0 |
@@ -18800,12 +18810,12 @@ CODE_08F165:
   getbs                                     ; $08F1C3 |
   mult  r10                                 ; $08F1C5 |
   add   r11                                 ; $08F1C6 |
-  bpl CODE_08F1CC                           ; $08F1C7 |
+  bpl ..positive                            ; $08F1C7 |
   inc   r14                                 ; $08F1C9 |
   not                                       ; $08F1CA |
   inc   r0                                  ; $08F1CB |
 
-CODE_08F1CC:
+..positive
   hib                                       ; $08F1CC |
   lsr                                       ; $08F1CD |
   to r11                                    ; $08F1CE |
@@ -18816,7 +18826,13 @@ CODE_08F1CC:
   stb   (r4)                                ; $08F1D3 |
   loop                                      ; $08F1D5 |
   inc   r4                                  ; $08F1D6 |
-  iwt   r0,#$F4AE                           ; $08F1D7 |
+
+; Calculates the vertices from a 2D vector image
+; and create a second set of vertices for the back side
+; All transformed vertices are flattened out into 2D vectors
+; (i.e. without the Z position)
+.calculate_vertices
+  iwt   r0,#letter_3d_model_ptrs            ; $08F1D7 |
   add   r1                                  ; $08F1DA |
   to r14                                    ; $08F1DB |
   add   r1                                  ; $08F1DC |
@@ -18957,18 +18973,28 @@ CODE_08F1CC:
   stb   (r1)                                ; $08F287 |
   loop                                      ; $08F289 |
   inc   r1                                  ; $08F28A |
+
+; This part creates faces
+; It consists of two parts: 
+; - Create the base faces of a variable amount of nodes but hardcoded colour
+; - Create the perimeter rectangles with a variable colour but hardcoded vertex count
+; Table format:
+; Vertex count (byte)
+; Indices to vertices (byte * vertex count)
+; Palette of perimeter (byte * vertex count)
+.create_faces
   iwt   r1,#$2BBE                           ; $08F28B |
   iwt   r2,#$2C0E                           ; $08F28E |
   ibt   r3,#$0000                           ; $08F291 |
-  ibt   r4,#$0004                           ; $08F293 |
-  ibt   r5,#$0002                           ; $08F295 |
-  ibt   r9,#$0020                           ; $08F297 |
+  ibt   r4,#$0004                           ; $08F293 | Number of vertices of each perimeter rectangle
+  ibt   r5,#$0002                           ; $08F295 | Number of base shapes
+  ibt   r9,#$0020                           ; $08F297 | Palette of base shapes
   to r11                                    ; $08F299 |
   getb                                      ; $08F29A |
   inc   r14                                 ; $08F29B |
   sms   ($003E),r11                         ; $08F29C |
 
-CODE_08F29F:
+..next_submodel:
   from r2                                   ; $08F29F |
   stw   (r1)                                ; $08F2A0 |
   inc   r1                                  ; $08F2A1 |
@@ -19062,9 +19088,10 @@ CODE_08F29F:
   from r6                                   ; $08F317 |
   stb   (r2)                                ; $08F318 |
   dec   r11                                 ; $08F31A |
-  bne CODE_08F29F                           ; $08F31B |
+  bne ..next_submodel                       ; $08F31B |
   inc   r2                                  ; $08F31D |
   move  r12,r3                              ; $08F31E |
+
   iwt   r1,#$2C0E                           ; $08F320 |
   iwt   r2,#$2D3A                           ; $08F323 |
   iwt   r3,#$2AF6                           ; $08F326 |
@@ -19116,6 +19143,8 @@ CODE_08F29F:
   move  r1,r4                               ; $08F364 |
   loop                                      ; $08F366 |
   inc   r2                                  ; $08F367 |
+
+.render_faces
   iwt   r1,#$2D3A                           ; $08F368 |
   getb                                      ; $08F36B |
   inc   r14                                 ; $08F36C |
@@ -19145,6 +19174,8 @@ CODE_08F29F:
   to r14                                    ; $08F388 |
   add   r14                                 ; $08F389 |
   cache                                     ; $08F38A |
+
+..next_submodel
   getb                                      ; $08F38B |
   with r14                                  ; $08F38C |
   add   #8                                  ; $08F38D |
@@ -19164,6 +19195,8 @@ CODE_08F29F:
   add   r5                                  ; $08F3A1 |
   ldb   (r3)                                ; $08F3A2 |
   sms   ($003C),r0                          ; $08F3A4 |
+
+..next_face
   to r12                                    ; $08F3A7 |
   ldb   (r4)                                ; $08F3A8 |
   inc   r4                                  ; $08F3AA |
@@ -19171,19 +19204,19 @@ CODE_08F29F:
   ldb   (r4)                                ; $08F3AC |
   ldb   (r5)                                ; $08F3AE |
   sex                                       ; $08F3B0 |
-  bpl CODE_08F3B8                           ; $08F3B1 |
+  bpl ..dont_render                         ; $08F3B1 |
   inc   r5                                  ; $08F3B3 |
   dec   r6                                  ; $08F3B4 |
-  bpl CODE_08F3BE                           ; $08F3B5 |
+  bpl ..do_render                           ; $08F3B5 |
   inc   r6                                  ; $08F3B7 |
 
-CODE_08F3B8:
+..dont_render
   with r4                                   ; $08F3B8 |
   add   r12                                 ; $08F3B9 |
-  iwt   r15,#$F47F                          ; $08F3BA |
+  iwt   r15,#..skip_face                    ; $08F3BA |
   inc   r4                                  ; $08F3BD |
 
-CODE_08F3BE:
+..do_render
   inc   r4                                  ; $08F3BE |
   ldb   (r6)                                ; $08F3BF |
   color                                     ; $08F3C1 |
@@ -19203,18 +19236,18 @@ CODE_08F3BE:
   stw   (r7)                                ; $08F3D7 |
   lob                                       ; $08F3D8 |
   sub   r2                                  ; $08F3D9 |
-  bcs CODE_08F3E1                           ; $08F3DA |
+  bcs ..not_leftmost                        ; $08F3DA |
   add   r2                                  ; $08F3DC |
   move  r2,r0                               ; $08F3DD |
   move  r11,r7                              ; $08F3DF |
 
-CODE_08F3E1:
+..not_leftmost
   sub   r9                                  ; $08F3E1 |
-  bcc CODE_08F3E7                           ; $08F3E2 |
+  bcc ..not_rightmost                       ; $08F3E2 |
   add   r9                                  ; $08F3E4 |
   move  r9,r0                               ; $08F3E5 |
 
-CODE_08F3E7:
+..not_rightmost
   inc   r7                                  ; $08F3E7 |
   inc   r7                                  ; $08F3E8 |
   loop                                      ; $08F3E9 |
@@ -19229,30 +19262,30 @@ CODE_08F3E7:
   to r11                                    ; $08F3FC |
   sub   r2                                  ; $08F3FD |
 
-CODE_08F3FE:
+..CODE_08F3FE
   from r2                                   ; $08F3FE |
   sub   r7                                  ; $08F3FF |
-  bcc CODE_08F42F                           ; $08F400 |
+  bcc ..CODE_08F42F                         ; $08F400 |
   nop                                       ; $08F402 |
   lms   r1,($0038)                          ; $08F403 |
   inc   r1                                  ; $08F406 |
 
-CODE_08F407:
+..CODE_08F407
   ldb   (r1)                                ; $08F407 |
   to r3                                     ; $08F409 |
   swap                                      ; $08F40A |
   dec   r1                                  ; $08F40B |
   dec   r1                                  ; $08F40C |
-  bpl CODE_08F412                           ; $08F40D |
+  bpl ..CODE_08F412                         ; $08F40D |
   dec   r1                                  ; $08F40F |
   move  r1,r10                              ; $08F410 |
 
-CODE_08F412:
+..CODE_08F412
   sms   ($0038),r1                          ; $08F412 |
   ldb   (r1)                                ; $08F415 |
   to r6                                     ; $08F417 |
   sub   r7                                  ; $08F418 |
-  beq CODE_08F407                           ; $08F419 |
+  beq ..CODE_08F407                         ; $08F419 |
   inc   r1                                  ; $08F41B |
   move  r7,r0                               ; $08F41C |
   iwt   r0,#$2200                           ; $08F41E |
@@ -19270,30 +19303,30 @@ CODE_08F412:
   to r5                                     ; $08F42D |
   add   r0                                  ; $08F42E |
 
-CODE_08F42F:
+..CODE_08F42F
   from r2                                   ; $08F42F |
   sub   r8                                  ; $08F430 |
-  bcc CODE_08F460                           ; $08F431 |
+  bcc ..CODE_08F460                         ; $08F431 |
   nop                                       ; $08F433 |
   lms   r1,($003A)                          ; $08F434 |
   inc   r1                                  ; $08F437 |
 
-CODE_08F438:
+..CODE_08F438
   ldb   (r1)                                ; $08F438 |
   to r4                                     ; $08F43A |
   swap                                      ; $08F43B |
   from r1                                   ; $08F43C |
   sub   r10                                 ; $08F43D |
-  bcc CODE_08F443                           ; $08F43E |
+  bcc ..CODE_08F443                         ; $08F43E |
   inc   r1                                  ; $08F440 |
   ibt   r1,#$0000                           ; $08F441 |
 
-CODE_08F443:
+..CODE_08F443
   sms   ($003A),r1                          ; $08F443 |
   ldb   (r1)                                ; $08F446 |
   to r6                                     ; $08F448 |
   sub   r8                                  ; $08F449 |
-  beq CODE_08F438                           ; $08F44A |
+  beq ..CODE_08F438                         ; $08F44A |
   inc   r1                                  ; $08F44C |
   move  r8,r0                               ; $08F44D |
   iwt   r0,#$2200                           ; $08F44F |
@@ -19311,7 +19344,7 @@ CODE_08F443:
   to r9                                     ; $08F45E |
   rol                                       ; $08F45F |
 
-CODE_08F460:
+..CODE_08F460
   from r3                                   ; $08F460 |
   to r1                                     ; $08F461 |
   hib                                       ; $08F462 |
@@ -19319,51 +19352,61 @@ CODE_08F460:
   hib                                       ; $08F464 |
   to r12                                    ; $08F465 |
   sub   r1                                  ; $08F466 |
-  bmi CODE_08F471                           ; $08F467 |
+  bmi ..CODE_08F471                         ; $08F467 |
   nop                                       ; $08F469 |
-  beq CODE_08F471                           ; $08F46A |
+  beq ..CODE_08F471                         ; $08F46A |
   nop                                       ; $08F46C |
   move  r13,r15                             ; $08F46D |
   loop                                      ; $08F46F |
   plot                                      ; $08F470 |
 
-CODE_08F471:
+..CODE_08F471
   with r3                                   ; $08F471 |
   add   r5                                  ; $08F472 |
   with r4                                   ; $08F473 |
   add   r9                                  ; $08F474 |
   dec   r11                                 ; $08F475 |
-  bpl CODE_08F3FE                           ; $08F476 |
+  bpl ..CODE_08F3FE                         ; $08F476 |
   inc   r2                                  ; $08F478 |
   lms   r4,($0048)                          ; $08F479 |
   lms   r5,($004A)                          ; $08F47C |
+
+..skip_face
   lms   r0,($003C)                          ; $08F47F |
   dec   r0                                  ; $08F482 |
-  beq CODE_08F48A                           ; $08F483 |
+  beq ..CODE_08F48A                         ; $08F483 |
   nop                                       ; $08F485 |
-  iwt   r15,#$F3A7                          ; $08F486 |
+  iwt   r15,#..next_face                    ; $08F486 |
   sbk                                       ; $08F489 |
 
-CODE_08F48A:
+..CODE_08F48A
   lms   r0,($003E)                          ; $08F48A |
   dec   r0                                  ; $08F48D |
-  beq CODE_08F495                           ; $08F48E |
+  beq .finish_render                        ; $08F48E |
   nop                                       ; $08F490 |
-  iwt   r15,#$F38B                          ; $08F491 |
+  iwt   r15,#..next_submodel                ; $08F491 |
   sbk                                       ; $08F494 |
 
-CODE_08F495:
+.finish_render
   inc   r2                                  ; $08F495 |
   rpix                                      ; $08F496 |
   stop                                      ; $08F498 |
   nop                                       ; $08F499 |
 
+; Table format:
+; Byte 1 (signed): X amplitude
+; Byte 2 (signed): Y amplitude
+; Byte 3 (signed): Z amplitude
+; Byte 4 (unsigned): Base palette (darkest color)
+letter_3d_colors:
   db $2D, $20, $E0, $0C                     ; $08F49A |
   db $00, $2D, $2D, $08                     ; $08F49E |
   db $2D, $E0, $20, $08                     ; $08F4A2 |
   db $20, $CA, $F7, $08                     ; $08F4A6 |
   db $E0, $F7, $CA, $08                     ; $08F4AA |
 
+; Pointers to each 3D letter "model"
+letter_3d_model_ptrs:
   dw $F4E2, $F538, $F58C, $F5DC, $F624      ; $08F4AE |
   dw $FCFD, $FD67, $F689, $F6EC, $F70A      ; $08F4B8 |
   dw $F756, $F7B3, $F818, $F88E, $F8F3      ; $08F4C2 |
