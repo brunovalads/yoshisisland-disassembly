@@ -9003,14 +9003,14 @@ pause_dma_spr_size:
 ; sprite graphics (used by the items in the pause menu)
 pause_play_sfx:
   TYX                                       ; $01CB60 |
-  LDA pause_sounds,x                        ; $01CB61 |\ play pause sounds from table (#$01 and #$02)
+  LDA.w pause_sounds,x                      ; $01CB61 |\ play pause sounds from table (#$01 and #$02)
   STA !r_apu_io_2_mirror_dp                 ; $01CB64 |/ bypassing push_sound_queue
 
 pause_preserve_sprite_gfx:
   LDA #$7BBE                                ; $01CB66 |
   STA $00                                   ; $01CB69 |
-  LDY pause_dma_spr_size,x                  ; $01CB6B |
-  LDA pause_dma_spr_vram,x                  ; $01CB6E |
+  LDY.w pause_dma_spr_size,x                ; $01CB6B |
+  LDA.w pause_dma_spr_vram,x                ; $01CB6E |
   JMP pause_do_vram_dma                     ; $01CB71 |
 
 ; Addresses for the VRAM transfers for BG3 GFX
@@ -9035,7 +9035,7 @@ pause_init_letters:
   LDX #$04                                  ; $01CB86 |
 
 .timer_loop
-  LDA pause_init_timer,x                    ; $01CB88 |
+  LDA.w pause_init_timer,x                  ; $01CB88 |
   STA $0B42,x                               ; $01CB8B |
   DEX                                       ; $01CB8E |
   BPL .timer_loop                           ; $01CB8F |
@@ -9047,8 +9047,8 @@ pause_preserve_bg3_gfx_1:
   CLC                                       ; $01CB97 | instead of doing the calculation in software
   ADC pause_dma_spr_size+2                  ; $01CB98 |
   STA $00                                   ; $01CB9B |
-  LDY pause_dma_bg3_gfx_size,x              ; $01CB9D |
-  LDA pause_dma_bg3_gfx_vram_1,x            ; $01CBA0 |
+  LDY.w pause_dma_bg3_gfx_size,x            ; $01CB9D |
+  LDA.w pause_dma_bg3_gfx_vram_1,x          ; $01CBA0 |
   BRA pause_do_vram_dma                     ; $01CBA3 |
 
 ; The logic keeps being the same
@@ -9062,7 +9062,7 @@ pause_preserve_bg3_gfx_2:
   LDA #$97C4                                ; $01CBAA | For some reason, the calculation is now done at assembly
   STA $00                                   ; $01CBAD |
   LDY $CB5C,x                               ; $01CBAF |
-  LDA pause_dma_bg3_gfx_vram_2,x            ; $01CBB2 |
+  LDA.w pause_dma_bg3_gfx_vram_2,x          ; $01CBB2 |
   BRA pause_do_vram_dma                     ; $01CBB5 |
 
 pause_dma_bg3_tm_vram:
@@ -9075,8 +9075,8 @@ pause_preserve_bg3_tilemap:
   TYX                                       ; $01CBBF |
   LDA #$A7C6                                ; $01CBC0 |
   STA $00                                   ; $01CBC3 |
-  LDY pause_dma_bg3_tm_size,x               ; $01CBC5 |
-  LDA pause_dma_bg3_tm_vram,x               ; $01CBC8 |
+  LDY.w pause_dma_bg3_tm_size,x             ; $01CBC5 |
+  LDA.w pause_dma_bg3_tm_vram,x             ; $01CBC8 |
 
 pause_do_vram_dma:
   PHB                                       ; $01CBCB |
@@ -9602,29 +9602,29 @@ pause_generate_tilemap:
   LDA $00                                   ; $01CFA3 |
   ASL A                                     ; $01CFA5 |
   TAX                                       ; $01CFA6 |
-  LDA score_screen_sep_tiles_bottom,x       ; $01CFA7 |
+  LDA.l score_screen_sep_tiles_bottom,x     ; $01CFA7 |
   STA $B3E7,y                               ; $01CFAB |
   LDX $00                                   ; $01CFAE |
   CPX #$15                                  ; $01CFB0 |
   BCS ..skip_total_points                   ; $01CFB2 |
-  LDA score_strings_total_points,x          ; $01CFB4 |
+  LDA.l score_strings_total_points,x        ; $01CFB4 |
   AND #$00FF                                ; $01CFB8 |
   TAX                                       ; $01CFBB |
-  LDA score_char_tiles_top,x                ; $01CFBC |
+  LDA.l score_char_tiles_top,x              ; $01CFBC |
   STA $B42D,y                               ; $01CFC0 |
-  LDA score_char_tiles_bottom,x             ; $01CFC3 |
+  LDA.l score_char_tiles_bottom,x           ; $01CFC3 |
   STA $B46D,y                               ; $01CFC7 |
 
 ..skip_total_points
   LDX $00                                   ; $01CFCA |
   CPX #$15                                  ; $01CFCC |
   BCS ..skip_high_score                     ; $01CFCE |
-  LDA score_strings_high_score_p,x          ; $01CFD0 |
+  LDA.l score_strings_high_score_p,x        ; $01CFD0 |
   AND #$00FF                                ; $01CFD4 |
   TAX                                       ; $01CFD7 |
-  LDA score_char_tiles_top,x                ; $01CFD8 |
+  LDA.l score_char_tiles_top,x              ; $01CFD8 |
   STA $B4ED,y                               ; $01CFDC |
-  LDA score_char_tiles_bottom,x             ; $01CFDF |
+  LDA.l score_char_tiles_bottom,x           ; $01CFDF |
   STA $B52D,y                               ; $01CFE3 |
 
 ..skip_high_score
@@ -9716,13 +9716,13 @@ pause_show_stars:
 
 ..loop
   PHX                                       ; $01D071 |
-  LDA score_strings_stars,x                 ; $01D072 |
+  LDA.l score_strings_stars,x               ; $01D072 |
   AND #$00FF                                ; $01D076 |
   TAX                                       ; $01D079 |
-  LDA score_char_tiles_top,x                ; $01D07A |
+  LDA.l score_char_tiles_top,x              ; $01D07A |
   ORA $18                                   ; $01D07E |
   STA $B1A7,y                               ; $01D080 |
-  LDA score_char_tiles_bottom,x             ; $01D083 |
+  LDA.l score_char_tiles_bottom,x           ; $01D083 |
   ORA $18                                   ; $01D087 |
   STA $B1E7,y                               ; $01D089 |
   PLX                                       ; $01D08C |
@@ -9808,13 +9808,13 @@ pause_show_red_coins:
 
 ..loop
   PHX                                       ; $01D107 |
-  LDA score_strings_red_coins,x             ; $01D108 |
+  LDA.l score_strings_red_coins,x           ; $01D108 |
   AND #$00FF                                ; $01D10C |
   TAX                                       ; $01D10F |
-  LDA score_char_tiles_top,x                ; $01D110 |
+  LDA.l score_char_tiles_top,x              ; $01D110 |
   ORA $18                                   ; $01D114 |
   STA $B267,y                               ; $01D116 |
-  LDA score_char_tiles_bottom,x             ; $01D119 |
+  LDA.l score_char_tiles_bottom,x           ; $01D119 |
   ORA $18                                   ; $01D11D |
   STA $B2A7,y                               ; $01D11F |
   PLX                                       ; $01D122 |
@@ -9885,13 +9885,13 @@ pause_show_flowers:
 .write_text
 ..loop
   PHX                                       ; $01D18F |
-  LDA score_strings_flowers,x               ; $01D190 |
+  LDA.l score_strings_flowers,x             ; $01D190 |
   AND #$00FF                                ; $01D194 |
   TAX                                       ; $01D197 |
-  LDA score_char_tiles_top,x                ; $01D198 |
+  LDA.l score_char_tiles_top,x              ; $01D198 |
   ORA $18                                   ; $01D19C |
   STA $B327,y                               ; $01D19E |
-  LDA score_char_tiles_bottom,x             ; $01D1A1 |
+  LDA.l score_char_tiles_bottom,x           ; $01D1A1 |
   ORA $18                                   ; $01D1A5 |
   STA $B367,y                               ; $01D1A7 |
   PLX                                       ; $01D1AA |
@@ -9908,7 +9908,7 @@ pause_show_flowers:
   REP #$10                                  ; $01D1B9 |
   PHX                                       ; $01D1BB |
   SEP #$10                                  ; $01D1BC |
-  LDA score_char_tiles_top+$50,x            ; $01D1BE |
+  LDA.l score_char_tiles_top+$50,x          ; $01D1BE |
   ORA $18                                   ; $01D1C2 |
   STA $B345                                 ; $01D1C4 |
   TXY                                       ; $01D1C7 |
@@ -9916,7 +9916,7 @@ pause_show_flowers:
   STA $B34F                                 ; $01D1CA |
 
 ..top_skip
-  LDA score_char_tiles_bottom+$50,x         ; $01D1CD |
+  LDA.l score_char_tiles_bottom+$50,x       ; $01D1CD |
   ORA $18                                   ; $01D1D1 |
   STA $B385                                 ; $01D1D3 |
   TXY                                       ; $01D1D6 |
@@ -10278,22 +10278,22 @@ CODE_01D35D:
   LDA $0003A1                               ; $01D417 |
   ASL A                                     ; $01D41B |
   TAX                                       ; $01D41C |
-  LDA pause_big_number_top,x                ; $01D41D |
+  LDA.l pause_big_number_top,x              ; $01D41D |
   STA $B5F9                                 ; $01D421 |
   INC A                                     ; $01D424 |
   STA $B5FB                                 ; $01D425 |
-  LDA pause_big_number_bottom,x             ; $01D428 |
+  LDA.l pause_big_number_bottom,x           ; $01D428 |
   STA $B639                                 ; $01D42C |
   INC A                                     ; $01D42F |
   STA $B63B                                 ; $01D430 |
   LDA $0003A3                               ; $01D433 |
   ASL A                                     ; $01D437 |
   TAX                                       ; $01D438 |
-  LDA pause_big_number_top,x                ; $01D439 |
+  LDA.l pause_big_number_top,x              ; $01D439 |
   STA $B5FD                                 ; $01D43D |
   INC A                                     ; $01D440 |
   STA $B5FF                                 ; $01D441 |
-  LDA pause_big_number_bottom,x             ; $01D444 |
+  LDA.l pause_big_number_bottom,x           ; $01D444 |
   STA $B63D                                 ; $01D448 |
   INC A                                     ; $01D44B |
   STA $B63F                                 ; $01D44C |
@@ -10324,11 +10324,11 @@ CODE_01D35D:
 score_screen_write_number:
   PHY                                       ; $01D45E |
   LDY #$02                                  ; $01D45F |
-  LDA score_char_tiles_top+$50,x            ; $01D461 |
+  LDA.l score_char_tiles_top+$50,x          ; $01D461 |
   ORA $18                                   ; $01D465 |
   STA ($10),y                               ; $01D467 |
   STA ($12),y                               ; $01D469 |
-  LDA score_char_tiles_bottom,x             ; $01D46B |
+  LDA.l score_char_tiles_bottom+$50,x       ; $01D46B |
   ORA $18                                   ; $01D46F |
   STA ($14),y                               ; $01D471 |
   STA ($16),y                               ; $01D473 |
@@ -10337,11 +10337,11 @@ score_screen_write_number:
   TYA                                       ; $01D478 |
   ASL A                                     ; $01D479 |
   TAX                                       ; $01D47A |
-  LDA score_char_tiles_top+$50,x            ; $01D47B |
+  LDA.l score_char_tiles_top+$50,x          ; $01D47B |
   ORA $18                                   ; $01D47F |
   STA ($10)                                 ; $01D481 |
   STA ($12)                                 ; $01D483 |
-  LDA score_char_tiles_bottom,x             ; $01D485 |
+  LDA.l score_char_tiles_bottom+$50,x       ; $01D485 |
   ORA $18                                   ; $01D489 |
   STA ($14)                                 ; $01D48B |
   STA ($16)                                 ; $01D48D |
