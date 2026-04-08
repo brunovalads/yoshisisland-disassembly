@@ -66,7 +66,8 @@ save_data_6_E_ptr:
 save_data_6_8_ptr:
   dw $7C46, $7CAE, $7D16                    ; $1780D0 | 6-8 completed / score save data pointers file 1, 2, 3
 
-; title screen init
+; Game mode for title screen init
+; Used by indexes $09 and $18
 gm_load_title_screen:
   LDA #$12                                  ; $1780D6 |
   JSL CODE_008279                           ; $1780D8 |
@@ -814,6 +815,8 @@ CODE_178673:
   PHK                                       ; $1787D3 |
   PLB                                       ; $1787D4 |
 
+; Game mode for title screen fade
+; Used by indexes $0A and $19
 gm_fade_to_title_screen:
   JSL init_oam                              ; $1787D5 |
   REP #$30                                  ; $1787D9 |
