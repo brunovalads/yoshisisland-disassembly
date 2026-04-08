@@ -6516,6 +6516,10 @@ CODE_01B606:
 ; end marker
   dw $FFFF                                  ; $01B657 |
 
+; Tilemap of the separators on the score and pause screen
+; For the pause screen, only the bottom is used
+score_screen_sep_tiles:
+.top
   dw $0145, $0146, $8145, $C146             ; $01B659 |
   dw $4145, $4146, $0145, $0146             ; $01B661 |
   dw $8145, $8146, $4145, $0146             ; $01B669 |
@@ -6523,6 +6527,7 @@ CODE_01B606:
   dw $0145, $0146, $8145, $C146             ; $01B679 |
   dw $0145, $0146, $8145, $0146             ; $01B681 |
 
+.bottom
   dw $0145, $0146, $8145, $8146             ; $01B689 |
   dw $0145, $0146, $0145, $0146             ; $01B691 |
   dw $8145, $8146, $0145, $8146             ; $01B699 |
@@ -6548,7 +6553,7 @@ CODE_01B6C9:
   STZ $00                                   ; $01B6D1 |
 
 CODE_01B6D3:
-  LDA DATA_01B7D7,y                         ; $01B6D3 |
+  LDA score_strings_high_score,y            ; $01B6D3 |
   JSR CODE_01B785                           ; $01B6D6 |
   CPY #$0016                                ; $01B6D9 |
   BCC CODE_01B6D3                           ; $01B6DC |
@@ -6560,7 +6565,7 @@ CODE_01B6D3:
   STZ $00                                   ; $01B6ED |
 
 CODE_01B6EF:
-  LDA $B835,y                               ; $01B6EF |
+  LDA score_strings_total_points,y          ; $01B6EF |
   JSR CODE_01B785                           ; $01B6F2 |
   CPY #$0015                                ; $01B6F5 |
   BCC CODE_01B6EF                           ; $01B6F8 |
@@ -6642,7 +6647,7 @@ CODE_01B7A1:
   LDY #$0000                                ; $01B7A4 |
 
 CODE_01B7A7:
-  LDA $B7ED,y                               ; $01B7A7 |
+  LDA score_strings_stars,y                 ; $01B7A7 |
   JSR CODE_01B785                           ; $01B7AA |
   CPY #$0018                                ; $01B7AD |
   BCC CODE_01B7A7                           ; $01B7B0 |
@@ -6653,7 +6658,7 @@ CODE_01B7B3:
   LDY #$0000                                ; $01B7B6 |
 
 CODE_01B7B9:
-  LDA $B805,y                               ; $01B7B9 |
+  LDA score_strings_red_coins,y             ; $01B7B9 |
   JSR CODE_01B785                           ; $01B7BC |
   CPY #$0018                                ; $01B7BF |
   BCC CODE_01B7B9                           ; $01B7C2 |
@@ -6664,37 +6669,49 @@ CODE_01B7C5:
   LDY #$0000                                ; $01B7C8 |
 
 CODE_01B7CB:
-  LDA $B81D,y                               ; $01B7CB |
+  LDA score_strings_flowers,y               ; $01B7CB |
   JSR CODE_01B785                           ; $01B7CE |
   CPY #$0018                                ; $01B7D1 |
   BCC CODE_01B7CB                           ; $01B7D4 |
   RTS                                       ; $01B7D6 |
 
-DATA_01B7D7:
+; Strings for the pause and score screens
+score_strings:
+.high_score
   db $3A, $3C, $4E, $0E, $10, $0C, $0E, $4E ; $01B7D7 |
   db $24, $04, $1C, $22, $08, $36, $36, $36 ; $01B7DF |
   db $36, $54, $5C, $4E, $3A, $3C           ; $01B7E7 |
 
+.stars
   db $3E, $40, $4E, $24, $26, $00, $22, $24 ; $01B7ED |
   db $36, $36, $36, $36, $36, $36, $50, $34 ; $01B7F5 |
   db $56, $50, $68, $6A, $4E, $50, $6C, $6E ; $01B7FD |
 
+.red_coins
   db $46, $48, $4E, $04, $1C, $10, $1A, $24 ; $01B805 |
   db $36, $36, $36, $36, $36, $36, $50, $34 ; $01B80D |
   db $54, $50, $68, $6A, $4E, $50, $6C, $6E ; $01B815 |
 
+.flowers
   db $42, $44, $4E, $0A, $16, $1C, $2C, $08 ; $01B81D |
   db $22, $24, $36, $36, $36, $36, $36, $50 ; $01B825 |
   db $34, $5A, $68, $6A, $4E, $50, $6C, $6E ; $01B82D |
 
+.total_points
   db $26, $1C, $26, $00, $16, $4E, $1E, $1C ; $01B835 |
   db $10, $1A, $26, $24, $36, $36, $36, $36 ; $01B83D |
   db $36, $36, $50, $6C, $6E                ; $01B845 |
 
+; High score string for pause
+.high_score_p
   db $4E, $0E, $10, $0C, $0E, $4E, $24, $04 ; $01B84A |
   db $1C, $22, $08, $36, $36, $36, $36, $36 ; $01B852 |
   db $36, $36, $50, $6C, $6E                ; $01B85A |
 
+; Tilemaps for the score screen characters
+; (e.g. letters and digits)
+score_char_tiles:
+.top
   dw $010A, $010B, $010C, $010D             ; $01B85F |
   dw $010E, $4106, $0120, $0121             ; $01B867 |
   dw $0122, $0123, $0124, $C116             ; $01B86F |
@@ -6705,7 +6722,6 @@ DATA_01B7D7:
   dw $017F, $012A, $012B, $0548             ; $01B897 |
   dw $0549, $054A, $054B, $054C             ; $01B89F |
   dw $054D, $054E, $054F, $017F             ; $01B8A7 |
-
   dw $0109, $0100, $0102, $0102             ; $01B8AF |
   dw $0103, $0104, $0105, $0106             ; $01B8B7 |
   dw $0107, $C115, $0168, $0167             ; $01B8BF |
@@ -6713,6 +6729,7 @@ DATA_01B7D7:
   dw $01C4, $010F, $01D6, $0164             ; $01B8CF |
   dw $0174, $016E, $017F                    ; $01B8D7 |
 
+.bottom
   dw $011A, $011B, $011C, $011D             ; $01B8DD |
   dw $011E, $011F, $0130, $0131             ; $01B8E5 |
   dw $0132, $0133, $0134, $C106             ; $01B8ED |
@@ -6723,7 +6740,6 @@ DATA_01B7D7:
   dw $0141, $013A, $013B, $0508             ; $01B915 |
   dw $0518, $0525, $0535, $052F             ; $01B91D |
   dw $053F, $050F, $0547, $017F             ; $01B925 |
-
   dw $0119, $0110, $C142, $0112             ; $01B92D |
   dw $0113, $0114, $0115, $0116             ; $01B935 |
   dw $0117, $C105, $0178, $0177             ; $01B93D |
@@ -7062,7 +7078,7 @@ CODE_01BC0E:
   CLC                                       ; $01BC12 |
   ADC #$0006                                ; $01BC13 |
   STA $13                                   ; $01BC16 |
-  JSR CODE_01BCAA                           ; $01BC18 |
+  JSR score_pluralize_pts                   ; $01BC18 |
   STZ $00                                   ; $01BC1B |
   STZ $02                                   ; $01BC1D |
   LDX #$0004                                ; $01BC1F |
@@ -7124,7 +7140,7 @@ CODE_01BC89:
   STZ $02                                   ; $01BC8D |
   LDA #$61DC                                ; $01BC8F |
   STA $13                                   ; $01BC92 |
-  JSR CODE_01BCAA                           ; $01BC94 |
+  JSR score_pluralize_pts                   ; $01BC94 |
   LDA #$007E                                ; $01BC97 |
   STA $01                                   ; $01BC9A |
   LDY #$34A0                                ; $01BC9C |
@@ -7133,21 +7149,28 @@ CODE_01BC89:
   JSL CODE_00BEA6                           ; $01BCA5 |
   RTS                                       ; $01BCA9 |
 
-CODE_01BCAA:
+; Replaces the pt. on the score screen with a pts. if
+; the counter is non-zero
+; Inputs:
+; X:     Tens of counter
+; $00:   Value of counter (times 2)
+; $02:   YXPCCCTT properties of text
+; [$13]: Pointer to tilemap
+score_pluralize_pts:
   TXA                                       ; $01BCAA |
-  BNE CODE_01BCB5                           ; $01BCAB |
+  BNE .plural                               ; $01BCAB |
   LDA $00                                   ; $01BCAD |
-  BEQ CODE_01BCBC                           ; $01BCAF |
+  BEQ .ret                                  ; $01BCAF |
   DEC A                                     ; $01BCB1 |
   DEC A                                     ; $01BCB2 |
-  BEQ CODE_01BCBC                           ; $01BCB3 |
+  BEQ .ret                                  ; $01BCB3 |
 
-CODE_01BCB5:
+.plural:
   LDA #$016F                                ; $01BCB5 |
   ORA $02                                   ; $01BCB8 |
   STA [$13]                                 ; $01BCBA |
 
-CODE_01BCBC:
+.ret
   RTS                                       ; $01BCBC |
 
   JSR CODE_01BEE4                           ; $01BCBD |
@@ -8832,27 +8855,27 @@ pause_letter_max_rotate:
 pause_sounds:
   dw $0001, $0002                           ; $01CA6F |
 
-pause_state_ptr:
-  dw $CAF7                                  ; $01CA73 |
-  dw $CB2F                                  ; $01CA75 |
-  dw $CB60                                  ; $01CA77 |
-  dw $CB7C                                  ; $01CA79 |
-  dw $CBA9                                  ; $01CA7B |
-  dw $CBBF                                  ; $01CA7D |
-  dw $CC0B                                  ; $01CA7F |
-  dw $CC2F                                  ; $01CA81 |
-  dw $CC5C                                  ; $01CA83 |
-  dw $CC8E                                  ; $01CA85 |
-  dw $CAEE                                  ; $01CA87 |
-  dw $CC98                                  ; $01CA89 |
-  dw $CC98                                  ; $01CA8B |
-  dw $CC98                                  ; $01CA8D |
-  dw $CC98                                  ; $01CA8F |
-  dw $CC98                                  ; $01CA91 |
-  dw $CC98                                  ; $01CA93 |
-  dw $CC98                                  ; $01CA95 |
-  dw $CCB1                                  ; $01CA97 |
-  dw $CE34                                  ; $01CA99 |
+pause_state_ptrs:
+  dw pause_fade_level                       ; $01CA73 |
+  dw pause_level_init                       ; $01CA75 |
+  dw pause_play_sfx                         ; $01CA77 |
+  dw pause_init_letters                     ; $01CA79 |
+  dw pause_preserve_bg3_gfx_2               ; $01CA7B |
+  dw pause_preserve_bg3_tilemap             ; $01CA7D |
+  dw pause_upload_sprite_gfx                ; $01CA7F |
+  dw pause_load_gfx                         ; $01CA81 |
+  dw pause_handle_reg_mirrors               ; $01CA83 |
+  dw pause_load_tilemap                     ; $01CA85 |
+  dw pause_reverse_fade                     ; $01CA87 |
+  dw pause_fade_letters                     ; $01CA89 |
+  dw pause_fade_letters                     ; $01CA8B |
+  dw pause_fade_letters                     ; $01CA8D |
+  dw pause_fade_letters                     ; $01CA8F |
+  dw pause_fade_letters                     ; $01CA91 |
+  dw pause_fade_letters                     ; $01CA93 |
+  dw pause_fade_letters                     ; $01CA95 |
+  dw pause_main                             ; $01CA97 |
+  dw pause_leave                            ; $01CA99 |
 
 main_pause:
   REP #$30                                  ; $01CA9B |
@@ -8864,12 +8887,12 @@ main_pause:
   AND #$00FF                                ; $01CAA8 |
   ASL A                                     ; $01CAAB |
   TAY                                       ; $01CAAC |
-  JSR ($CA71,x)                             ; $01CAAD |
+  JSR (pause_state_ptrs-2,x)                ; $01CAAD |
   SEP #$30                                  ; $01CAB0 |
   LDA !r_pause_menu_state                   ; $01CAB2 |
   CMP #$0B                                  ; $01CAB5 |
   BCC CODE_01CAC4                           ; $01CAB7 |
-  LDA $0CF6                                 ; $01CAB9 |
+  LDA !r_pause_shown_items                  ; $01CAB9 |
   BEQ CODE_01CAC4                           ; $01CABC |
   JSR CODE_01DE0A                           ; $01CABE |
   JSR CODE_01CAD6                           ; $01CAC1 |
@@ -8893,12 +8916,17 @@ CODE_01CAD6:
   SEP #$20                                  ; $01CAE7 |
   RTS                                       ; $01CAE9 |
 
+pause_fade_ptrs:
   dw $CB1E, $CB13                           ; $01CAEA |
 
+pause_reverse_fade:
   SEP #$30                                  ; $01CAEE |
   LDA !r_pause_menu_flag                    ; $01CAF0 |
   EOR #$01                                  ; $01CAF3 |
   BRA CODE_01CAFC                           ; $01CAF5 |
+
+; Code which fades from and to a level
+pause_fade_level:
   SEP #$30                                  ; $01CAF7 |
   LDA !r_pause_menu_flag                    ; $01CAF9 |
 
@@ -8907,39 +8935,44 @@ CODE_01CAFC:
   ASL A                                     ; $01CAFD |
   TAX                                       ; $01CAFE |
   LDA !r_reg_inidisp_mirror                 ; $01CAFF |
-  JSR ($CAEA,x)                             ; $01CB02 |
+  JSR (pause_fade_ptrs,x)                   ; $01CB02 |
   PLA                                       ; $01CB05 |
   EOR !r_pause_menu_flag                    ; $01CB06 |
-  BEQ CODE_01CB0C                           ; $01CB09 |
+  BEQ .still_fading                         ; $01CB09 |
   RTS                                       ; $01CB0B |
 
-CODE_01CB0C:
+.still_fading
   REP #$20                                  ; $01CB0C |
   PLA                                       ; $01CB0E |
   JML $01C2E2                               ; $01CB0F |
+
+
   DEC A                                     ; $01CB13 |
   DEC A                                     ; $01CB14 |
   BPL CODE_01CB2B                           ; $01CB15 |
-  JSR CODE_01CE5D                           ; $01CB17 |
+  JSR pause_next_state                      ; $01CB17 |
   LDA #$80                                  ; $01CB1A |
   BRA CODE_01CB2B                           ; $01CB1C |
+
+
   AND #$0F                                  ; $01CB1E |
   INC A                                     ; $01CB20 |
   INC A                                     ; $01CB21 |
   CMP #$0F                                  ; $01CB22 |
   BCC CODE_01CB2B                           ; $01CB24 |
-  JSR CODE_01CE5D                           ; $01CB26 |
+  JSR pause_next_state                      ; $01CB26 |
   LDA #$0F                                  ; $01CB29 |
 
 CODE_01CB2B:
   STA !r_reg_inidisp_mirror                 ; $01CB2B |
   RTS                                       ; $01CB2E |
 
+pause_level_init:
   SEP #$30                                  ; $01CB2F |
   JSL init_oam                              ; $01CB31 |
   REP #$30                                  ; $01CB35 |
   LDA !r_pause_menu_flag                    ; $01CB37 |
-  BNE CODE_01CB54                           ; $01CB3A |
+  BNE .pause_active                         ; $01CB3A |
   STZ !r_joy1_lo                            ; $01CB3C |
   STZ !r_joy1_lo_press                      ; $01CB3F |
   STZ !r_joy2_lo                            ; $01CB42 |
@@ -8950,71 +8983,102 @@ CODE_01CB2B:
   JSL main_gamemode_0F_l                    ; $01CB4E |
   REP #$30                                  ; $01CB52 |
 
-CODE_01CB54:
-  JSR CODE_01CE5D                           ; $01CB54 |
+.pause_active
+  JSR pause_next_state                      ; $01CB54 |
   RTS                                       ; $01CB57 |
 
+; Addresses for the VRAM transfers for sprites
+; Actually both point to $5400, YI also uses the
+; highest bit to set the transfer direction
+; (clear = WRAM to VRAM, set = VRAM to WRAM)
+pause_dma_spr_vram:
   dw $5400, $D400                           ; $01CB58 |
 
+; Ditto for above but for the sizes
+; It's +2 for reading from VRAM due to hardware quirks
+pause_dma_spr_size:
   dw $1000, $1002                           ; $01CB5C |
 
+; Plays the (un)pause SFX and prepares/restores the
+; sprite graphics (used by the items in the pause menu)
+pause_play_sfx:
   TYX                                       ; $01CB60 |
   LDA pause_sounds,x                        ; $01CB61 |\ play pause sounds from table (#$01 and #$02)
   STA !r_apu_io_2_mirror_dp                 ; $01CB64 |/ bypassing push_sound_queue
+
+pause_preserve_sprite_gfx:
   LDA #$7BBE                                ; $01CB66 |
   STA $00                                   ; $01CB69 |
-  LDY $CB5C,x                               ; $01CB6B |
-  LDA $CB58,x                               ; $01CB6E |
-  JMP CODE_01CBCB                           ; $01CB71 |
+  LDY pause_dma_spr_size,x                  ; $01CB6B |
+  LDA pause_dma_spr_vram,x                  ; $01CB6E |
+  JMP pause_do_vram_dma                     ; $01CB71 |
 
+; Addresses for the VRAM transfers for BG3 GFX
+; Same logic as above for sprites
+pause_dma_bg3_gfx_vram_1:
   dw $4E00, $CE00                           ; $01CB74 |
 
+; Ditto for above but for the sizes
+pause_dma_bg3_gfx_size:
   dw $0C00, $0C02                           ; $01CB78 |
 
+; Initialises the pause letters and preserves
+; the first set of BG3 GFX
+pause_init_letters:
   SEP #$30                                  ; $01CB7C |
   LDX #$35                                  ; $01CB7E |
 
-CODE_01CB80:
+.angle_loop
   STZ $0B12,x                               ; $01CB80 |
   DEX                                       ; $01CB83 |
-  BPL CODE_01CB80                           ; $01CB84 |
+  BPL .angle_loop                           ; $01CB84 |
   LDX #$04                                  ; $01CB86 |
 
-CODE_01CB88:
-  LDA $CA3D,x                               ; $01CB88 |
+.timer_loop
+  LDA pause_init_timer,x                    ; $01CB88 |
   STA $0B42,x                               ; $01CB8B |
   DEX                                       ; $01CB8E |
-  BPL CODE_01CB88                           ; $01CB8F |
+  BPL .timer_loop                           ; $01CB8F |
+
+pause_preserve_bg3_gfx_1:
   REP #$30                                  ; $01CB91 |
   TYX                                       ; $01CB93 |
-  LDA #$7BBE                                ; $01CB94 |
-  CLC                                       ; $01CB97 |
-  ADC $CB5E                                 ; $01CB98 |
+  LDA #$7BBE                                ; $01CB94 | This constant could have been precalculated
+  CLC                                       ; $01CB97 | instead of doing the calculation in software
+  ADC pause_dma_spr_size+2                  ; $01CB98 |
   STA $00                                   ; $01CB9B |
-  LDY $CB78,x                               ; $01CB9D |
-  LDA $CB74,x                               ; $01CBA0 |
-  BRA CODE_01CBCB                           ; $01CBA3 |
+  LDY pause_dma_bg3_gfx_size,x              ; $01CB9D |
+  LDA pause_dma_bg3_gfx_vram_1,x            ; $01CBA0 |
+  BRA pause_do_vram_dma                     ; $01CBA3 |
 
+; The logic keeps being the same
+; No size, though, because it's the same amount of bytes uploaded
+pause_dma_bg3_gfx_vram_2:
   dw $2800, $A800                           ; $01CBA5 |
 
+; Preserves the second set of the BG3 GFX
+pause_preserve_bg3_gfx_2:
   TYX                                       ; $01CBA9 |
-  LDA #$97C4                                ; $01CBAA |
+  LDA #$97C4                                ; $01CBAA | For some reason, the calculation is now done at assembly
   STA $00                                   ; $01CBAD |
   LDY $CB5C,x                               ; $01CBAF |
-  LDA $CBA5,x                               ; $01CBB2 |
-  BRA CODE_01CBCB                           ; $01CBB5 |
+  LDA pause_dma_bg3_gfx_vram_2,x            ; $01CBB2 |
+  BRA pause_do_vram_dma                     ; $01CBB5 |
 
+pause_dma_bg3_tm_vram:
   dw $3400, $B400                           ; $01CBB7 |
 
+pause_dma_bg3_tm_size:
   dw $0800, $0802                           ; $01CBBB |
 
+pause_preserve_bg3_tilemap:
   TYX                                       ; $01CBBF |
   LDA #$A7C6                                ; $01CBC0 |
   STA $00                                   ; $01CBC3 |
-  LDY $CBBB,x                               ; $01CBC5 |
-  LDA $CBB7,x                               ; $01CBC8 |
+  LDY pause_dma_bg3_tm_size,x               ; $01CBC5 |
+  LDA pause_dma_bg3_tm_vram,x               ; $01CBC8 |
 
-CODE_01CBCB:
+pause_do_vram_dma:
   PHB                                       ; $01CBCB |
   PEA $7E48                                 ; $01CBCC |
   PLB                                       ; $01CBCF |
@@ -9030,12 +9094,12 @@ CODE_01CBCB:
   STA $0008,x                               ; $01CBE5 |
   LDA #$3981                                ; $01CBE8 |
   LDY $00                                   ; $01CBEB |
-  BCS CODE_01CBF4                           ; $01CBED |
+  BCS .read_vram                            ; $01CBED |
   LDA #$1801                                ; $01CBEF |
   INY                                       ; $01CBF2 |
   INY                                       ; $01CBF3 |
 
-CODE_01CBF4:
+.read_vram
   STA $0003,x                               ; $01CBF4 |
   TYA                                       ; $01CBF7 |
   STA $0005,x                               ; $01CBF8 |
@@ -9045,9 +9109,10 @@ CODE_01CBF4:
   STA $000A,x                               ; $01CC00 |
   STA $4800                                 ; $01CC03 |
   PLB                                       ; $01CC06 |
-  JSR CODE_01CE5D                           ; $01CC07 |
+  JSR pause_next_state                      ; $01CC07 |
   RTS                                       ; $01CC0A |
 
+pause_upload_sprite_gfx:
   TYA                                       ; $01CC0B |
   BEQ CODE_01CC2B                           ; $01CC0C |
   LDX #$E800                                ; $01CC0E |
@@ -9064,11 +9129,15 @@ CODE_01CC1F:
   JSL CODE_00BEA6                           ; $01CC27 |
 
 CODE_01CC2B:
-  JSR CODE_01CE5D                           ; $01CC2B |
+  JSR pause_next_state                      ; $01CC2B |
   RTS                                       ; $01CC2E |
 
+; Loads the BG3 graphics for the bottom bar
+; (global counters like coins and items)
+; This step is only done when pausing
+pause_load_gfx:
   TYA                                       ; $01CC2F |
-  BEQ CODE_01CC48                           ; $01CC30 |
+  BEQ .leaving                              ; $01CC30 |
   LDA #$004F                                ; $01CC32 |
   JSL decompress_lc_lz1_l                   ; $01CC35 |
   LDX #$0070                                ; $01CC39 |
@@ -9077,45 +9146,67 @@ CODE_01CC2B:
   LDY #$2C00                                ; $01CC41 |
   JSL CODE_00BEA6                           ; $01CC44 |
 
-CODE_01CC48:
-  JSR CODE_01CE5D                           ; $01CC48 |
+.leaving
+  JSR pause_next_state                      ; $01CC48 |
   RTS                                       ; $01CC4B |
 
+; Addresses of the hardware mirror backups
+; First word is the destination, second word the source
+; Table is sort of interleaved (2nd words will be used
+; source if pausing and destination if unpausing)
+pause_reg_backup_bank:
   dw $007E, $0000, $007E                    ; $01CC4C |
 
-  dw $AFC8, $095E, $AFC8, $CE83             ; $01CC52 |
-  dw $CEB7, $5D20, $BBCE, $58FC             ; $01CC5A |
-  dw $B9CC, $CC4C, $0285                    ; $01CC62 |
+pause_reg_backup_addr:
+  dw $AFC8, $095E, $AFC8                    ; $01CC52 |
 
-  LDA $CC52,y                               ; $01CC68 |
+pause_write_reg_ptrs:
+  dw pause_restore_regs                     ; $01CC58 |
+  dw pause_backup_regs                      ; $01CC5A |
+
+; Code which backs up mirrors of hardware registers
+; like BG3 position
+pause_handle_reg_mirrors:
+  JSR pause_next_state                      ; $01CC5C |
+  TYX                                       ; $01CC5F |
+  JSR (pause_write_reg_ptrs,x)              ; $01CC60 |
+  LDA pause_reg_backup_bank,y               ; $01CC63 |
+  STA $02                                   ; $01CC66 |
+  LDA pause_reg_backup_addr,y               ; $01CC68 |
   STA $00                                   ; $01CC6B |
   INY                                       ; $01CC6D |
   INY                                       ; $01CC6E |
-  LDA $CC4C,y                               ; $01CC6F |
+  LDA pause_reg_backup_bank,y               ; $01CC6F |
   STA $05                                   ; $01CC72 |
-  LDA $CC52,y                               ; $01CC74 |
+  LDA pause_reg_backup_addr,y               ; $01CC74 |
   STA $03                                   ; $01CC77 |
   LDY #$0000                                ; $01CC79 |
   TYX                                       ; $01CC7C |
   SEP #$20                                  ; $01CC7D |
 
-CODE_01CC7F:
+.transfer_loop:
   LDA [$00],y                               ; $01CC7F |
   STA [$03],y                               ; $01CC81 |
   INY                                       ; $01CC83 |
   CPY #$000E                                ; $01CC84 |
-  BCC CODE_01CC7F                           ; $01CC87 |
+  BCC .transfer_loop                        ; $01CC87 |
   RTS                                       ; $01CC89 |
 
-  dw $CF07                                  ; $01CC8A |
-  dw $CF1F                                  ; $01CC8C |
+pause_tilemap_actions:
+  dw pause_restore_palette                  ; $01CC8A |
+  dw pause_generate_tilemap                 ; $01CC8C |
 
-  JSR CODE_01CE5D                           ; $01CC8E |
+pause_load_tilemap:
+  JSR pause_next_state                      ; $01CC8E |
   PHB                                       ; $01CC91 |
   SEP #$10                                  ; $01CC92 |
   TYX                                       ; $01CC94 |
-  JMP ($CC8A,x)                             ; $01CC95 |
-  JSR CODE_01CE5D                           ; $01CC98 |
+  JMP (pause_tilemap_actions,x)             ; $01CC95 |
+
+; Grows or shrinks the pause letters on the menu
+; depending on whether the player has paused or unpaused
+pause_fade_letters:
+  JSR pause_next_state                      ; $01CC98 |
   SEP #$30                                  ; $01CC9B |
   LDA !r_pause_menu_state                   ; $01CC9D |
   SEC                                       ; $01CCA0 |
@@ -9125,30 +9216,34 @@ CODE_01CC7F:
   ASL A                                     ; $01CCA5 |
   LDX #$04                                  ; $01CCA6 |
 
-CODE_01CCA8:
+.loop
   STA $0B36,x                               ; $01CCA8 |
   DEX                                       ; $01CCAB |
-  BPL CODE_01CCA8                           ; $01CCAC |
-  JMP CODE_01CD56                           ; $01CCAE |
+  BPL .loop                                 ; $01CCAC |
+  JMP pause_render_letters                  ; $01CCAE |
+
+; Main cause of the pause screen
+; Handles the item menu and 3D letters
+pause_main:
   SEP #$30                                  ; $01CCB1 |
   LDA !r_pause_items                        ; $01CCB3 |
-  BEQ CODE_01CCBB                           ; $01CCB6 |
-  JSR CODE_01DBD5                           ; $01CCB8 |
+  BEQ .no_items                             ; $01CCB6 |
+  JSR pause_handle_item_menu                ; $01CCB8 |
 
-CODE_01CCBB:
+.no_items
   LDA !r_cur_item_used                      ; $01CCBB |
-  BEQ CODE_01CCC6                           ; $01CCBE |
+  BEQ .no_used_item                         ; $01CCBE |
   LDA $37                                   ; $01CCC0 |
   AND #$80                                  ; $01CCC2 |
-  BNE CODE_01CCCC                           ; $01CCC4 |
+  BNE .unpause                              ; $01CCC4 |
 
-CODE_01CCC6:
+.no_used_item
   ORA $38                                   ; $01CCC6 |
   AND #$90                                  ; $01CCC8 |
   BEQ pause_letters                         ; $01CCCA |
 
-CODE_01CCCC:
-  JSR CODE_01CE5D                           ; $01CCCC |
+.unpause
+  JSR pause_next_state                      ; $01CCCC |
 
 pause_letters:
   LDX #$04                                  ; $01CCCF |
@@ -9190,7 +9285,7 @@ pause_letters:
   STZ $0B2A,x                               ; $01CD17 |
   LDA #$20                                  ; $01CD1A |
   STA $0B42,x                               ; $01CD1C |
-  BRA CODE_01CD56                           ; $01CD1F |
+  BRA pause_render_letters                  ; $01CD1F |
 
 .CODE_01CD21
   LDA !r_frame_counter_global_dp            ; $01CD21 |
@@ -9227,10 +9322,10 @@ pause_letters:
 
 .next
   DEX                                       ; $01CD50 |
-  BMI CODE_01CD56                           ; $01CD51 |
+  BMI pause_render_letters                  ; $01CD51 |
   JMP .loop                                 ; $01CD53 |
 
-CODE_01CD56:
+pause_render_letters:
   REP #$20                                  ; $01CD56 |
   LDA #$6800                                ; $01CD58 |
   STA !gsu_r1                               ; $01CD5B |
@@ -9317,6 +9412,7 @@ CODE_01CE0C:
   BCC CODE_01CE0C                           ; $01CE31 |
   RTS                                       ; $01CE33 |
 
+pause_leave:
   SEP #$30                                  ; $01CE34 |
   LDA !r_cur_item_used                      ; $01CE36 |
   BEQ CODE_01CE48                           ; $01CE39 |
@@ -9331,40 +9427,46 @@ CODE_01CE48:
   EOR #$01                                  ; $01CE4B | | inverts pause flag
   AND #$01                                  ; $01CE4D | |
   STA !r_pause_menu_flag                    ; $01CE4F |/
-  JSR CODE_01CE5D                           ; $01CE52 |
-  JSR CODE_01CE5D                           ; $01CE55 | 2x speed for unpause transition
+  JSR pause_next_state                      ; $01CE52 |
+  JSR pause_next_state                      ; $01CE55 | 2x speed for unpause transition
 
 CODE_01CE58:
-  JMP CODE_01CD56                           ; $01CE58 |
+  JMP pause_render_letters                  ; $01CE58 |
 
+; Which state to enter on the pause screen
+pause_delta_state:
   db $FF, $01                               ; $01CE5B |
 
-CODE_01CE5D:
+; Gets to the next fade states
+; If unpausing an activating and activating an item, play sound and prepare timer.
+pause_next_state:
   PHY                                       ; $01CE5D |
   PHP                                       ; $01CE5E |
   SEP #$20                                  ; $01CE5F |
   LDY !r_pause_menu_flag                    ; $01CE61 |
   LDA !r_pause_menu_state                   ; $01CE64 |
   CLC                                       ; $01CE67 |
-  ADC $CE5B,y                               ; $01CE68 | increment or decrement
+  ADC pause_delta_state,y                   ; $01CE68 | increment or decrement
   STA !r_pause_menu_state                   ; $01CE6B | if unpaused or paused
-  BNE CODE_01CE80                           ; $01CE6E |
+  BNE .no_item                              ; $01CE6E |
   LDA !r_cur_item_used                      ; $01CE70 | unpausing finished
-  BEQ CODE_01CE80                           ; $01CE73 | check for item being used
+  BEQ .no_item                              ; $01CE73 | check for item being used
   LDA #$27                                  ; $01CE75 |\ play sound #$27
   JSL push_sound_queue                      ; $01CE77 |/
   LDA #$40                                  ; $01CE7B | 64 frame item use
   STA !r_item_use_counter                   ; $01CE7D | transition
 
-CODE_01CE80:
+.no_item
   PLP                                       ; $01CE80 |
   PLY                                       ; $01CE81 |
   RTS                                       ; $01CE82 |
 
+; Restores the level's mirrors of hardware registers (e.g. BG3 pos)
+pause_restore_regs:
   LDA $7EAFD7                               ; $01CE83 |
-  STA $41                                   ; $01CE87 |
+  STA !r_bg3_cam_x_dp                       ; $01CE87 |
   LDA $7EAFD9                               ; $01CE89 |
-  STA $43                                   ; $01CE8D |
+  STA !r_bg3_cam_y_dp                       ; $01CE8D |
   LDA $7EAFDB                               ; $01CE8F |
   STA !r_reg_hdmaen_mirror                  ; $01CE93 |
   LDA $7EAFDD                               ; $01CE96 |
@@ -9379,9 +9481,12 @@ CODE_01CE80:
   REP #$20                                  ; $01CEB4 |
   RTS                                       ; $01CEB6 |
 
-  LDA $41                                   ; $01CEB7 |
+; Preserves the current mirrors of hardware registers (e.g. BG3 pos) into extended RAM
+; and upload the decompressed BG3 data into VRAM
+pause_backup_regs:
+  LDA !r_bg3_cam_x_dp                       ; $01CEB7 |
   STA $7EAFD7                               ; $01CEB9 |
-  LDA $43                                   ; $01CEBD |
+  LDA !r_bg3_cam_y_dp                       ; $01CEBD |
   STA $7EAFD9                               ; $01CEBF |
   LDA !r_reg_hdmaen_mirror                  ; $01CEC3 |
   STA $7EAFDB                               ; $01CEC6 |
@@ -9408,19 +9513,23 @@ CODE_01CE80:
   PLY                                       ; $01CF05 |
   RTS                                       ; $01CF06 |
 
+pause_restore_palette:
   LDX #$00                                  ; $01CF07 |
 
-CODE_01CF09:
+.loop
   LDA $7EB6E0,x                             ; $01CF09 |
   STA !s_cgram_mirror,x                     ; $01CF0D |
   LDA $7EB7E0,x                             ; $01CF11 |
   STA $702100,x                             ; $01CF15 |
   INX                                       ; $01CF19 |
   INX                                       ; $01CF1A |
-  BNE CODE_01CF09                           ; $01CF1B |
+  BNE .loop                                 ; $01CF1B |
   PLB                                       ; $01CF1D |
   RTS                                       ; $01CF1E |
 
+; Preserves the current BG3 tilemap and also
+; generates the tilemap on the pause screen
+pause_generate_tilemap:
   LDA #$0000                                ; $01CF1F |
   STA $41                                   ; $01CF22 |
   STA $43                                   ; $01CF24 |
@@ -9431,48 +9540,48 @@ CODE_01CF09:
   PHY                                       ; $01CF2F |
   PLB                                       ; $01CF30 |
 
-CODE_01CF31:
-  LDA $2000,x                               ; $01CF31 |
+.backup_loop
+  LDA.w !s_cgram_mirror,x                   ; $01CF31 |
   STA $7EB6E0,x                             ; $01CF34 |
-  LDA $2100,x                               ; $01CF38 |
+  LDA.w !s_cgram_mirror+$100,x              ; $01CF38 |
   STA $7EB7E0,x                             ; $01CF3B |
   INX                                       ; $01CF3F |
   INX                                       ; $01CF40 |
-  BNE CODE_01CF31                           ; $01CF41 |
+  BNE .backup_loop                          ; $01CF41 |
   LDA #$0000                                ; $01CF43 |
   TAX                                       ; $01CF46 |
   TXY                                       ; $01CF47 |
 
-CODE_01CF48:
-  STA $2000,x                               ; $01CF48 |
-  STA $2100,x                               ; $01CF4B |
+.clear_cgram_loop
+  LDA.w !s_cgram_mirror,x                   ; $01CF48 |
+  LDA.w !s_cgram_mirror+$100,x              ; $01CF4B |
   INX                                       ; $01CF4E |
   INX                                       ; $01CF4F |
-  BNE CODE_01CF48                           ; $01CF50 |
+  BNE .clear_cgram_loop                     ; $01CF50 |
   TYX                                       ; $01CF52 |
 
-CODE_01CF53:
+.write_cgram_loop
   LDA hirom_mirror($3FA002),x               ; $01CF53 |
-  STA $2002,x                               ; $01CF57 |
+  LDA.w !s_cgram_mirror+$002,x              ; $01CF57 |
   LDA hirom_mirror($3FA022),x               ; $01CF5A |
-  STA $2022,x                               ; $01CF5E |
+  LDA.w !s_cgram_mirror+$022,x              ; $01CF5E |
   LDA hirom_mirror($3FA1C8),x               ; $01CF61 |
-  STA $2102,x                               ; $01CF65 |
+  LDA.w !s_cgram_mirror+$102,x              ; $01CF65 |
   LDA hirom_mirror($3FA1E6),x               ; $01CF68 |
-  STA $2122,x                               ; $01CF6C |
+  LDA.w !s_cgram_mirror+$122,x              ; $01CF6C |
   LDA hirom_mirror($3FA204),x               ; $01CF6F |
-  STA $2142,x                               ; $01CF73 |
+  LDA.w !s_cgram_mirror+$142,x              ; $01CF73 |
   INX                                       ; $01CF76 |
   INX                                       ; $01CF77 |
   CPX #$1E                                  ; $01CF78 |
-  BCC CODE_01CF53                           ; $01CF7A |
+  BCC .write_cgram_loop                     ; $01CF7A |
   LDX #$7E                                  ; $01CF7C |
   PHX                                       ; $01CF7E |
   PLB                                       ; $01CF7F |
   LDX #$00                                  ; $01CF80 |
   LDA #$217F                                ; $01CF82 |
 
-CODE_01CF85:
+.clear_tilemap_loop
   STA $AFDF,x                               ; $01CF85 |
   STA $B0DF,x                               ; $01CF88 |
   STA $B1DF,x                               ; $01CF8B |
@@ -9482,58 +9591,62 @@ CODE_01CF85:
   STA $B5DF,x                               ; $01CF97 |
   INX                                       ; $01CF9A |
   INX                                       ; $01CF9B |
-  BNE CODE_01CF85                           ; $01CF9C |
+  BNE .clear_tilemap_loop                   ; $01CF9C |
+
+.write_status_row:
   LDX #$00                                  ; $01CF9E |
   STX $00                                   ; $01CFA0 |
   TXY                                       ; $01CFA2 |
 
-CODE_01CFA3:
+..loop
   LDA $00                                   ; $01CFA3 |
   ASL A                                     ; $01CFA5 |
   TAX                                       ; $01CFA6 |
-  LDA $01B689,x                             ; $01CFA7 |
+  LDA score_screen_sep_tiles_bottom,x       ; $01CFA7 |
   STA $B3E7,y                               ; $01CFAB |
   LDX $00                                   ; $01CFAE |
   CPX #$15                                  ; $01CFB0 |
-  BCS CODE_01CFCA                           ; $01CFB2 |
-  LDA $01B835,x                             ; $01CFB4 |
+  BCS ..skip_total_points                   ; $01CFB2 |
+  LDA score_strings_total_points,x          ; $01CFB4 |
   AND #$00FF                                ; $01CFB8 |
   TAX                                       ; $01CFBB |
-  LDA $01B85F,x                             ; $01CFBC |
+  LDA score_char_tiles_top,x                ; $01CFBC |
   STA $B42D,y                               ; $01CFC0 |
-  LDA $01B8DD,x                             ; $01CFC3 |
+  LDA score_char_tiles_bottom,x             ; $01CFC3 |
   STA $B46D,y                               ; $01CFC7 |
 
-CODE_01CFCA:
+..skip_total_points
   LDX $00                                   ; $01CFCA |
   CPX #$15                                  ; $01CFCC |
-  BCS CODE_01CFE6                           ; $01CFCE |
-  LDA $01B84A,x                             ; $01CFD0 |
+  BCS ..skip_high_score                     ; $01CFCE |
+  LDA score_strings_high_score_p,x          ; $01CFD0 |
   AND #$00FF                                ; $01CFD4 |
   TAX                                       ; $01CFD7 |
-  LDA $01B85F,x                             ; $01CFD8 |
+  LDA score_char_tiles_top,x                ; $01CFD8 |
   STA $B4ED,y                               ; $01CFDC |
-  LDA $01B8DD,x                             ; $01CFDF |
+  LDA score_char_tiles_bottom,x             ; $01CFDF |
   STA $B52D,y                               ; $01CFE3 |
 
-CODE_01CFE6:
+..skip_high_score
   INY                                       ; $01CFE6 |
   INY                                       ; $01CFE7 |
   INC $00                                   ; $01CFE8 |
   LDX $00                                   ; $01CFEA |
   CPX #$18                                  ; $01CFEC |
-  BCC CODE_01CFA3                           ; $01CFEE |
-  JSR CODE_01D035                           ; $01CFF0 |
-  JSR CODE_01D0DE                           ; $01CFF3 |
-  JSR CODE_01D17A                           ; $01CFF6 |
-  JSR CODE_01D203                           ; $01CFF9 |
-  JSR CODE_01D275                           ; $01CFFC |
-  JSR CODE_01D35B                           ; $01CFFF |
-  JSR CODE_01D2E0                           ; $01D002 |
+  BCC ..loop                                ; $01CFEE |
+
+; Write all the counters on the pause screen
+  JSR pause_show_stars                      ; $01CFF0 |
+  JSR pause_show_red_coins                  ; $01CFF3 |
+  JSR pause_show_flowers                    ; $01CFF6 |
+  JSR pause_write_score                     ; $01CFF9 |
+  JSR pause_write_high_score                ; $01CFFC |
+  JSR pause_write_status_line               ; $01CFFF |
+  JSR pause_write_item_cursor               ; $01D002 |
   REP #$10                                  ; $01D005 |
   LDY #$007E                                ; $01D007 |
   STY $01                                   ; $01D00A |
-  LDY #$3400                                ; $01D00C |
+  LDY #$3400                                ; $01D00C | Transfer tilemap to VRAM
   LDX #$AFDF                                ; $01D00F |
   LDA #$0700                                ; $01D012 |
   JSL CODE_00BEA6                           ; $01D015 |
@@ -9550,40 +9663,50 @@ CODE_01CFE6:
   STA !r_reg_tm_mirror                      ; $01D031 |
   RTS                                       ; $01D034 |
 
-CODE_01D035:
+; Writes the player's star count on the pause screen tilemap
+; Output:
+; $00: Star coin count
+pause_show_stars:
   STZ $18                                   ; $01D035 |
   LDY #$00                                  ; $01D037 |
   STZ $00                                   ; $01D039 |
-  LDA $0003B6                               ; $01D03B |
-  BEQ CODE_01D05D                           ; $01D03F |
+  LDA.l !r_stars_amount                     ; $01D03B |
+  BEQ .no_stars                             ; $01D03F |
 
-CODE_01D041:
+; Calculate total stars and disregard fractional value
+.integer
+..loop
   CMP #$000A                                ; $01D041 |
-  BCC CODE_01D04E                           ; $01D044 |
+  BCC ..break                               ; $01D044 |
   SEC                                       ; $01D046 |
   SBC #$000A                                ; $01D047 |
   INC $00                                   ; $01D04A |
-  BRA CODE_01D041                           ; $01D04C |
+  BRA ..loop                                ; $01D04C |
 
-CODE_01D04E:
+..break
+.calculate_max
   LDA $00                                   ; $01D04E |
   CMP #$001E                                ; $01D050 |
-  BCC CODE_01D05D                           ; $01D053 |
-  LDA #$0400                                ; $01D055 |
+  BCC .no_stars                             ; $01D053 |
+  LDA #$0400                                ; $01D055 | If at least 30 stars, show yellow text
   STA $18                                   ; $01D058 |
-  LDA #$001E                                ; $01D05A |
+  LDA #$001E                                ; $01D05A | Failsafe if the player somehow has gotten more than 30 stars
 
-CODE_01D05D:
+.no_stars
   STA $00                                   ; $01D05D |
 
-CODE_01D05F:
+.tens
+..loop
   CMP #$000A                                ; $01D05F |
-  BCC CODE_01D06A                           ; $01D062 |
+  BCC ..break                               ; $01D062 |
   SBC #$000A                                ; $01D064 |
   INY                                       ; $01D067 |
-  BRA CODE_01D05F                           ; $01D068 |
+  BRA ..loop                                ; $01D068 |
 
-CODE_01D06A:
+..break
+
+; Writes the text on the pause screen
+.write_text
   ASL A                                     ; $01D06A |
   TAX                                       ; $01D06B |
   PHX                                       ; $01D06C |
@@ -9591,15 +9714,15 @@ CODE_01D06A:
   LDX #$00                                  ; $01D06E |
   TXY                                       ; $01D070 |
 
-CODE_01D071:
+..loop
   PHX                                       ; $01D071 |
-  LDA $01B7ED,x                             ; $01D072 |
+  LDA score_strings_stars,x                 ; $01D072 |
   AND #$00FF                                ; $01D076 |
   TAX                                       ; $01D079 |
-  LDA $01B85F,x                             ; $01D07A |
+  LDA score_char_tiles_top,x                ; $01D07A |
   ORA $18                                   ; $01D07E |
   STA $B1A7,y                               ; $01D080 |
-  LDA $01B8DD,x                             ; $01D083 |
+  LDA score_char_tiles_bottom,x             ; $01D083 |
   ORA $18                                   ; $01D087 |
   STA $B1E7,y                               ; $01D089 |
   PLX                                       ; $01D08C |
@@ -9607,7 +9730,7 @@ CODE_01D071:
   INY                                       ; $01D08E |
   INX                                       ; $01D08F |
   CPX #$18                                  ; $01D090 |
-  BCC CODE_01D071                           ; $01D092 |
+  BCC ..loop                                ; $01D092 |
   PLY                                       ; $01D094 |
   PLX                                       ; $01D095 |
   LDA $00                                   ; $01D096 |
@@ -9624,7 +9747,7 @@ CODE_01D071:
   STA $14                                   ; $01D0AC |
   LDA #$B20F                                ; $01D0AE |
   STA $16                                   ; $01D0B1 |
-  JSR CODE_01D45E                           ; $01D0B3 |
+  JSR score_screen_write_number             ; $01D0B3 |
   REP #$10                                  ; $01D0B6 |
   PLA                                       ; $01D0B8 |
   AND #$00FF                                ; $01D0B9 |
@@ -9641,34 +9764,41 @@ CODE_01D071:
   PHB                                       ; $01D0D1 |
   PHK                                       ; $01D0D2 |
   PLB                                       ; $01D0D3 |
-  JSR CODE_01BCAA                           ; $01D0D4 |
+  JSR score_pluralize_pts                   ; $01D0D4 |
   PLB                                       ; $01D0D7 |
   SEP #$10                                  ; $01D0D8 |
   PLA                                       ; $01D0DA |
   STA $00                                   ; $01D0DB |
   RTS                                       ; $01D0DD |
 
-CODE_01D0DE:
+; Writes the player's red coin count on the pause screen tilemap
+; Output:
+; $02: Red coin count
+pause_show_red_coins:
   STZ $18                                   ; $01D0DE |
   LDY #$00                                  ; $01D0E0 |
-  LDA $0003B4                               ; $01D0E2 |
+  LDA.l !r_red_coins_amount                 ; $01D0E2 |
   CMP #$0014                                ; $01D0E6 |
-  BCC CODE_01D0F3                           ; $01D0E9 |
-  LDA #$0400                                ; $01D0EB |
+  BCC .not_max                              ; $01D0E9 |
+  LDA #$0400                                ; $01D0EB | Mark red coins as yellow if at least 20 have been found
   STA $18                                   ; $01D0EE |
-  LDA #$0014                                ; $01D0F0 |
+  LDA #$0014                                ; $01D0F0 | Failsafe
 
-CODE_01D0F3:
+.not_max
   STA $02                                   ; $01D0F3 |
 
-CODE_01D0F5:
+.get_tens
+..loop
   CMP #$000A                                ; $01D0F5 |
-  BCC CODE_01D100                           ; $01D0F8 |
+  BCC ..break                               ; $01D0F8 |
   SBC #$000A                                ; $01D0FA |
   INY                                       ; $01D0FD |
-  BRA CODE_01D0F5                           ; $01D0FE |
+  BRA ..loop                                ; $01D0FE |
 
-CODE_01D100:
+..break
+
+; Writes the text on the pause screen tilemap
+.write_text
   ASL A                                     ; $01D100 |
   TAX                                       ; $01D101 |
   PHX                                       ; $01D102 |
@@ -9676,15 +9806,15 @@ CODE_01D100:
   LDX #$00                                  ; $01D104 |
   TXY                                       ; $01D106 |
 
-CODE_01D107:
+..loop
   PHX                                       ; $01D107 |
-  LDA $01B805,x                             ; $01D108 |
+  LDA score_strings_red_coins,x             ; $01D108 |
   AND #$00FF                                ; $01D10C |
   TAX                                       ; $01D10F |
-  LDA $01B85F,x                             ; $01D110 |
+  LDA score_char_tiles_top,x                ; $01D110 |
   ORA $18                                   ; $01D114 |
   STA $B267,y                               ; $01D116 |
-  LDA $01B8DD,x                             ; $01D119 |
+  LDA score_char_tiles_bottom,x             ; $01D119 |
   ORA $18                                   ; $01D11D |
   STA $B2A7,y                               ; $01D11F |
   PLX                                       ; $01D122 |
@@ -9692,7 +9822,7 @@ CODE_01D107:
   INY                                       ; $01D124 |
   INX                                       ; $01D125 |
   CPX #$18                                  ; $01D126 |
-  BCC CODE_01D107                           ; $01D128 |
+  BCC ..loop                                ; $01D128 |
   PLY                                       ; $01D12A |
   PLX                                       ; $01D12B |
   LDA $00                                   ; $01D12C |
@@ -9711,7 +9841,7 @@ CODE_01D107:
   STA $14                                   ; $01D145 |
   LDA #$B2CF                                ; $01D147 |
   STA $16                                   ; $01D14A |
-  JSR CODE_01D45E                           ; $01D14C |
+  JSR score_screen_write_number             ; $01D14C |
   REP #$10                                  ; $01D14F |
   PLA                                       ; $01D151 |
   AND #$00FF                                ; $01D152 |
@@ -9728,7 +9858,7 @@ CODE_01D107:
   PHB                                       ; $01D16A |
   PHK                                       ; $01D16B |
   PLB                                       ; $01D16C |
-  JSR CODE_01BCAA                           ; $01D16D |
+  JSR score_pluralize_pts                   ; $01D16D |
   PLB                                       ; $01D170 |
   SEP #$10                                  ; $01D171 |
   PLA                                       ; $01D173 |
@@ -9737,30 +9867,31 @@ CODE_01D107:
   STA $00                                   ; $01D177 |
   RTS                                       ; $01D179 |
 
-CODE_01D17A:
+pause_show_flowers:
   STZ $18                                   ; $01D17A |
-  LDA $0003B8                               ; $01D17C |
+  LDA.l !r_flowers_amount                   ; $01D17C |
   ASL A                                     ; $01D180 |
   TAX                                       ; $01D181 |
   CPX #$0A                                  ; $01D182 |
-  BCC CODE_01D18B                           ; $01D184 |
-  LDA #$0400                                ; $01D186 |
-  STA $18                                   ; $01D189 |
+  BCC .not_max                              ; $01D184 |
+  LDA #$0400                                ; $01D186 | Mark flowers as yellow if at least 5 have been found
+  STA $18                                   ; $01D189 | Unlike before, there is no failsafe
 
-CODE_01D18B:
+.not_max
   PHX                                       ; $01D18B |
   LDX #$00                                  ; $01D18C |
   TXY                                       ; $01D18E |
 
-CODE_01D18F:
+.write_text
+..loop
   PHX                                       ; $01D18F |
-  LDA $01B81D,x                             ; $01D190 |
+  LDA score_strings_flowers,x               ; $01D190 |
   AND #$00FF                                ; $01D194 |
   TAX                                       ; $01D197 |
-  LDA $01B85F,x                             ; $01D198 |
+  LDA score_char_tiles_top,x                ; $01D198 |
   ORA $18                                   ; $01D19C |
   STA $B327,y                               ; $01D19E |
-  LDA $01B8DD,x                             ; $01D1A1 |
+  LDA score_char_tiles_bottom,x             ; $01D1A1 |
   ORA $18                                   ; $01D1A5 |
   STA $B367,y                               ; $01D1A7 |
   PLX                                       ; $01D1AA |
@@ -9768,7 +9899,7 @@ CODE_01D18F:
   INY                                       ; $01D1AC |
   INX                                       ; $01D1AD |
   CPX #$18                                  ; $01D1AE |
-  BCC CODE_01D18F                           ; $01D1B0 |
+  BCC ..loop                                ; $01D1B0 |
   PLX                                       ; $01D1B2 |
   LDA $00                                   ; $01D1B3 |
   PHA                                       ; $01D1B5 |
@@ -9777,22 +9908,22 @@ CODE_01D18F:
   REP #$10                                  ; $01D1B9 |
   PHX                                       ; $01D1BB |
   SEP #$10                                  ; $01D1BC |
-  LDA $01B8AF,x                             ; $01D1BE |
+  LDA score_char_tiles_top+$50,x            ; $01D1BE |
   ORA $18                                   ; $01D1C2 |
   STA $B345                                 ; $01D1C4 |
   TXY                                       ; $01D1C7 |
-  BEQ CODE_01D1CD                           ; $01D1C8 |
+  BEQ ..top_skip                            ; $01D1C8 |
   STA $B34F                                 ; $01D1CA |
 
-CODE_01D1CD:
-  LDA $01B92D,x                             ; $01D1CD |
+..top_skip
+  LDA score_char_tiles_bottom+$50,x         ; $01D1CD |
   ORA $18                                   ; $01D1D1 |
   STA $B385                                 ; $01D1D3 |
   TXY                                       ; $01D1D6 |
-  BEQ CODE_01D1DC                           ; $01D1D7 |
+  BEQ ..bottom_skip                         ; $01D1D7 |
   STA $B38F                                 ; $01D1D9 |
 
-CODE_01D1DC:
+..bottom_skip
   REP #$10                                  ; $01D1DC |
   PLA                                       ; $01D1DE |
   AND #$00FF                                ; $01D1DF |
@@ -9807,7 +9938,7 @@ CODE_01D1DC:
   PHB                                       ; $01D1F3 |
   PHK                                       ; $01D1F4 |
   PLB                                       ; $01D1F5 |
-  JSR CODE_01BCAA                           ; $01D1F6 |
+  JSR score_pluralize_pts                   ; $01D1F6 |
   PLB                                       ; $01D1F9 |
   SEP #$10                                  ; $01D1FA |
   PLA                                       ; $01D1FC |
@@ -9816,7 +9947,15 @@ CODE_01D1DC:
   STA $00                                   ; $01D200 |
   RTS                                       ; $01D202 |
 
-CODE_01D203:
+
+; Calculates the current score based on the player's current amount
+; of stars, red coins and flowers and write it on the pause tilemap.
+; Input:
+; $00: Star count
+; $02: Red coin count
+; Output:
+; $00: Player's score
+pause_write_score:
   STZ $18                                   ; $01D203 |
   LDY #$00                                  ; $01D205 |
   LDA $0003B8                               ; $01D207 |
@@ -9831,20 +9970,22 @@ CODE_01D203:
   ADC $02                                   ; $01D216 |
   STA $00                                   ; $01D218 |
   CMP #$0064                                ; $01D21A |
-  BCC CODE_01D226                           ; $01D21D |
-  LDA #$000A                                ; $01D21F |
+  BCC .not_max                              ; $01D21D |
+  LDA #$000A                                ; $01D21F | Show 100 if the player has at least 100 points
   TAY                                       ; $01D222 |
   INY                                       ; $01D223 |
-  BRA CODE_01D231                           ; $01D224 |
+  BRA .write_number                         ; $01D224 |
 
-CODE_01D226:
+.not_max
+..loop
   CMP #$000A                                ; $01D226 |
-  BCC CODE_01D231                           ; $01D229 |
+  BCC ..break                               ; $01D229 |
   SBC #$000A                                ; $01D22B |
   INY                                       ; $01D22E |
-  BRA CODE_01D226                           ; $01D22F |
+  BRA ..loop                                ; $01D22F |
 
-CODE_01D231:
+..break
+.write_number
   ASL A                                     ; $01D231 |
   TAX                                       ; $01D232 |
   LDA $00                                   ; $01D233 |
@@ -9859,7 +10000,7 @@ CODE_01D231:
   LDA #$B48F                                ; $01D243 |
   STA $14                                   ; $01D246 |
   STA $16                                   ; $01D248 |
-  JSR CODE_01D45E                           ; $01D24A |
+  JSR score_screen_write_number             ; $01D24A |
   REP #$10                                  ; $01D24D |
   PLA                                       ; $01D24F |
   AND #$00FF                                ; $01D250 |
@@ -9876,39 +10017,44 @@ CODE_01D231:
   PHB                                       ; $01D268 |
   PHK                                       ; $01D269 |
   PLB                                       ; $01D26A |
-  JSR CODE_01BCAA                           ; $01D26B |
+  JSR score_pluralize_pts                   ; $01D26B |
   PLB                                       ; $01D26E |
   SEP #$10                                  ; $01D26F |
   PLA                                       ; $01D271 |
   STA $00                                   ; $01D272 |
   RTS                                       ; $01D274 |
 
-CODE_01D275:
+; Writes the current level's high score on the pause screen
+; Input:
+; $00: Player's current score count
+pause_write_high_score:
   LDY #$00                                  ; $01D275 |
-  LDA $00021A                               ; $01D277 |
+  LDA.l !r_cur_stage                        ; $01D277 |
   TAX                                       ; $01D27B |
-  LDA $0002B8,x                             ; $01D27C |
+  LDA.l !r_stage_scores,x                   ; $01D27C |
   AND #$00FF                                ; $01D280 |
   CMP $00                                   ; $01D283 |
-  BCS CODE_01D289                           ; $01D285 |
+  BCS .high_score_not_beaten                ; $01D285 |
   LDA $00                                   ; $01D287 |
 
-CODE_01D289:
+.high_score_not_beaten:
   CMP #$0064                                ; $01D289 |
-  BCC CODE_01D295                           ; $01D28C |
-  LDA #$000A                                ; $01D28E |
+  BCC .get_tens                             ; $01D28C |
+  LDA #$000A                                ; $01D28E | Show 100 if the high score is least 100 points
   TAY                                       ; $01D291 |
   INY                                       ; $01D292 |
-  BRA CODE_01D2A0                           ; $01D293 |
+  BRA .write_number                         ; $01D293 |
 
-CODE_01D295:
+.get_tens
+..loop
   CMP #$000A                                ; $01D295 |
-  BCC CODE_01D2A0                           ; $01D298 |
+  BCC ..break                               ; $01D298 |
   SBC #$000A                                ; $01D29A |
   INY                                       ; $01D29D |
-  BRA CODE_01D295                           ; $01D29E |
+  BRA ..loop                                ; $01D29E |
 
-CODE_01D2A0:
+..break
+.write_number
   ASL A                                     ; $01D2A0 |
   TAX                                       ; $01D2A1 |
   REP #$10                                  ; $01D2A2 |
@@ -9922,7 +10068,7 @@ CODE_01D2A0:
   STA $14                                   ; $01D2B2 |
   STA $16                                   ; $01D2B4 |
   STZ $18                                   ; $01D2B6 |
-  JSR CODE_01D45E                           ; $01D2B8 |
+  JSR score_screen_write_number             ; $01D2B8 |
   REP #$10                                  ; $01D2BB |
   PLA                                       ; $01D2BD |
   AND #$00FF                                ; $01D2BE |
@@ -9939,77 +10085,90 @@ CODE_01D2A0:
   PHB                                       ; $01D2D6 |
   PHK                                       ; $01D2D7 |
   PLB                                       ; $01D2D8 |
-  JSR CODE_01BCAA                           ; $01D2D9 |
+  JSR score_pluralize_pts                   ; $01D2D9 |
   PLB                                       ; $01D2DC |
   SEP #$10                                  ; $01D2DD |
   RTS                                       ; $01D2DF |
 
-CODE_01D2E0:
+; Code prepares the display of the items on the pause screen
+; and also draws the cursor on the selected item,
+; potentially initialising it if the player enters pause
+; the first time.
+pause_write_item_cursor:
   PHB                                       ; $01D2E0 |
   PHK                                       ; $01D2E1 |
   PLB                                       ; $01D2E2 |
-  STZ $0CF6                                 ; $01D2E3 |
-  STZ $0CF7                                 ; $01D2E6 |
+  STZ !r_pause_shown_items                  ; $01D2E3 | Clear first and second shown item (but not third one)
+  STZ !r_pause_shown_items+1                ; $01D2E6 |
   SEP #$20                                  ; $01D2E9 |
   LDX #$00                                  ; $01D2EB |
   TXY                                       ; $01D2ED |
 
-CODE_01D2EE:
+; Code compresses all items on the pause screen to have no gap
+.compress_items
+..loop
   LDA !r_pause_items,x                      ; $01D2EE |
   AND #$0F                                  ; $01D2F1 |
-  BEQ CODE_01D2F9                           ; $01D2F3 |
+  BEQ ..empty                               ; $01D2F3 |
   STA !r_pause_items,y                      ; $01D2F5 |
   INY                                       ; $01D2F8 |
 
-CODE_01D2F9:
+..empty
   INX                                       ; $01D2F9 |
   CPX #$1B                                  ; $01D2FA |
-  BCC CODE_01D2EE                           ; $01D2FC |
+  BCC ..loop                                ; $01D2FC |
   TYX                                       ; $01D2FE |
 
-CODE_01D2FF:
-  CPX #$1B                                  ; $01D2FF |
-  BCS CODE_01D309                           ; $01D301 |
+..clear_loop:
+  CPX #$1B                                  ; $01D2FF | Clear all other items
+  BCS .show_items                           ; $01D301 |
   STZ !r_pause_items,x                      ; $01D303 |
   INX                                       ; $01D306 |
-  BRA CODE_01D2FF                           ; $01D307 |
+  BRA ..clear_loop                          ; $01D307 |
 
-CODE_01D309:
-  LDA !r_pause_items                        ; $01D309 |
-  BEQ CODE_01D32F                           ; $01D30C |
+; Copies items into a buffer
+.show_items
+  LDA !r_pause_items                        ; $01D309 | Don't do anything if the player has no items
+  BEQ .ret                                  ; $01D30C |
   LDY #$00                                  ; $01D30E |
-  LDA $0CF4                                 ; $01D310 |
-  BNE CODE_01D31B                           ; $01D313 |
-  STZ $0CF5                                 ; $01D315 |
-  INC $0CF4                                 ; $01D318 |
+  LDA !r_pause_cursor_pos                   ; $01D310 |
+  BNE ..no_init                             ; $01D313 |
+  STZ !r_pause_window_pos                   ; $01D315 | Always show the first item
+  INC !r_pause_cursor_pos                   ; $01D318 | Item selection cursor is always non-zero
 
-CODE_01D31B:
-  LDX $0CF5                                 ; $01D31B |
+..no_init
+  LDX !r_pause_window_pos                   ; $01D31B |
 
-CODE_01D31E:
+..copy_loop
   LDA !r_pause_items,x                      ; $01D31E |
-  STA $0CF6,y                               ; $01D321 |
+  STA !r_pause_shown_items,y                ; $01D321 |
   INX                                       ; $01D324 |
   INY                                       ; $01D325 |
   CPY #$03                                  ; $01D326 |
-  BCC CODE_01D31E                           ; $01D328 |
+  BCC ..copy_loop                           ; $01D328 |
   REP #$20                                  ; $01D32A |
-  JSR CODE_01DDB0                           ; $01D32C |
+  JSR pause_animate_item_box                ; $01D32C |
 
-CODE_01D32F:
+.ret
   REP #$20                                  ; $01D32F |
   PLB                                       ; $01D331 |
   RTS                                       ; $01D332 |
 
+; 16x16 numbers for the star counter on the pause screen
+pause_big_number:
+.top
   dw $1DA8, $1D80, $1D82, $1D84             ; $01D333 |
   dw $1D86, $1D88, $1DA0, $1DA2             ; $01D33B |
   dw $1DA4, $1DA6                           ; $01D343 |
 
+.bottom
   dw $1DB8, $1D90, $1D92, $1D94             ; $01D347 |
   dw $1D96, $1D98, $1DB0, $1DB2             ; $01D34F |
   dw $1DB4, $1DB6                           ; $01D357 |
 
-CODE_01D35B:
+; Writes the status line with the player's life, coin and star count
+; as well as all the items on the tilemap
+pause_write_status_line:
   LDX #$00                                  ; $01D35B |
 
 CODE_01D35D:
@@ -10024,7 +10183,9 @@ CODE_01D35D:
   INX                                       ; $01D373 |
   CPX #$40                                  ; $01D374 |
   BCC CODE_01D35D                           ; $01D376 |
-  LDA #$098C                                ; $01D378 |
+
+.lives
+  LDA #$098C                                ; $01D378 | Yoshi icon
   STA $B5E1                                 ; $01D37B |
   INC A                                     ; $01D37E |
   STA $B5E3                                 ; $01D37F |
@@ -10034,35 +10195,36 @@ CODE_01D35D:
   STA $B623                                 ; $01D387 |
   LDX #$00                                  ; $01D38A |
   TXY                                       ; $01D38C |
-  LDA $000379                               ; $01D38D |
+  LDA.l !r_extra_lives                      ; $01D38D |
 
-CODE_01D391:
+..hundreds_loop
   CMP #$0064                                ; $01D391 |
-  BCC CODE_01D39C                           ; $01D394 |
+  BCC ..hundreds_break                      ; $01D394 |
   SBC #$0064                                ; $01D396 |
   INY                                       ; $01D399 |
-  BRA CODE_01D391                           ; $01D39A |
+  BRA ..hundreds_loop                       ; $01D39A |
 
-CODE_01D39C:
+..hundreds_break
+..tens_loop
   CMP #$000A                                ; $01D39C |
-  BCC CODE_01D3A7                           ; $01D39F |
+  BCC ..tens_break                          ; $01D39F |
   SBC #$000A                                ; $01D3A1 |
   INX                                       ; $01D3A4 |
-  BRA CODE_01D39C                           ; $01D3A5 |
+  BRA ..tens_loop                           ; $01D3A5 |
 
-CODE_01D3A7:
+..tens_break
   CPY #$00                                  ; $01D3A7 |
-  BNE CODE_01D3B9                           ; $01D3A9 |
+  BNE ..write                               ; $01D3A9 |
   TXY                                       ; $01D3AB |
   TAX                                       ; $01D3AC |
   LDA #$000A                                ; $01D3AD |
   CPY #$00                                  ; $01D3B0 |
-  BNE CODE_01D3B9                           ; $01D3B2 |
+  BNE ..write                               ; $01D3B2 |
   TXY                                       ; $01D3B4 |
   TAX                                       ; $01D3B5 |
   LDA #$000A                                ; $01D3B6 |
 
-CODE_01D3B9:
+..write:
   ORA #$0DC0                                ; $01D3B9 |
   STA $B629                                 ; $01D3BC |
   TXA                                       ; $01D3BF |
@@ -10071,6 +10233,8 @@ CODE_01D3B9:
   TYA                                       ; $01D3C6 |
   ORA #$0DC0                                ; $01D3C7 |
   STA $B625                                 ; $01D3CA |
+
+.coins
   LDA #$0DD2                                ; $01D3CD |
   STA $B5EB                                 ; $01D3D0 |
   INC A                                     ; $01D3D3 |
@@ -10080,27 +10244,29 @@ CODE_01D3B9:
   INC A                                     ; $01D3DB |
   STA $B62D                                 ; $01D3DC |
   LDX #$00                                  ; $01D3DF |
-  LDA $00037B                               ; $01D3E1 |
+  LDA.l !r_coins_collected                  ; $01D3E1 |
 
-CODE_01D3E5:
+..tens_loop
   CMP #$000A                                ; $01D3E5 |
-  BCC CODE_01D3F0                           ; $01D3E8 |
+  BCC ..tens_break                          ; $01D3E8 |
   SBC #$000A                                ; $01D3EA |
   INX                                       ; $01D3ED |
-  BRA CODE_01D3E5                           ; $01D3EE |
+  BRA ..tens_loop                           ; $01D3EE |
 
-CODE_01D3F0:
+..tens_break
   CPX #$00                                  ; $01D3F0 |
-  BNE CODE_01D3F8                           ; $01D3F2 |
+  BNE ..write                               ; $01D3F2 |
   TAX                                       ; $01D3F4 |
   LDA #$000A                                ; $01D3F5 |
 
-CODE_01D3F8:
+..write
   ORA #$0DC0                                ; $01D3F8 |
   STA $B631                                 ; $01D3FB |
   TXA                                       ; $01D3FE |
   ORA #$0DC0                                ; $01D3FF |
   STA $B62F                                 ; $01D402 |
+
+.stars
   LDA #$0DCB                                ; $01D405 |
   STA $B5F5                                 ; $01D408 |
   INC A                                     ; $01D40B |
@@ -10112,64 +10278,79 @@ CODE_01D3F8:
   LDA $0003A1                               ; $01D417 |
   ASL A                                     ; $01D41B |
   TAX                                       ; $01D41C |
-  LDA $01D333,x                             ; $01D41D |
+  LDA pause_big_number_top,x                ; $01D41D |
   STA $B5F9                                 ; $01D421 |
   INC A                                     ; $01D424 |
   STA $B5FB                                 ; $01D425 |
-  LDA $01D347,x                             ; $01D428 |
+  LDA pause_big_number_bottom,x             ; $01D428 |
   STA $B639                                 ; $01D42C |
   INC A                                     ; $01D42F |
   STA $B63B                                 ; $01D430 |
   LDA $0003A3                               ; $01D433 |
   ASL A                                     ; $01D437 |
   TAX                                       ; $01D438 |
-  LDA $01D333,x                             ; $01D439 |
+  LDA pause_big_number_top,x                ; $01D439 |
   STA $B5FD                                 ; $01D43D |
   INC A                                     ; $01D440 |
   STA $B5FF                                 ; $01D441 |
-  LDA $01D347,x                             ; $01D444 |
+  LDA pause_big_number_bottom,x             ; $01D444 |
   STA $B63D                                 ; $01D448 |
   INC A                                     ; $01D44B |
   STA $B63F                                 ; $01D44C |
-  JSR CODE_01D490                           ; $01D44F |
+  JSR pause_draw_item_boxes                 ; $01D44F |
   SEP #$20                                  ; $01D452 |
   PHB                                       ; $01D454 |
   PHK                                       ; $01D455 |
   PLB                                       ; $01D456 |
-  JSR CODE_01DCE0                           ; $01D457 |
+  JSR pause_draw_arrows                     ; $01D457 |
   PLB                                       ; $01D45A |
   REP #$20                                  ; $01D45B |
   RTS                                       ; $01D45D |
 
-CODE_01D45E:
+; Writes a number on the score and pause screen
+; The numbers are written twice which is used on the
+; pause screen to write the score both on the left and
+; right side.
+; On the level end score screen, the same tiles are written
+; to the same tile in the tilemap.
+; Inputs:
+; X:     Units to write (times 2)
+; Y:     Tens to write
+; ($10): Pointer to tilemap of first number (top half)
+; ($12): Pointer to tilemap of second number (top half)
+; ($14): Pointer to tilemap of first number (bottom half)
+; ($16): Pointer to tilemap of second number (bottom half)
+; $18:   YXPCCCTT properties of the number
+score_screen_write_number:
   PHY                                       ; $01D45E |
   LDY #$02                                  ; $01D45F |
-  LDA $01B8AF,x                             ; $01D461 |
+  LDA score_char_tiles_top+$50,x            ; $01D461 |
   ORA $18                                   ; $01D465 |
   STA ($10),y                               ; $01D467 |
   STA ($12),y                               ; $01D469 |
-  LDA $01B92D,x                             ; $01D46B |
+  LDA score_char_tiles_bottom,x             ; $01D46B |
   ORA $18                                   ; $01D46F |
   STA ($14),y                               ; $01D471 |
   STA ($16),y                               ; $01D473 |
   PLY                                       ; $01D475 |
-  BEQ CODE_01D48F                           ; $01D476 |
+  BEQ .no_tens                              ; $01D476 |
   TYA                                       ; $01D478 |
   ASL A                                     ; $01D479 |
   TAX                                       ; $01D47A |
-  LDA $01B8AF,x                             ; $01D47B |
+  LDA score_char_tiles_top+$50,x            ; $01D47B |
   ORA $18                                   ; $01D47F |
   STA ($10)                                 ; $01D481 |
   STA ($12)                                 ; $01D483 |
-  LDA $01B92D,x                             ; $01D485 |
+  LDA score_char_tiles_bottom,x             ; $01D485 |
   ORA $18                                   ; $01D489 |
   STA ($14)                                 ; $01D48B |
   STA ($16)                                 ; $01D48D |
 
-CODE_01D48F:
+.no_tens:
   RTS                                       ; $01D48F |
 
-CODE_01D490:
+; Draws item boxes on the pause screen's status line
+pause_draw_item_boxes:
   LDA #$1DAC                                ; $01D490 |
   STA $B5C7                                 ; $01D493 |
   LDA #$1D9C                                ; $01D496 |
@@ -11012,9 +11193,9 @@ fire_melon_item:
 
 
 CODE_01DB83:
-  LDA $0CF4                                 ; $01DB83 |
+  LDA !r_pause_cursor_pos                   ; $01DB83 |
   CLC                                       ; $01DB86 |
-  ADC $0CF5                                 ; $01DB87 |
+  ADC !r_pause_window_pos                   ; $01DB87 |
   TAX                                       ; $01DB8A |
   BEQ CODE_01DBB9                           ; $01DB8B |
   STZ $0356,x                               ; $01DB8D |
@@ -11036,15 +11217,15 @@ CODE_01DBA4:
   BRA CODE_01DB92                           ; $01DBA5 |
 
 CODE_01DBA7:
-  LDA $0CF5                                 ; $01DBA7 |
+  LDA !r_pause_window_pos                   ; $01DBA7 |
   BEQ CODE_01DBB1                           ; $01DBAA |
-  DEC $0CF5                                 ; $01DBAC |
+  DEC !r_pause_window_pos                   ; $01DBAC |
   BRA CODE_01DBB9                           ; $01DBAF |
 
 CODE_01DBB1:
-  DEC $0CF4                                 ; $01DBB1 |
+  DEC !r_pause_cursor_pos                   ; $01DBB1 |
   BNE CODE_01DBB9                           ; $01DBB4 |
-  INC $0CF4                                 ; $01DBB6 |
+  INC !r_pause_cursor_pos                   ; $01DBB6 |
 
 CODE_01DBB9:
   RTS                                       ; $01DBB9 |
@@ -11062,12 +11243,12 @@ CODE_01DBB9:
   db $01, $FF, $FF, $03, $FF, $FF, $1B, $FF ; $01DBCC |
   db $FF                                    ; $01DBD4 |
 
-CODE_01DBD5:
+pause_handle_item_menu:
   LDA $38                                   ; $01DBD5 |
   AND #$03                                  ; $01DBD7 |
   BEQ CODE_01DC4B                           ; $01DBD9 |
   TAX                                       ; $01DBDB |
-  LDA $0CF4                                 ; $01DBDC |
+  LDA !r_pause_cursor_pos                   ; $01DBDC |
   BNE CODE_01DBE4                           ; $01DBDF |
   JMP CODE_01DC8A                           ; $01DBE1 |
 
@@ -11079,7 +11260,7 @@ CODE_01DBE4:
   CMP $DBCE,x                               ; $01DBEB |
   BEQ CODE_01DBFA                           ; $01DBEE |
   INC A                                     ; $01DBF0 |
-  STA $0CF4                                 ; $01DBF1 |
+  STA !r_pause_cursor_pos                   ; $01DBF1 |
   LDA #$5C                                  ; $01DBF4 |\ play sound #$5C
   STA !r_apu_io_2_mirror_dp                 ; $01DBF6 |/ bypassing push_sound_queue
   BRA CODE_01DC1C                           ; $01DBF8 |
@@ -11087,38 +11268,38 @@ CODE_01DBE4:
 CODE_01DBFA:
   LDA $00                                   ; $01DBFA |
   CLC                                       ; $01DBFC |
-  ADC $0CF5                                 ; $01DBFD |
+  ADC !r_pause_window_pos                   ; $01DBFD |
   CLC                                       ; $01DC00 |
   ADC $DBCB,x                               ; $01DC01 |
   CMP $DBD1,x                               ; $01DC04 |
   BNE CODE_01DC0E                           ; $01DC07 |
-  LDA $0CF5                                 ; $01DC09 |
+  LDA !r_pause_window_pos                   ; $01DC09 |
   BRA CODE_01DC1C                           ; $01DC0C |
 
 CODE_01DC0E:
   LDA #$5C                                  ; $01DC0E |\ play sound #$5C
   STA !r_apu_io_2_mirror_dp                 ; $01DC10 |/ bypassing push_sound_queue
-  LDA $0CF5                                 ; $01DC12 |
+  LDA !r_pause_window_pos                   ; $01DC12 |
   CLC                                       ; $01DC15 |
   ADC $DBCB,x                               ; $01DC16 |
-  STA $0CF5                                 ; $01DC19 |
+  STA !r_pause_window_pos                   ; $01DC19 |
 
 CODE_01DC1C:
-  LDA $0CF4                                 ; $01DC1C |
+  LDA !r_pause_cursor_pos                   ; $01DC1C |
   CLC                                       ; $01DC1F |
-  ADC $0CF5                                 ; $01DC20 |
+  ADC !r_pause_window_pos                   ; $01DC20 |
   TAX                                       ; $01DC23 |
   CPX #$1B                                  ; $01DC24 |
   BCS CODE_01DC42                           ; $01DC26 |
   DEX                                       ; $01DC28 |
   LDA !r_pause_items,x                      ; $01DC29 |
   BNE CODE_01DC42                           ; $01DC2C |
-  DEC $0CF5                                 ; $01DC2E |
+  DEC !r_pause_window_pos                   ; $01DC2E |
   BPL CODE_01DC40                           ; $01DC31 |
-  STZ $0CF5                                 ; $01DC33 |
-  DEC $0CF4                                 ; $01DC36 |
+  STZ !r_pause_window_pos                   ; $01DC33 |
+  DEC !r_pause_cursor_pos                   ; $01DC36 |
   BPL CODE_01DC40                           ; $01DC39 |
-  STZ $0CF4                                 ; $01DC3B |
+  STZ !r_pause_cursor_pos                   ; $01DC3B |
   BRA CODE_01DC42                           ; $01DC3E |
 
 CODE_01DC40:
@@ -11127,7 +11308,7 @@ CODE_01DC40:
 CODE_01DC42:
   JSR CODE_01DCC6                           ; $01DC42 |
   JSR CODE_01DD8B                           ; $01DC45 |
-  JSR CODE_01DCE0                           ; $01DC48 |
+  JSR pause_draw_arrows                     ; $01DC48 |
 
 CODE_01DC4B:
   LDA !r_cur_item_used                      ; $01DC4B |
@@ -11137,9 +11318,9 @@ CODE_01DC4B:
   BEQ CODE_01DC8A                           ; $01DC54 |
   LDA !r_pause_item_disable                 ; $01DC56 |
   BNE CODE_01DC74                           ; $01DC59 |
-  LDA $0CF5                                 ; $01DC5B |
+  LDA !r_pause_window_pos                   ; $01DC5B |
   CLC                                       ; $01DC5E |
-  ADC $0CF4                                 ; $01DC5F |
+  ADC !r_pause_cursor_pos                   ; $01DC5F |
   TAX                                       ; $01DC62 |
   LDA $0356,x                               ; $01DC63 |
   STA !r_cur_item_used                      ; $01DC66 |
@@ -11208,11 +11389,11 @@ CODE_01DCC1:
 
 CODE_01DCC6:
   LDX #$00                                  ; $01DCC6 |
-  LDY $0CF5                                 ; $01DCC8 |
+  LDY !r_pause_window_pos                   ; $01DCC8 |
 
 CODE_01DCCB:
   LDA !r_pause_items,y                      ; $01DCCB |
-  STA $0CF6,x                               ; $01DCCE |
+  STA !r_pause_shown_items,x                ; $01DCCE |
   INY                                       ; $01DCD1 |
   INX                                       ; $01DCD2 |
   CPX #$03                                  ; $01DCD3 |
@@ -11223,9 +11404,9 @@ CODE_01DCCB:
 
   dw $09AF, $099D                           ; $01DCDC |
 
-CODE_01DCE0:
+pause_draw_arrows:
   LDX #$00                                  ; $01DCE0 |
-  LDA $0CF5                                 ; $01DCE2 |
+  LDA !r_pause_window_pos                   ; $01DCE2 |
   BEQ CODE_01DCE9                           ; $01DCE5 |
   INX                                       ; $01DCE7 |
   INX                                       ; $01DCE8 |
@@ -11238,7 +11419,7 @@ CODE_01DCE9:
   STA $7EB645                               ; $01DCF5 |
   SEP #$20                                  ; $01DCF9 |
   LDX #$00                                  ; $01DCFB |
-  LDA $0CF5                                 ; $01DCFD |
+  LDA !r_pause_window_pos                   ; $01DCFD |
   CLC                                       ; $01DD00 |
   ADC #$03                                  ; $01DD01 |
   CMP #$1B                                  ; $01DD03 |
@@ -11258,22 +11439,32 @@ CODE_01DD0F:
   SEP #$20                                  ; $01DD1F |
   RTS                                       ; $01DD21 |
 
+; Tilemaps of the currently active item box on the pause screen
+item_box_tilemap:
+.0
   dw $1DBB, $1DBC, $1DBC, $1DBE             ; $01DD22 |
   dw $1DD1, $417F, $417F, $1DBF             ; $01DD2A |
   dw $1DD1, $417F, $417F, $1DBF             ; $01DD32 |
   dw $9DBB, $9DBC, $9DBC, $9DBE             ; $01DD3A |
+
+.1
   dw $5DBE, $1DBC, $1DBC, $1DBE             ; $01DD42 |
   dw $5DBF, $417F, $417F, $1DBF             ; $01DD4A |
   dw $5DBF, $417F, $417F, $1DBF             ; $01DD52 |
   dw $DDBE, $9DBC, $9DBC, $9DBE             ; $01DD5A |
+
+.2
   dw $5DBE, $1DBC, $1DBC, $5DBB             ; $01DD62 |
   dw $5DBF, $417F, $417F, $5DD1             ; $01DD6A |
   dw $5DBF, $417F, $417F, $5DD1             ; $01DD72 |
-  dw $DDBE, $9DBC, $9DBC                    ; $01DD7A |
+  dw $DDBE, $9DBC, $9DBC, $DDBB             ; $01DD7A |
 
-  db $BB, $DD, $22, $DD, $42, $DD, $62      ; $01DD80 |
+; Pointers to the tilemap_data
+.ptrs:
+  dw .0, .1, .2                             ; $01DD82 |
 
-  db $DD, $00, $06, $0C                     ; $01DD87 |
+.indices:
+  db $00, $06, $0C                          ; $01DD88 |
 
 CODE_01DD8B:
   REP #$20                                  ; $01DD8B |
@@ -11281,9 +11472,9 @@ CODE_01DD8B:
   LDX #$7E                                  ; $01DD8E |
   PHX                                       ; $01DD90 |
   PLB                                       ; $01DD91 |
-  JSR CODE_01D490                           ; $01DD92 |
+  JSR pause_draw_item_boxes                 ; $01DD92 |
   PLB                                       ; $01DD95 |
-  JSR CODE_01DDB0                           ; $01DD96 |
+  JSR pause_animate_item_box                ; $01DD96 |
   REP #$10                                  ; $01DD99 |
   LDY #$007E                                ; $01DD9B |
   STY $01                                   ; $01DD9E |
@@ -11294,15 +11485,16 @@ CODE_01DD8B:
   SEP #$30                                  ; $01DDAD |
   RTS                                       ; $01DDAF |
 
-CODE_01DDB0:
-  LDA $0CF4                                 ; $01DDB0 |
+; Animates the currently selected item box on the pause screen
+pause_animate_item_box:
+  LDA !r_pause_cursor_pos                   ; $01DDB0 |
   AND #$00FF                                ; $01DDB3 |
   TAY                                       ; $01DDB6 |
   ASL A                                     ; $01DDB7 |
   TAX                                       ; $01DDB8 |
-  LDA $DD87,y                               ; $01DDB9 |
+  LDA item_box_tilemap_indices,y            ; $01DDB9 |
   TAY                                       ; $01DDBC |
-  LDA $DD80,x                               ; $01DDBD |
+  LDA item_box_tilemap_ptrs,x               ; $01DDBD |
   STA $00                                   ; $01DDC0 |
   CLC                                       ; $01DDC2 |
   ADC #$0008                                ; $01DDC3 |
@@ -11316,7 +11508,7 @@ CODE_01DDB0:
   TYX                                       ; $01DDD4 |
   LDY #$00                                  ; $01DDD5 |
 
-CODE_01DDD7:
+.loop
   LDA ($00),y                               ; $01DDD7 |
   STA $7EB5C7,x                             ; $01DDD9 |
   LDA ($02),y                               ; $01DDDD |
@@ -11330,7 +11522,7 @@ CODE_01DDD7:
   INY                                       ; $01DDF1 |
   INY                                       ; $01DDF2 |
   CPY #$08                                  ; $01DDF3 |
-  BCC CODE_01DDD7                           ; $01DDF5 |
+  BCC .loop                                 ; $01DDF5 |
   RTS                                       ; $01DDF7 |
 
   dw $3540, $3542, $3144, $3146             ; $01DDF8 |
@@ -11345,7 +11537,7 @@ CODE_01DE0A:
   TXY                                       ; $01DE13 |
 
 CODE_01DE14:
-  LDA $0CF6,y                               ; $01DE14 |
+  LDA !r_pause_shown_items,y                ; $01DE14 |
   AND #$00FF                                ; $01DE17 |
   BEQ CODE_01DE3C                           ; $01DE1A |
   PHY                                       ; $01DE1C |

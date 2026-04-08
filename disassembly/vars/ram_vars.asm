@@ -561,6 +561,15 @@
 !r_switch_timer = $0CEC
 !r_switch_timer_l = $7E0CEC
 
+!r_pause_cursor_pos = $0CF4
+!r_pause_cursor_pos_l = $7E0CF4
+
+!r_pause_window_pos = $0CF5
+!r_pause_window_pos_l = $7E0CF5
+
+!r_pause_shown_items = $0CF6
+!r_pause_shown_items_l = $7E0CF6
+
 !r_fuzzy_opt_wave_amp = $0CFF
 !r_fuzzy_opt_wave_amp_l = $7E0CFF
 
