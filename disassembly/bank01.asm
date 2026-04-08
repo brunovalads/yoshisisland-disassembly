@@ -9553,8 +9553,8 @@ pause_generate_tilemap:
   TXY                                       ; $01CF47 |
 
 .clear_cgram_loop
-  LDA.w !s_cgram_mirror,x                   ; $01CF48 |
-  LDA.w !s_cgram_mirror+$100,x              ; $01CF4B |
+  STA.w !s_cgram_mirror,x                   ; $01CF48 |
+  STA.w !s_cgram_mirror+$100,x              ; $01CF4B |
   INX                                       ; $01CF4E |
   INX                                       ; $01CF4F |
   BNE .clear_cgram_loop                     ; $01CF50 |
@@ -9562,15 +9562,15 @@ pause_generate_tilemap:
 
 .write_cgram_loop
   LDA hirom_mirror($3FA002),x               ; $01CF53 |
-  LDA.w !s_cgram_mirror+$002,x              ; $01CF57 |
+  STA.w !s_cgram_mirror+$002,x              ; $01CF57 |
   LDA hirom_mirror($3FA022),x               ; $01CF5A |
-  LDA.w !s_cgram_mirror+$022,x              ; $01CF5E |
+  STA.w !s_cgram_mirror+$022,x              ; $01CF5E |
   LDA hirom_mirror($3FA1C8),x               ; $01CF61 |
-  LDA.w !s_cgram_mirror+$102,x              ; $01CF65 |
+  STA.w !s_cgram_mirror+$102,x              ; $01CF65 |
   LDA hirom_mirror($3FA1E6),x               ; $01CF68 |
-  LDA.w !s_cgram_mirror+$122,x              ; $01CF6C |
+  STA.w !s_cgram_mirror+$122,x              ; $01CF6C |
   LDA hirom_mirror($3FA204),x               ; $01CF6F |
-  LDA.w !s_cgram_mirror+$142,x              ; $01CF73 |
+  STA.w !s_cgram_mirror+$142,x              ; $01CF73 |
   INX                                       ; $01CF76 |
   INX                                       ; $01CF77 |
   CPX #$1E                                  ; $01CF78 |
@@ -11492,9 +11492,9 @@ pause_animate_item_box:
   TAY                                       ; $01DDB6 |
   ASL A                                     ; $01DDB7 |
   TAX                                       ; $01DDB8 |
-  LDA item_box_tilemap_indices,y            ; $01DDB9 |
+  LDA item_box_tilemap_indices-1,y          ; $01DDB9 |
   TAY                                       ; $01DDBC |
-  LDA item_box_tilemap_ptrs,x               ; $01DDBD |
+  LDA.w item_box_tilemap_ptrs-2,x           ; $01DDBD |
   STA $00                                   ; $01DDC0 |
   CLC                                       ; $01DDC2 |
   ADC #$0008                                ; $01DDC3 |
