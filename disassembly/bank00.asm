@@ -490,12 +490,11 @@ fade_limit:
   PHA                                       ; $0083CB |
   PLB                                       ; $0083CC |
 
-; various game modes:
-; $04, $06, $0B, $12, $14, $1A, $21, $23, $25, $27
-; $2B, $2D, $2F, $32, $34, $3A, $3C, $41, $43
-
 ; Gamemode for fading in or out
 ; When fade is done, go to next game mode
+; Various game modes indexes lead to this mode:
+; $04, $06, $0B, $12, $14, $1A, $21, $23, $25, $27
+; $2B, $2D, $2F, $32, $34, $3A, $3C, $41, $43
 gm_fade_screen_in_out:
   LDX $0201                                 ; $0083CD | Fade in/out type
   LDA !r_reg_inidisp_mirror                 ; $0083D0 |\
@@ -518,6 +517,8 @@ gm_fade_screen_in_out:
   PLB                                       ; $0083EE |
   RTL                                       ; $0083EF |
 
+; Game mode for another fading
+; Used by indexes $02, $08, $1F, $29, $37
 gm_fade_alt:
   DEC $0202                                 ; $0083F0 |
   BPL gm_fade_screen_in_out_ret             ; $0083F3 |

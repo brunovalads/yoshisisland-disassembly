@@ -12713,8 +12713,8 @@ CODE_01E6EC:
 
   db $0B, $1F                               ; $01E6EE |
 
-; used for both 'restart from middle ring' and
-; 'retry level' selection screens
+; Game used for both 'restart from middle ring' and
+; 'retry level' selection screens (game mode indexes $36 and $3E)
 gm_retry_level_cutscene_select:
   DEC $8F                                   ; $01E6F0 |
   BNE CODE_01E70F                           ; $01E6F2 |
