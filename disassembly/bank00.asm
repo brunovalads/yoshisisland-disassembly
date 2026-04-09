@@ -3388,17 +3388,17 @@ DATA_009B53:
 CODE_009B55:
   JSR CODE_008AE5                           ; $009B55 |
   LDA $7782,x                               ; $009B58 |
-  BNE Return_009B71                         ; $009B5B |
+  BNE .ret                                  ; $009B5B |
   DEC $73C2,x                               ; $009B5D |
-  BPL CODE_009B65                           ; $009B60 |
+  BPL .CODE_009B65                          ; $009B60 |
   JMP CODE_008AF8                           ; $009B62 |
 
-CODE_009B65:
+.CODE_009B65
   LDY $73C2,x                               ; $009B65 |
   LDA DATA_009B53,y                         ; $009B68 |
   AND #$00FF                                ; $009B6B |
   STA $7782,x                               ; $009B6E |
-Return_009B71:
+.ret:
   RTS                                       ; $009B71 |
 
   db $03, $03, $03, $03, $03, $03, $03, $03 ; $009B72 |
