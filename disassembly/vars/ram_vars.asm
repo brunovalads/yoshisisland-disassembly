@@ -451,6 +451,8 @@
 !r_starcounter_side = $0B81
 !r_starcounter_side_l = $7E0B81
 
+!r_ambient_sprite_freeze_flag = $0B8F
+!r_ambient_sprite_freeze_flag_l = $7E0B8F
 
 !r_active_special_sprites = $0C04
 !r_active_special_sprites_l = $7E0C04

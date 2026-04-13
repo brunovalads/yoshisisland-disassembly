@@ -11703,7 +11703,7 @@ CODE_10E458:
   db $3E, $1E, $3E, $1E, $3E, $3E, $3E, $3E ; $10E469 |
   db $3E, $3E, $3E, $1E, $3E, $1E, $3E      ; $10E471 |
 
-  LDA $0B8F                                 ; $10E478 |
+  LDA !r_ambient_sprite_freeze_flag         ; $10E478 |
   BEQ CODE_10E482                           ; $10E47B |
   LDA #$000C                                ; $10E47D |
   BRA CODE_10E494                           ; $10E480 |
@@ -11729,10 +11729,10 @@ CODE_10E49D:
   BRA CODE_10E4AF                           ; $10E4A1 |
 
 CODE_10E4A3:
-  LDA $0B8F                                 ; $10E4A3 |
+  LDA !r_ambient_sprite_freeze_flag         ; $10E4A3 |
   EOR #$0002                                ; $10E4A6 |
   AND #$0002                                ; $10E4A9 |
-  STA $0B8F                                 ; $10E4AC |
+  STA !r_ambient_sprite_freeze_flag         ; $10E4AC |
 
 CODE_10E4AF:
   RTS                                       ; $10E4AF |
@@ -11960,10 +11960,10 @@ CODE_10E63B:
   LDA $0B8D                                 ; $10E676 |
   CMP #$0020                                ; $10E679 |
   BEQ CODE_10E692                           ; $10E67C |
-  LDA $0B8F                                 ; $10E67E |
+  LDA !r_ambient_sprite_freeze_flag         ; $10E67E |
   EOR #$0002                                ; $10E681 |
   AND #$0002                                ; $10E684 |
-  STA $0B8F                                 ; $10E687 |
+  STA !r_ambient_sprite_freeze_flag         ; $10E687 |
   INC $0B8D                                 ; $10E68A |
   LDA #$000A                                ; $10E68D |
   STA $88                                   ; $10E690 |
@@ -11982,10 +11982,10 @@ CODE_10E692:
   JSR CODE_10E511                           ; $10E6A9 |
   INC $79                                   ; $10E6AC |
   INC $79                                   ; $10E6AE |
-  LDA $0B8F                                 ; $10E6B0 |
+  LDA !r_ambient_sprite_freeze_flag         ; $10E6B0 |
   EOR #$0002                                ; $10E6B3 |
   AND #$0002                                ; $10E6B6 |
-  STA $0B8F                                 ; $10E6B9 |
+  STA !r_ambient_sprite_freeze_flag         ; $10E6B9 |
 
 CODE_10E6BC:
   LDY $80                                   ; $10E6BC |
@@ -12341,10 +12341,10 @@ CODE_10E943:
 CODE_10E975:
   DEC $75                                   ; $10E975 |
   BNE CODE_10E991                           ; $10E977 |
-  LDA $0B8F                                 ; $10E979 |
+  LDA !r_ambient_sprite_freeze_flag         ; $10E979 |
   EOR #$0002                                ; $10E97C |
   AND #$0002                                ; $10E97F |
-  STA $0B8F                                 ; $10E982 |
+  STA !r_ambient_sprite_freeze_flag         ; $10E982 |
   INC $0B8D                                 ; $10E985 |
   INC $79                                   ; $10E988 |
   INC $79                                   ; $10E98A |
@@ -12356,10 +12356,10 @@ CODE_10E991:
 
   DEC $75                                   ; $10E992 |
   BNE CODE_10E9AB                           ; $10E994 |
-  LDA $0B8F                                 ; $10E996 |
+  LDA !r_ambient_sprite_freeze_flag         ; $10E996 |
   EOR #$0002                                ; $10E999 |
   AND #$0002                                ; $10E99C |
-  STA $0B8F                                 ; $10E99F |
+  STA !r_ambient_sprite_freeze_flag         ; $10E99F |
   INC $79                                   ; $10E9A2 |
   INC $79                                   ; $10E9A4 |
   LDA #$0030                                ; $10E9A6 |

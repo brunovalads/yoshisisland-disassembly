@@ -1421,18 +1421,18 @@ handle_ambient_sprites:
   PHB                                       ; $008AB6 |
   PHK                                       ; $008AB7 |
   PLB                                       ; $008AB8 |
-  LDA !s_sprite_disable_flag                ; $008AB9 |
-  ORA $0B55                                 ; $008ABC |
-  ORA !r_cur_item_used                      ; $008ABF |
-  STA $0B8F                                 ; $008AC2 |
+  LDA !s_sprite_disable_flag                ; $008AB9 |\
+  ORA $0B55                                 ; $008ABC | | Set ambient sprite freeze flag
+  ORA !r_cur_item_used                      ; $008ABF | | if any other freeze flag is set
+  STA !r_ambient_sprite_freeze_flag         ; $008AC2 |/
   LDX #$3C                                  ; $008AC5 |
 
 CODE_008AC7:
   LDY $6EC0,x                               ; $008AC7 |
-  BEQ CODE_008ACF                           ; $008ACA |
+  BEQ .CODE_008ACF                          ; $008ACA |
   JSR execute_ambient_sprite_routine        ; $008ACC |
 
-CODE_008ACF:
+.CODE_008ACF:
   DEX                                       ; $008ACF |
   DEX                                       ; $008AD0 |
   DEX                                       ; $008AD1 |
@@ -1451,16 +1451,16 @@ execute_ambient_sprite_routine:
   PHA                                       ; $008AE3 |
   RTS                                       ; $008AE4 |
 
-; generic ambient sprite routine
-CODE_008AE5:
-  LDA $0B8F                                 ; $008AE5 |
+; Check if ambient sprite animation freeze is activated and don't animate it
+check_ambient_sprite_freeze:
+  LDA !r_ambient_sprite_freeze_flag         ; $008AE5 |
   BEQ CODE_008AF2                           ; $008AE8 |
   PLA                                       ; $008AEA |
   RTS                                       ; $008AEB |
 
-; alt entry point
-CODE_008AEC:
-  LDA $0B8F                                 ; $008AEC |
+; Same as above but without restoring A from stack
+check_amb_sprite_freeze_no_pull:
+  LDA !r_ambient_sprite_freeze_flag         ; $008AEC |
   BEQ CODE_008AF2                           ; $008AEF |
   RTS                                       ; $008AF1 |
 
@@ -1474,25 +1474,25 @@ CODE_008AF8:
   LDA #$00FF                                ; $008AFB |
   STA $7462,x                               ; $008AFE |
   LDY $76E2,x                               ; $008B01 |
-  BMI CODE_008B0C                           ; $008B04 |
+  BMI .ret                                  ; $008B04 |
   LDA $7ECE,y                               ; $008B06 |
   TRB $7ECC                                 ; $008B09 |
 
-CODE_008B0C:
+.ret:
   RTS                                       ; $008B0C |
 
 CODE_008B0D:
   DEC $7782,x                               ; $008B0D |
   LDA $7E8E,x                               ; $008B10 |
-  BEQ CODE_008B18                           ; $008B13 |
+  BEQ .CODE_008B18                          ; $008B13 |
   DEC $7E8E,x                               ; $008B15 |
 
-CODE_008B18:
+.CODE_008B18:
   LDY $7781,x                               ; $008B18 |
-  BEQ CODE_008B20                           ; $008B1B |
+  BEQ .ret                                  ; $008B1B |
   DEC $7781,x                               ; $008B1D |
 
-CODE_008B20:
+.ret:
   RTS                                       ; $008B20 |
 
 ; this routine tries to find a free slot in the ambient sprite table
@@ -1695,7 +1695,7 @@ DATA_008CA5:
   dw $0003                                  ; $008CBD |
 
 ambient_water_splash_transition:
-  JSR CODE_008AE5                           ; $008CBF |
+  JSR check_ambient_sprite_freeze           ; $008CBF |
   LDA $7782,x                               ; $008CC2 |
   BNE CODE_008CDF                           ; $008CC5 |
   LDA $7E4C,x                               ; $008CC7 |
@@ -1723,7 +1723,7 @@ DATA_008CE0:
   dw $FFFE, $0000                           ; $008D00 |
 
 ambient_water_splash_swimming:
-  JSR CODE_008AE5                           ; $008D04 |
+  JSR check_ambient_sprite_freeze           ; $008D04 |
   LDA $7782,x                               ; $008D07 | won't be 0 here, previous routine aborts by pulling return value if it is
   ASL A                                     ; $008D0A |
   TAY                                       ; $008D0B |
@@ -1740,7 +1740,7 @@ DATA_008D17:
   dw $0000, $0000, $0001, $0000             ; $008D2F |
 
 ambient_bubble_in_water:
-  JSR CODE_008AE5                           ; $008D37 |
+  JSR check_ambient_sprite_freeze           ; $008D37 |
   LDA $7822,x                               ; $008D3A |
   AND #$00FF                                ; $008D3D |
   STA $7782,x                               ; $008D40 |
@@ -1770,7 +1770,7 @@ CODE_008D65:
   RTS                                       ; $008D74 |
 
 ambient_eggshell:
-  JSR CODE_008AE5                           ; $008D75 |
+  JSR check_ambient_sprite_freeze           ; $008D75 |
   LDA $7782,x                               ; $008D78 |
   BNE CODE_008D89                           ; $008D7B |
   INC $7782,x                               ; $008D7D |
@@ -1785,14 +1785,14 @@ DATA_008D8A:
   db $40,$40,$FF,$00,$00                    ; $008D8A |
 
 ambient_small_bopping_ani:
-  JSR CODE_008AE5                           ; $008D8F |
+  JSR check_ambient_sprite_freeze           ; $008D8F |
   INC $73C2,x                               ; $008D92 |
   RTS                                       ; $008D95 |
 
 ; red coin when collected
 ; objects to coins at goal
 ambient_coin_get:
-  JSR CODE_008AEC                           ; $008D96 |
+  JSR check_amb_sprite_freeze_no_pull       ; $008D96 |
   LDA $14                                   ; $008D99 |
   LSR A                                     ; $008D9B |
   LSR A                                     ; $008D9C |
@@ -1803,7 +1803,7 @@ ambient_coin_get:
 
 ; +1 star sprite, 1up sprite
 ambient_score_sprites:
-  JSR CODE_008AEC                           ; $008DA5 |
+  JSR check_amb_sprite_freeze_no_pull       ; $008DA5 |
   RTS                                       ; $008DA8 |
 
 DATA_008DA9:
@@ -1812,7 +1812,7 @@ DATA_008DAE:
   db $06, $06, $06, $03                     ; $008DAE |
 
 ambient_salvo_slime_smoke_puff:
-  JSR CODE_008AE5                           ; $008DB2 |
+  JSR check_ambient_sprite_freeze           ; $008DB2 |
   SEP #$20                                  ; $008DB5 |
   LDY $7E4C,x                               ; $008DB7 |
   LDA $7782,x                               ; $008DBA |
@@ -1844,7 +1844,7 @@ CODE_008DE4:
   RTS                                       ; $008DE6 |
 
 CODE_008DE7:
-  JSR CODE_008AE5                           ; $008DE7 |
+  JSR check_ambient_sprite_freeze           ; $008DE7 |
   SEP #$20                                  ; $008DEA |
   LDA $7782,x                               ; $008DEC |
   LSR A                                     ; $008DEF |
@@ -1874,7 +1874,7 @@ CODE_008E0B:
   RTS                                       ; $008E15 |
 
 ambient_terrain_destroy_smoke_puff:
-  JSR CODE_008AE5                           ; $008E16 |
+  JSR check_ambient_sprite_freeze           ; $008E16 |
   LDY $73C2,x                               ; $008E19 |
   LDA $7782,x                               ; $008E1C |
   BNE CODE_008E2F                           ; $008E1F |
@@ -1892,7 +1892,7 @@ CODE_008E2F:
   db $09, $07, $06, $03, $02, $01, $00      ; $008E30 |
 
 CODE_008E37:
-  JSR CODE_008AE5                           ; $008E37 |
+  JSR check_ambient_sprite_freeze           ; $008E37 |
   SEP #$20                                  ; $008E3A |
   LDY $7E4C,x                               ; $008E3C |
   LDA $7782,x                               ; $008E3F |
@@ -1913,7 +1913,7 @@ CODE_008E55:
   db $06, $06, $06, $06, $04, $03           ; $008E58 |
 
 ambient_train_enter_track_ani:
-  JSR CODE_008AE5                           ; $008E5E |
+  JSR check_ambient_sprite_freeze           ; $008E5E |
   SEP #$20                                  ; $008E61 |
   LDY $73C2,x                               ; $008E63 |
   LDA $7782,x                               ; $008E66 |
@@ -1931,7 +1931,7 @@ CODE_008E77:
   db $06, $06, $05, $05                     ; $008E7A |
 
 ambient_train_transformation_smoke:
-  JSR CODE_008AE5                           ; $008E7E |
+  JSR check_ambient_sprite_freeze           ; $008E7E |
   SEP #$20                                  ; $008E81 |
   LDY $73C2,x                               ; $008E83 |
   LDA $7782,x                               ; $008E86 |
@@ -1988,7 +1988,7 @@ CODE_008EB8:
   RTS                                       ; $008EEE |
 
 ambient_floating_log_lava_drop:
-  JSR CODE_008AE5                           ; $008EEF |
+  JSR check_ambient_sprite_freeze           ; $008EEF |
   LDA $71E2,x                               ; $008EF2 |
   BMI CODE_008EFD                           ; $008EF5 |
   LDA #$0001                                ; $008EF7 |
@@ -1998,7 +1998,7 @@ CODE_008EFD:
   RTS                                       ; $008EFD |
 
 CODE_008EFE:
-  JSR CODE_008AE5                           ; $008EFE |
+  JSR check_ambient_sprite_freeze           ; $008EFE |
   LDA $7782,x                               ; $008F01 |
   LSR A                                     ; $008F04 |
   LSR A                                     ; $008F05 |
@@ -2007,7 +2007,7 @@ CODE_008EFE:
   RTS                                       ; $008F0A |
 
 CODE_008F0B:
-  JSR CODE_008AE5                           ; $008F0B |
+  JSR check_ambient_sprite_freeze           ; $008F0B |
   LDA $7782,x                               ; $008F0E |
   CMP #$0008                                ; $008F11 |
   BNE CODE_008F19                           ; $008F14 |
@@ -2033,7 +2033,7 @@ CODE_008F2E:
   db $03, $02, $02, $02                     ; $008F37 |
 
 ambient_snow_puff:
-  JSR CODE_008AE5                           ; $008F3B |
+  JSR check_ambient_sprite_freeze           ; $008F3B |
   LDA $7782,x                               ; $008F3E |
   BNE CODE_008F5B                           ; $008F41 |
   SEP #$20                                  ; $008F43 |
@@ -2055,7 +2055,7 @@ CODE_008F5B:
   db $03, $03, $03, $03, $04, $04           ; $008F64 |
 
 CODE_008F6A:
-  JSR CODE_008AE5                           ; $008F6A |
+  JSR check_ambient_sprite_freeze           ; $008F6A |
   LDA $7782,x                               ; $008F6D |
   BNE CODE_008F8A                           ; $008F70 |
   DEC $7E4C,x                               ; $008F72 |
@@ -2075,7 +2075,7 @@ CODE_008F8A:
   db $40, $02, $02, $02, $02, $02, $02, $02 ; $008F93 |
 
 ambient_dr_freezegood_bop:
-  JSR CODE_008AE5                           ; $008F9B |
+  JSR check_ambient_sprite_freeze           ; $008F9B |
   LDA $7782,x                               ; $008F9E |
   BNE CODE_008FBB                           ; $008FA1 |
   DEC $7E4C,x                               ; $008FA3 |
@@ -2101,14 +2101,14 @@ CODE_008FBB:
 ambient_sparkles_1:
   LDY $7E4E,x                               ; $008FD2 |
   BEQ CODE_008FE4                           ; $008FD5 |
-  LDA $0B8F                                 ; $008FD7 |
+  LDA !r_ambient_sprite_freeze_flag         ; $008FD7 |
   BEQ CODE_008FE4                           ; $008FDA |
   DEC $7782,x                               ; $008FDC |
   BPL CODE_008FE7                           ; $008FDF |
   JMP CODE_008AF8                           ; $008FE1 |
 
 CODE_008FE4:
-  JSR CODE_008AE5                           ; $008FE4 |
+  JSR check_ambient_sprite_freeze           ; $008FE4 |
 
 CODE_008FE7:
   LDA $7782,x                               ; $008FE7 |
@@ -2129,7 +2129,7 @@ CODE_009004:
   db $01, $11                               ; $009005 |
 
 CODE_009007:
-  JSR CODE_008AE5                           ; $009007 |
+  JSR check_ambient_sprite_freeze           ; $009007 |
   LDA $7782,x                               ; $00900A |
   BNE CODE_009027                           ; $00900D |
   DEC $7E4C,x                               ; $00900F |
@@ -2146,7 +2146,7 @@ CODE_009027:
   RTS                                       ; $009027 |
 
 CODE_009028:
-  JSR CODE_008AE5                           ; $009028 |
+  JSR check_ambient_sprite_freeze           ; $009028 |
   LDY $7E4C,x                               ; $00902B |
   LDA !s_spr_x_pixel_pos,y                  ; $00902E |
   STA $00                                   ; $009031 |
@@ -2197,7 +2197,7 @@ CODE_00907A:
   db $03, $03, $02, $02                     ; $009095 |
 
 ambient_bubble_pop:
-  JSR CODE_008AE5                           ; $009099 |
+  JSR check_ambient_sprite_freeze           ; $009099 |
   LDA $7782,x                               ; $00909C |
   BNE CODE_0090B9                           ; $00909F |
   DEC $7E4C,x                               ; $0090A1 |
@@ -2215,13 +2215,13 @@ CODE_0090B9:
 
 ; related to salvo slime boss
 CODE_0090BA:
-  JSR CODE_008AEC                           ; $0090BA |
+  JSR check_amb_sprite_freeze_no_pull       ; $0090BA |
   RTS                                       ; $0090BD |
 
   db $06, $04, $04, $03, $03                ; $0090BE |
 
 ambient_lemon_drop_splatter:
-  JSR CODE_008AE5                           ; $0090C3 |
+  JSR check_ambient_sprite_freeze           ; $0090C3 |
   LDA $7782,x                               ; $0090C6 |
   BNE CODE_0090DF                           ; $0090C9 |
   DEC $73C2,x                               ; $0090CB |
@@ -2250,7 +2250,7 @@ ambient_smoke_puff_1:
   BRA CODE_009103                           ; $0090FE |
 
 CODE_009100:
-  JSR CODE_008AE5                           ; $009100 |
+  JSR check_ambient_sprite_freeze           ; $009100 |
 
 CODE_009103:
   LDA $7782,x                               ; $009103 |
@@ -2272,7 +2272,7 @@ CODE_009120:
   db $08, $08, $04, $02                     ; $009129 |
 
 ambient_bill_blaster_explosion:
-  JSR CODE_008AE5                           ; $00912D |
+  JSR check_ambient_sprite_freeze           ; $00912D |
   LDA $7782,x                               ; $009130 |
   BNE CODE_00914D                           ; $009133 |
   DEC $7E4C,x                               ; $009135 |
@@ -2291,7 +2291,7 @@ CODE_00914D:
   db $03, $02, $01, $06, $04, $02           ; $00914E |
 
 ambient_lava_flames:
-  JSR CODE_008AE5                           ; $009154 |
+  JSR check_ambient_sprite_freeze           ; $009154 |
   LDA $7782,x                               ; $009157 |
   BNE CODE_009174                           ; $00915A |
   DEC $7E4C,x                               ; $00915C |
@@ -2312,7 +2312,7 @@ CODE_009174:
 ; puff from ground (pushing crates/pots,
 ; baby bowser sliding)
 ambient_smoke_puff_ground:
-  JSR CODE_008AE5                           ; $00917B |
+  JSR check_ambient_sprite_freeze           ; $00917B |
   LDA $7782,x                               ; $00917E |
   BNE CODE_00919B                           ; $009181 |
   DEC $7E4C,x                               ; $009183 |
@@ -2331,7 +2331,7 @@ CODE_00919B:
   db $02, $01, $0C, $08                     ; $00919C |
 
 CODE_0091A0:
-  JSR CODE_008AE5                           ; $0091A0 |
+  JSR check_ambient_sprite_freeze           ; $0091A0 |
   LDA $7782,x                               ; $0091A3 |
   BNE CODE_0091C0                           ; $0091A6 |
   DEC $7E4C,x                               ; $0091A8 |
@@ -2415,7 +2415,7 @@ CODE_00923D:
   db $01, $01, $01, $01, $01, $02           ; $00924E |
 
 ambient_ground_pound_smash_ani:
-  JSR CODE_008AE5                           ; $009254 |
+  JSR check_ambient_sprite_freeze           ; $009254 |
   LDA $7782,x                               ; $009257 |
   BNE CODE_009274                           ; $00925A |
   DEC $7E4C,x                               ; $00925C |
@@ -2440,7 +2440,7 @@ CODE_009274:
 ; transformation bubbles, minigame items,
 ; stars
 ambient_sparkles_2:
-  JSR CODE_008AE5                           ; $00927D |
+  JSR check_ambient_sprite_freeze           ; $00927D |
   LDA $7782,x                               ; $009280 |
   BNE CODE_00929D                           ; $009283 |
   DEC $7E4C,x                               ; $009285 |
@@ -2460,7 +2460,7 @@ DATA_00929E:
   db $03, $03, $03, $03, $03, $03, $03      ; $00929E |
 
 CODE_0092A5:
-  LDA $0B8F                                 ; $0092A5 |
+  LDA !r_ambient_sprite_freeze_flag         ; $0092A5 |
   BEQ ambient_large_smoke_puff              ; $0092A8 |
   JSR CODE_008C12                           ; $0092AA |
 
@@ -2573,7 +2573,7 @@ ambient_smoke_puff_2:
   BRA CODE_009383                           ; $00937E |
 
 CODE_009380:
-  JSR CODE_008AE5                           ; $009380 |
+  JSR check_ambient_sprite_freeze           ; $009380 |
 
 CODE_009383:
   LDA $7782,x                               ; $009383 |
@@ -2596,7 +2596,7 @@ CODE_00939F:
 ; smoke puff generated when licking
 ; something Yoshi can't eat
 ambient_smoke_puff_lick:
-  JSR CODE_008AE5                           ; $0093A4 |
+  JSR check_ambient_sprite_freeze           ; $0093A4 |
   LDA $7782,x                               ; $0093A7 |
   BNE CODE_0093C3                           ; $0093AA |
   DEC $7E4C,x                               ; $0093AC |
@@ -2648,7 +2648,7 @@ CODE_00940F:
   db $02, $04, $06, $0A, $06, $04           ; $009410 |
 
 CODE_009416:
-  JSR CODE_008AE5                           ; $009416 |
+  JSR check_ambient_sprite_freeze           ; $009416 |
   LDA $7782,x                               ; $009419 |
   BNE CODE_009432                           ; $00941C |
   DEC $73C2,x                               ; $00941E |
@@ -2782,11 +2782,11 @@ CODE_009515:
   RTS                                       ; $009518 |
 
 CODE_009519:
-  JSR CODE_008AEC                           ; $009519 |
+  JSR check_amb_sprite_freeze_no_pull       ; $009519 |
   RTS                                       ; $00951C |
 
 ambient_lakitu_fireball_gen_flames:
-  JSR CODE_008AE5                           ; $00951D |
+  JSR check_ambient_sprite_freeze           ; $00951D |
   LDA $7782,x                               ; $009520 |
   BNE CODE_00952D                           ; $009523 |
   INC $7782,x                               ; $009525 |
@@ -2800,7 +2800,7 @@ CODE_00952E:
   JMP CODE_008AF8                           ; $00952E |
 
 CODE_009531:
-  JSR CODE_008AE5                           ; $009531 |
+  JSR check_ambient_sprite_freeze           ; $009531 |
   LDA $7782,x                               ; $009534 |
   BNE CODE_009544                           ; $009537 |
   LDA #$0002                                ; $009539 |
@@ -2815,7 +2815,7 @@ CODE_009545:
   JMP CODE_008AF8                           ; $009545 |
 
 CODE_009548:
-  JSR CODE_008AE5                           ; $009548 |
+  JSR check_ambient_sprite_freeze           ; $009548 |
   LDA $7782,x                               ; $00954B |
   BNE CODE_00955B                           ; $00954E |
   LDA #$0003                                ; $009550 |
@@ -2830,7 +2830,7 @@ CODE_00955C:
   JMP CODE_008AF8                           ; $00955C |
 
 CODE_00955F:
-  JSR CODE_008AE5                           ; $00955F |
+  JSR check_ambient_sprite_freeze           ; $00955F |
   LDA $7782,x                               ; $009562 |
   BNE CODE_009572                           ; $009565 |
   LDA #$0004                                ; $009567 |
@@ -2845,7 +2845,7 @@ CODE_009573:
   JMP CODE_008AF8                           ; $009573 |
 
 ambient_lava_drop_fire:
-  JSR CODE_008AE5                           ; $009576 |
+  JSR check_ambient_sprite_freeze           ; $009576 |
   LDA $7782,x                               ; $009579 |
   BNE CODE_009589                           ; $00957C |
   LDA #$0006                                ; $00957E |
@@ -2860,7 +2860,7 @@ CODE_00958A:
   JMP CODE_008AF8                           ; $00958A |
 
 ambient_lakitu_cloud_puff:
-  JSR CODE_008AE5                           ; $00958D |
+  JSR check_ambient_sprite_freeze           ; $00958D |
   LDA $7782,x                               ; $009590 |
   BNE CODE_0095A0                           ; $009593 |
   LDA #$0008                                ; $009595 |
@@ -2901,7 +2901,7 @@ ambient_crate_smash_planks:
   SEP #$10                                  ; $0095F1 |
 
 CODE_0095F3:
-  JSR CODE_008AE5                           ; $0095F3 |
+  JSR check_ambient_sprite_freeze           ; $0095F3 |
   LDA $7E8E,x                               ; $0095F6 |
   BNE CODE_009613                           ; $0095F9 |
   LDA $78C0,x                               ; $0095FB |
@@ -2920,7 +2920,7 @@ CODE_009613:
   db $04, $03, $02, $01, $00, $00, $00      ; $009614 |
 
 ambient_ice_watermelon_sparkle:
-  JSR CODE_008AE5                           ; $00961B |
+  JSR check_ambient_sprite_freeze           ; $00961B |
   LDA $7782,x                               ; $00961E |
   BNE CODE_00963A                           ; $009621 |
   DEC $7E4C,x                               ; $009623 |
@@ -2952,7 +2952,7 @@ ambient_ice_shards:
   LDA #$8CB1                                ; $00965C |
   JSL r_gsu_init_1                          ; $00965F |  GSU init
   PLX                                       ; $009663 |
-  JSR CODE_008AE5                           ; $009664 |
+  JSR check_ambient_sprite_freeze           ; $009664 |
   LDA $7782,x                               ; $009667 |
   BNE CODE_009687                           ; $00966A |
   DEC $73C2,x                               ; $00966C |
@@ -3053,7 +3053,7 @@ CODE_009687:
   db $08, $30, $44, $06, $00                ; $009868 |
 
 ambient_smoke_puff_3:
-  JSR CODE_008AE5                           ; $00986D |
+  JSR check_ambient_sprite_freeze           ; $00986D |
   LDA $7782,x                               ; $009870 |
   BNE CODE_009883                           ; $009873 |
   DEC $7E4E,x                               ; $009875 |
@@ -3089,7 +3089,7 @@ ambient_minigame_coin_cannon_puff:
   LDA #$9287                                ; $0098D3 |
   JSL r_gsu_init_1                          ; $0098D6 |  GSU init
   PLX                                       ; $0098DA |
-  JSR CODE_008AE5                           ; $0098DB |
+  JSR check_ambient_sprite_freeze           ; $0098DB |
   LDA $7E8E,x                               ; $0098DE |
   BNE CODE_00990F                           ; $0098E1 |
   INC $7E4C,x                               ; $0098E3 |
@@ -3117,7 +3117,7 @@ CODE_00990F:
   RTS                                       ; $009912 |
 
 ambient_minigame_win_star_rising:
-  JSR CODE_008AE5                           ; $009913 |
+  JSR check_ambient_sprite_freeze           ; $009913 |
   LDA #$0001                                ; $009916 |
   STA $7782,x                               ; $009919 |
   DEC $7E4C,x                               ; $00991C |
@@ -3170,7 +3170,7 @@ CODE_00995F:
   dw $000C, $000E, $000D                    ; $009992 |
 
 ambient_minigame_balloon_bop_loader:
-  JSR CODE_008AE5                           ; $009998 |
+  JSR check_ambient_sprite_freeze           ; $009998 |
   LDA #$0002                                ; $00999B |
   STA $7782,x                               ; $00999E |
   DEC $7E4C,x                               ; $0099A1 |
@@ -3226,7 +3226,7 @@ CODE_009A07:
   db $03                                    ; $009A18 |
 
 ambient_minigame_win_full_star:
-  JSR CODE_008AE5                           ; $009A19 |
+  JSR check_ambient_sprite_freeze           ; $009A19 |
   LDA #$0002                                ; $009A1C |
   STA $7782,x                               ; $009A1F |
   PHX                                       ; $009A22 |
@@ -3264,7 +3264,7 @@ CODE_009A61:
   RTS                                       ; $009A65 |
 
 ambient_minigame_balloon_bop_effect:
-  JSR CODE_008AE5                           ; $009A66 |
+  JSR check_ambient_sprite_freeze           ; $009A66 |
   LDA #$0002                                ; $009A69 |
   STA $7782,x                               ; $009A6C |
   DEC $7E4C,x                               ; $009A6F |
@@ -3348,7 +3348,7 @@ CODE_009B12:
   RTS                                       ; $009B12 |
 
 ambient_arrow_cloud_arrow:
-  JSR CODE_008AE5                           ; $009B13 |
+  JSR check_ambient_sprite_freeze           ; $009B13 |
   LDY $7462,x                               ; $009B16 |
   CPY #$FF                                  ; $009B19 |
   BNE CODE_009B25                           ; $009B1B |
@@ -3386,7 +3386,7 @@ DATA_009B53:
   db $0C, $10                               ; $009B53 |
 
 CODE_009B55:
-  JSR CODE_008AE5                           ; $009B55 |
+  JSR check_ambient_sprite_freeze           ; $009B55 |
   LDA $7782,x                               ; $009B58 |
   BNE .ret                                  ; $009B5B |
   DEC $73C2,x                               ; $009B5D |
@@ -3406,7 +3406,7 @@ CODE_009B55:
   db $02, $02, $02, $02, $02, $02           ; $009B82 |
 
 ambient_bopping_ani:
-  JSR CODE_008AE5                           ; $009B88 |
+  JSR check_ambient_sprite_freeze           ; $009B88 |
   SEP #$20                                  ; $009B8B |
   LDA $7782,x                               ; $009B8D |
   BEQ CODE_009BA1                           ; $009B90 |
@@ -3438,7 +3438,7 @@ CODE_009BB6:
   RTS                                       ; $009BBB |
 
 ambient_blowhard_stun_stars:
-  JSR CODE_008AE5                           ; $009BBC |
+  JSR check_ambient_sprite_freeze           ; $009BBC |
   LDA $7782,x                               ; $009BBF |
   BNE CODE_009BC7                           ; $009BC2 |
   JMP CODE_008AF8                           ; $009BC4 |
@@ -3459,7 +3459,7 @@ CODE_009BDD:
   db $08, $06, $04, $02, $02                ; $009BDE |
 
 ambient_colored_block_break_puff:
-  JSR CODE_008AE5                           ; $009BE3 |
+  JSR check_ambient_sprite_freeze           ; $009BE3 |
   LDA $7782,x                               ; $009BE6 |
   BNE CODE_009C10                           ; $009BE9 |
   DEC $7E4C,x                               ; $009BEB |
@@ -3500,7 +3500,7 @@ CODE_009C1D:
   LDA #$8CB1                                ; $009C33 |
   JSL r_gsu_init_1                          ; $009C36 |  GSU init
   PLX                                       ; $009C3A |
-  JSR CODE_008AE5                           ; $009C3B |
+  JSR check_ambient_sprite_freeze           ; $009C3B |
   LDA $7782,x                               ; $009C3E |
   BNE CODE_009C5E                           ; $009C41 |
   DEC $73C2,x                               ; $009C43 |
@@ -3626,7 +3626,7 @@ ambient_break_stone_block_smoke_puff:
   LDA #$8CB1                                ; $009EA8 |
   JSL r_gsu_init_1                          ; $009EAB |  GSU init
   PLX                                       ; $009EAF |
-  JSR CODE_008AE5                           ; $009EB0 |
+  JSR check_ambient_sprite_freeze           ; $009EB0 |
   LDA $7782,x                               ; $009EB3 |
   BNE CODE_009ED2                           ; $009EB6 |
   DEC $73C2,x                               ; $009EB8 |
@@ -3771,7 +3771,7 @@ ambient_feather_like:
   LDA #$8CB1                                ; $00A1A6 |
   JSL r_gsu_init_1                          ; $00A1A9 |  GSU init
   PLX                                       ; $00A1AD |
-  JSR CODE_008AE5                           ; $00A1AE |
+  JSR check_ambient_sprite_freeze           ; $00A1AE |
   LDA $7782,x                               ; $00A1B1 |
   BNE CODE_00A1D1                           ; $00A1B4 |
   DEC $73C2,x                               ; $00A1B6 |
@@ -3937,7 +3937,7 @@ DATA_00A54D:
   dw $F800, $0800                           ; $00A54D |
 
 ambient_crazee_daisy_music_note:
-  JSR CODE_008AE5                           ; $00A551 |
+  JSR check_ambient_sprite_freeze           ; $00A551 |
   LDY #$00                                  ; $00A554 |
   LDA $7142,x                               ; $00A556 |
   CMP $7E4C,x                               ; $00A559 |
@@ -3954,7 +3954,7 @@ DATA_00A567:
   db $07, $07, $05, $04, $04, $04, $04, $04 ; $00A567 |
 
 ambient_ice_melting_ani:
-  JSR CODE_008AE5                           ; $00A56F |
+  JSR check_ambient_sprite_freeze           ; $00A56F |
   LDA $7782,x                               ; $00A572 |
   BNE CODE_00A58B                           ; $00A575 |
   DEC $73C2,x                               ; $00A577 |
@@ -3986,7 +3986,7 @@ ambient_snow_falling:
   LDA #$8CB1                                ; $00A5B0 |
   JSL r_gsu_init_1                          ; $00A5B3 |  GSU init
   PLX                                       ; $00A5B7 |
-  JSR CODE_008AE5                           ; $00A5B8 |
+  JSR check_ambient_sprite_freeze           ; $00A5B8 |
   LDA $7782,x                               ; $00A5BB |
   BNE CODE_00A5DB                           ; $00A5BE |
   DEC $73C2,x                               ; $00A5C0 |
@@ -4060,7 +4060,7 @@ CODE_00A5DB:
   db $04, $21, $E1, $06, $00                ; $00A6A4 |
 
 ambient_enemy_bopped_bones:
-  JSR CODE_008AE5                           ; $00A6A9 |
+  JSR check_ambient_sprite_freeze           ; $00A6A9 |
   LDA $7782,x                               ; $00A6AC |
   BNE CODE_00A6B4                           ; $00A6AF |
   JMP CODE_008AF8                           ; $00A6B1 |
@@ -4083,7 +4083,7 @@ CODE_00A6CD:
   RTS                                       ; $00A6CD |
 
 ambient_salvo_slime_drops:
-  JSR CODE_008AE5                           ; $00A6CE |
+  JSR check_ambient_sprite_freeze           ; $00A6CE |
   LDA $7820,x                               ; $00A6D1 |
   AND #$0001                                ; $00A6D4 |
   BEQ CODE_00A701                           ; $00A6D7 |
@@ -4126,7 +4126,7 @@ DATA_00A71A:
   db $01, $01, $FF, $01                     ; $00A722 |
 
 ambient_cork_smoke_puff:
-  JSR CODE_008AE5                           ; $00A726 |
+  JSR check_ambient_sprite_freeze           ; $00A726 |
   LDA $7782,x                               ; $00A729 |
   BNE CODE_00A74F                           ; $00A72C |
   DEC $7E4C,x                               ; $00A72E |
@@ -4151,7 +4151,7 @@ DATA_00A750:
   db $02                                    ; $00A758 |
 
 CODE_00A759:
-  JSR CODE_008AE5                           ; $00A759 |
+  JSR check_ambient_sprite_freeze           ; $00A759 |
   LDA $7782,x                               ; $00A75C |
   BNE CODE_00A775                           ; $00A75F |
   DEC $73C2,x                               ; $00A761 |
@@ -4168,7 +4168,7 @@ CODE_00A775:
   RTS                                       ; $00A775 |
 
 CODE_00A776:
-  JSR CODE_008AE5                           ; $00A776 |
+  JSR check_ambient_sprite_freeze           ; $00A776 |
   LDA $7782,x                               ; $00A779 |
   BNE CODE_00A78C                           ; $00A77C |
   DEC $73C2,x                               ; $00A77E |
@@ -4183,7 +4183,7 @@ CODE_00A78C:
   RTS                                       ; $00A78C |
 
 CODE_00A78D:
-  JSR CODE_008AE5                           ; $00A78D |
+  JSR check_ambient_sprite_freeze           ; $00A78D |
   LDA $7782,x                               ; $00A790 |
   BNE CODE_00A7A3                           ; $00A793 |
   DEC $73C2,x                               ; $00A795 |
@@ -4198,7 +4198,7 @@ CODE_00A7A3:
   RTS                                       ; $00A7A3 |
 
 ambient_kamek_magic_sparkle:
-  JSR CODE_008AE5                           ; $00A7A4 |
+  JSR check_ambient_sprite_freeze           ; $00A7A4 |
   LDA $7782,x                               ; $00A7A7 |
   BNE CODE_00A7D0                           ; $00A7AA |
   SEP #$20                                  ; $00A7AC |
@@ -4226,7 +4226,7 @@ DATA_00A7D1:
 ; splash effect from milde (sprite $0108)
 ; or 1up balloon (sprite $08B) explosion
 ambient_explosion_splash:
-  JSR CODE_008AE5                           ; $00A7DA |
+  JSR check_ambient_sprite_freeze           ; $00A7DA |
   LDA $7782,x                               ; $00A7DD |
   BNE CODE_00A7F6                           ; $00A7E0 |
   DEC $73C2,x                               ; $00A7E2 |
@@ -4243,7 +4243,7 @@ CODE_00A7F6:
   RTS                                       ; $00A7F6 |
 
 ambient_froggy_stomach_acid_puff:
-  JSR CODE_008AE5                           ; $00A7F7 |
+  JSR check_ambient_sprite_freeze           ; $00A7F7 |
   LDA $7782,x                               ; $00A7FA |
   BNE CODE_00A80D                           ; $00A7FD |
   DEC $73C2,x                               ; $00A7FF |
@@ -4305,7 +4305,7 @@ ambient_baby_bowser_egg_explosion:
   LDX $00                                   ; $00A88E |
 
 CODE_00A890:
-  JSR CODE_008AE5                           ; $00A890 |
+  JSR check_ambient_sprite_freeze           ; $00A890 |
   LDA $7782,x                               ; $00A893 |
   BNE CODE_00A8AD                           ; $00A896 |
   DEC $7E4C,x                               ; $00A898 |
@@ -4629,7 +4629,7 @@ ambient_bowser_aiming_reticle:
   SEP #$10                                  ; $00AD5F |
 
 CODE_00AD61:
-  JSR CODE_008AE5                           ; $00AD61 |
+  JSR check_ambient_sprite_freeze           ; $00AD61 |
   LDA $7782,x                               ; $00AD64 |
   BNE CODE_00AD6C                           ; $00AD67 |
   JMP CODE_008AF8                           ; $00AD69 |
@@ -7901,7 +7901,7 @@ CODE_00CB97:
   REP #$20                                  ; $00CB97 |
   LDA $00                                   ; $00CB99 |
   PHA                                       ; $00CB9B |
-  LDX $0B8F                                 ; $00CB9C |
+  LDX !r_ambient_sprite_freeze_flag         ; $00CB9C |
   LDA $0B93                                 ; $00CB9F |
   CLC                                       ; $00CBA2 |
   ADC $7ECC58,x                             ; $00CBA3 |
