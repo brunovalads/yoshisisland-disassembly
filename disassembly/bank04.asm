@@ -1381,7 +1381,7 @@ main_shy_guy:
   ORA !s_spr_timer_frozen,x                 ; $048A6E |
   BNE CODE_048A8A                           ; $048A71 |
   LDA !s_sprite_disable_flag                ; $048A73 |
-  ORA $0B55                                 ; $048A76 |
+  ORA !r_mosaic_freeze_timer                ; $048A76 |
   ORA !r_cur_item_used                      ; $048A79 |
   BNE CODE_048AAB                           ; $048A7C |
   LDA $7860,x                               ; $048A7E |
@@ -4403,7 +4403,7 @@ init_board_bg3:
 
 main_board_bg3:
   LDA !s_sprite_disable_flag                ; $04A1B4 |
-  ORA $0B55                                 ; $04A1B7 |
+  ORA !r_mosaic_freeze_timer                ; $04A1B7 |
   ORA !r_cur_item_used                      ; $04A1BA |
   BEQ CODE_04A1C2                           ; $04A1BD |
   JMP CODE_04A250                           ; $04A1BF |
@@ -4816,7 +4816,7 @@ main_plank_bg3:
 
 CODE_04A4F1:
   LDA !s_sprite_disable_flag                ; $04A4F1 |
-  ORA $0B55                                 ; $04A4F4 |
+  ORA !r_mosaic_freeze_timer                ; $04A4F4 |
   ORA !r_cur_item_used                      ; $04A4F7 |
   BEQ CODE_04A4FF                           ; $04A4FA |
   JMP CODE_04A586                           ; $04A4FC |
@@ -6087,7 +6087,7 @@ CODE_04AE9D:
 ; common seesaw sub
 CODE_04AEDF:
   LDA !s_sprite_disable_flag                ; $04AEDF |
-  ORA $0B55                                 ; $04AEE2 |
+  ORA !r_mosaic_freeze_timer                ; $04AEE2 |
   ORA !r_cur_item_used                      ; $04AEE5 |
   BNE CODE_04AF3C                           ; $04AEE8 |
   LDA !s_spr_gsu_morph_2_lo,x               ; $04AEEA |
@@ -9571,7 +9571,7 @@ CODE_04CCDC:
   CMP #$0010                                ; $04CCE5 |
   BNE CODE_04CD01                           ; $04CCE8 |
   LDA !s_sprite_disable_flag                ; $04CCEA |
-  ORA $0B55                                 ; $04CCED |
+  ORA !r_mosaic_freeze_timer                ; $04CCED |
   ORA !r_cur_item_used                      ; $04CCF0 |
   BNE CODE_04CD22                           ; $04CCF3 |
   LDA $7860,x                               ; $04CCF5 |
@@ -11718,7 +11718,7 @@ main_player:
 .check_disabled
   LDA !s_player_disable_flag                ; $04DDCC |\  if sign bit of disable
   BMI .update                               ; $04DDCF | | flag is on, do NOT check
-  ORA $0B55                                 ; $04DDD1 | | else check player disabled,
+  ORA !r_mosaic_freeze_timer                ; $04DDD1 | | else check player disabled,
   ORA !r_cur_item_used                      ; $04DDD4 | | mosaic freeze, and using item
   BNE CODE_04DDE8                           ; $04DDD7 |/  skip updating if any on
 
@@ -14810,7 +14810,7 @@ draw_player:
   LDA $611A                                 ; $04FAA3 |\ "above" layer priority #
   BEQ .ret                                  ; $04FAA6 |/ $00 means don't draw player
   LDA !s_player_disable_flag                ; $04FAA8 |\
-  ORA $0B55                                 ; $04FAAB | | any of these pause
+  ORA !r_mosaic_freeze_timer                ; $04FAAB | | any of these pause
   ORA $614A                                 ; $04FAAE | | flags on?
   ORA !r_cur_item_used                      ; $04FAB1 | | skip timer checks
   BNE .gsu                                  ; $04FAB4 |/
@@ -14989,7 +14989,7 @@ main_camera:
   BNE .check_autoscroll_sprite              ; $04FD3B |/
   LDA !s_player_disable_flag                ; $04FD3D |\
   ORA $0C8E                                 ; $04FD40 | | these inactive flags
-  ORA $0B55                                 ; $04FD43 | | skip camera updating
+  ORA !r_mosaic_freeze_timer                ; $04FD43 | | skip camera updating
   ORA !r_cur_item_used                      ; $04FD46 | |
   BNE .store_autoscroll_X                   ; $04FD49 |/
   LDA !s_player_transforming_flag           ; $04FD4B |\

@@ -4409,7 +4409,7 @@ CODE_01A607:
 
 ; flan l sub
   LDA !s_sprite_disable_flag                ; $01A60B |
-  ORA $0B55                                 ; $01A60E |
+  ORA !r_mosaic_freeze_timer                ; $01A60E |
   ORA !r_cur_item_used                      ; $01A611 |
   BEQ CODE_01A619                           ; $01A614 |
   PLY                                       ; $01A616 |\
@@ -7712,7 +7712,7 @@ main_gamemode_0F:
   LDA $3B                                   ; $01C19D | | push layer 1 camera Y
   PHA                                       ; $01C19F |/
   LDA !s_sprite_disable_flag                ; $01C1A0 |\
-  ORA $0B55                                 ; $01C1A3 | | are any of these pause flags on?
+  ORA !r_mosaic_freeze_timer                ; $01C1A3 | | are any of these pause flags on?
   ORA !r_cur_item_used                      ; $01C1A6 | | skip camera shakes if so
   BNE .handle_offset_per_tile               ; $01C1A9 |/
   LDA !s_cam_y_large_shaking_timer          ; $01C1AB |\  large camera shake?
@@ -7780,9 +7780,9 @@ main_gamemode_0F:
   JSR (animation_palette_ptr,x)             ; $01C221 |/
 
 CODE_01C224:
-  LDA $0B55                                 ; $01C224 |
+  LDA !r_mosaic_freeze_timer                ; $01C224 |
   BEQ CODE_01C232                           ; $01C227 |
-  DEC $0B55                                 ; $01C229 |\
+  DEC !r_mosaic_freeze_timer                ; $01C229 |\
   AND #$0F                                  ; $01C22C | | Decrease Mosaic pause timer
   TAX                                       ; $01C22E | | and set Mosaic effect
   LDA $C0B8,x                               ; $01C22F | |
@@ -10884,7 +10884,7 @@ opt_fuzzied:
   STA !r_reg_ts_mirror                      ; $01D931 |/ on subscreen
   REP #$20                                  ; $01D934 |
   LDA !s_sprite_disable_flag                ; $01D936 |\
-  ORA $0B55                                 ; $01D939 | | check for sprites being paused,
+  ORA !r_mosaic_freeze_timer                ; $01D939 | | check for sprites being paused,
   ORA !r_cur_item_used                      ; $01D93C | | item being used (pause flags)
   BNE .check_bg2                            ; $01D93F |/
   LDA !s_fuzzy_timer                        ; $01D941 |\ do we have time on the fuzzy

@@ -1592,7 +1592,7 @@ CODE_0C8D2E:
 
 CODE_0C8D2F:
   LDA !s_sprite_disable_flag                ; $0C8D2F |
-  ORA $0B55                                 ; $0C8D32 |
+  ORA !r_mosaic_freeze_timer                ; $0C8D32 |
   ORA !r_cur_item_used                      ; $0C8D35 |
   BEQ CODE_0C8D3B                           ; $0C8D38 |
   RTL                                       ; $0C8D3A |
@@ -6418,7 +6418,7 @@ init_little_skill_mouser:
 
 CODE_0CB311:
   LDA !s_sprite_disable_flag                ; $0CB311 |
-  ORA $0B55                                 ; $0CB314 |
+  ORA !r_mosaic_freeze_timer                ; $0CB314 |
   ORA !r_cur_item_used                      ; $0CB317 |
   BNE CODE_0CB351                           ; $0CB31A |
   LDA $7860,x                               ; $0CB31C |
@@ -6673,7 +6673,7 @@ CODE_0CB536:
 
 main_star:
   LDA !s_sprite_disable_flag                ; $0CB537 |\
-  ORA $0B55                                 ; $0CB53A | | If any pause flags
+  ORA !r_mosaic_freeze_timer                ; $0CB53A | | If any pause flags
   ORA !r_cur_item_used                      ; $0CB53D | | Branch to return
   BNE CODE_0CB536                           ; $0CB540 |/
   LDA !s_spr_timer_3,x                      ; $0CB542 |
@@ -15299,7 +15299,7 @@ CODE_0CFD82:
 CODE_0CFD83:
   PLA                                       ; $0CFD83 |
   LDA !s_sprite_disable_flag                ; $0CFD84 |
-  ORA $0B55                                 ; $0CFD87 |
+  ORA !r_mosaic_freeze_timer                ; $0CFD87 |
   ORA !r_cur_item_used                      ; $0CFD8A |
   BEQ CODE_0CFD90                           ; $0CFD8D |
   RTL                                       ; $0CFD8F |

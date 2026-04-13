@@ -2249,7 +2249,7 @@ handle_sprites:
 
 CODE_0397EC:
   LDA !s_sprite_disable_flag                ; $0397EC |
-  ORA $0B55                                 ; $0397EF |
+  ORA !r_mosaic_freeze_timer                ; $0397EF |
   ORA !r_cur_item_used                      ; $0397F2 |
   BNE CODE_039802                           ; $0397F5 |
   INC $14                                   ; $0397F7 |
@@ -2525,7 +2525,7 @@ handle_sprite:
   LDA !s_spr_y_pixel_pos,x                  ; $039A18 |
   STA !s_cur_spr_y_prev                     ; $039A1B |
   LDA !s_sprite_disable_flag                ; $039A1E |
-  ORA $0B55                                 ; $039A21 |
+  ORA !r_mosaic_freeze_timer                ; $039A21 |
   ORA !r_cur_item_used                      ; $039A24 |\ Skip processing all but one timer
   BNE .nodec_spr_timer_4                    ; $039A27 |/ if item being used
 
@@ -2634,7 +2634,7 @@ spr_state_tongued:
   PHK                                       ; $039AD5 |
   PLB                                       ; $039AD6 |
   LDA !s_sprite_disable_flag                ; $039AD7 |
-  ORA $0B55                                 ; $039ADA |
+  ORA !r_mosaic_freeze_timer                ; $039ADA |
   ORA !r_cur_item_used                      ; $039ADD |
   BEQ CODE_039AE3                           ; $039AE0 |
   RTL                                       ; $039AE2 |
@@ -3145,7 +3145,7 @@ swallowed_fuzzy:
   LDA #$0003                                ; $039EE1 |
   STA !s_opt_mode                           ; $039EE4 |
   LDA #$0010                                ; $039EE7 |
-  STA $0B55                                 ; $039EEA |
+  STA !r_mosaic_freeze_timer                ; $039EEA |
   JSL despawn_sprite_stage_ID               ; $039EED |
   LDA #$00B3                                ; $039EF1 |
   TXY                                       ; $039EF4 |
@@ -3186,7 +3186,7 @@ swallowed_fuzzy:
 
 main_fuzzy_wind:
   LDA !s_sprite_disable_flag                ; $039F4E |
-  ORA $0B55                                 ; $039F51 |
+  ORA !r_mosaic_freeze_timer                ; $039F51 |
   ORA !r_cur_item_used                      ; $039F54 |
   BEQ CODE_039F5A                           ; $039F57 |
   RTL                                       ; $039F59 |
@@ -5445,7 +5445,7 @@ CODE_03AF42:
   BNE .ret                                  ; $03AF47 |/
 ; entry point
   LDA !s_sprite_disable_flag                ; $03AF49 |\
-  ORA $0B55                                 ; $03AF4C | |
+  ORA !r_mosaic_freeze_timer                ; $03AF4C | |
   ORA !r_cur_item_used                      ; $03AF4F | | If any pause flag is on, return
   BEQ CODE_03AF57                           ; $03AF52 |/
 
@@ -6502,7 +6502,7 @@ CODE_03B707:
 
 ; l sub
   LDA !s_sprite_disable_flag                ; $03B716 |
-  ORA $0B55                                 ; $03B719 |
+  ORA !r_mosaic_freeze_timer                ; $03B719 |
   ORA !r_cur_item_used                      ; $03B71C |
   BEQ CODE_03B741                           ; $03B71F |
   LDA !s_spr_timer_1,x                      ; $03B721 |
@@ -10877,7 +10877,7 @@ CODE_03D8CE:
 
 main_autoscroller:
   LDA !s_sprite_disable_flag                ; $03D8D7 |
-  ORA $0B55                                 ; $03D8DA |
+  ORA !r_mosaic_freeze_timer                ; $03D8DA |
   ORA !r_cur_item_used                      ; $03D8DD |
   BNE CODE_03D93D                           ; $03D8E0 |
   JSR CODE_03D942                           ; $03D8E2 |
@@ -11028,7 +11028,7 @@ main_gusty_gen:
 
 CODE_03D9EE:
   LDA !s_sprite_disable_flag                ; $03D9EE |
-  ORA $0B55                                 ; $03D9F1 |
+  ORA !r_mosaic_freeze_timer                ; $03D9F1 |
   ORA !r_cur_item_used                      ; $03D9F4 |
   BNE CODE_03DA57                           ; $03D9F7 | if the game is inactive
   LDA $0CD2                                 ; $03D9F9 |
@@ -11116,7 +11116,7 @@ main_bat_gen_r:
 
 CODE_03DA88:
   LDA !s_sprite_disable_flag                ; $03DA88 |
-  ORA $0B55                                 ; $03DA8B |
+  ORA !r_mosaic_freeze_timer                ; $03DA8B |
   ORA !r_cur_item_used                      ; $03DA8E |
   BNE CODE_03DAEA                           ; $03DA91 |
   LDA $0CD4                                 ; $03DA93 |
@@ -11173,7 +11173,7 @@ main_bat_gen_rl:
 
 CODE_03DAF3:
   LDA !s_sprite_disable_flag                ; $03DAF3 |
-  ORA $0B55                                 ; $03DAF6 |
+  ORA !r_mosaic_freeze_timer                ; $03DAF6 |
   ORA !r_cur_item_used                      ; $03DAF9 |
   BNE CODE_03DAEA                           ; $03DAFC |
   LDA $0CD4                                 ; $03DAFE |
@@ -11269,7 +11269,7 @@ CODE_03DB93:
 
 main_unknown2_gen:
   LDA !s_sprite_disable_flag                ; $03DBB7 |
-  ORA $0B55                                 ; $03DBBA |
+  ORA !r_mosaic_freeze_timer                ; $03DBBA |
   ORA !r_cur_item_used                      ; $03DBBD |
   BNE CODE_03DC2D                           ; $03DBC0 |
   LDA $0CD6                                 ; $03DBC2 |
@@ -11410,7 +11410,7 @@ main_speardance:
   DEC A                                     ; $03DCEF |
   BNE CODE_03DD00                           ; $03DCF0 |
   LDA !s_sprite_disable_flag                ; $03DCF2 |
-  ORA $0B55                                 ; $03DCF5 |
+  ORA !r_mosaic_freeze_timer                ; $03DCF5 |
   ORA !r_cur_item_used                      ; $03DCF8 |
   BEQ CODE_03DD04                           ; $03DCFB |
   STA $0C56                                 ; $03DCFD |
@@ -11536,7 +11536,7 @@ main_flutter_gen:
 
 CODE_03DDE2:
   LDA !s_sprite_disable_flag                ; $03DDE2 |
-  ORA $0B55                                 ; $03DDE5 |
+  ORA !r_mosaic_freeze_timer                ; $03DDE5 |
   ORA !r_cur_item_used                      ; $03DDE8 |
   BNE CODE_03DE59                           ; $03DDEB |
   LDA $0CDA                                 ; $03DDED |
@@ -11627,7 +11627,7 @@ main_spore_gen:
 
 CODE_03DE9C:
   LDA !s_sprite_disable_flag                ; $03DE9C |
-  ORA $0B55                                 ; $03DE9F |
+  ORA !r_mosaic_freeze_timer                ; $03DE9F |
   ORA !r_cur_item_used                      ; $03DEA2 |
   BNE CODE_03DF0B                           ; $03DEA5 |
   LDA $0CDC                                 ; $03DEA7 |
@@ -11709,7 +11709,7 @@ main_balloonpokey_gen:
 
 CODE_03DF3A:
   LDA !s_sprite_disable_flag                ; $03DF3A |
-  ORA $0B55                                 ; $03DF3D |
+  ORA !r_mosaic_freeze_timer                ; $03DF3D |
   ORA !r_cur_item_used                      ; $03DF40 |
   BNE CODE_03DF4A                           ; $03DF43 |
   LDA $0CDE                                 ; $03DF45 |
@@ -11814,7 +11814,7 @@ main_balloonmissile_gen:
 
 CODE_03E00E:
   LDA !s_sprite_disable_flag                ; $03E00E |
-  ORA $0B55                                 ; $03E011 |
+  ORA !r_mosaic_freeze_timer                ; $03E011 |
   ORA !r_cur_item_used                      ; $03E014 |
   BNE CODE_03E01E                           ; $03E017 |
   LDA $0CE0                                 ; $03E019 |
@@ -11910,7 +11910,7 @@ main_balloon_gen:
 
 CODE_03E0C7:
   LDA !s_sprite_disable_flag                ; $03E0C7 |
-  ORA $0B55                                 ; $03E0CA |
+  ORA !r_mosaic_freeze_timer                ; $03E0CA |
   ORA !r_cur_item_used                      ; $03E0CD |
   BNE CODE_03E123                           ; $03E0D0 |
   LDA $0CE2                                 ; $03E0D2 |
@@ -12092,7 +12092,7 @@ CODE_03E203:
   PHY                                       ; $03E203 |
   SEP #$10                                  ; $03E204 |
   LDA !s_sprite_disable_flag                ; $03E206 |
-  ORA $0B55                                 ; $03E209 |
+  ORA !r_mosaic_freeze_timer                ; $03E209 |
   ORA !r_cur_item_used                      ; $03E20C |
   BNE CODE_03E216                           ; $03E20F |
   LDA $0CE4                                 ; $03E211 |
@@ -12230,7 +12230,7 @@ main_fuzzy_gen:
 
 CODE_03E316:
   LDA !s_sprite_disable_flag                ; $03E316 |
-  ORA $0B55                                 ; $03E319 |
+  ORA !r_mosaic_freeze_timer                ; $03E319 |
   ORA !r_cur_item_used                      ; $03E31C |
   BEQ CODE_03E322                           ; $03E31F |
 
@@ -14618,7 +14618,7 @@ CODE_03F5D4:
 CODE_03F5F6:
   STA !s_spr_x_accel_ceiling,x              ; $03F5F6 |
   LDA !s_sprite_disable_flag                ; $03F5F9 |
-  ORA $0B55                                 ; $03F5FC |
+  ORA !r_mosaic_freeze_timer                ; $03F5FC |
   ORA !r_cur_item_used                      ; $03F5FF |
   BNE CODE_03F616                           ; $03F602 |
 
@@ -14699,7 +14699,7 @@ CODE_03F678:
   LDA #$0003                                ; $03F68A |\
   STA !s_opt_mode                           ; $03F68D |/ Enable mode for wavy fuzzy effect
   LDA #$0010                                ; $03F690 |
-  STA $0B55                                 ; $03F693 |
+  STA !r_mosaic_freeze_timer                ; $03F693 |
   BRA CODE_03F6B1                           ; $03F696 |
 
 CODE_03F698:

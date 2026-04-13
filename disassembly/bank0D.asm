@@ -1449,7 +1449,7 @@ CODE_0D8B2F:
 
 CODE_0D8B3B:
   LDA !s_sprite_disable_flag                ; $0D8B3B |
-  ORA $0B55                                 ; $0D8B3E |
+  ORA !r_mosaic_freeze_timer                ; $0D8B3E |
   ORA !r_cur_item_used                      ; $0D8B41 |
   BNE CODE_0D8B8A                           ; $0D8B44 |
   LDY !s_spr_wildcard_4_lo_dp,x             ; $0D8B46 |
@@ -4923,7 +4923,7 @@ CODE_0DA5DD:
   LDA #$FFFF                                ; $0DA601 |
   STA !s_spr_dyntile_index,x                ; $0DA604 |
   LDA !s_sprite_disable_flag                ; $0DA607 |
-  ORA $0B55                                 ; $0DA60A |
+  ORA !r_mosaic_freeze_timer                ; $0DA60A |
   ORA !r_cur_item_used                      ; $0DA60D |
   BNE CODE_0DA61C                           ; $0DA610 |
   LDY !s_spr_wildcard_6_lo_dp,x             ; $0DA612 |
@@ -5283,7 +5283,7 @@ CODE_0DA916:
 
 CODE_0DA917:
   LDA !s_sprite_disable_flag                ; $0DA917 |
-  ORA $0B55                                 ; $0DA91A |
+  ORA !r_mosaic_freeze_timer                ; $0DA91A |
   ORA !r_cur_item_used                      ; $0DA91D |
   BEQ CODE_0DA916                           ; $0DA920 |
 
@@ -6408,7 +6408,7 @@ CODE_0DB20A:
 
 CODE_0DB20B:
   LDA !s_sprite_disable_flag                ; $0DB20B |
-  ORA $0B55                                 ; $0DB20E |
+  ORA !r_mosaic_freeze_timer                ; $0DB20E |
   ORA !r_cur_item_used                      ; $0DB211 |
   BNE CODE_0DB24A                           ; $0DB214 |
   LDY !s_spr_wildcard_4_hi_dp,x             ; $0DB216 |
@@ -8965,7 +8965,7 @@ CODE_0DC5BF:
 
 CODE_0DC5C5:
   LDA !s_sprite_disable_flag                ; $0DC5C5 |
-  ORA $0B55                                 ; $0DC5C8 |
+  ORA !r_mosaic_freeze_timer                ; $0DC5C8 |
   ORA !r_cur_item_used                      ; $0DC5CB |
   BEQ CODE_0DC5D8                           ; $0DC5CE |
   JSL $03B697                               ; $0DC5D0 |
@@ -11975,7 +11975,7 @@ main_bower_room_kamek:
 
 CODE_0DEB8E:
   LDA !s_sprite_disable_flag                ; $0DEB8E |
-  ORA $0B55                                 ; $0DEB91 |
+  ORA !r_mosaic_freeze_timer                ; $0DEB91 |
   ORA !r_cur_item_used                      ; $0DEB94 |
   BEQ CODE_0DEBA1                           ; $0DEB97 |
   JSL $03B697                               ; $0DEB99 |
@@ -13490,7 +13490,7 @@ main_baby_bowser_egg:
 .animate
   STA !s_spr_anim_frame,x                   ; $0DF99F | throw depth governs anim frame
   LDA !s_sprite_disable_flag                ; $0DF9A2 |\
-  ORA $0B55                                 ; $0DF9A5 | | return now if any of
+  ORA !r_mosaic_freeze_timer                ; $0DF9A5 | | return now if any of
   ORA !r_cur_item_used                      ; $0DF9A8 | | these pause flags on
   BNE .ret                                  ; $0DF9AB |/
   LDA !gsu_r9                               ; $0DF9AD |\  if egg Z >= bowser Z

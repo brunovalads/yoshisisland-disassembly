@@ -439,6 +439,11 @@
 !r_pause_item_disable = $0B48
 !r_pause_item_disable_l = $7E0B48
 
+
+!r_mosaic_freeze_timer = $0B55
+!r_mosaic_freeze_timer_l = $7E0B55
+
+
 !r_anim_tileset_timer = $0B67
 ; !r_anim_tileset_timer_l = $7E0B67
 

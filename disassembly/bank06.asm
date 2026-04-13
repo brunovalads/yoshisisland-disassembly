@@ -6791,7 +6791,7 @@ main_cloud_drop_vertical:
   LDA !s_spr_collision_state,x              ; $06BA33 |
   BEQ CODE_06BA50                           ; $06BA36 |
   LDA !s_sprite_disable_flag                ; $06BA38 |
-  ORA $0B55                                 ; $06BA3B |
+  ORA !r_mosaic_freeze_timer                ; $06BA3B |
   ORA !r_cur_item_used                      ; $06BA3E |
   BNE CODE_06BA50                           ; $06BA41 |
   LDA !s_spr_bitwise_settings_1,x           ; $06BA43 |
@@ -6984,7 +6984,7 @@ main_cloud_drop_horizontal:
   LDA !s_spr_collision_state,x              ; $06BBD3 |
   BEQ CODE_06BBF0                           ; $06BBD6 |
   LDA !s_sprite_disable_flag                ; $06BBD8 |
-  ORA $0B55                                 ; $06BBDB |
+  ORA !r_mosaic_freeze_timer                ; $06BBDB |
   ORA !r_cur_item_used                      ; $06BBDE |
   BNE CODE_06BBF0                           ; $06BBE1 |
   LDA !s_spr_bitwise_settings_1,x           ; $06BBE3 |
@@ -7512,7 +7512,7 @@ CODE_06C00A:
   PHP                                       ; $06C011 |
   BPL CODE_06C020                           ; $06C012 |
   LDA !s_sprite_disable_flag                ; $06C014 |
-  ORA $0B55                                 ; $06C017 |
+  ORA !r_mosaic_freeze_timer                ; $06C017 |
   ORA !r_cur_item_used                      ; $06C01A |
   BNE CODE_06BFFD                           ; $06C01D |
   RTS                                       ; $06C01F |
@@ -8191,7 +8191,7 @@ CODE_06C578:
 
   LDX $12                                   ; $06C591 |
   LDA !s_sprite_disable_flag                ; $06C593 |
-  ORA $0B55                                 ; $06C596 |
+  ORA !r_mosaic_freeze_timer                ; $06C596 |
   ORA !r_cur_item_used                      ; $06C599 |
   BEQ CODE_06C5A2                           ; $06C59C |
   JSL $03B69D                               ; $06C59E |
@@ -8772,7 +8772,7 @@ CODE_06CA38:
 CODE_06CA4A:
   JSR CODE_06CCF8                           ; $06CA4A |
   LDA !s_sprite_disable_flag                ; $06CA4D |
-  ORA $0B55                                 ; $06CA50 |
+  ORA !r_mosaic_freeze_timer                ; $06CA50 |
   ORA !r_cur_item_used                      ; $06CA53 |
   BEQ CODE_06CA60                           ; $06CA56 |
   JSL $03B716                               ; $06CA58 |
@@ -9346,7 +9346,7 @@ CODE_06CF42:
   TXA                                       ; $06CF42 |
   STA $7E48                                 ; $06CF43 |
   LDA !s_sprite_disable_flag                ; $06CF46 |
-  ORA $0B55                                 ; $06CF49 |
+  ORA !r_mosaic_freeze_timer                ; $06CF49 |
   ORA !r_cur_item_used                      ; $06CF4C |
   BEQ CODE_06CF55                           ; $06CF4F |
   JSL $03B716                               ; $06CF51 |
@@ -9476,7 +9476,7 @@ CODE_06D03B:
 CODE_06D03E:
   LDA !s_sprite_disable_flag                ; $06D03E |
   ORA !s_player_disable_flag                ; $06D041 |
-  ORA $0B55                                 ; $06D044 |
+  ORA !r_mosaic_freeze_timer                ; $06D044 |
   ORA !r_cur_item_used                      ; $06D047 |
   BEQ CODE_06D057                           ; $06D04A |
   LDY $0E15                                 ; $06D04C |

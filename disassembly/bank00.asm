@@ -1422,7 +1422,7 @@ handle_ambient_sprites:
   PHK                                       ; $008AB7 |
   PLB                                       ; $008AB8 |
   LDA !s_sprite_disable_flag                ; $008AB9 |\
-  ORA $0B55                                 ; $008ABC | | Set ambient sprite freeze flag
+  ORA !r_mosaic_freeze_timer                ; $008ABC | | Set ambient sprite freeze flag
   ORA !r_cur_item_used                      ; $008ABF | | if any other freeze flag is set
   STA !r_ambient_sprite_freeze_flag         ; $008AC2 |/
   LDX #$3C                                  ; $008AC5 |

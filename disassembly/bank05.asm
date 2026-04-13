@@ -7107,7 +7107,7 @@ yoshi_block_ptr:
 main_yoshi_block:
   JSL CODE_03AA52                           ; $05B75A |
   LDA !s_sprite_disable_flag                ; $05B75E |
-  ORA $0B55                                 ; $05B761 |
+  ORA !r_mosaic_freeze_timer                ; $05B761 |
   ORA !r_cur_item_used                      ; $05B764 |
   BEQ CODE_05B76D                           ; $05B767 |
   JSL $03B69D                               ; $05B769 |
@@ -11470,7 +11470,7 @@ CODE_05D8B5:
 head_bop_special_bullet_bill:
   JSL CODE_03AA52                           ; $05D8B6 |
   LDA !s_sprite_disable_flag                ; $05D8BA |
-  ORA $0B55                                 ; $05D8BD |
+  ORA !r_mosaic_freeze_timer                ; $05D8BD |
   ORA !r_cur_item_used                      ; $05D8C0 |
   BNE CODE_05D8D5                           ; $05D8C3 |
   LDA !s_spr_gsu_morph_2_lo,x               ; $05D8C5 |
@@ -11732,7 +11732,7 @@ init_hint_block:
 main_hint_block:
   JSL CODE_03AA52                           ; $05DAC3 |
   LDA !s_sprite_disable_flag                ; $05DAC7 |
-  ORA $0B55                                 ; $05DACA |
+  ORA !r_mosaic_freeze_timer                ; $05DACA |
   ORA !r_cur_item_used                      ; $05DACD |
   BEQ CODE_05DADA                           ; $05DAD0 |
   JSL $03B69D                               ; $05DAD2 |
@@ -11746,7 +11746,7 @@ CODE_05DADA:
   TAX                                       ; $05DAE1 |
   JSR ($DAB1,x)                             ; $05DAE2 |
   LDA !s_sprite_disable_flag                ; $05DAE5 |
-  ORA $0B55                                 ; $05DAE8 |
+  ORA !r_mosaic_freeze_timer                ; $05DAE8 |
   ORA !r_cur_item_used                      ; $05DAEB |
   BEQ CODE_05DAF4                           ; $05DAEE |
   LDY !s_spr_wildcard_5_lo_dp,x             ; $05DAF0 |
@@ -14591,7 +14591,7 @@ CODE_05F0F3:
   RTS                                       ; $05F0F9 |
 
   LDA !s_sprite_disable_flag                ; $05F0FA |
-  ORA $0B55                                 ; $05F0FD |
+  ORA !r_mosaic_freeze_timer                ; $05F0FD |
   ORA !r_cur_item_used                      ; $05F100 |
   BNE CODE_05F112                           ; $05F103 |
   LDY !s_spr_collision_state,x              ; $05F105 |

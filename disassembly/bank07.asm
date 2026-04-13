@@ -6605,7 +6605,7 @@ main_sluggy:
   LDA !s_spr_collision_state,x              ; $07B6DC |
   BEQ CODE_07B704                           ; $07B6DF |
   LDA !s_sprite_disable_flag                ; $07B6E1 |
-  ORA $0B55                                 ; $07B6E4 |
+  ORA !r_mosaic_freeze_timer                ; $07B6E4 |
   ORA !r_cur_item_used                      ; $07B6E7 |
   BNE CODE_07B704                           ; $07B6EA |
   LDA #$0005                                ; $07B6EC |

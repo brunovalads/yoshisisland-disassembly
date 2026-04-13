@@ -7235,7 +7235,7 @@ CODE_0EB958:
 
 CODE_0EB962:
   LDA !s_sprite_disable_flag                ; $0EB962 |
-  ORA $0B55                                 ; $0EB965 |
+  ORA !r_mosaic_freeze_timer                ; $0EB965 |
   ORA !r_cur_item_used                      ; $0EB968 |
   BNE CODE_0EB997                           ; $0EB96B |
   LDA !s_spr_state,x                        ; $0EB96D |
@@ -9375,7 +9375,7 @@ CODE_0EC9ED:
   CPY #$16                                  ; $0EC9F4 |
   BEQ CODE_0ECA06                           ; $0EC9F6 |
   LDA !s_sprite_disable_flag                ; $0EC9F8 |
-  ORA $0B55                                 ; $0EC9FB |
+  ORA !r_mosaic_freeze_timer                ; $0EC9FB |
   ORA !r_cur_item_used                      ; $0EC9FE |
   BNE CODE_0ECA06                           ; $0ECA01 |
   JSR CODE_0ECAA8                           ; $0ECA03 |
@@ -12376,7 +12376,7 @@ main_frog_pirate:
   LDA !s_spr_wildcard_1_lo,x                ; $0EE02C |
   BEQ CODE_0EE046                           ; $0EE02F |
   LDA !s_sprite_disable_flag                ; $0EE031 |
-  ORA $0B55                                 ; $0EE034 |
+  ORA !r_mosaic_freeze_timer                ; $0EE034 |
   ORA !r_cur_item_used                      ; $0EE037 |
   BEQ CODE_0EE04D                           ; $0EE03A |
   JSL $03B69D                               ; $0EE03C |
@@ -12397,7 +12397,7 @@ CODE_0EE04D:
   TAX                                       ; $0EE058 |
   JSR ($DFF9,x)                             ; $0EE059 | state table
   LDA !s_sprite_disable_flag                ; $0EE05C |
-  ORA $0B55                                 ; $0EE05F |
+  ORA !r_mosaic_freeze_timer                ; $0EE05F |
   ORA !r_cur_item_used                      ; $0EE062 |
   BNE CODE_0EE06D                           ; $0EE065 |
   JSR CODE_0EE2C6                           ; $0EE067 |
@@ -12428,7 +12428,7 @@ CODE_0EE094:
   LDA !s_spr_wildcard_1_lo,x                ; $0EE098 |
   BEQ CODE_0EE0B0                           ; $0EE09B |
   LDA !s_sprite_disable_flag                ; $0EE09D |
-  ORA $0B55                                 ; $0EE0A0 |
+  ORA !r_mosaic_freeze_timer                ; $0EE0A0 |
   ORA !r_cur_item_used                      ; $0EE0A3 |
   BEQ CODE_0EE0B0                           ; $0EE0A6 |
   JSL $03B69D                               ; $0EE0A8 |
