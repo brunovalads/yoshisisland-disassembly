@@ -3830,7 +3830,7 @@ main_checkered_block:
   BRA CODE_059DD3                           ; $059DCA |
 
 CODE_059DCC:
-  JSL $03B716                               ; $059DCC |
+  JSL CODE_03B716                           ; $059DCC |
   JSR CODE_059E99                           ; $059DD0 |
 
 CODE_059DD3:
@@ -7106,50 +7106,50 @@ yoshi_block_ptr:
 
 main_yoshi_block:
   JSL CODE_03AA52                           ; $05B75A |
-  LDA !s_sprite_disable_flag                ; $05B75E |
-  ORA !r_mosaic_freeze_timer                ; $05B761 |
-  ORA !r_cur_item_used                      ; $05B764 |
-  BEQ CODE_05B76D                           ; $05B767 |
+  LDA !s_sprite_disable_flag                ; $05B75E |\
+  ORA !r_mosaic_freeze_timer                ; $05B761 | | Continue processing if all sprite freeze flags are clear
+  ORA !r_cur_item_used                      ; $05B764 | |
+  BEQ .CODE_05B76D                          ; $05B767 |/
   JSL $03B69D                               ; $05B769 |
 
-CODE_05B76D:
+.CODE_05B76D:
   LDA !s_player_state                       ; $05B76D |
   CMP #$0018                                ; $05B770 |
-  BEQ CODE_05B7B6                           ; $05B773 |
+  BEQ .CODE_05B7B6                          ; $05B773 |
   TXY                                       ; $05B775 |
   LDA !s_spr_wildcard_5_lo_dp,x             ; $05B776 |
   CMP #$0003                                ; $05B778 |
-  BNE CODE_05B793                           ; $05B77B |
+  BNE .CODE_05B793                          ; $05B77B |
   LDA !s_transform_timer                    ; $05B77D |
-  BEQ CODE_05B7D0                           ; $05B780 |
+  BEQ .ret                                  ; $05B780 |
   LDA $0C8A                                 ; $05B782 |
-  BEQ CODE_05B7D0                           ; $05B785 |
+  BEQ .ret                                  ; $05B785 |
   LDA #$0002                                ; $05B787 |
   STA !s_spr_draw_priority,x                ; $05B78A |
   STZ !s_spr_wildcard_5_lo_dp,x             ; $05B78D |
   JML $05B6F3                               ; $05B78F |
 
-CODE_05B793:
+.CODE_05B793:
   ASL A                                     ; $05B793 |
   TAX                                       ; $05B794 |
   JSR ($B754,x)                             ; $05B795 |
   JSR CODE_05B88C                           ; $05B798 |
-  BCS CODE_05B7B6                           ; $05B79B |
+  BCS .CODE_05B7B6                          ; $05B79B |
   LDA !s_player_y_prev                      ; $05B79D |
   STA !s_player_y                           ; $05B7A0 |
   LDA $0C8A                                 ; $05B7A3 |
-  BEQ CODE_05B7AE                           ; $05B7A6 |
+  BEQ .CODE_05B7AE                          ; $05B7A6 |
   INC !s_player_disable_flag                ; $05B7A8 |
   INC !s_sprite_disable_flag                ; $05B7AB |
 
-CODE_05B7AE:
+.CODE_05B7AE:
   LDA #$0020                                ; $05B7AE |\ play sound #$20
   JSL push_sound_queue                      ; $05B7B1 |/
   RTL                                       ; $05B7B5 |
 
-CODE_05B7B6:
+.CODE_05B7B6:
   LDA !s_transform_timer                    ; $05B7B6 |
-  BNE CODE_05B7D0                           ; $05B7B9 |
+  BNE .ret                                  ; $05B7B9 |
   LDA !s_spr_x_pixel_pos,x                  ; $05B7BB |
   STA $00                                   ; $05B7BE |
   LDA !s_spr_y_pixel_pos,x                  ; $05B7C0 |
@@ -7158,7 +7158,7 @@ CODE_05B7B6:
   JSL $03B56E                               ; $05B7C8 |
   JML despawn_sprite_stage_ID               ; $05B7CC |
 
-CODE_05B7D0:
+.ret:
   RTL                                       ; $05B7D0 |
 
   TYX                                       ; $05B7D1 |
@@ -11469,10 +11469,10 @@ CODE_05D8B5:
 
 head_bop_special_bullet_bill:
   JSL CODE_03AA52                           ; $05D8B6 |
-  LDA !s_sprite_disable_flag                ; $05D8BA |
-  ORA !r_mosaic_freeze_timer                ; $05D8BD |
-  ORA !r_cur_item_used                      ; $05D8C0 |
-  BNE CODE_05D8D5                           ; $05D8C3 |
+  LDA !s_sprite_disable_flag                ; $05D8BA |\
+  ORA !r_mosaic_freeze_timer                ; $05D8BD | | Return if any sprite freeze flag is set
+  ORA !r_cur_item_used                      ; $05D8C0 | |
+  BNE .ret                                  ; $05D8C3 |/
   LDA !s_spr_gsu_morph_2_lo,x               ; $05D8C5 |
   CLC                                       ; $05D8C8 |
   ADC #$0002                                ; $05D8C9 |
@@ -11480,7 +11480,7 @@ head_bop_special_bullet_bill:
   STA !s_spr_gsu_morph_2_lo,x               ; $05D8CF |
   JSR CODE_05D76A                           ; $05D8D2 |
 
-CODE_05D8D5:
+.ret:
   RTL                                       ; $05D8D5 |
 
 head_bop_bullet_bill:
@@ -11731,51 +11731,51 @@ init_hint_block:
 
 main_hint_block:
   JSL CODE_03AA52                           ; $05DAC3 |
-  LDA !s_sprite_disable_flag                ; $05DAC7 |
-  ORA !r_mosaic_freeze_timer                ; $05DACA |
-  ORA !r_cur_item_used                      ; $05DACD |
-  BEQ CODE_05DADA                           ; $05DAD0 |
+  LDA !s_sprite_disable_flag                ; $05DAC7 |\
+  ORA !r_mosaic_freeze_timer                ; $05DACA | | Continue processing if all sprite freeze flags are clear
+  ORA !r_cur_item_used                      ; $05DACD | |
+  BEQ .CODE_05DADA                          ; $05DAD0 |/
   JSL $03B69D                               ; $05DAD2 |
-  JSL $03B716                               ; $05DAD6 |
+  JSL CODE_03B716                           ; $05DAD6 |
 
-CODE_05DADA:
+.CODE_05DADA:
   STZ !s_spr_facing_dir,x                   ; $05DADA |
   TXY                                       ; $05DADD |
   LDA !s_spr_wildcard_5_lo_dp,x             ; $05DADE |
   ASL A                                     ; $05DAE0 |
   TAX                                       ; $05DAE1 |
   JSR ($DAB1,x)                             ; $05DAE2 |
-  LDA !s_sprite_disable_flag                ; $05DAE5 |
-  ORA !r_mosaic_freeze_timer                ; $05DAE8 |
-  ORA !r_cur_item_used                      ; $05DAEB |
-  BEQ CODE_05DAF4                           ; $05DAEE |
+  LDA !s_sprite_disable_flag                ; $05DAE5 |\
+  ORA !r_mosaic_freeze_timer                ; $05DAE8 | | TODO: Figure out the branching after checking if all sprite freeze flags are clear
+  ORA !r_cur_item_used                      ; $05DAEB | |
+  BEQ .CODE_05DAF4                          ; $05DAEE |/
   LDY !s_spr_wildcard_5_lo_dp,x             ; $05DAF0 |
-  BEQ CODE_05DAF7                           ; $05DAF2 |
+  BEQ .CODE_05DAF7                          ; $05DAF2 |
 
-CODE_05DAF4:
+.CODE_05DAF4:
   JSR CODE_05DB79                           ; $05DAF4 |
 
-CODE_05DAF7:
+.CODE_05DAF7:
   LDY !s_spr_wildcard_5_lo_dp,x             ; $05DAF7 |
-  BNE CODE_05DB74                           ; $05DAF9 |
+  BNE .CODE_05DB74                          ; $05DAF9 |
   LDY $60AB                                 ; $05DAFB |
-  BPL CODE_05DB46                           ; $05DAFE |
+  BPL .CODE_05DB46                          ; $05DAFE |
   LDY !s_player_jump_state                  ; $05DB00 |
-  BEQ CODE_05DB46                           ; $05DB03 |
+  BEQ .CODE_05DB46                          ; $05DB03 |
   LDA !s_spr_x_player_delta,x               ; $05DB05 |
   CLC                                       ; $05DB08 |
   ADC #$000C                                ; $05DB09 |
   CMP #$0018                                ; $05DB0C |
-  BCS CODE_05DB46                           ; $05DB0F |
+  BCS .CODE_05DB46                          ; $05DB0F |
   LDA !s_spr_y_player_delta,x               ; $05DB11 |
   CMP #$FFE8                                ; $05DB14 |
-  BMI CODE_05DB46                           ; $05DB17 |
+  BMI .CODE_05DB46                          ; $05DB17 |
   CMP #$FFF0                                ; $05DB19 |
-  BPL CODE_05DB46                           ; $05DB1C |
+  BPL .CODE_05DB46                          ; $05DB1C |
   STZ !s_player_y_speed                     ; $05DB1E |
   STZ !s_player_flutter_state               ; $05DB21 |
 
-CODE_05DB24:
+.CODE_05DB24:
   DEC !s_spr_y_pixel_pos,x                  ; $05DB24 |
   LDA #$FC00                                ; $05DB27 |
   STA !s_spr_y_speed_lo,x                   ; $05DB2A |
@@ -11789,20 +11789,20 @@ CODE_05DB24:
   INC !s_spr_wildcard_5_lo_dp,x             ; $05DB43 |
   RTL                                       ; $05DB45 |
 
-CODE_05DB46:
+.CODE_05DB46:
   LDY !s_spr_collision_id,x                 ; $05DB46 |
   DEY                                       ; $05DB49 |
-  BMI CODE_05DB60                           ; $05DB4A |
+  BMI .CODE_05DB60                          ; $05DB4A |
   LDA !s_spr_state,y                        ; $05DB4C |
   CMP #$0010                                ; $05DB4F |
-  BNE CODE_05DB60                           ; $05DB52 |
+  BNE .CODE_05DB60                          ; $05DB52 |
   LDA !s_spr_collision_state,y              ; $05DB54 |
-  BEQ CODE_05DB60                           ; $05DB57 |
+  BEQ .CODE_05DB60                          ; $05DB57 |
   TYX                                       ; $05DB59 |
   JSL $03B25B                               ; $05DB5A |
-  BRA CODE_05DB24                           ; $05DB5E |
+  BRA .CODE_05DB24                          ; $05DB5E |
 
-CODE_05DB60:
+.CODE_05DB60:
   LDA !s_spr_timer_2,x                      ; $05DB60 |
   BNE CODE_05DB74                           ; $05DB63 |
   LDA #$0008                                ; $05DB65 |
@@ -11811,7 +11811,7 @@ CODE_05DB60:
   EOR #$0002                                ; $05DB6E |
   STA !s_spr_gsu_morph_2_lo,x               ; $05DB71 |
 
-CODE_05DB74:
+.CODE_05DB74:
   JSL $03D127                               ; $05DB74 |
   RTL                                       ; $05DB78 |
 
@@ -14587,29 +14587,29 @@ CODE_05F0F2:
 
 CODE_05F0F3:
   JSL despawn_sprite_threshold_B            ; $05F0F3 |
-  BCS CODE_05F113                           ; $05F0F7 |
+  BCS .ret_pla                              ; $05F0F7 |
   RTS                                       ; $05F0F9 |
 
-  LDA !s_sprite_disable_flag                ; $05F0FA |
-  ORA !r_mosaic_freeze_timer                ; $05F0FD |
-  ORA !r_cur_item_used                      ; $05F100 |
-  BNE CODE_05F112                           ; $05F103 |
+  LDA !s_sprite_disable_flag                ; $05F0FA |\
+  ORA !r_mosaic_freeze_timer                ; $05F0FD | | Return if any sprite freeze flag is set
+  ORA !r_cur_item_used                      ; $05F100 | |
+  BNE .ret_ply_pla                          ; $05F103 |/
   LDY !s_spr_collision_state,x              ; $05F105 |
-  BNE CODE_05F115                           ; $05F108 |
+  BNE .CODE_05F115                          ; $05F108 |
   LDA !s_spr_state,x                        ; $05F10A |
   CMP #$0010                                ; $05F10D |
-  BEQ CODE_05F114                           ; $05F110 |
+  BEQ .ret                                  ; $05F110 |
 
-CODE_05F112:
+.ret_ply_pla:
   PLY                                       ; $05F112 |
 
-CODE_05F113:
+.ret_pla:
   PLA                                       ; $05F113 |
 
-CODE_05F114:
+.ret:
   RTL                                       ; $05F114 |
 
-CODE_05F115:
+.CODE_05F115:
   LDA #$0040                                ; $05F115 |
   STA !s_spr_x_accel,x                      ; $05F118 |
   STZ !s_spr_x_accel_ceiling,x              ; $05F11B |
@@ -14618,20 +14618,20 @@ CODE_05F115:
   CLC                                       ; $05F124 |
   ADC #$0040                                ; $05F125 |
   CMP #$0080                                ; $05F128 |
-  BCS CODE_05F133                           ; $05F12B |
+  BCS .CODE_05F133                          ; $05F12B |
   STZ !s_spr_x_speed_lo,x                   ; $05F12D |
   STZ !s_spr_x_accel,x                      ; $05F130 |
 
-CODE_05F133:
+.CODE_05F133:
   LDA !s_spr_y_speed_lo,x                   ; $05F133 |
   CLC                                       ; $05F136 |
   ADC #$0040                                ; $05F137 |
   CMP #$0080                                ; $05F13A |
-  BCS CODE_05F145                           ; $05F13D |
+  BCS .CODE_05F145                          ; $05F13D |
   STZ !s_spr_y_speed_lo,x                   ; $05F13F |
   STZ !s_spr_y_accel,x                      ; $05F142 |
 
-CODE_05F145:
+.CODE_05F145:
   LDA !s_spr_x_speed_lo,x                   ; $05F145 |
   ORA !s_spr_y_speed_lo,x                   ; $05F148 |
   BEQ CODE_05F18C                           ; $05F14B |

@@ -7210,62 +7210,62 @@ main_cactus_jack:
   JSL CODE_03AA52                           ; $0EB931 |
   LDA !s_spr_state,x                        ; $0EB935 |
   CMP #$0010                                ; $0EB938 |
-  BEQ CODE_0EB958                           ; $0EB93B |
+  BEQ .CODE_0EB958                          ; $0EB93B |
   CMP #$0008                                ; $0EB93D |
-  BNE CODE_0EB955                           ; $0EB940 |
+  BNE .CODE_0EB955                          ; $0EB940 |
   LDY !s_spr_draw_priority,x                ; $0EB942 |
-  BPL CODE_0EB958                           ; $0EB945 |
+  BPL .CODE_0EB958                          ; $0EB945 |
   LDA !s_spr_wildcard_4_lo_dp,x             ; $0EB947 |
   INC A                                     ; $0EB949 |
-  BEQ CODE_0EB955                           ; $0EB94A |
+  BEQ .CODE_0EB955                          ; $0EB94A |
   INC A                                     ; $0EB94C |
-  BEQ CODE_0EB955                           ; $0EB94D |
+  BEQ .CODE_0EB955                          ; $0EB94D |
   LDA #$FFFF                                ; $0EB94F |
   STA !s_spr_dyntile_index,x                ; $0EB952 |
 
-CODE_0EB955:
+.CODE_0EB955:
   JSR CODE_0EBBD2                           ; $0EB955 |
 
-CODE_0EB958:
+.CODE_0EB958:
   LDY !s_spr_wildcard_5_lo_dp,x             ; $0EB958 |
   CPY #$04                                  ; $0EB95A |
-  BEQ CODE_0EB962                           ; $0EB95C |
+  BEQ .CODE_0EB962                          ; $0EB95C |
   CPY #$05                                  ; $0EB95E |
-  BNE CODE_0EB975                           ; $0EB960 |
+  BNE .CODE_0EB975                          ; $0EB960 |
 
-CODE_0EB962:
-  LDA !s_sprite_disable_flag                ; $0EB962 |
-  ORA !r_mosaic_freeze_timer                ; $0EB965 |
-  ORA !r_cur_item_used                      ; $0EB968 |
-  BNE CODE_0EB997                           ; $0EB96B |
+.CODE_0EB962:
+  LDA !s_sprite_disable_flag                ; $0EB962 |\
+  ORA !r_mosaic_freeze_timer                ; $0EB965 | | Return if any sprite freeze flag is set
+  ORA !r_cur_item_used                      ; $0EB968 | |
+  BNE .ret                                  ; $0EB96B |/
   LDA !s_spr_state,x                        ; $0EB96D |
   CMP #$0010                                ; $0EB970 |
-  BEQ CODE_0EB979                           ; $0EB973 |
+  BEQ .CODE_0EB979                          ; $0EB973 |
 
-CODE_0EB975:
+.CODE_0EB975:
   JSL CODE_03AF23                           ; $0EB975 |
 
-CODE_0EB979:
-  JSR CODE_0EB998                           ; $0EB979 |
+.CODE_0EB979:
+  JSR .CODE_0EB998                          ; $0EB979 |
   LDY !s_spr_draw_priority,x                ; $0EB97C |
-  BMI CODE_0EB987                           ; $0EB97F |
+  BMI .CODE_0EB987                          ; $0EB97F |
   JSR CODE_0EB99F                           ; $0EB981 |
   JSR CODE_0EB9DB                           ; $0EB984 |
 
-CODE_0EB987:
+.CODE_0EB987:
   TXY                                       ; $0EB987 |
   LDA !s_spr_wildcard_5_lo_dp,x             ; $0EB988 |
   ASL A                                     ; $0EB98A |
   TAX                                       ; $0EB98B |
   JSR ($B91E,x)                             ; $0EB98C |
   LDY !s_spr_draw_priority,x                ; $0EB98F |
-  BMI CODE_0EB997                           ; $0EB992 |
+  BMI .ret                                  ; $0EB992 |
   JSR CODE_0EBC3B                           ; $0EB994 |
 
-CODE_0EB997:
+.ret:
   RTL                                       ; $0EB997 |
 
-CODE_0EB998:
+.CODE_0EB998:
   JSL CODE_03A2C7                           ; $0EB998 |
   BCS CODE_0EB9CB                           ; $0EB99C |
 
@@ -9373,41 +9373,41 @@ CODE_0EC9ED:
   BNE CODE_0ECA3A                           ; $0EC9F0 |
   LDY !s_spr_wildcard_5_lo_dp,x             ; $0EC9F2 |
   CPY #$16                                  ; $0EC9F4 |
-  BEQ CODE_0ECA06                           ; $0EC9F6 |
-  LDA !s_sprite_disable_flag                ; $0EC9F8 |
-  ORA !r_mosaic_freeze_timer                ; $0EC9FB |
-  ORA !r_cur_item_used                      ; $0EC9FE |
-  BNE CODE_0ECA06                           ; $0ECA01 |
+  BEQ .CODE_0ECA06                          ; $0EC9F6 |
+  LDA !s_sprite_disable_flag                ; $0EC9F8 |\
+  ORA !r_mosaic_freeze_timer                ; $0EC9FB | | TODO: Figure out the branching after checking if any sprite freeze flags is set
+  ORA !r_cur_item_used                      ; $0EC9FE | |
+  BNE .CODE_0ECA06                          ; $0ECA01 |/
   JSR CODE_0ECAA8                           ; $0ECA03 |
 
-CODE_0ECA06:
+.CODE_0ECA06:
   LDA !s_spr_x_pixel_pos,x                  ; $0ECA06 |
   LDY !s_spr_facing_dir,x                   ; $0ECA09 |
-  BNE CODE_0ECA15                           ; $0ECA0C |
+  BNE .CODE_0ECA15                          ; $0ECA0C |
   CMP #$0014                                ; $0ECA0E |
-  BMI CODE_0ECA1E                           ; $0ECA11 |
-  BRA CODE_0ECA2C                           ; $0ECA13 |
+  BMI .CODE_0ECA1E                          ; $0ECA11 |
+  BRA .CODE_0ECA2C                          ; $0ECA13 |
 
-CODE_0ECA15:
+.CODE_0ECA15:
   SEC                                       ; $0ECA15 |
   SBC #$00F0                                ; $0ECA16 |
   CMP !s_cam_x_right_boundary               ; $0ECA19 |
-  BMI CODE_0ECA2C                           ; $0ECA1C |
+  BMI .CODE_0ECA2C                          ; $0ECA1C |
 
-CODE_0ECA1E:
+.CODE_0ECA1E:
   LDY !s_spr_wildcard_2_lo,x                ; $0ECA1E |
-  BEQ CODE_0ECA2C                           ; $0ECA21 |
+  BEQ .CODE_0ECA2C                          ; $0ECA21 |
   LDY !s_spr_wildcard_5_lo_dp,x             ; $0ECA23 |
   CPY #$18                                  ; $0ECA25 |
-  BEQ CODE_0ECA2C                           ; $0ECA27 |
+  BEQ .CODE_0ECA2C                          ; $0ECA27 |
   JSR CODE_0ECAF8                           ; $0ECA29 |
 
-CODE_0ECA2C:
+.CODE_0ECA2C:
   JSL CODE_03A2C7                           ; $0ECA2C |
-  BCS CODE_0ECA35                           ; $0ECA30 |
+  BCS .CODE_0ECA35                          ; $0ECA30 |
   JMP CODE_0ECA8D                           ; $0ECA32 |
 
-CODE_0ECA35:
+.CODE_0ECA35:
   JSR CODE_0ECC9F                           ; $0ECA35 |
   PLA                                       ; $0ECA38 |
   RTL                                       ; $0ECA39 |
@@ -12372,22 +12372,22 @@ main_frog_pirate:
   JSR CODE_0EE112                           ; $0EE023 |
   LDY !s_spr_wildcard_5_lo_dp,x             ; $0EE026 |
   CPY #$0D                                  ; $0EE028 |
-  BPL CODE_0EE094                           ; $0EE02A |
+  BPL .CODE_0EE094                          ; $0EE02A |
   LDA !s_spr_wildcard_1_lo,x                ; $0EE02C |
-  BEQ CODE_0EE046                           ; $0EE02F |
-  LDA !s_sprite_disable_flag                ; $0EE031 |
-  ORA !r_mosaic_freeze_timer                ; $0EE034 |
-  ORA !r_cur_item_used                      ; $0EE037 |
-  BEQ CODE_0EE04D                           ; $0EE03A |
+  BEQ .CODE_0EE046                          ; $0EE02F |
+  LDA !s_sprite_disable_flag                ; $0EE031 |\
+  ORA !r_mosaic_freeze_timer                ; $0EE034 | | TODO: Figure out the branching after checking if all sprite freeze flags are clear
+  ORA !r_cur_item_used                      ; $0EE037 | |
+  BEQ .CODE_0EE04D                          ; $0EE03A |/
   JSL $03B69D                               ; $0EE03C |
-  JSL $03B716                               ; $0EE040 |
-  BRA CODE_0EE04D                           ; $0EE044 |
+  JSL CODE_03B716                           ; $0EE040 |
+  BRA .CODE_0EE04D                          ; $0EE044 |
 
-CODE_0EE046:
+.CODE_0EE046:
   JSR CODE_0EE1B3                           ; $0EE046 |
   JSL CODE_03AF23                           ; $0EE049 |
 
-CODE_0EE04D:
+.CODE_0EE04D:
   JSR CODE_0EE1D9                           ; $0EE04D |
   JSR CODE_0EE231                           ; $0EE050 |
   LDY !s_spr_wildcard_5_lo_dp,x             ; $0EE053 |
@@ -12396,45 +12396,45 @@ CODE_0EE04D:
   TXY                                       ; $0EE057 |
   TAX                                       ; $0EE058 |
   JSR ($DFF9,x)                             ; $0EE059 | state table
-  LDA !s_sprite_disable_flag                ; $0EE05C |
-  ORA !r_mosaic_freeze_timer                ; $0EE05F |
-  ORA !r_cur_item_used                      ; $0EE062 |
-  BNE CODE_0EE06D                           ; $0EE065 |
+  LDA !s_sprite_disable_flag                ; $0EE05C |\
+  ORA !r_mosaic_freeze_timer                ; $0EE05F | | TODO: Figure out the branching after checking if any sprite freeze flags is set
+  ORA !r_cur_item_used                      ; $0EE062 | |
+  BNE .CODE_0EE06D                          ; $0EE065 |/
   JSR CODE_0EE2C6                           ; $0EE067 |
   JSR CODE_0EE4DD                           ; $0EE06A |
 
-CODE_0EE06D:
+.CODE_0EE06D:
   JSR CODE_0EE519                           ; $0EE06D |
   STZ !s_spr_x_accel,x                      ; $0EE070 |
   LDA $7860,x                               ; $0EE073 |
   AND #$0001                                ; $0EE076 |
-  BEQ CODE_0EE093                           ; $0EE079 |
+  BEQ ..ret                                 ; $0EE079 |
   LDA #$0040                                ; $0EE07B |
   STA !s_spr_x_accel,x                      ; $0EE07E |
   LDA !s_spr_x_speed_lo,x                   ; $0EE081 |
   CLC                                       ; $0EE084 |
   ADC #$0010                                ; $0EE085 |
   CMP #$0020                                ; $0EE088 |
-  BCS CODE_0EE093                           ; $0EE08B |
+  BCS ..ret                                 ; $0EE08B |
   STZ !s_spr_x_speed_lo,x                   ; $0EE08D |
   STZ !s_spr_x_accel,x                      ; $0EE090 |
 
-CODE_0EE093:
+..ret:
   RTL                                       ; $0EE093 |
 
-CODE_0EE094:
+.CODE_0EE094:
   CPY #$15                                  ; $0EE094 |
-  BPL CODE_0EE0D3                           ; $0EE096 |
+  BPL .CODE_0EE0D3                          ; $0EE096 |
   LDA !s_spr_wildcard_1_lo,x                ; $0EE098 |
-  BEQ CODE_0EE0B0                           ; $0EE09B |
-  LDA !s_sprite_disable_flag                ; $0EE09D |
-  ORA !r_mosaic_freeze_timer                ; $0EE0A0 |
-  ORA !r_cur_item_used                      ; $0EE0A3 |
-  BEQ CODE_0EE0B0                           ; $0EE0A6 |
+  BEQ .CODE_0EE0B0                          ; $0EE09B |
+  LDA !s_sprite_disable_flag                ; $0EE09D |\
+  ORA !r_mosaic_freeze_timer                ; $0EE0A0 | | TODO: Figure out the branching after checking if all sprite freeze flags are clear
+  ORA !r_cur_item_used                      ; $0EE0A3 | |
+  BEQ .CODE_0EE0B0                          ; $0EE0A6 |/
   JSL $03B69D                               ; $0EE0A8 |
-  JSL $03B716                               ; $0EE0AC |
+  JSL CODE_03B716                           ; $0EE0AC |
 
-CODE_0EE0B0:
+.CODE_0EE0B0:
   LDY !s_spr_wildcard_5_lo_dp,x             ; $0EE0B0 |
   TYA                                       ; $0EE0B2 |
   ASL A                                     ; $0EE0B3 |
@@ -12445,16 +12445,16 @@ CODE_0EE0B0:
   JSR CODE_0EE519                           ; $0EE0BC |
   LDA !s_player_cur_anim_frame              ; $0EE0BF |
   CMP #$0166                                ; $0EE0C2 |
-  BNE CODE_0EE0D2                           ; $0EE0C5 |
+  BNE ..ret                                 ; $0EE0C5 |
   LDA !s_spr_timer_1,x                      ; $0EE0C7 |
-  BNE CODE_0EE0D2                           ; $0EE0CA |
+  BNE ..ret                                 ; $0EE0CA |
   LDA #$000C                                ; $0EE0CC |
   STA $6124                                 ; $0EE0CF |
 
-CODE_0EE0D2:
+..ret:
   RTL                                       ; $0EE0D2 |
 
-CODE_0EE0D3:
+.CODE_0EE0D3:
   JSL CODE_03AF23                           ; $0EE0D3 |
   JSR CODE_0EE1D9                           ; $0EE0D7 |
   JSR CODE_0EE519                           ; $0EE0DA |

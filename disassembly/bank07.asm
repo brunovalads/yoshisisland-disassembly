@@ -6603,11 +6603,11 @@ init_pink_sluggy:
 ; blue and pink
 main_sluggy:
   LDA !s_spr_collision_state,x              ; $07B6DC |
-  BEQ CODE_07B704                           ; $07B6DF |
-  LDA !s_sprite_disable_flag                ; $07B6E1 |
-  ORA !r_mosaic_freeze_timer                ; $07B6E4 |
-  ORA !r_cur_item_used                      ; $07B6E7 |
-  BNE CODE_07B704                           ; $07B6EA |
+  BEQ .CODE_07B704                          ; $07B6DF |
+  LDA !s_sprite_disable_flag                ; $07B6E1 |\
+  ORA !r_mosaic_freeze_timer                ; $07B6E4 | | TODO: Figure out the branching after checking if any sprite freeze flags is set
+  ORA !r_cur_item_used                      ; $07B6E7 | |
+  BNE .CODE_07B704                          ; $07B6EA |/
   LDA #$0005                                ; $07B6EC |
   STA !s_spr_anim_frame,x                   ; $07B6EF |
   LDA !s_spr_oam_yxppccct,x                 ; $07B6F2 |
@@ -6617,7 +6617,7 @@ main_sluggy:
   AND #$FFE0                                ; $07B6FE |
   STA !s_spr_bitwise_settings_3,x           ; $07B701 |
 
-CODE_07B704:
+.CODE_07B704:
   JSL CODE_03AF23                           ; $07B704 |
   JSL $07B853                               ; $07B708 |
   LDA !s_spr_wildcard_3_lo_dp,x             ; $07B70C |
@@ -6654,41 +6654,41 @@ CODE_07B704:
 
 CODE_07B74F:
   LDA !s_spr_timer_1,x                      ; $07B74F |
-  BNE CODE_07B76E                           ; $07B752 |
+  BNE .ret                                  ; $07B752 |
   LDA #$0008                                ; $07B754 |
   STA !s_spr_timer_1,x                      ; $07B757 |
   DEC !s_spr_wildcard_4_lo_dp,x             ; $07B75A |
-  BPL CODE_07B763                           ; $07B75C |
+  BPL .CODE_07B763                          ; $07B75C |
   LDA #$0003                                ; $07B75E |
   STA !s_spr_wildcard_4_lo_dp,x             ; $07B761 |
 
-CODE_07B763:
+.CODE_07B763:
   LDY !s_spr_wildcard_4_lo_dp,x             ; $07B763 |
   LDA $B74B,y                               ; $07B765 |
   AND #$00FF                                ; $07B768 |
   STA !s_spr_anim_frame,x                   ; $07B76B |
 
-CODE_07B76E:
+.ret:
   RTS                                       ; $07B76E |
 
   db $04, $03, $02, $01, $00                ; $07B76F |
 
   LDX $12                                   ; $07B774 |
   LDA !s_spr_timer_1,x                      ; $07B776 |
-  BNE CODE_07B790                           ; $07B779 |
+  BNE .ret                                  ; $07B779 |
   LDA #$0004                                ; $07B77B |
   STA !s_spr_timer_1,x                      ; $07B77E |
   DEC !s_spr_wildcard_4_lo_dp,x             ; $07B781 |
-  BMI CODE_07B791                           ; $07B783 |
+  BMI .CODE_07B791                          ; $07B783 |
   LDY !s_spr_wildcard_4_lo_dp,x             ; $07B785 |
   LDA $B76F,y                               ; $07B787 |
   AND #$00FF                                ; $07B78A |
   STA !s_spr_anim_frame,x                   ; $07B78D |
 
-CODE_07B790:
+.ret:
   RTS                                       ; $07B790 |
 
-CODE_07B791:
+.CODE_07B791:
   LDA !s_spr_y_pixel_pos,x                  ; $07B791 |
   CLC                                       ; $07B794 |
   ADC #$0004                                ; $07B795 |

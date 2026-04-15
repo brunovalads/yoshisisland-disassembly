@@ -1591,19 +1591,19 @@ CODE_0C8D2E:
   RTS                                       ; $0C8D2E |
 
 CODE_0C8D2F:
-  LDA !s_sprite_disable_flag                ; $0C8D2F |
-  ORA !r_mosaic_freeze_timer                ; $0C8D32 |
-  ORA !r_cur_item_used                      ; $0C8D35 |
-  BEQ CODE_0C8D3B                           ; $0C8D38 |
+  LDA !s_sprite_disable_flag                ; $0C8D2F |\
+  ORA !r_mosaic_freeze_timer                ; $0C8D32 | | Continue processing if all sprite freeze flags are clear
+  ORA !r_cur_item_used                      ; $0C8D35 | |
+  BEQ .CODE_0C8D3B                          ; $0C8D38 |/
   RTL                                       ; $0C8D3A |
 
-CODE_0C8D3B:
+.CODE_0C8D3B:
   LDA !s_spr_collision_state,x              ; $0C8D3B |
   DEC A                                     ; $0C8D3E |
-  BEQ CODE_0C8D44                           ; $0C8D3F |
+  BEQ .CODE_0C8D44                          ; $0C8D3F |
   STA !s_spr_collision_state,x              ; $0C8D41 |
 
-CODE_0C8D44:
+.CODE_0C8D44:
   LDY !s_spr_wildcard_6_lo_dp,x             ; $0C8D44 |
   TYX                                       ; $0C8D46 |
   JMP ($8D4A,x)                             ; $0C8D47 |
@@ -1620,11 +1620,11 @@ CODE_0C8D44:
   LDX $12                                   ; $0C8D6A |
   LDY #$00                                  ; $0C8D6C |
   LDA !s_spr_x_speed_lo,x                   ; $0C8D6E |
-  BMI CODE_0C8D75                           ; $0C8D71 |
+  BMI .CODE_0C8D75                          ; $0C8D71 |
   INY                                       ; $0C8D73 |
   INY                                       ; $0C8D74 |
 
-CODE_0C8D75:
+.CODE_0C8D75:
   TYA                                       ; $0C8D75 |
   EOR !s_spr_facing_dir,x                   ; $0C8D76 |
   TAY                                       ; $0C8D79 |
@@ -1642,14 +1642,14 @@ CODE_0C8D75:
   INY                                       ; $0C8D97 |
   STY !s_spr_wildcard_6_lo_dp,x             ; $0C8D98 |
   LDA !s_spr_dyntile_index,x                ; $0C8D9A |
-  BMI CODE_0C8DAC                           ; $0C8D9D |
+  BMI .CODE_0C8DAC                          ; $0C8D9D |
   LDA !s_spr_oam_1,x                        ; $0C8D9F |
   AND #$07FC                                ; $0C8DA2 |
   ORA #$0800                                ; $0C8DA5 |
   STA !s_spr_oam_1,x                        ; $0C8DA8 |
   RTL                                       ; $0C8DAB |
 
-CODE_0C8DAC:
+.CODE_0C8DAC:
   LDA !s_spr_oam_yxppccct,x                 ; $0C8DAC |
   ORA #$0080                                ; $0C8DAF |
   STA !s_spr_oam_yxppccct,x                 ; $0C8DB2 |
@@ -1657,21 +1657,21 @@ CODE_0C8DAC:
 
   LDX $12                                   ; $0C8DB6 |
   LDA !s_spr_dyntile_index,x                ; $0C8DB8 |
-  BMI CODE_0C8DC7                           ; $0C8DBB |
+  BMI .CODE_0C8DC7                          ; $0C8DBB |
   JSL $03AA2E                               ; $0C8DBD |
   JSL $0C8E07                               ; $0C8DC1 |
-  BRA CODE_0C8DD3                           ; $0C8DC5 |
+  BRA .CODE_0C8DD3                          ; $0C8DC5 |
 
-CODE_0C8DC7:
+.CODE_0C8DC7:
   LDA !s_spr_oam_1,x                        ; $0C8DC7 |
   AND #$07FC                                ; $0C8DCA |
   ORA #$1001                                ; $0C8DCD |
   STA !s_spr_oam_1,x                        ; $0C8DD0 |
 
-CODE_0C8DD3:
+.CODE_0C8DD3:
   LDA $7860,x                               ; $0C8DD3 |
   BIT #$0001                                ; $0C8DD6 |
-  BEQ CODE_0C8DEE                           ; $0C8DD9 |
+  BEQ .CODE_0C8DEE                          ; $0C8DD9 |
   LDA !s_spr_x_speed_lo,x                   ; $0C8DDB |
   AND #$8000                                ; $0C8DDE |
   ASL A                                     ; $0C8DE1 |
@@ -1682,12 +1682,12 @@ CODE_0C8DD3:
   STA !s_spr_x_speed_lo,x                   ; $0C8DE8 |
   LDA $7860,x                               ; $0C8DEB |
 
-CODE_0C8DEE:
+.CODE_0C8DEE:
   BIT #$000C                                ; $0C8DEE |
-  BEQ CODE_0C8DF7                           ; $0C8DF1 |
+  BEQ .CODE_0C8DF7                          ; $0C8DF1 |
   JSL $0C8F3F                               ; $0C8DF3 |
 
-CODE_0C8DF7:
+.CODE_0C8DF7:
   JSL $0C8EDE                               ; $0C8DF7 |
   SEP #$20                                  ; $0C8DFB |
   LDA !s_spr_wildcard_4_lo_dp,x             ; $0C8DFD |
@@ -1698,9 +1698,9 @@ CODE_0C8DF7:
   RTL                                       ; $0C8E06 |
 
   LDA !r_msg_box_state                      ; $0C8E07 |
-  BNE CODE_0C8E4F                           ; $0C8E0A |
+  BNE .ret                                  ; $0C8E0A |
   LDA !s_spr_dyntile_index,x                ; $0C8E0C |
-  BMI CODE_0C8E4F                           ; $0C8E0F |
+  BMI .ret                                  ; $0C8E0F |
   REP #$10                                  ; $0C8E11 |
   LDA !s_spr_wildcard_4_lo_dp,x             ; $0C8E13 |
   AND #$00FF                                ; $0C8E15 |
@@ -1724,7 +1724,7 @@ CODE_0C8DF7:
   INC $0CF9                                 ; $0C8E4A |
   LDX $12                                   ; $0C8E4D |
 
-CODE_0C8E4F:
+.ret:
   RTL                                       ; $0C8E4F |
 
   LDY !s_spr_collision_id,x                 ; $0C8E50 |
@@ -6417,45 +6417,45 @@ init_little_skill_mouser:
   dw $0000, $0000, $0002, $0000             ; $0CB309 |
 
 CODE_0CB311:
-  LDA !s_sprite_disable_flag                ; $0CB311 |
-  ORA !r_mosaic_freeze_timer                ; $0CB314 |
-  ORA !r_cur_item_used                      ; $0CB317 |
-  BNE CODE_0CB351                           ; $0CB31A |
+  LDA !s_sprite_disable_flag                ; $0CB311 |\
+  ORA !r_mosaic_freeze_timer                ; $0CB314 | | Return if any sprite freeze flag is set
+  ORA !r_cur_item_used                      ; $0CB317 | |
+  BNE .ret                                  ; $0CB31A |/
   LDA $7860,x                               ; $0CB31C |
   BIT #$000C                                ; $0CB31F |
-  BNE CODE_0CB352                           ; $0CB322 |
+  BNE .CODE_0CB352                          ; $0CB322 |
   BIT #$0002                                ; $0CB324 |
-  BNE CODE_0CB35D                           ; $0CB327 |
+  BNE .CODE_0CB35D                          ; $0CB327 |
   BIT #$0001                                ; $0CB329 |
-  BEQ CODE_0CB351                           ; $0CB32C |
+  BEQ .ret                                  ; $0CB32C |
   LDA #$001F                                ; $0CB32E |\ play sound #$1F
   JSL push_sound_queue                      ; $0CB331 |/
   JSL $03A590                               ; $0CB335 |
   LDA !s_spr_wildcard_6_lo_dp,x             ; $0CB339 |
   CMP #$0003                                ; $0CB33B |
-  BCC CODE_0CB349                           ; $0CB33E |
+  BCC .CODE_0CB349                          ; $0CB33E |
   LDA !s_spr_x_speed_lo,x                   ; $0CB340 |
-  BNE CODE_0CB34B                           ; $0CB343 |
+  BNE .CODE_0CB34B                          ; $0CB343 |
   JML $03B078                               ; $0CB345 |
 
-CODE_0CB349:
+.CODE_0CB349:
   INC !s_spr_wildcard_6_lo_dp,x             ; $0CB349 |
 
-CODE_0CB34B:
+.CODE_0CB34B:
   LDA #$FE00                                ; $0CB34B |
   STA !s_spr_y_speed_lo,x                   ; $0CB34E |
 
-CODE_0CB351:
+.ret:
   RTL                                       ; $0CB351 |
 
-CODE_0CB352:
+.CODE_0CB352:
   LSR A                                     ; $0CB352 |
   AND #$0006                                ; $0CB353 |
   TAY                                       ; $0CB356 |
   LDA $B309,y                               ; $0CB357 |
   STA !s_spr_facing_dir,x                   ; $0CB35A |
 
-CODE_0CB35D:
+.CODE_0CB35D:
   STZ !s_spr_x_speed_lo,x                   ; $0CB35D |
   SEP #$20                                  ; $0CB360 |
   LDA #$02                                  ; $0CB362 |
@@ -6677,9 +6677,9 @@ main_star:
   ORA !r_cur_item_used                      ; $0CB53D | | Branch to return
   BNE CODE_0CB536                           ; $0CB540 |/
   LDA !s_spr_timer_3,x                      ; $0CB542 |
-  BNE CODE_0CB59D                           ; $0CB545 |
+  BNE .CODE_0CB59D                          ; $0CB545 |
   LDY !s_spr_collision_id,x                 ; $0CB547 |
-  BPL CODE_0CB59D                           ; $0CB54A |
+  BPL .CODE_0CB59D                          ; $0CB54A |
   LDA #$01EF                                ; $0CB54C |
   JSL spawn_ambient_sprite                  ; $0CB54F |
   LDA !s_spr_x_pixel_pos,x                  ; $0CB553 |
@@ -6709,12 +6709,12 @@ main_star:
   STA !r_starcounter_timer                  ; $0CB596 |
   JML despawn_sprite_free_slot              ; $0CB599 |
 
-CODE_0CB59D:
+.CODE_0CB59D:
   LDA !s_spr_timer_1,x                      ; $0CB59D |
-  BNE CODE_0CB5A6                           ; $0CB5A0 |
+  BNE .CODE_0CB5A6                          ; $0CB5A0 |
   JML despawn_sprite_stage_ID               ; $0CB5A2 |
 
-CODE_0CB5A6:
+.CODE_0CB5A6:
   LSR A                                     ; $0CB5A6 |
   LSR A                                     ; $0CB5A7 |
   LSR A                                     ; $0CB5A8 |
@@ -6724,42 +6724,42 @@ CODE_0CB5A6:
   LDX #$05                                  ; $0CB5AD |
   LDA $14                                   ; $0CB5AF |
   AND $B4F0,y                               ; $0CB5B1 |
-  BEQ CODE_0CB5B8                           ; $0CB5B4 |
+  BEQ .CODE_0CB5B8                          ; $0CB5B4 |
   LDX #$FF                                  ; $0CB5B6 |
 
-CODE_0CB5B8:
+.CODE_0CB5B8:
   TXA                                       ; $0CB5B8 |
   LDX $12                                   ; $0CB5B9 |
   STA !s_spr_draw_priority,x                ; $0CB5BB |
   REP #$20                                  ; $0CB5BE |
   LDA !s_spr_wildcard_4_lo_dp,x             ; $0CB5C0 |
-  BNE CODE_0CB605                           ; $0CB5C2 |
+  BNE .CODE_0CB605                          ; $0CB5C2 |
   LDA $7860,x                               ; $0CB5C4 |
   AND #$0001                                ; $0CB5C7 |
-  BNE CODE_0CB5F6                           ; $0CB5CA |
+  BNE .CODE_0CB5F6                          ; $0CB5CA |
   LDY #$02                                  ; $0CB5CC |
   LDA !s_spr_y_speed_lo,x                   ; $0CB5CE |
   CLC                                       ; $0CB5D1 |
   ADC #$0080                                ; $0CB5D2 |
   CMP #$0100                                ; $0CB5D5 |
-  BCC CODE_0CB5F1                           ; $0CB5D8 |
+  BCC .CODE_0CB5F1                          ; $0CB5D8 |
   LDY #$01                                  ; $0CB5DA |
   LDA !s_spr_y_speed_lo,x                   ; $0CB5DC |
-  BMI CODE_0CB5F1                           ; $0CB5DF |
+  BMI .CODE_0CB5F1                          ; $0CB5DF |
   LDY #$03                                  ; $0CB5E1 |
   CMP #$0100                                ; $0CB5E3 |
-  BCC CODE_0CB5F1                           ; $0CB5E6 |
+  BCC .CODE_0CB5F1                          ; $0CB5E6 |
   LDY #$04                                  ; $0CB5E8 |
   CMP #$0180                                ; $0CB5EA |
-  BCC CODE_0CB5F1                           ; $0CB5ED |
+  BCC .CODE_0CB5F1                          ; $0CB5ED |
   LDY #$05                                  ; $0CB5EF |
 
-CODE_0CB5F1:
+.CODE_0CB5F1:
   TYA                                       ; $0CB5F1 |
   STA !s_spr_anim_frame,x                   ; $0CB5F2 |
   RTL                                       ; $0CB5F5 |
 
-CODE_0CB5F6:
+.CODE_0CB5F6:
   STZ !s_spr_anim_frame,x                   ; $0CB5F6 |
   STZ !s_spr_x_speed_lo,x                   ; $0CB5F9 |
   LDA #$0002                                ; $0CB5FC |
@@ -6767,18 +6767,18 @@ CODE_0CB5F6:
   INC !s_spr_wildcard_4_lo_dp,x             ; $0CB602 |
   RTL                                       ; $0CB604 |
 
-CODE_0CB605:
+.CODE_0CB605:
   LDA !s_spr_timer_2,x                      ; $0CB605 |
-  BNE CODE_0CB62D                           ; $0CB608 |
+  BNE .CODE_0CB62D                          ; $0CB608 |
   LDY !s_spr_gsu_morph_1_lo,x               ; $0CB60A |
-  BNE CODE_0CB61C                           ; $0CB60D |
+  BNE .CODE_0CB61C                          ; $0CB60D |
   LDY !s_spr_x_player_dir,x                 ; $0CB60F |
   TYA                                       ; $0CB612 |
   EOR #$0002                                ; $0CB613 |
   STA !s_spr_facing_dir,x                   ; $0CB616 |
   INC !s_spr_gsu_morph_1_lo,x               ; $0CB619 |
 
-CODE_0CB61C:
+.CODE_0CB61C:
   LDY !s_spr_facing_dir,x                   ; $0CB61C |
   LDA $B4EC,y                               ; $0CB61F |
   STA !s_spr_x_speed_lo,x                   ; $0CB622 |
@@ -6786,7 +6786,7 @@ CODE_0CB61C:
   STA !s_spr_y_speed_lo,x                   ; $0CB628 |
   STZ !s_spr_wildcard_4_lo_dp,x             ; $0CB62B |
 
-CODE_0CB62D:
+.CODE_0CB62D:
   RTL                                       ; $0CB62D |
 
   dw $FF00, $0100                           ; $0CB62E |
@@ -15298,19 +15298,19 @@ CODE_0CFD82:
 
 CODE_0CFD83:
   PLA                                       ; $0CFD83 |
-  LDA !s_sprite_disable_flag                ; $0CFD84 |
-  ORA !r_mosaic_freeze_timer                ; $0CFD87 |
-  ORA !r_cur_item_used                      ; $0CFD8A |
-  BEQ CODE_0CFD90                           ; $0CFD8D |
+  LDA !s_sprite_disable_flag                ; $0CFD84 |\
+  ORA !r_mosaic_freeze_timer                ; $0CFD87 | | Continue processing if all sprite freeze flags are clear
+  ORA !r_cur_item_used                      ; $0CFD8A | |
+  BEQ .CODE_0CFD90                          ; $0CFD8D |/
   RTL                                       ; $0CFD8F |
 
-CODE_0CFD90:
+.CODE_0CFD90:
   LDA !s_spr_collision_state,x              ; $0CFD90 |
   DEC A                                     ; $0CFD93 |
-  BEQ CODE_0CFD99                           ; $0CFD94 |
+  BEQ .CODE_0CFD99                          ; $0CFD94 |
   STA !s_spr_collision_state,x              ; $0CFD96 |
 
-CODE_0CFD99:
+.CODE_0CFD99:
   LDY !s_spr_wildcard_1_hi,x                ; $0CFD99 |
   TYX                                       ; $0CFD9C |
   JMP ($FDA0,x)                             ; $0CFD9D |
@@ -15320,11 +15320,11 @@ CODE_0CFD99:
   LDX $12                                   ; $0CFDA4 |
   LDY #$00                                  ; $0CFDA6 |
   LDA !s_spr_x_speed_lo,x                   ; $0CFDA8 |
-  BMI CODE_0CFDAF                           ; $0CFDAB |
+  BMI .CODE_0CFDAF                          ; $0CFDAB |
   INY                                       ; $0CFDAD |
   INY                                       ; $0CFDAE |
 
-CODE_0CFDAF:
+.CODE_0CFDAF:
   TYA                                       ; $0CFDAF |
   EOR !s_spr_facing_dir,x                   ; $0CFDB0 |
   TAY                                       ; $0CFDB3 |
@@ -15345,18 +15345,18 @@ CODE_0CFDAF:
   JSR CODE_0CFE6C                           ; $0CFDD4 |
   LDA $7860,x                               ; $0CFDD7 |
   BIT #$0001                                ; $0CFDDA |
-  BEQ CODE_0CFDEE                           ; $0CFDDD |
+  BEQ .CODE_0CFDEE                          ; $0CFDDD |
   LDY #$00                                  ; $0CFDDF |
   LDA !s_spr_x_speed_lo,x                   ; $0CFDE1 |
-  BPL CODE_0CFDE8                           ; $0CFDE4 |
+  BPL .CODE_0CFDE8                          ; $0CFDE4 |
   INY                                       ; $0CFDE6 |
   INY                                       ; $0CFDE7 |
 
-CODE_0CFDE8:
+.CODE_0CFDE8:
   LDA $8D4E,y                               ; $0CFDE8 |
   STA !s_spr_x_speed_lo,x                   ; $0CFDEB |
 
-CODE_0CFDEE:
+.CODE_0CFDEE:
   LDA !s_spr_wildcard_3_lo_dp,x             ; $0CFDEE |
   CLC                                       ; $0CFDF0 |
   ADC !s_spr_wildcard_6_lo_dp,x             ; $0CFDF1 |

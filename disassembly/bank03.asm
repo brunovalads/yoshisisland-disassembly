@@ -2248,10 +2248,10 @@ handle_sprites:
   JSR check_new_sprites                     ; $0397E9 |/
 
 CODE_0397EC:
-  LDA !s_sprite_disable_flag                ; $0397EC |
-  ORA !r_mosaic_freeze_timer                ; $0397EF |
-  ORA !r_cur_item_used                      ; $0397F2 |
-  BNE CODE_039802                           ; $0397F5 |
+  LDA !s_sprite_disable_flag                ; $0397EC |\
+  ORA !r_mosaic_freeze_timer                ; $0397EF | | Check if any sprite freeze flag is set
+  ORA !r_cur_item_used                      ; $0397F2 | |
+  BNE CODE_039802                           ; $0397F5 |/
   INC $14                                   ; $0397F7 |
   LDX #$09                                  ; $0397F9 |
   LDA #$884C                                ; $0397FB |
@@ -2524,10 +2524,10 @@ handle_sprite:
   STA !s_cur_spr_x_prev                     ; $039A15 |
   LDA !s_spr_y_pixel_pos,x                  ; $039A18 |
   STA !s_cur_spr_y_prev                     ; $039A1B |
-  LDA !s_sprite_disable_flag                ; $039A1E |
-  ORA !r_mosaic_freeze_timer                ; $039A21 |
-  ORA !r_cur_item_used                      ; $039A24 |\ Skip processing all but one timer
-  BNE .nodec_spr_timer_4                    ; $039A27 |/ if item being used
+  LDA !s_sprite_disable_flag                ; $039A1E |\
+  ORA !r_mosaic_freeze_timer                ; $039A21 | | Skip processing if any sprite freeze flag is set
+  ORA !r_cur_item_used                      ; $039A24 | |
+  BNE .nodec_spr_timer_4                    ; $039A27 |/
 
   LDA !s_spr_timer_1,x                      ; $039A29 |\
   BEQ .nodec_spr_timer_1                    ; $039A2C | | Decrement timer if non-zero
@@ -2633,10 +2633,10 @@ spr_state_tongued:
   STA !s_spr_oam_1,x                        ; $039AD2 |
   PHK                                       ; $039AD5 |
   PLB                                       ; $039AD6 |
-  LDA !s_sprite_disable_flag                ; $039AD7 |
-  ORA !r_mosaic_freeze_timer                ; $039ADA |
-  ORA !r_cur_item_used                      ; $039ADD |
-  BEQ CODE_039AE3                           ; $039AE0 |
+  LDA !s_sprite_disable_flag                ; $039AD7 |\
+  ORA !r_mosaic_freeze_timer                ; $039ADA | | Continue processing if all sprite freeze flags are clear
+  ORA !r_cur_item_used                      ; $039ADD | |
+  BEQ CODE_039AE3                           ; $039AE0 |/
   RTL                                       ; $039AE2 |
 
 CODE_039AE3:
@@ -3185,10 +3185,10 @@ swallowed_fuzzy:
 ; end tongued_sprite
 
 main_fuzzy_wind:
-  LDA !s_sprite_disable_flag                ; $039F4E |
-  ORA !r_mosaic_freeze_timer                ; $039F51 |
-  ORA !r_cur_item_used                      ; $039F54 |
-  BEQ CODE_039F5A                           ; $039F57 |
+  LDA !s_sprite_disable_flag                ; $039F4E |\
+  ORA !r_mosaic_freeze_timer                ; $039F51 | | Continue processing if all sprite freeze flags are clear
+  ORA !r_cur_item_used                      ; $039F54 | |
+  BEQ CODE_039F5A                           ; $039F57 |/
   RTL                                       ; $039F59 |
 
 CODE_039F5A:
@@ -6500,31 +6500,31 @@ CODE_03B707:
   STA !s_spr_x_pixel_pos,x                  ; $03B712 |
   RTL                                       ; $03B715 |
 
-; l sub
-  LDA !s_sprite_disable_flag                ; $03B716 |
-  ORA !r_mosaic_freeze_timer                ; $03B719 |
-  ORA !r_cur_item_used                      ; $03B71C |
-  BEQ CODE_03B741                           ; $03B71F |
+CODE_03B716:
+  LDA !s_sprite_disable_flag                ; $03B716 |\
+  ORA !r_mosaic_freeze_timer                ; $03B719 | | Return if all sprite freeze flags are clear
+  ORA !r_cur_item_used                      ; $03B71C | |
+  BEQ .ret                                  ; $03B71F |/
   LDA !s_spr_timer_1,x                      ; $03B721 |
-  BEQ CODE_03B729                           ; $03B724 |
+  BEQ .CODE_03B729                          ; $03B724 |
   DEC !s_spr_timer_1,x                      ; $03B726 |
 
-CODE_03B729:
+.CODE_03B729:
   LDA !s_spr_timer_2,x                      ; $03B729 |
-  BEQ CODE_03B731                           ; $03B72C |
+  BEQ .CODE_03B731                          ; $03B72C |
   DEC !s_spr_timer_2,x                      ; $03B72E |
 
-CODE_03B731:
+.CODE_03B731:
   LDA !s_spr_timer_3,x                      ; $03B731 |
-  BEQ CODE_03B739                           ; $03B734 |
+  BEQ .CODE_03B739                          ; $03B734 |
   DEC !s_spr_timer_3,x                      ; $03B736 |
 
-CODE_03B739:
+.CODE_03B739:
   LDA !s_spr_timer_4,x                      ; $03B739 |
-  BEQ CODE_03B741                           ; $03B73C |
+  BEQ .ret                                  ; $03B73C |
   DEC !s_spr_timer_4,x                      ; $03B73E |
 
-CODE_03B741:
+.ret:
   RTL                                       ; $03B741 |
 
 init_flashing_egg:
@@ -10876,56 +10876,56 @@ CODE_03D8CE:
   RTS                                       ; $03D8D6 |
 
 main_autoscroller:
-  LDA !s_sprite_disable_flag                ; $03D8D7 |
-  ORA !r_mosaic_freeze_timer                ; $03D8DA |
-  ORA !r_cur_item_used                      ; $03D8DD |
-  BNE CODE_03D93D                           ; $03D8E0 |
+  LDA !s_sprite_disable_flag                ; $03D8D7 |\
+  ORA !r_mosaic_freeze_timer                ; $03D8DA | | Return if any sprite freeze flag is set
+  ORA !r_cur_item_used                      ; $03D8DD | |
+  BNE .ret                                  ; $03D8E0 |/
   JSR CODE_03D942                           ; $03D8E2 |
   LDA !r_autoscr_x_cam+1                    ; $03D8E5 |
   SEC                                       ; $03D8E8 |
   SBC !r_autoscr_x_dest                     ; $03D8E9 |
-  BEQ CODE_03D8F9                           ; $03D8EC |
+  BEQ .CODE_03D8F9                          ; $03D8EC |
   EOR !r_autoscr_x_dest_delta               ; $03D8EE |
-  BMI CODE_03D8F9                           ; $03D8F1 |
+  BMI .CODE_03D8F9                          ; $03D8F1 |
   LDA !r_autoscr_x_dest                     ; $03D8F3 |
   STA !r_autoscr_x_cam+1                    ; $03D8F6 |
 
-CODE_03D8F9:
+.CODE_03D8F9:
   STA $0000                                 ; $03D8F9 |
   LDA !r_autoscr_y_cam+1                    ; $03D8FC |
   SEC                                       ; $03D8FF |
   SBC !r_autoscr_y_dest                     ; $03D900 |
-  BEQ CODE_03D910                           ; $03D903 |
+  BEQ .CODE_03D910                          ; $03D903 |
   EOR !r_autoscr_y_dest_delta               ; $03D905 |
-  BMI CODE_03D910                           ; $03D908 |
+  BMI .CODE_03D910                          ; $03D908 |
   LDA !r_autoscr_y_dest                     ; $03D90A |
   STA !r_autoscr_y_cam+1                    ; $03D90D |
 
-CODE_03D910:
+.CODE_03D910:
   ORA $0000                                 ; $03D910 |
-  BMI CODE_03D93D                           ; $03D913 |
+  BMI .ret                                  ; $03D913 |
   LDX !r_autoscr_dest_index                 ; $03D915 |
   LDA autoscroller_values+3,x               ; $03D918 |\
   AND #$00FF                                ; $03D91B | | checks next checkpoint
   CMP #$00FE                                ; $03D91E | | if FE or FF, jump down to end autoscrolling
-  BCS CODE_03D92C                           ; $03D921 |/
+  BCS .CODE_03D92C                          ; $03D921 |/
   INX                                       ; $03D923 |\
   INX                                       ; $03D924 | |
   INX                                       ; $03D925 | | moves up 3 into autoscroll table (next checkpoint)
   STX !r_autoscr_dest_index                 ; $03D926 | | then reinitializes auto-scroll with new checkpoint
   JMP CODE_03D897                           ; $03D929 |/
 
-CODE_03D92C:
-  BNE CODE_03D934                           ; $03D92C |\  if FE or FF, done with this autoscroll section
+.CODE_03D92C:
+  BNE .CODE_03D934                          ; $03D92C |\  if FE or FF, done with this autoscroll section
   STZ !r_autoscr_x_active                   ; $03D92E | | if FE, also clear active autoscrolling for X flag
   STZ !r_autoscr_y_active                   ; $03D931 | | and active Y flag
 
-CODE_03D934:
+.CODE_03D934:
   STZ !r_cur_autoscr                        ; $03D934 | | - FF & FE: clear autoscroll ID
   STZ !r_autoscr_x_speed                    ; $03D937 | | and X velocity
   STZ !r_autoscr_y_speed                    ; $03D93A |/  and Y velocity
 
-CODE_03D93D:
+.ret:
   RTS                                       ; $03D93D |
 
 ; data (-1 and 1)
@@ -11027,19 +11027,19 @@ main_gusty_gen:
   JMP remove_special_spr                    ; $03D9EB |
 
 CODE_03D9EE:
-  LDA !s_sprite_disable_flag                ; $03D9EE |
-  ORA !r_mosaic_freeze_timer                ; $03D9F1 |
-  ORA !r_cur_item_used                      ; $03D9F4 |
-  BNE CODE_03DA57                           ; $03D9F7 | if the game is inactive
+  LDA !s_sprite_disable_flag                ; $03D9EE |\
+  ORA !r_mosaic_freeze_timer                ; $03D9F1 | | Return if any sprite freeze flag is set
+  ORA !r_cur_item_used                      ; $03D9F4 | |
+  BNE .ret                                  ; $03D9F7 |/
   LDA $0CD2                                 ; $03D9F9 |
-  BNE CODE_03DA57                           ; $03D9FC |
+  BNE .ret                                  ; $03D9FC |
   LDA #$0030                                ; $03D9FE |
   STA $0CD2                                 ; $03DA01 |
   SEP #$10                                  ; $03DA04 |
   PHY                                       ; $03DA06 |
   LDA #$00E6                                ; $03DA07 | spawn gusty
   JSL spawn_sprite_active                   ; $03DA0A |
-  BCC CODE_03DA54                           ; $03DA0E |
+  BCC .CODE_03DA54                          ; $03DA0E |
   LDA $10                                   ; $03DA10 |
   AND #$001E                                ; $03DA12 |
   ASL A                                     ; $03DA15 |
@@ -11074,11 +11074,11 @@ CODE_03D9EE:
   LDA $D9DA,x                               ; $03DA4E |
   STA !s_spr_x_accel_ceiling,y              ; $03DA51 |
 
-CODE_03DA54:
+.CODE_03DA54:
   PLY                                       ; $03DA54 |
   REP #$10                                  ; $03DA55 |
 
-CODE_03DA57:
+.ret:
   RTS                                       ; $03DA57 |
 
 init_gusty_stop:
@@ -11115,22 +11115,22 @@ main_bat_gen_r:
   JMP remove_special_spr                    ; $03DA85 |
 
 CODE_03DA88:
-  LDA !s_sprite_disable_flag                ; $03DA88 |
-  ORA !r_mosaic_freeze_timer                ; $03DA8B |
-  ORA !r_cur_item_used                      ; $03DA8E |
-  BNE CODE_03DAEA                           ; $03DA91 |
+  LDA !s_sprite_disable_flag                ; $03DA88 |\
+  ORA !r_mosaic_freeze_timer                ; $03DA8B | | Return if any sprite freeze flag is set
+  ORA !r_cur_item_used                      ; $03DA8E | |
+  BNE RET_03DAEA                            ; $03DA91 |/
   LDA $0CD4                                 ; $03DA93 |
-  BNE CODE_03DAEA                           ; $03DA96 |
+  BNE RET_03DAEA                            ; $03DA96 |
   LDA !r_bat_gen_amount                     ; $03DA98 |
   CMP #$0003                                ; $03DA9B |
-  BCS CODE_03DAEA                           ; $03DA9E |
+  BCS RET_03DAEA                            ; $03DA9E |
   LDA #$0030                                ; $03DAA0 |
   STA $0CD4                                 ; $03DAA3 |
   SEP #$10                                  ; $03DAA6 |
   PHY                                       ; $03DAA8 |
   LDA #$013E                                ; $03DAA9 |
   JSL spawn_sprite_active                   ; $03DAAC |
-  BCC CODE_03DAE7                           ; $03DAB0 |
+  BCC .CODE_03DAE7                          ; $03DAB0 |
   INC !r_bat_gen_amount                     ; $03DAB2 |
   LDA $10                                   ; $03DAB5 |
   AND #$000E                                ; $03DAB7 |
@@ -11158,11 +11158,11 @@ CODE_03DA88:
   PLB                                       ; $03DAE3 |
   INC !s_spr_gsu_morph_1_lo,x               ; $03DAE4 |
 
-CODE_03DAE7:
+.CODE_03DAE7:
   PLY                                       ; $03DAE7 |
   REP #$10                                  ; $03DAE8 |
 
-CODE_03DAEA:
+RET_03DAEA:
   RTS                                       ; $03DAEA |
 
 ; bat generator on both sides
@@ -11172,12 +11172,12 @@ main_bat_gen_rl:
   JMP remove_special_spr                    ; $03DAF0 |
 
 CODE_03DAF3:
-  LDA !s_sprite_disable_flag                ; $03DAF3 |
-  ORA !r_mosaic_freeze_timer                ; $03DAF6 |
-  ORA !r_cur_item_used                      ; $03DAF9 |
-  BNE CODE_03DAEA                           ; $03DAFC |
+  LDA !s_sprite_disable_flag                ; $03DAF3 |\
+  ORA !r_mosaic_freeze_timer                ; $03DAF6 | | Return if any sprite freeze flag is set
+  ORA !r_cur_item_used                      ; $03DAF9 | |
+  BNE RET_03DAEA                            ; $03DAFC |/
   LDA $0CD4                                 ; $03DAFE |
-  BNE CODE_03DAEA                           ; $03DB01 |
+  BNE RET_03DAEA                            ; $03DB01 |
   LDA #$0003                                ; $03DB03 |
   STA $00                                   ; $03DB06 |
   LDA !r_cur_stage                          ; $03DB08 |
@@ -11268,15 +11268,15 @@ CODE_03DB93:
   dw $0060, $0030                           ; $03DBB3 |
 
 main_unknown2_gen:
-  LDA !s_sprite_disable_flag                ; $03DBB7 |
-  ORA !r_mosaic_freeze_timer                ; $03DBBA |
-  ORA !r_cur_item_used                      ; $03DBBD |
-  BNE CODE_03DC2D                           ; $03DBC0 |
+  LDA !s_sprite_disable_flag                ; $03DBB7 |\
+  ORA !r_mosaic_freeze_timer                ; $03DBBA | | Return if any sprite freeze flag is set
+  ORA !r_cur_item_used                      ; $03DBBD | |
+  BNE .ret                                  ; $03DBC0 |/
   LDA $0CD6                                 ; $03DBC2 |
-  BNE CODE_03DC2D                           ; $03DBC5 |
+  BNE .ret                                  ; $03DBC5 |
   LDA $0C4E                                 ; $03DBC7 |
   CMP #$0001                                ; $03DBCA |
-  BCS CODE_03DC2D                           ; $03DBCD |
+  BCS .ret                                  ; $03DBCD |
   PHY                                       ; $03DBCF |
   SEP #$10                                  ; $03DBD0 |
   LDA $10                                   ; $03DBD2 |
@@ -11288,11 +11288,11 @@ main_unknown2_gen:
   CLC                                       ; $03DBDF |
   ADC $DB97,y                               ; $03DBE0 | add value in table
   CMP !r_bg1_cam_x                          ; $03DBE3 |
-  BPL CODE_03DBEC                           ; $03DBE6 |
+  BPL .CODE_03DBEC                          ; $03DBE6 |
   CLC                                       ; $03DBE8 |
   ADC #$0100                                ; $03DBE9 |
 
-CODE_03DBEC:
+.CODE_03DBEC:
   STA $00                                   ; $03DBEC |
   STA !gsu_r8                               ; $03DBEE |
   LDA !r_bg1_cam_y                          ; $03DBF1 |
@@ -11300,11 +11300,11 @@ CODE_03DBEC:
   CLC                                       ; $03DBF7 |
   ADC $DBA7,y                               ; $03DBF8 |
   CMP !r_bg1_cam_y                          ; $03DBFB |
-  BPL CODE_03DC04                           ; $03DBFE |
+  BPL .CODE_03DC04                          ; $03DBFE |
   CLC                                       ; $03DC00 |
   ADC #$0100                                ; $03DC01 |
 
-CODE_03DC04:
+.CODE_03DC04:
   STA $02                                   ; $03DC04 |
   STA !gsu_r0                               ; $03DC06 |
   LDX #$0A                                  ; $03DC09 |
@@ -11312,18 +11312,18 @@ CODE_03DC04:
   JSL r_gsu_init_3                          ; $03DC0E | GSU init
   LDA !gsu_r6                               ; $03DC12 |
   CMP #$0010                                ; $03DC15 |
-  BNE CODE_03DC2A                           ; $03DC18 |
+  BNE .CODE_03DC2A                          ; $03DC18 |
   LDA #$0157                                ; $03DC1A |
   JSL spawn_sprite_active                   ; $03DC1D |
-  BCC CODE_03DC2A                           ; $03DC21 |
+  BCC .CODE_03DC2A                          ; $03DC21 |
   INC $0C4E                                 ; $03DC23 |
   JSL $07C30B                               ; $03DC26 |
 
-CODE_03DC2A:
+.CODE_03DC2A:
   REP #$10                                  ; $03DC2A |
   PLY                                       ; $03DC2C |
 
-CODE_03DC2D:
+.ret:
   RTS                                       ; $03DC2D |
 
 init_unknown2_stop:
@@ -11409,10 +11409,10 @@ main_speardance:
   LDA $0C54                                 ; $03DCEC |
   DEC A                                     ; $03DCEF |
   BNE CODE_03DD00                           ; $03DCF0 |
-  LDA !s_sprite_disable_flag                ; $03DCF2 |
-  ORA !r_mosaic_freeze_timer                ; $03DCF5 |
-  ORA !r_cur_item_used                      ; $03DCF8 |
-  BEQ CODE_03DD04                           ; $03DCFB |
+  LDA !s_sprite_disable_flag                ; $03DCF2 |\
+  ORA !r_mosaic_freeze_timer                ; $03DCF5 | | Skip if all sprite freeze flags are clear
+  ORA !r_cur_item_used                      ; $03DCF8 | |
+  BEQ CODE_03DD04                           ; $03DCFB |/
   STA $0C56                                 ; $03DCFD |
 
 CODE_03DD00:
@@ -11535,22 +11535,22 @@ main_flutter_gen:
   JMP remove_special_spr                    ; $03DDDF |
 
 CODE_03DDE2:
-  LDA !s_sprite_disable_flag                ; $03DDE2 |
-  ORA !r_mosaic_freeze_timer                ; $03DDE5 |
-  ORA !r_cur_item_used                      ; $03DDE8 |
-  BNE CODE_03DE59                           ; $03DDEB |
+  LDA !s_sprite_disable_flag                ; $03DDE2 |\
+  ORA !r_mosaic_freeze_timer                ; $03DDE5 | | Return if any sprite freeze flag is set
+  ORA !r_cur_item_used                      ; $03DDE8 | |
+  BNE .ret                                  ; $03DDEB |/
   LDA $0CDA                                 ; $03DDED |
-  BNE CODE_03DE59                           ; $03DDF0 |
+  BNE .ret                                  ; $03DDF0 |
   LDA $0C6C                                 ; $03DDF2 |
   CMP #$0004                                ; $03DDF5 |
-  BCS CODE_03DE59                           ; $03DDF8 |
+  BCS .ret                                  ; $03DDF8 |
   LDA #$0030                                ; $03DDFA |
   STA $0CDA                                 ; $03DDFD |
   SEP #$10                                  ; $03DE00 |
   PHY                                       ; $03DE02 |
   LDA #$0152                                ; $03DE03 |
   JSL spawn_sprite_active                   ; $03DE06 |
-  BCC CODE_03DE56                           ; $03DE0A |
+  BCC .CODE_03DE56                          ; $03DE0A |
   INC $0C6C                                 ; $03DE0C |
   LDA !r_cam_moving_dir_x                   ; $03DE0F |
   STA !s_spr_facing_dir,y                   ; $03DE12 |
@@ -11586,11 +11586,11 @@ CODE_03DDE2:
   LDA #$0001                                ; $03DE50 |
   STA !s_spr_gsu_morph_1_lo,x               ; $03DE53 |
 
-CODE_03DE56:
+.CODE_03DE56:
   PLY                                       ; $03DE56 |
   REP #$10                                  ; $03DE57 |
 
-CODE_03DE59:
+.ret:
   RTS                                       ; $03DE59 |
 
 init_flutter_stop:
@@ -11626,12 +11626,12 @@ main_spore_gen:
   JMP remove_special_spr                    ; $03DE99 |
 
 CODE_03DE9C:
-  LDA !s_sprite_disable_flag                ; $03DE9C |
-  ORA !r_mosaic_freeze_timer                ; $03DE9F |
-  ORA !r_cur_item_used                      ; $03DEA2 |
-  BNE CODE_03DF0B                           ; $03DEA5 |
+  LDA !s_sprite_disable_flag                ; $03DE9C |\
+  ORA !r_mosaic_freeze_timer                ; $03DE9F | | Return if any sprite freeze flag is set
+  ORA !r_cur_item_used                      ; $03DEA2 | |
+  BNE .ret                                  ; $03DEA5 |/
   LDA $0CDC                                 ; $03DEA7 |
-  BNE CODE_03DF0B                           ; $03DEAA |
+  BNE .ret                                  ; $03DEAA |
   SEP #$10                                  ; $03DEAC |
   PHY                                       ; $03DEAE |
   LDA #$0165                                ; $03DEAF |
@@ -11643,12 +11643,12 @@ CODE_03DE9C:
   JSL r_gsu_init_1                          ; $03DEC0 | GSU init
   LDA !gsu_r6                               ; $03DEC4 |
   CMP #$0004                                ; $03DEC7 |
-  BCS CODE_03DF08                           ; $03DECA |
+  BCS .CODE_03DF08                          ; $03DECA |
   LDA #$0020                                ; $03DECC |
   STA $0CDC                                 ; $03DECF |
   LDA #$0165                                ; $03DED2 |
   JSL spawn_sprite_active                   ; $03DED5 |
-  BCC CODE_03DF08                           ; $03DED9 |
+  BCC .CODE_03DF08                          ; $03DED9 |
   LDA $10                                   ; $03DEDB |
   AND #$000F                                ; $03DEDD |
   ASL A                                     ; $03DEE0 |
@@ -11673,11 +11673,11 @@ CODE_03DE9C:
   JSL init_nipper_spore                     ; $03DF03 |
   PLB                                       ; $03DF07 |
 
-CODE_03DF08:
+.CODE_03DF08:
   PLY                                       ; $03DF08 |
   REP #$10                                  ; $03DF09 |
 
-CODE_03DF0B:
+.ret:
   RTS                                       ; $03DF0B |
 
 init_spore_stop:
@@ -11704,18 +11704,18 @@ CODE_03DF1A:
 main_balloonpokey_gen:
   JSL random_number_gen                     ; $03DF2E |
   LDA !r_balloon_pokey_gen_flag             ; $03DF32 |
-  BNE CODE_03DF3A                           ; $03DF35 |
+  BNE .CODE_03DF3A                          ; $03DF35 |
   JMP remove_special_spr                    ; $03DF37 |
 
-CODE_03DF3A:
-  LDA !s_sprite_disable_flag                ; $03DF3A |
-  ORA !r_mosaic_freeze_timer                ; $03DF3D |
-  ORA !r_cur_item_used                      ; $03DF40 |
-  BNE CODE_03DF4A                           ; $03DF43 |
+.CODE_03DF3A:
+  LDA !s_sprite_disable_flag                ; $03DF3A |\
+  ORA !r_mosaic_freeze_timer                ; $03DF3D | | Return if any sprite freeze flag is set
+  ORA !r_cur_item_used                      ; $03DF40 | |
+  BNE .ret                                  ; $03DF43 |/
   LDA $0CDE                                 ; $03DF45 |
   BEQ CODE_03DF4B                           ; $03DF48 |
 
-CODE_03DF4A:
+.ret:
   RTS                                       ; $03DF4A |
 
 CODE_03DF4B:
@@ -11809,18 +11809,18 @@ CODE_03DFFE:
 main_balloonmissile_gen:
   JSL random_number_gen                     ; $03E002 |
   LDA !r_balloon_missile_gen_flag           ; $03E006 |
-  BNE CODE_03E00E                           ; $03E009 |
+  BNE .CODE_03E00E                          ; $03E009 |
   JMP remove_special_spr                    ; $03E00B |
 
-CODE_03E00E:
-  LDA !s_sprite_disable_flag                ; $03E00E |
-  ORA !r_mosaic_freeze_timer                ; $03E011 |
-  ORA !r_cur_item_used                      ; $03E014 |
-  BNE CODE_03E01E                           ; $03E017 |
+.CODE_03E00E:
+  LDA !s_sprite_disable_flag                ; $03E00E |\
+  ORA !r_mosaic_freeze_timer                ; $03E011 | | Return if any sprite freeze flag is set
+  ORA !r_cur_item_used                      ; $03E014 | |
+  BNE .ret                                  ; $03E017 |/
   LDA $0CE0                                 ; $03E019 |
   BEQ CODE_03E01F                           ; $03E01C |
 
-CODE_03E01E:
+.ret:
   RTS                                       ; $03E01E |
 
 CODE_03E01F:
@@ -11909,42 +11909,42 @@ main_balloon_gen:
   JMP remove_special_spr                    ; $03E0C4 |
 
 CODE_03E0C7:
-  LDA !s_sprite_disable_flag                ; $03E0C7 |
-  ORA !r_mosaic_freeze_timer                ; $03E0CA |
-  ORA !r_cur_item_used                      ; $03E0CD |
-  BNE CODE_03E123                           ; $03E0D0 |
+  LDA !s_sprite_disable_flag                ; $03E0C7 |\
+  ORA !r_mosaic_freeze_timer                ; $03E0CA | | Return if any sprite freeze flag is set
+  ORA !r_cur_item_used                      ; $03E0CD | |
+  BNE .ret                                  ; $03E0D0 |/
   LDA $0CE2                                 ; $03E0D2 |
-  BNE CODE_03E123                           ; $03E0D5 |
+  BNE .ret                                  ; $03E0D5 |
   LDA #$0060                                ; $03E0D7 |
   STA $0CE2                                 ; $03E0DA |
   LDA $0FED                                 ; $03E0DD |
   CMP #$000C                                ; $03E0E0 |
-  BPL CODE_03E123                           ; $03E0E3 |
+  BPL .ret                                  ; $03E0E3 |
   SEP #$10                                  ; $03E0E5 |
   PHY                                       ; $03E0E7 |
   LDA #$0052                                ; $03E0E8 |
   JSL spawn_sprite_init                     ; $03E0EB |
-  BCC CODE_03E120                           ; $03E0EF |
+  BCC .CODE_03E120                          ; $03E0EF |
   LDA !r_bg1_cam_y                          ; $03E0F1 |
   CLC                                       ; $03E0F4 |
   ADC #$0110                                ; $03E0F5 |
   STA !s_spr_y_pixel_pos,y                  ; $03E0F8 |
   LDA !s_player_x_speed_prev                ; $03E0FB |
-  BNE CODE_03E108                           ; $03E0FE |
+  BNE .CODE_03E108                          ; $03E0FE |
   LDA !s_player_direction                   ; $03E100 |
   DEC A                                     ; $03E103 |
   EOR #$FFFF                                ; $03E104 |
   INC A                                     ; $03E107 |
 
-CODE_03E108:
-  BPL CODE_03E10F                           ; $03E108 |
+.CODE_03E108:
+  BPL .CODE_03E10F                          ; $03E108 |
   LDA #$FFA0                                ; $03E10A |
-  BRA CODE_03E112                           ; $03E10D |
+  BRA .CODE_03E112                          ; $03E10D |
 
-CODE_03E10F:
+.CODE_03E10F:
   LDA #$0060                                ; $03E10F |
 
-CODE_03E112:
+.CODE_03E112:
   STA $00                                   ; $03E112 |
   LDA !s_player_x                           ; $03E114 |
   CLC                                       ; $03E117 |
@@ -11952,11 +11952,11 @@ CODE_03E112:
   AND #$FFE0                                ; $03E11A |
   STA !s_spr_x_pixel_pos,y                  ; $03E11D |
 
-CODE_03E120:
+.CODE_03E120:
   PLY                                       ; $03E120 |
   REP #$10                                  ; $03E121 |
 
-CODE_03E123:
+.ret:
   RTS                                       ; $03E123 |
 
 init_balloon_stop:
@@ -12091,10 +12091,10 @@ main_minisalvo_gen:
 CODE_03E203:
   PHY                                       ; $03E203 |
   SEP #$10                                  ; $03E204 |
-  LDA !s_sprite_disable_flag                ; $03E206 |
-  ORA !r_mosaic_freeze_timer                ; $03E209 |
-  ORA !r_cur_item_used                      ; $03E20C |
-  BNE CODE_03E216                           ; $03E20F |
+  LDA !s_sprite_disable_flag                ; $03E206 |\
+  ORA !r_mosaic_freeze_timer                ; $03E209 | | Return if any sprite freeze flag is set
+  ORA !r_cur_item_used                      ; $03E20C | |
+  BNE CODE_03E216                           ; $03E20F |/
   LDA $0CE4                                 ; $03E211 |
   BEQ CODE_03E219                           ; $03E214 |
 
@@ -12229,10 +12229,10 @@ main_fuzzy_gen:
   JMP remove_special_spr                    ; $03E313 |
 
 CODE_03E316:
-  LDA !s_sprite_disable_flag                ; $03E316 |
-  ORA !r_mosaic_freeze_timer                ; $03E319 |
-  ORA !r_cur_item_used                      ; $03E31C |
-  BEQ CODE_03E322                           ; $03E31F |
+  LDA !s_sprite_disable_flag                ; $03E316 |\
+  ORA !r_mosaic_freeze_timer                ; $03E319 | | Continue processing if all sprite freeze flags are clear
+  ORA !r_cur_item_used                      ; $03E31C | |
+  BEQ CODE_03E322                           ; $03E31F |/
 
 CODE_03E321:
   RTS                                       ; $03E321 |
@@ -14617,10 +14617,10 @@ CODE_03F5D4:
 
 CODE_03F5F6:
   STA !s_spr_x_accel_ceiling,x              ; $03F5F6 |
-  LDA !s_sprite_disable_flag                ; $03F5F9 |
-  ORA !r_mosaic_freeze_timer                ; $03F5FC |
-  ORA !r_cur_item_used                      ; $03F5FF |
-  BNE CODE_03F616                           ; $03F602 |
+  LDA !s_sprite_disable_flag                ; $03F5F9 |\
+  ORA !r_mosaic_freeze_timer                ; $03F5FC | | Skip if any sprite freeze flag is set
+  ORA !r_cur_item_used                      ; $03F5FF | |
+  BNE CODE_03F616                           ; $03F602 |/
 
 CODE_03F604:
   LDA !s_spr_bitwise_settings_1,x           ; $03F604 |

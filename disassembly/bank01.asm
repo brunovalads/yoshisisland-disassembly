@@ -4408,10 +4408,10 @@ CODE_01A607:
   RTL                                       ; $01A60A |
 
 ; flan l sub
-  LDA !s_sprite_disable_flag                ; $01A60B |
-  ORA !r_mosaic_freeze_timer                ; $01A60E |
-  ORA !r_cur_item_used                      ; $01A611 |
-  BEQ CODE_01A619                           ; $01A614 |
+  LDA !s_sprite_disable_flag                ; $01A60B |\
+  ORA !r_mosaic_freeze_timer                ; $01A60E | | Continue processing if all sprite freeze flags are clear
+  ORA !r_cur_item_used                      ; $01A611 | |
+  BEQ CODE_01A619                           ; $01A614 |/
   PLY                                       ; $01A616 |\
   PLA                                       ; $01A617 | | skips the RTL
   RTL                                       ; $01A618 |/  and goes back one long in stack

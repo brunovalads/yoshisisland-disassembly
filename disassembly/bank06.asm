@@ -6789,78 +6789,78 @@ CODE_06BA21:
 
 main_cloud_drop_vertical:
   LDA !s_spr_collision_state,x              ; $06BA33 |
-  BEQ CODE_06BA50                           ; $06BA36 |
-  LDA !s_sprite_disable_flag                ; $06BA38 |
-  ORA !r_mosaic_freeze_timer                ; $06BA3B |
-  ORA !r_cur_item_used                      ; $06BA3E |
-  BNE CODE_06BA50                           ; $06BA41 |
+  BEQ .CODE_06BA50                          ; $06BA36 |
+  LDA !s_sprite_disable_flag                ; $06BA38 |\
+  ORA !r_mosaic_freeze_timer                ; $06BA3B | | TODO: Figure out the branching after checking if any sprite freeze flags is set
+  ORA !r_cur_item_used                      ; $06BA3E | |
+  BNE .CODE_06BA50                          ; $06BA41 |/
   LDA !s_spr_bitwise_settings_1,x           ; $06BA43 |
   ORA #$0200                                ; $06BA46 |
   STA !s_spr_bitwise_settings_1,x           ; $06BA49 |
   JSL $06BB4D                               ; $06BA4C |
 
-CODE_06BA50:
+.CODE_06BA50:
   JSL CODE_03AF23                           ; $06BA50 |
   JSL $06BAF3                               ; $06BA54 |
   LDA !s_spr_wildcard_3_lo_dp,x             ; $06BA58 |
-  BNE CODE_06BAAE                           ; $06BA5A |
+  BNE .CODE_06BAAE                          ; $06BA5A |
   LDA #$0010                                ; $06BA5C |
   STA !s_spr_y_accel,x                      ; $06BA5F |
   LDY #$00                                  ; $06BA62 |
   LDA !s_spr_y_pixel_pos,x                  ; $06BA64 |
   CMP !s_spr_wildcard_4_lo_dp,x             ; $06BA67 |
-  BCC CODE_06BA6D                           ; $06BA69 |
+  BCC .CODE_06BA6D                          ; $06BA69 |
   LDY #$02                                  ; $06BA6B |
 
-CODE_06BA6D:
+.CODE_06BA6D:
   LDA $BA2F,y                               ; $06BA6D |
   STA !s_spr_y_accel_ceiling,x              ; $06BA70 |
   LDA !s_spr_y_speed_lo,x                   ; $06BA73 |
-  BNE CODE_06BA88                           ; $06BA76 |
+  BNE .CODE_06BA88                          ; $06BA76 |
   LDA #$0005                                ; $06BA78 |
   STA !s_spr_wildcard_3_lo_dp,x             ; $06BA7B |
   LDA #$0004                                ; $06BA7D |
   STA !s_spr_timer_1,x                      ; $06BA80 |
   STZ !s_spr_y_accel,x                      ; $06BA83 |
-  BRA CODE_06BAEE                           ; $06BA86 |
+  BRA .CODE_06BAEE                          ; $06BA86 |
 
-CODE_06BA88:
-  BPL CODE_06BA9C                           ; $06BA88 |
+.CODE_06BA88:
+  BPL .CODE_06BA9C                          ; $06BA88 |
   LDA #$000D                                ; $06BA8A |
   STA !s_spr_anim_frame,x                   ; $06BA8D |
   TAY                                       ; $06BA90 |
   LDA $B9C2,y                               ; $06BA91 |
   AND #$00FF                                ; $06BA94 |
   STA !s_spr_y_hitbox_offset,x              ; $06BA97 |
-  BRA CODE_06BAEE                           ; $06BA9A |
+  BRA .CODE_06BAEE                          ; $06BA9A |
 
-CODE_06BA9C:
+.CODE_06BA9C:
   LDA #$0006                                ; $06BA9C |
   STA !s_spr_anim_frame,x                   ; $06BA9F |
   TAY                                       ; $06BAA2 |
   LDA $B9C2,y                               ; $06BAA3 |
   AND #$00FF                                ; $06BAA6 |
   STA !s_spr_y_hitbox_offset,x              ; $06BAA9 |
-  BRA CODE_06BAEE                           ; $06BAAC |
+  BRA .CODE_06BAEE                          ; $06BAAC |
 
-CODE_06BAAE:
+.CODE_06BAAE:
   LDA #$BA25                                ; $06BAAE |
   LDY $75E3,x                               ; $06BAB1 |
-  BPL CODE_06BAB9                           ; $06BAB4 |
+  BPL .CODE_06BAB9                          ; $06BAB4 |
   LDA #$BA2A                                ; $06BAB6 |
 
-CODE_06BAB9:
+.CODE_06BAB9:
   STA $00                                   ; $06BAB9 |
   LDA !s_spr_wildcard_3_lo_dp,x             ; $06BABB |
   LSR A                                     ; $06BABD |
-  BNE CODE_06BACC                           ; $06BABE |
+  BNE .CODE_06BACC                          ; $06BABE |
   LDA !s_spr_timer_1,x                      ; $06BAC0 |
   LSR A                                     ; $06BAC3 |
-  BNE CODE_06BACC                           ; $06BAC4 |
+  BNE .CODE_06BACC                          ; $06BAC4 |
   LDA #$0010                                ; $06BAC6 |
   STA !s_spr_y_accel,x                      ; $06BAC9 |
 
-CODE_06BACC:
+.CODE_06BACC:
   LDY !s_spr_wildcard_3_lo_dp,x             ; $06BACC |
   DEY                                       ; $06BACE |
   LDA ($00),y                               ; $06BACF |
@@ -6871,12 +6871,12 @@ CODE_06BACC:
   AND #$00FF                                ; $06BADB |
   STA !s_spr_y_hitbox_offset,x              ; $06BADE |
   LDA !s_spr_timer_1,x                      ; $06BAE1 |
-  BNE CODE_06BAEE                           ; $06BAE4 |
+  BNE .CODE_06BAEE                          ; $06BAE4 |
   LDA #$0004                                ; $06BAE6 |
   STA !s_spr_timer_1,x                      ; $06BAE9 |
   DEC !s_spr_wildcard_3_lo_dp,x             ; $06BAEC |
 
-CODE_06BAEE:
+.CODE_06BAEE:
   JSL $03A5B7                               ; $06BAEE |
   RTL                                       ; $06BAF2 |
 
@@ -6982,79 +6982,79 @@ CODE_06BBC1:
 
 main_cloud_drop_horizontal:
   LDA !s_spr_collision_state,x              ; $06BBD3 |
-  BEQ CODE_06BBF0                           ; $06BBD6 |
-  LDA !s_sprite_disable_flag                ; $06BBD8 |
-  ORA !r_mosaic_freeze_timer                ; $06BBDB |
-  ORA !r_cur_item_used                      ; $06BBDE |
-  BNE CODE_06BBF0                           ; $06BBE1 |
+  BEQ .CODE_06BBF0                          ; $06BBD6 |
+  LDA !s_sprite_disable_flag                ; $06BBD8 |\
+  ORA !r_mosaic_freeze_timer                ; $06BBDB | | TODO: Figure out the branching after checking if any sprite freeze flags is set
+  ORA !r_cur_item_used                      ; $06BBDE | |
+  BNE .CODE_06BBF0                          ; $06BBE1 |/
   LDA !s_spr_bitwise_settings_1,x           ; $06BBE3 |
   ORA #$0200                                ; $06BBE6 |
   STA !s_spr_bitwise_settings_1,x           ; $06BBE9 |
   JSL $06BCA9                               ; $06BBEC |
 
-CODE_06BBF0:
+.CODE_06BBF0:
   JSL CODE_03AF23                           ; $06BBF0 |
   JSL $06BAF3                               ; $06BBF4 |
   STZ !s_spr_facing_dir,x                   ; $06BBF8 |
   LDA !s_spr_wildcard_3_lo_dp,x             ; $06BBFB |
-  BNE CODE_06BC51                           ; $06BBFD |
+  BNE .CODE_06BC51                          ; $06BBFD |
   LDA #$0010                                ; $06BBFF |
   STA !s_spr_x_accel,x                      ; $06BC02 |
   LDY #$00                                  ; $06BC05 |
   LDA !s_spr_x_pixel_pos,x                  ; $06BC07 |
   CMP !s_spr_wildcard_4_lo_dp,x             ; $06BC0A |
-  BCC CODE_06BC10                           ; $06BC0C |
+  BCC .CODE_06BC10                          ; $06BC0C |
   LDY #$02                                  ; $06BC0E |
 
-CODE_06BC10:
+.CODE_06BC10:
   LDA $BA2F,y                               ; $06BC10 |
   STA !s_spr_x_accel_ceiling,x              ; $06BC13 |
   LDA !s_spr_x_speed_lo,x                   ; $06BC16 |
-  BNE CODE_06BC2B                           ; $06BC19 |
+  BNE .CODE_06BC2B                          ; $06BC19 |
   LDA #$0004                                ; $06BC1B |
   STA !s_spr_wildcard_3_lo_dp,x             ; $06BC1E |
   LDA #$0005                                ; $06BC20 |
   STA !s_spr_timer_1,x                      ; $06BC23 |
   STZ !s_spr_x_accel,x                      ; $06BC26 |
-  BRA CODE_06BC91                           ; $06BC29 |
+  BRA .CODE_06BC91                          ; $06BC29 |
 
-CODE_06BC2B:
-  BPL CODE_06BC3F                           ; $06BC2B |
+.CODE_06BC2B:
+  BPL .CODE_06BC3F                          ; $06BC2B |
   LDA #$000F                                ; $06BC2D |
   STA !s_spr_anim_frame,x                   ; $06BC30 |
   TAY                                       ; $06BC33 |
   LDA $BB6A,y                               ; $06BC34 |
   AND #$00FF                                ; $06BC37 |
   STA !s_spr_x_hitbox_offset,x              ; $06BC3A |
-  BRA CODE_06BC91                           ; $06BC3D |
+  BRA .CODE_06BC91                          ; $06BC3D |
 
-CODE_06BC3F:
+.CODE_06BC3F:
   LDA #$0005                                ; $06BC3F |
   STA !s_spr_anim_frame,x                   ; $06BC42 |
   TAY                                       ; $06BC45 |
   LDA $BB6A,y                               ; $06BC46 |
   AND #$00FF                                ; $06BC49 |
   STA !s_spr_x_hitbox_offset,x              ; $06BC4C |
-  BRA CODE_06BC91                           ; $06BC4F |
+  BRA .CODE_06BC91                          ; $06BC4F |
 
-CODE_06BC51:
+.CODE_06BC51:
   LDA #$BBCB                                ; $06BC51 |
   LDY $75E1,x                               ; $06BC54 |
-  BPL CODE_06BC5C                           ; $06BC57 |
+  BPL .CODE_06BC5C                          ; $06BC57 |
   LDA #$BBCF                                ; $06BC59 |
 
-CODE_06BC5C:
+.CODE_06BC5C:
   STA $00                                   ; $06BC5C |
   LDA !s_spr_wildcard_3_lo_dp,x             ; $06BC5E |
   LSR A                                     ; $06BC60 |
-  BNE CODE_06BC6F                           ; $06BC61 |
+  BNE .CODE_06BC6F                          ; $06BC61 |
   LDA !s_spr_timer_1,x                      ; $06BC63 |
   LSR A                                     ; $06BC66 |
-  BNE CODE_06BC6F                           ; $06BC67 |
+  BNE .CODE_06BC6F                          ; $06BC67 |
   LDA #$0010                                ; $06BC69 |
   STA !s_spr_x_accel,x                      ; $06BC6C |
 
-CODE_06BC6F:
+.CODE_06BC6F:
   LDY !s_spr_wildcard_3_lo_dp,x             ; $06BC6F |
   DEY                                       ; $06BC71 |
   LDA ($00),y                               ; $06BC72 |
@@ -7065,12 +7065,12 @@ CODE_06BC6F:
   AND #$00FF                                ; $06BC7E |
   STA !s_spr_x_hitbox_offset,x              ; $06BC81 |
   LDA !s_spr_timer_1,x                      ; $06BC84 |
-  BNE CODE_06BC91                           ; $06BC87 |
+  BNE .CODE_06BC91                          ; $06BC87 |
   LDA #$0005                                ; $06BC89 |
   STA !s_spr_timer_1,x                      ; $06BC8C |
   DEC !s_spr_wildcard_3_lo_dp,x             ; $06BC8F |
 
-CODE_06BC91:
+.CODE_06BC91:
   JSL $03A5B7                               ; $06BC91 |
   RTL                                       ; $06BC95 |
 
@@ -7499,7 +7499,7 @@ CODE_06BFEC:
   JSL $03B69D                               ; $06BFF9 |
 
 CODE_06BFFD:
-  JSL $03B716                               ; $06BFFD |
+  JSL CODE_03B716                           ; $06BFFD |
   LDA !s_spr_state                          ; $06C001 |
   CMP #$0008                                ; $06C004 |
   BEQ CODE_06C028                           ; $06C007 |
@@ -7510,14 +7510,14 @@ CODE_06C00A:
   CPY #$3005                                ; $06C00C |
   BPL CODE_06BFD1                           ; $06C00F |
   PHP                                       ; $06C011 |
-  BPL CODE_06C020                           ; $06C012 |
-  LDA !s_sprite_disable_flag                ; $06C014 |
-  ORA !r_mosaic_freeze_timer                ; $06C017 |
-  ORA !r_cur_item_used                      ; $06C01A |
-  BNE CODE_06BFFD                           ; $06C01D |
+  BPL .CODE_06C020                          ; $06C012 |
+  LDA !s_sprite_disable_flag                ; $06C014 |\
+  ORA !r_mosaic_freeze_timer                ; $06C017 | | Return if all sprite freeze flags are clear
+  ORA !r_cur_item_used                      ; $06C01A | |
+  BNE CODE_06BFFD                           ; $06C01D |/
   RTS                                       ; $06C01F |
 
-CODE_06C020:
+.CODE_06C020:
   LDA !s_spr_state                          ; $06C020 |
   CMP #$0008                                ; $06C023 |
   BNE CODE_06C065                           ; $06C026 |
@@ -8190,13 +8190,13 @@ CODE_06C578:
   db $20, $18, $10, $0A, $E0, $00, $20, $00 ; $06C589 |
 
   LDX $12                                   ; $06C591 |
-  LDA !s_sprite_disable_flag                ; $06C593 |
-  ORA !r_mosaic_freeze_timer                ; $06C596 |
-  ORA !r_cur_item_used                      ; $06C599 |
-  BEQ CODE_06C5A2                           ; $06C59C |
+  LDA !s_sprite_disable_flag                ; $06C593 |\
+  ORA !r_mosaic_freeze_timer                ; $06C596 | | Continue processing if all sprite freeze flags are clear
+  ORA !r_cur_item_used                      ; $06C599 | |
+  BEQ .CODE_06C5A2                          ; $06C59C |/
   JSL $03B69D                               ; $06C59E |
 
-CODE_06C5A2:
+.CODE_06C5A2:
   LDA $0C8A                                 ; $06C5A2 |
   ORA !s_player_transforming_flag           ; $06C5A5 |
   BNE CODE_06C5CE                           ; $06C5A8 |
@@ -8771,14 +8771,14 @@ CODE_06CA38:
 
 CODE_06CA4A:
   JSR CODE_06CCF8                           ; $06CA4A |
-  LDA !s_sprite_disable_flag                ; $06CA4D |
-  ORA !r_mosaic_freeze_timer                ; $06CA50 |
-  ORA !r_cur_item_used                      ; $06CA53 |
-  BEQ CODE_06CA60                           ; $06CA56 |
-  JSL $03B716                               ; $06CA58 |
+  LDA !s_sprite_disable_flag                ; $06CA4D |\
+  ORA !r_mosaic_freeze_timer                ; $06CA50 | | TODO: Figure out the branching after checking if all sprite freeze flags are clear
+  ORA !r_cur_item_used                      ; $06CA53 | |
+  BEQ .CODE_06CA60                          ; $06CA56 |/
+  JSL CODE_03B716                           ; $06CA58 |
   JSL $03B69D                               ; $06CA5C |
 
-CODE_06CA60:
+.CODE_06CA60:
   LDA !s_spr_cam_x_pos                      ; $06CA60 |
   CLC                                       ; $06CA63 |
   ADC #$0008                                ; $06CA64 |
@@ -8795,7 +8795,7 @@ CODE_06CA60:
   CLC                                       ; $06CA7D |
   ADC !r_bg1_cam_y                          ; $06CA7E |
   STA !s_spr_y_player_delta                 ; $06CA81 |
-  JSR CODE_06CAA4                           ; $06CA84 |
+  JSR .CODE_06CAA4                          ; $06CA84 |
   LDA $76                                   ; $06CA87 |
   ASL A                                     ; $06CA89 |
   TAX                                       ; $06CA8A |
@@ -8803,17 +8803,17 @@ CODE_06CA60:
   JSR CODE_06CB05                           ; $06CA8E |
   LDY $76                                   ; $06CA91 |
   CPY #$03                                  ; $06CA93 |
-  BEQ CODE_06CAA1                           ; $06CA95 |
+  BEQ .ret                                  ; $06CA95 |
   CPY #$02                                  ; $06CA97 |
-  BEQ CODE_06CAA1                           ; $06CA99 |
+  BEQ .ret                                  ; $06CA99 |
   JSR CODE_06CC9E                           ; $06CA9B |
   JSR CODE_06CB15                           ; $06CA9E |
 
-CODE_06CAA1:
+.ret:
   LDX $12                                   ; $06CAA1 |
   RTL                                       ; $06CAA3 |
 
-CODE_06CAA4:
+.CODE_06CAA4:
   LDA !s_spr_state                          ; $06CAA4 |
   CMP #$0008                                ; $06CAA7 |
   BNE CODE_06CB04                           ; $06CAAA |
@@ -8827,20 +8827,20 @@ CODE_06CAA4:
   TSB !s_player_disable_flag                ; $06CABE |
   LDY !s_player_mouth_state                 ; $06CAC1 |
   CPY #$04                                  ; $06CAC4 |
-  BNE CODE_06CAD2                           ; $06CAC6 |
+  BNE .CODE_06CAD2                          ; $06CAC6 |
   LDA !s_player_tongue_y_rel                ; $06CAC8 |
   CMP #$FFF0                                ; $06CACB |
   BMI CODE_06CB04                           ; $06CACE |
-  BRA CODE_06CADE                           ; $06CAD0 |
+  BRA .CODE_06CADE                          ; $06CAD0 |
 
-CODE_06CAD2:
+.CODE_06CAD2:
   LDA !s_player_tongue_x_rel                ; $06CAD2 |
   CLC                                       ; $06CAD5 |
   ADC #$0010                                ; $06CAD6 |
   CMP #$0020                                ; $06CAD9 |
   BCS CODE_06CB04                           ; $06CADC |
 
-CODE_06CADE:
+.CODE_06CADE:
   STZ !s_tongued_sprite_slot                ; $06CADE |
 
 CODE_06CAE1:
@@ -9345,30 +9345,30 @@ CODE_06CF34:
 CODE_06CF42:
   TXA                                       ; $06CF42 |
   STA $7E48                                 ; $06CF43 |
-  LDA !s_sprite_disable_flag                ; $06CF46 |
-  ORA !r_mosaic_freeze_timer                ; $06CF49 |
-  ORA !r_cur_item_used                      ; $06CF4C |
-  BEQ CODE_06CF55                           ; $06CF4F |
-  JSL $03B716                               ; $06CF51 |
+  LDA !s_sprite_disable_flag                ; $06CF46 |\
+  ORA !r_mosaic_freeze_timer                ; $06CF49 | | TODO: Figure out the branching after checking if all sprite freeze flags are clear
+  ORA !r_cur_item_used                      ; $06CF4C | |
+  BEQ .CODE_06CF55                          ; $06CF4F |/
+  JSL CODE_03B716                           ; $06CF51 |
 
-CODE_06CF55:
-  JSR CODE_06CF66                           ; $06CF55 |
-  JSR CODE_06CFA5                           ; $06CF58 |
-  JSR CODE_06CFC4                           ; $06CF5B |
-  JSR CODE_06D019                           ; $06CF5E |
+.CODE_06CF55:
+  JSR .CODE_06CF66                          ; $06CF55 |
+  JSR .CODE_06CFA5                          ; $06CF58 |
+  JSR .CODE_06CFC4                           ; $06CF5B |
+  JSR .CODE_06D019                           ; $06CF5E |
   RTL                                       ; $06CF61 |
 
   dw $0003, $FFFB                           ; $06CF62 |
 
-CODE_06CF66:
+.CODE_06CF66:
   LDA !s_player_transforming_flag           ; $06CF66 |
   CMP #$0001                                ; $06CF69 |
-  BEQ CODE_06CF74                           ; $06CF6C |
+  BEQ .CODE_06CF74                          ; $06CF6C |
   LDY $0C8A                                 ; $06CF6E |
-  BNE CODE_06CF74                           ; $06CF71 |
+  BNE .CODE_06CF74                          ; $06CF71 |
   RTS                                       ; $06CF73 |
 
-CODE_06CF74:
+.CODE_06CF74:
   LDY #$00                                  ; $06CF74 |
   STY $74A3                                 ; $06CF76 |
   LDY !s_player_direction                   ; $06CF79 |
@@ -9390,53 +9390,53 @@ CODE_06CF74:
   PLA                                       ; $06CFA3 |
   RTL                                       ; $06CFA4 |
 
-CODE_06CFA5:
+.CODE_06CFA5:
   LDA !s_player_state                       ; $06CFA5 |
   CMP #$0012                                ; $06CFA8 |
-  BEQ CODE_06CFB6                           ; $06CFAB |
+  BEQ .CODE_06CFB6                          ; $06CFAB |
   LDA !s_player_invincibility_timer         ; $06CFAD |
   SEC                                       ; $06CFB0 |
   SBC #$009F                                ; $06CFB1 |
-  BNE CODE_06CFC3                           ; $06CFB4 |
+  BNE ..ret                                 ; $06CFB4 |
 
-CODE_06CFB6:
+.CODE_06CFB6:
   JSR CODE_06D110                           ; $06CFB6 |
   LDA !s_spr_y_pixel_pos                    ; $06CFB9 |
   CLC                                       ; $06CFBC |
   ADC #$0004                                ; $06CFBD |
   STA !s_spr_y_pixel_pos                    ; $06CFC0 |
 
-CODE_06CFC3:
+..ret:
   RTS                                       ; $06CFC3 |
 
-CODE_06CFC4:
+.CODE_06CFC4:
   LDA #$FFFF                                ; $06CFC4 |
   LDY !s_spr_draw_priority                  ; $06CFC7 |
-  BMI CODE_06CFF2                           ; $06CFCA |
+  BMI ..ret                                 ; $06CFCA |
   REP #$10                                  ; $06CFCC |
   LDY !s_player_form                        ; $06CFCE |
   CPY #$000E                                ; $06CFD1 |
-  BEQ CODE_06CFED                           ; $06CFD4 |
+  BEQ .CODE_06CFED                          ; $06CFD4 |
   LDY !s_player_cur_anim_frame              ; $06CFD6 |
   CPY #$0166                                ; $06CFD9 |
-  BEQ CODE_06CFED                           ; $06CFDC |
+  BEQ .CODE_06CFED                          ; $06CFDC |
   LDA #$0002                                ; $06CFDE |
   LDY $0E15                                 ; $06CFE1 |
-  BNE CODE_06CFED                           ; $06CFE4 |
+  BNE .CODE_06CFED                          ; $06CFE4 |
   LDY $61CE                                 ; $06CFE6 |
-  BNE CODE_06CFED                           ; $06CFE9 |
+  BNE .CODE_06CFED                          ; $06CFE9 |
   INC A                                     ; $06CFEB |
   INC A                                     ; $06CFEC |
 
-CODE_06CFED:
+.CODE_06CFED:
   STA !s_spr_draw_priority                  ; $06CFED |
   SEP #$10                                  ; $06CFF0 |
 
-CODE_06CFF2:
+..ret:
   RTS                                       ; $06CFF2 |
 
   LDY $0E15                                 ; $06CFF3 |
-  BEQ CODE_06D012                           ; $06CFF6 |
+  BEQ ..ret                                 ; $06CFF6 |
   LDY #$1B                                  ; $06CFF8 |
   STY !s_spr_anim_frame                     ; $06CFFA |
   LDY #$12                                  ; $06CFFD |
@@ -9448,59 +9448,59 @@ CODE_06CFF2:
   STZ !s_spr_facing_dir                     ; $06D00D |
   INC $76                                   ; $06D010 |
 
-CODE_06D012:
+..ret:
   RTS                                       ; $06D012 |
 
   dw $000D, $0010, $0012                    ; $06D013 |
 
-CODE_06D019:
+.CODE_06D019:
   LDY $1078                                 ; $06D019 |
-  BEQ CODE_06D023                           ; $06D01C |
+  BEQ .CODE_06D023                          ; $06D01C |
   LDY #$02                                  ; $06D01E |
   JMP CODE_06D07C                           ; $06D020 |
 
-CODE_06D023:
+.CODE_06D023:
   LDA !s_player_state                       ; $06D023 |
   CMP #$0006                                ; $06D026 |
-  BNE CODE_06D03E                           ; $06D029 |
+  BNE .CODE_06D03E                          ; $06D029 |
   LDA !s_pipe_transition_type_lo            ; $06D02B |
   AND #$00FF                                ; $06D02E |
   CMP #$0002                                ; $06D031 |
-  BEQ CODE_06D03B                           ; $06D034 |
+  BEQ .CODE_06D03B                          ; $06D034 |
   CMP #$0004                                ; $06D036 |
-  BNE CODE_06D03E                           ; $06D039 |
+  BNE .CODE_06D03E                          ; $06D039 |
 
-CODE_06D03B:
+.CODE_06D03B:
   JMP CODE_06D0DE                           ; $06D03B |
 
-CODE_06D03E:
-  LDA !s_sprite_disable_flag                ; $06D03E |
-  ORA !s_player_disable_flag                ; $06D041 |
-  ORA !r_mosaic_freeze_timer                ; $06D044 |
-  ORA !r_cur_item_used                      ; $06D047 |
-  BEQ CODE_06D057                           ; $06D04A |
+.CODE_06D03E:
+  LDA !s_sprite_disable_flag                ; $06D03E |\
+  ORA !s_player_disable_flag                ; $06D041 | |
+  ORA !r_mosaic_freeze_timer                ; $06D044 | | TODO: Figure out the branching after checking if all freeze flags are clear
+  ORA !r_cur_item_used                      ; $06D047 | |
+  BEQ .CODE_06D057                          ; $06D04A |/
   LDY $0E15                                 ; $06D04C |
-  BEQ CODE_06D056                           ; $06D04F |
+  BEQ ..ret                                 ; $06D04F |
   LDY #$1F                                  ; $06D051 |
   STY !s_spr_anim_frame                     ; $06D053 |
 
-CODE_06D056:
+..ret:
   RTS                                       ; $06D056 |
 
-CODE_06D057:
+.CODE_06D057:
   LDA !r_stars_amount                       ; $06D057 |
   CMP #$0032                                ; $06D05A |
-  BPL CODE_06D060                           ; $06D05D |
+  BPL .CODE_06D060                          ; $06D05D |
   RTS                                       ; $06D05F |
 
-CODE_06D060:
+.CODE_06D060:
   LDY #$02                                  ; $06D060 |
   LDA !s_player_jump_state                  ; $06D062 |
-  BEQ CODE_06D06C                           ; $06D065 |
+  BEQ .CODE_06D06C                          ; $06D065 |
   LDA !s_player_y_speed                     ; $06D067 |
   BRA CODE_06D07F                           ; $06D06A |
 
-CODE_06D06C:
+.CODE_06D06C:
   LDA !s_player_x_speed_prev                ; $06D06C |
   BEQ CODE_06D0AD                           ; $06D06F |
   CLC                                       ; $06D071 |

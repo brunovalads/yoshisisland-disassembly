@@ -1370,29 +1370,29 @@ shy_guy_state_ptr:
 main_shy_guy:
   LDY !s_spr_wildcard_5_lo_dp,x             ; $048A58 |
   CPY #$08                                  ; $048A5A |
-  BEQ CODE_048A8A                           ; $048A5C |
+  BEQ .CODE_048A8A                          ; $048A5C |
   JSR CODE_048ACB                           ; $048A5E |
   LDY !s_spr_wildcard_5_lo_dp,x             ; $048A61 |
   CPY #$02                                  ; $048A63 |
-  BNE CODE_048A8A                           ; $048A65 |
+  BNE .CODE_048A8A                          ; $048A65 |
   LDA !s_spr_state,x                        ; $048A67 |
   SEC                                       ; $048A6A |
   SBC #$0010                                ; $048A6B |
   ORA !s_spr_timer_frozen,x                 ; $048A6E |
-  BNE CODE_048A8A                           ; $048A71 |
-  LDA !s_sprite_disable_flag                ; $048A73 |
-  ORA !r_mosaic_freeze_timer                ; $048A76 |
-  ORA !r_cur_item_used                      ; $048A79 |
-  BNE CODE_048AAB                           ; $048A7C |
+  BNE .CODE_048A8A                          ; $048A71 |
+  LDA !s_sprite_disable_flag                ; $048A73 |\
+  ORA !r_mosaic_freeze_timer                ; $048A76 | | Return if any sprite freeze flag is set
+  ORA !r_cur_item_used                      ; $048A79 | |
+  BNE .ret                                  ; $048A7C |/
   LDA $7860,x                               ; $048A7E |
   AND #$000C                                ; $048A81 |
-  BEQ CODE_048A8E                           ; $048A84 |
+  BEQ .CODE_048A8E                          ; $048A84 |
   JML $03B273                               ; $048A86 |
 
-CODE_048A8A:
+.CODE_048A8A:
   JSL CODE_03AF23                           ; $048A8A |
 
-CODE_048A8E:
+.CODE_048A8E:
   LDY !s_spr_wildcard_5_lo_dp,x             ; $048A8E |
   TYA                                       ; $048A90 |
   ASL A                                     ; $048A91 |
@@ -1401,16 +1401,16 @@ CODE_048A8E:
   JSR ($8A46,x)                             ; $048A94 | state table
   LDY !s_spr_wildcard_5_lo_dp,x             ; $048A97 |
   CPY #$08                                  ; $048A99 |
-  BEQ CODE_048AAB                           ; $048A9B |
+  BEQ .ret                                  ; $048A9B |
   LDA !s_spr_timer_3,x                      ; $048A9D |
-  BNE CODE_048AA8                           ; $048AA0 |
+  BNE .CODE_048AA8                          ; $048AA0 |
   JSR CODE_048B8D                           ; $048AA2 |
   JSR CODE_048BDF                           ; $048AA5 |
 
-CODE_048AA8:
+.CODE_048AA8:
   JSR CODE_048AAC                           ; $048AA8 |
 
-CODE_048AAB:
+.ret:
   RTL                                       ; $048AAB |
 
 ; shy guy sub
@@ -4402,10 +4402,10 @@ init_board_bg3:
   dw $FEC0, $0140                           ; $04A1B0 |
 
 main_board_bg3:
-  LDA !s_sprite_disable_flag                ; $04A1B4 |
-  ORA !r_mosaic_freeze_timer                ; $04A1B7 |
-  ORA !r_cur_item_used                      ; $04A1BA |
-  BEQ CODE_04A1C2                           ; $04A1BD |
+  LDA !s_sprite_disable_flag                ; $04A1B4 |\
+  ORA !r_mosaic_freeze_timer                ; $04A1B7 | | TODO: Figure out the branching after checking if all sprite freeze flags are clear
+  ORA !r_cur_item_used                      ; $04A1BA | |
+  BEQ CODE_04A1C2                           ; $04A1BD |/
   JMP CODE_04A250                           ; $04A1BF |
 
 CODE_04A1C2:
@@ -4815,10 +4815,10 @@ main_plank_bg3:
   LDX $12                                   ; $04A4EF |
 
 CODE_04A4F1:
-  LDA !s_sprite_disable_flag                ; $04A4F1 |
-  ORA !r_mosaic_freeze_timer                ; $04A4F4 |
-  ORA !r_cur_item_used                      ; $04A4F7 |
-  BEQ CODE_04A4FF                           ; $04A4FA |
+  LDA !s_sprite_disable_flag                ; $04A4F1 |\
+  ORA !r_mosaic_freeze_timer                ; $04A4F4 | | TODO: Figure out the branching after checking if all sprite freeze flags are clear
+  ORA !r_cur_item_used                      ; $04A4F7 | |
+  BEQ CODE_04A4FF                           ; $04A4FA |/
   JMP CODE_04A586                           ; $04A4FC |
 
 CODE_04A4FF:
@@ -6086,30 +6086,30 @@ CODE_04AE9D:
 
 ; common seesaw sub
 CODE_04AEDF:
-  LDA !s_sprite_disable_flag                ; $04AEDF |
-  ORA !r_mosaic_freeze_timer                ; $04AEE2 |
-  ORA !r_cur_item_used                      ; $04AEE5 |
-  BNE CODE_04AF3C                           ; $04AEE8 |
+  LDA !s_sprite_disable_flag                ; $04AEDF |\
+  ORA !r_mosaic_freeze_timer                ; $04AEE2 | | Return if any sprite freeze flag is set
+  ORA !r_cur_item_used                      ; $04AEE5 | |
+  BNE .ret                                  ; $04AEE8 |/
   LDA !s_spr_gsu_morph_2_lo,x               ; $04AEEA |
   STA $00                                   ; $04AEED |
   CLC                                       ; $04AEEF |
   ADC !s_spr_wildcard_1_hi,x                ; $04AEF0 |
-  BPL CODE_04AEFF                           ; $04AEF3 |
+  BPL .CODE_04AEFF                          ; $04AEF3 |
   CMP $AED7,y                               ; $04AEF5 |
-  BPL CODE_04AF39                           ; $04AEF8 |
+  BPL .CODE_04AF39                          ; $04AEF8 |
   LDA $AED7,y                               ; $04AEFA |
-  BRA CODE_04AF07                           ; $04AEFD |
+  BRA .CODE_04AF07                          ; $04AEFD |
 
-CODE_04AEFF:
+.CODE_04AEFF:
   CMP $AED9,y                               ; $04AEFF |
-  BMI CODE_04AF39                           ; $04AF02 |
+  BMI .CODE_04AF39                          ; $04AF02 |
   LDA $AED9,y                               ; $04AF04 |
 
-CODE_04AF07:
+.CODE_04AF07:
   PHA                                       ; $04AF07 |
   LDA !s_spr_id,x                           ; $04AF08 |
   CMP #$003D                                ; $04AF0B |
-  BNE CODE_04AF38                           ; $04AF0E |
+  BNE .CODE_04AF38                          ; $04AF0E |
   LDA !s_spr_wildcard_1_hi,x                ; $04AF10 |
   CMP #$8000                                ; $04AF13 |
   ROR A                                     ; $04AF16 |
@@ -6130,13 +6130,13 @@ CODE_04AF07:
   STZ !s_spr_wildcard_1_lo,x                ; $04AF33 |
   REP #$20                                  ; $04AF36 |
 
-CODE_04AF38:
+.CODE_04AF38:
   PLA                                       ; $04AF38 |
 
-CODE_04AF39:
+.CODE_04AF39:
   STA !s_spr_gsu_morph_2_lo,x               ; $04AF39 |
 
-CODE_04AF3C:
+.ret:
   RTS                                       ; $04AF3C |
 
   dw $D900, $2700                           ; $04AF3D |
@@ -9560,29 +9560,29 @@ CODE_04CCC0:
 
 main_spike:
   LDY !s_spr_dyntile_index,x                ; $04CCD3 |
-  BMI CODE_04CCDC                           ; $04CCD6 |
+  BMI .CODE_04CCDC                          ; $04CCD6 |
   JSL $03AA2E                               ; $04CCD8 |
 
-CODE_04CCDC:
+.CODE_04CCDC:
   LDY !s_spr_wildcard_5_lo_dp,x             ; $04CCDC |
   CPY #$03                                  ; $04CCDE |
-  BNE CODE_04CD01                           ; $04CCE0 |
+  BNE .CODE_04CD01                          ; $04CCE0 |
   LDA !s_spr_state,x                        ; $04CCE2 |
   CMP #$0010                                ; $04CCE5 |
-  BNE CODE_04CD01                           ; $04CCE8 |
-  LDA !s_sprite_disable_flag                ; $04CCEA |
-  ORA !r_mosaic_freeze_timer                ; $04CCED |
-  ORA !r_cur_item_used                      ; $04CCF0 |
-  BNE CODE_04CD22                           ; $04CCF3 |
+  BNE .CODE_04CD01                          ; $04CCE8 |
+  LDA !s_sprite_disable_flag                ; $04CCEA |\
+  ORA !r_mosaic_freeze_timer                ; $04CCED | | Return if any sprite freeze flag is set
+  ORA !r_cur_item_used                      ; $04CCF0 | |
+  BNE .ret                                  ; $04CCF3 |/
   LDA $7860,x                               ; $04CCF5 |
   AND #$000C                                ; $04CCF8 |
-  BEQ CODE_04CD05                           ; $04CCFB |
+  BEQ .CODE_04CD05                          ; $04CCFB |
   JML $03B273                               ; $04CCFD |
 
-CODE_04CD01:
+.CODE_04CD01:
   JSL CODE_03AF23                           ; $04CD01 |
 
-CODE_04CD05:
+.CODE_04CD05:
   TXY                                       ; $04CD05 |
   LDA !s_spr_wildcard_5_lo_dp,x             ; $04CD06 |
   ASL A                                     ; $04CD08 |
@@ -9590,20 +9590,20 @@ CODE_04CD05:
   JSR ($CCCB,x)                             ; $04CD0A |
   LDY #$00                                  ; $04CD0D |
   LDA !s_spr_x_accel_ceiling,x              ; $04CD0F |
-  BEQ CODE_04CD1C                           ; $04CD12 |
-  BMI CODE_04CD18                           ; $04CD14 |
+  BEQ .CODE_04CD1C                          ; $04CD12 |
+  BMI .CODE_04CD18                          ; $04CD14 |
   INY                                       ; $04CD16 |
   INY                                       ; $04CD17 |
 
-CODE_04CD18:
+.CODE_04CD18:
   TYA                                       ; $04CD18 |
   STA !s_spr_facing_dir,x                   ; $04CD19 |
 
-CODE_04CD1C:
+.CODE_04CD1C:
   JSR CODE_048B8D                           ; $04CD1C |
   JSR CODE_048BDF                           ; $04CD1F |
 
-CODE_04CD22:
+.ret:
   RTL                                       ; $04CD22 |
 
   db $0C, $20, $18                          ; $04CD23 |
@@ -14008,14 +14008,14 @@ DATA_04F1F0:
   dw $0FFE, $07FE, $0FFE                    ; $04F1F0 |
 
 CODE_04F1F6:
-  LDA !s_player_disable_flag                ; $04F1F6 |
-  ORA !s_sprite_disable_flag                ; $04F1F9 |
-  ORA !r_cur_item_used                      ; $04F1FC |
-  ORA !s_cam_event_flag                     ; $04F1FF |
-  BEQ CODE_04F205                           ; $04F202 |
+  LDA !s_player_disable_flag                ; $04F1F6 |\
+  ORA !s_sprite_disable_flag                ; $04F1F9 | |
+  ORA !r_cur_item_used                      ; $04F1FC | | Continue processing if all freeze flags are clear
+  ORA !s_cam_event_flag                     ; $04F1FF | |
+  BEQ .CODE_04F205                          ; $04F202 |/
   RTL                                       ; $04F204 |
 
-CODE_04F205:
+.CODE_04F205:
   LDA #$0004                                ; $04F205 |\ play sound #$04
   JSL push_sound_queue                      ; $04F208 |/
   INC $7FEA                                 ; $04F20C |
