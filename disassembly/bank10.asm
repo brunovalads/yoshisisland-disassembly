@@ -408,7 +408,7 @@ CODE_1083C2:
   LDA #$AA                                  ; $1083CC |
   STA $006C00                               ; $1083CE |
   JSL CODE_108000                           ; $1083D2 |
-  STZ $0202                                 ; $1083D6 |
+  STZ !r_transition_step_timer              ; $1083D6 |
   LDA #$80                                  ; $1083D9 |
   STA $011A                                 ; $1083DB |
   JSL enable_nmi                            ; $1083DE |

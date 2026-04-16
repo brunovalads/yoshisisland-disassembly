@@ -520,17 +520,17 @@ gm_fade_screen_in_out:
 ; Game mode for another fading
 ; Used by indexes $02, $08, $1F, $29, $37
 gm_fade_alt:
-  DEC $0202                                 ; $0083F0 |
+  DEC !r_transition_step_timer              ; $0083F0 |
   BPL gm_fade_screen_in_out_ret             ; $0083F3 |
   LDA #$02                                  ; $0083F5 |
-  STA $0202                                 ; $0083F7 |
+  STA !r_transition_step_timer              ; $0083F7 |
   BRA gm_fade_screen_in_out                 ; $0083FA |
 
 gm16_world_end_cutscene_load:
-  DEC $0202                                 ; $0083FC |
+  DEC !r_transition_step_timer              ; $0083FC |
   BPL gm_fade_screen_in_out_ret             ; $0083FF |
   LDA #$08                                  ; $008401 |
-  STA $0202                                 ; $008403 |
+  STA !r_transition_step_timer              ; $008403 |
   BRA gm_fade_screen_in_out                 ; $008406 |
 
 ; RNG routine

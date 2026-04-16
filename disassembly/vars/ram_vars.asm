@@ -192,6 +192,9 @@
 !r_reg_inidisp_mirror = $0200
 !r_reg_inidisp_mirror_l = $7E0200
 
+!r_transition_step_timer = $0202
+!r_transition_step_timer_l = $7E0202
+
 !r_spc_block_set = $0203
 !r_spc_block_set_l = $7E0203
 
