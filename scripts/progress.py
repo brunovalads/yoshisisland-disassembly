@@ -1,16 +1,20 @@
 import sys
-import glob
+import os
 import re
 
 def calculate_progress(verbose):
-    bank_asm_files = [file for file in glob.glob("../disassembly/*.asm") if "\\bank" in file]
-    #print(bank_asm_files)
-    
+    total_banks = 0x40
+    bank_asm_files = []
     done_banks = []
+    for bank in range(total_banks):
+        file_path = f"../disassembly/bank{bank:02X}.asm"
+        if os.path.isfile(file_path):
+            bank_asm_files.append(file_path)
+            continue
+        done_banks.append(bank)
     
     comments = 0
     total = 0
-    bank_totals = {}
     for bank_asm_file in bank_asm_files:
         bank = bank_asm_file[-10:-4]
         with open(bank_asm_file, 'r') as f:
@@ -60,7 +64,7 @@ def calculate_progress(verbose):
     print('Done lines: {0}'.format(comments))
     print('Total lines: {0}'.format(total))
     print('Progress: {0:.2f}%'.format(percent))
-    print('{0}/{1} banks done'.format(len(done_banks), len(bank_asm_files)))
+    print('{0}/{1} banks done'.format(len(done_banks), total_banks))
 
 def output_bank(bank, comments, total):
     percent = total > 0 and float(comments) / float(total) * 100.0 or 100.0
