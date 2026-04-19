@@ -179,7 +179,7 @@ hookbill_init_fog_fade:
   CMP #$0020                                ; $01817F |
   BCC CODE_018113                           ; $018182 |
   LDX $12                                   ; $018184 |
-  JSL $03D5E4                               ; $018186 |
+  JSL CODE_03D5E4                           ; $018186 |
   STZ $0C14                                 ; $01818A |
   STZ $0C16                                 ; $01818D |
   LDA #$0004                                ; $018190 |
@@ -189,7 +189,7 @@ hookbill_init_fog_fade:
   STZ $0D3B                                 ; $01819C |
 
 CODE_01819F:
-  SEP #$10                                  ; $01819F | entry point
+  SEP #$10                                  ; $01819F |
   LDX $12                                   ; $0181A1 |
   INC !s_spr_wildcard_4_lo_dp,x             ; $0181A3 |
   INC !s_spr_wildcard_4_lo_dp,x             ; $0181A5 |
@@ -213,7 +213,7 @@ CODE_0181BA:
   BRA CODE_01819F                           ; $0181C3 |
 
 hookbill_init_sprites:
-  JSL $0181FB                               ; $0181C5 |
+  JSL CODE_0181FB                           ; $0181C5 |
   LDA #$00F1                                ; $0181C9 |
   STA !r_apu_io_0_mirror                    ; $0181CC |
   LDA #$00DD                                ; $0181CF |
@@ -228,10 +228,10 @@ hookbill_init_sprites:
   JSL spawn_sprite_init                     ; $0181EB | init kamek sprite
   LDA #$0010                                ; $0181EF |
   STA !s_spr_x_pixel_pos,y                  ; $0181F2 |
-  JSL $04F74A                               ; $0181F5 |
+  JSL CODE_04F74A                           ; $0181F5 |
   BRA CODE_01819F                           ; $0181F9 |
 
-; l sub
+CODE_0181FB:
   REP #$10                                  ; $0181FB |
   LDA #$00F8                                ; $0181FD | comp. file index
   LDY #$3400                                ; $018200 | VRAM dest. (BG3 tilemap)
@@ -1109,7 +1109,7 @@ CODE_018CC7:
   STA $6024,y                               ; $018CD5 |
 
 CODE_018CD8:
-  REP #$10                                  ; $018CD8 | entry point
+  REP #$10                                  ; $018CD8 |
   LDA #$0006                                ; $018CDA |
   STA $00                                   ; $018CDD |
   LDY !s_spr_oam_pointer,x                  ; $018CDF |
@@ -1366,7 +1366,7 @@ CODE_018EE7:
   LDY $107C                                 ; $018F09 |
   CPY #$06                                  ; $018F0C |
   BNE CODE_018F1A                           ; $018F0E |
-  JSL $02A982                               ; $018F10 |
+  JSL CODE_02A982                           ; $018F10 |
   INC $0B7B                                 ; $018F14 |
   LDA #$0033                                ; $018F17 |
 
@@ -1525,7 +1525,7 @@ CODE_01901D:
 
 CODE_019050:
   STZ $02                                   ; $019050 |
-  JSL $0EEBFA                               ; $019052 |
+  JSL CODE_0EEBFA                           ; $019052 |
   LDA $04                                   ; $019056 |
   STA $71E2,y                               ; $019058 |
   LDA #$0028                                ; $01905B |
@@ -1598,7 +1598,7 @@ CODE_0190DA:
   LDA !s_spr_y_accel,y                      ; $0190ED |
   STA $02                                   ; $0190F0 |
   TYX                                       ; $0190F2 |
-  JSL $03B24B                               ; $0190F3 |
+  JSL CODE_03B24B                           ; $0190F3 |
   LDY !s_spr_wildcard_5_lo_dp,x             ; $0190F7 |
   CPY #$0B                                  ; $0190F9 |
   BPL CODE_019120                           ; $0190FB |
@@ -1660,7 +1660,7 @@ CODE_01913C:
   BPL CODE_0191BA                           ; $019154 |
 
 CODE_019156:
-  INC $1070                                 ; $019156 | entry point
+  INC $1070                                 ; $019156 |
   LDA #$FE00                                ; $019159 |
   STA !s_spr_wildcard_1_lo,x                ; $01915C |
   STZ !s_spr_gsu_morph_2_lo,x               ; $01915F |
@@ -1735,7 +1735,7 @@ CODE_0191D3:
   STA $02                                   ; $0191F1 |
   TYX                                       ; $0191F3 |
   PHY                                       ; $0191F4 |
-  JSL $03B24B                               ; $0191F5 |
+  JSL CODE_03B24B                           ; $0191F5 |
   PLY                                       ; $0191F9 |
   LDA $00                                   ; $0191FA |
   BNE CODE_0191CA                           ; $0191FC |
@@ -2083,7 +2083,7 @@ hookbill_stare_forward:
   INC !s_spr_wildcard_5_lo_dp,x             ; $019479 |
 
 CODE_01947B:
-  LDA !s_spr_wildcard_6_lo_dp,x             ; $01947B | entry point
+  LDA !s_spr_wildcard_6_lo_dp,x             ; $01947B |
   SEC                                       ; $01947D |
   SBC #$0029                                ; $01947E |
   AND #$0007                                ; $019481 |
@@ -3603,7 +3603,7 @@ hookbill_dead_squish_down:
   LDA !s_spr_y_pixel_pos,x                  ; $01A002 |
   STA $02                                   ; $01A005 |
   LDA #$0340                                ; $01A007 |
-  JSL $02E1A6                               ; $01A00A |
+  JSL CODE_02E1A6                           ; $01A00A |
   RTS                                       ; $01A00E |
 
 CODE_01A00F:
@@ -4390,7 +4390,7 @@ CODE_01A5DF:
   dw $AA6B                                  ; $01A5EA |
 
 main_flan:
-  JSL $01A60B                               ; $01A5EC |
+  JSL CODE_01A60B                           ; $01A5EC |
   JSR CODE_01A740                           ; $01A5F0 |
   TXY                                       ; $01A5F3 |
   LDA !s_spr_wildcard_5_lo_dp,x             ; $01A5F4 |
@@ -4408,6 +4408,7 @@ CODE_01A607:
   RTL                                       ; $01A60A |
 
 ; flan l sub
+CODE_01A60B:
   LDA !s_sprite_disable_flag                ; $01A60B |\
   ORA !r_mosaic_freeze_timer                ; $01A60E | | Continue processing if all sprite freeze flags are clear
   ORA !r_cur_item_used                      ; $01A611 | |
@@ -4454,7 +4455,7 @@ CODE_01A63F:
   BEQ CODE_01A6A0                           ; $01A668 |
   PHY                                       ; $01A66A |
   TYX                                       ; $01A66B |
-  JSL $03B24B                               ; $01A66C |
+  JSL CODE_03B24B                           ; $01A66C |
   PLY                                       ; $01A670 |
   LDA #$0000                                ; $01A671 |
   STA !s_spr_x_accel,y                      ; $01A674 |
@@ -4468,7 +4469,7 @@ CODE_01A63F:
   CMP #$8000                                ; $01A68A |
   ROR A                                     ; $01A68D |
   STA !s_spr_x_speed_lo,y                   ; $01A68E |
-  JSL $03B53D                               ; $01A691 |
+  JSL CODE_03B53D                           ; $01A691 |
   LDX #$09                                  ; $01A695 |
   LDA !gsu_r15                              ; $01A697 |
   JSL r_gsu_init_1                          ; $01A69A | gsu (continue from previous?)
@@ -4500,7 +4501,7 @@ CODE_01A6C9:
   LDA $7860,x                               ; $01A6C9 |
   AND #$0001                                ; $01A6CC |
   BEQ CODE_01A6F7                           ; $01A6CF |
-  JSL $03A590                               ; $01A6D1 |
+  JSL CODE_03A590                           ; $01A6D1 |
   LDA !s_spr_wildcard_4_lo_dp,x             ; $01A6D5 |
   CMP #$0002                                ; $01A6D7 |
   BCC CODE_01A6E9                           ; $01A6DA |
@@ -5191,7 +5192,7 @@ CODE_01AB61:
   ADC #$0040                                ; $01AB8F |
   CMP #$0080                                ; $01AB92 |
   BCS CODE_01ABC1                           ; $01AB95 |
-  JSL $03AD74                               ; $01AB97 |
+  JSL CODE_03AD74                           ; $01AB97 |
   BCC CODE_01ABC1                           ; $01AB9B |
   LDA #$7C60                                ; $01AB9D |
   STA !s_spr_bitwise_settings_1,x           ; $01ABA0 |
@@ -5253,7 +5254,7 @@ CODE_01AC05:
   LDA !s_spr_collision_state,y              ; $01AC1C |
   BEQ CODE_01AC29                           ; $01AC1F |
   TYX                                       ; $01AC21 |
-  JSL $03B25B                               ; $01AC22 |
+  JSL CODE_03B25B                           ; $01AC22 |
   STZ !s_spr_timer_1,x                      ; $01AC26 |
 
 CODE_01AC29:
@@ -5280,7 +5281,7 @@ CODE_01AC3F:
   STA !s_spr_bitwise_settings_1,x           ; $01AC56 |
   LDA #$0974                                ; $01AC59 |
   STA !s_spr_oam_1,x                        ; $01AC5C |
-  JSL $03AEFD                               ; $01AC5F |
+  JSL CODE_03AEFD                           ; $01AC5F |
   LDA #$0080                                ; $01AC63 |
 
 CODE_01AC66:
@@ -5365,7 +5366,9 @@ CODE_01ACE6:
   LSR A                                     ; $01ACF4 |
   LSR A                                     ; $01ACF5 |
   STA !s_spr_facing_dir,x                   ; $01ACF6 |
-  ORA $00                                   ; $01ACF9 | entry point
+
+CODE_01ACF9:
+  ORA $00                                   ; $01ACF9 |
   TAY                                       ; $01ACFB |
   LDA $AC7A,y                               ; $01ACFC |
   STA !s_spr_x_accel_ceiling,x              ; $01ACFF |
@@ -5390,7 +5393,7 @@ main_gusty:
   AND #$0004                                ; $01AD1E | random #: 0 or 4
   STA $00                                   ; $01AD21 |
   LDA !s_spr_facing_dir,x                   ; $01AD23 | this will be 0 or 2
-  JSL $01ACF9                               ; $01AD26 | together, our set of random values is 0, 2, 4, or 6
+  JSL CODE_01ACF9                           ; $01AD26 | together, our set of random values is 0, 2, 4, or 6
   STZ !s_spr_collision_state,x              ; $01AD2A |
   STZ !s_spr_y_accel_ceiling,x              ; $01AD2D |
 
@@ -5416,7 +5419,7 @@ CODE_01AD3B:
   BMI CODE_01AD92                           ; $01AD58 |
   LDY !s_player_jump_state                  ; $01AD5A |
   BEQ CODE_01AD64                           ; $01AD5D |
-  JSL $03A5B7                               ; $01AD5F |
+  JSL CODE_03A5B7                           ; $01AD5F |
   RTL                                       ; $01AD63 |
 
 CODE_01AD64:
@@ -5436,7 +5439,7 @@ CODE_01AD64:
   ADC !s_player_x_speed_prev                ; $01AD85 |
   STA !s_player_x_speed_prev                ; $01AD88 |
   STA !s_player_x_speed                     ; $01AD8B |
-  JSL $06BEC1                               ; $01AD8E |
+  JSL CODE_06BEC1                           ; $01AD8E |
 
 CODE_01AD92:
   LDA !s_spr_timer_2,x                      ; $01AD92 |
@@ -5516,6 +5519,8 @@ init_watermelon_seed:
 main_seed:
   LDY $7860,x                               ; $01AE19 |
   BEQ CODE_01AE54                           ; $01AE1C |
+
+CODE_01AE1E:
   LDA #$0229                                ; $01AE1E |
   JSL spawn_ambient_sprite                  ; $01AE21 |
   LDA !s_spr_x_pixel_pos,x                  ; $01AE25 |
@@ -5546,7 +5551,7 @@ CODE_01AE54:
   LDA !s_player_invincibility_timer         ; $01AE5E |
   BNE CODE_01AE71                           ; $01AE61 |
   JSL player_hit_sprite                     ; $01AE63 |
-  JSL $03B25B                               ; $01AE67 |
+  JSL CODE_03B25B                           ; $01AE67 |
   LDA #$0001                                ; $01AE6B |
   STA $03BC                                 ; $01AE6E |
 
@@ -5798,7 +5803,7 @@ gm0c_level_fadein_and_name:
   STA $0375                                 ; $01B04D | | Set return X/Y
   LDA !r_stars_amount                       ; $01B050 | |
   STA $0377                                 ; $01B053 | | Save current star count
-  JML $118000                               ; $01B056 |/  Jump to bandit minigame
+  JML CODE_118000                           ; $01B056 |/  Jump to bandit minigame
 
 .set_entrance_data
   LDA $7F7E01,x                             ; $01B05A |\
@@ -5912,7 +5917,7 @@ gm0c_level_fadein_and_name:
   STA !r_reg_inidisp_mirror                 ; $01B13B |/ Turn off F-blank
   LDA #$01                                  ; $01B13E |\
   STA $0201                                 ; $01B140 |/ Set Fade Out mode
-  JSL $108FD6                               ; $01B143 |
+  JSL CODE_108FD6                           ; $01B143 |
   LDX #$7F                                  ; $01B147 |
 
 CODE_01B149:
@@ -5932,7 +5937,7 @@ CODE_01B149:
   SBC #$0094                                ; $01B166 | |
   STA !s_bg1_cam_y                          ; $01B169 |/
   INC !s_player_jump_state                  ; $01B16C | ???
-  JSL $04DC28                               ; $01B16F | Init baby mario ?
+  JSL CODE_04DC28                           ; $01B16F | Init baby mario ?
   REP #$20                                  ; $01B173 |
   LDA #$0006                                ; $01B175 |
   STA !s_player_jump_state                  ; $01B178 |
@@ -5943,7 +5948,7 @@ CODE_01B149:
   LDA #$0016                                ; $01B187 |
   STA !s_player_state                       ; $01B18A |
   SEP #$20                                  ; $01B18D |
-  JSL $01B27B                               ; $01B18F | Init GSU buffer
+  JSL CODE_01B27B                           ; $01B18F | Init GSU buffer
   LDA #$01                                  ; $01B193 |
   STA $0B54                                 ; $01B195 |
   REP #$20                                  ; $01B198 |
@@ -5951,7 +5956,7 @@ CODE_01B149:
   STA !r_stage_intro_flag                   ; $01B19D |
   LDA #$0120                                ; $01B1A0 |
   STA $0B4C                                 ; $01B1A3 |
-  JSL $108F49                               ; $01B1A6 |
+  JSL CODE_108F49                           ; $01B1A6 |
   LDA #$03                                  ; $01B1AA |
   STA $4D                                   ; $01B1AC |
   LDA #$02                                  ; $01B1AE |
@@ -5962,7 +5967,7 @@ CODE_01B149:
   STA !reg_vtimel                           ; $01B1BA |/
   LDA #$B1                                  ; $01B1BD |\ set all IRQ flags
   STA !reg_nmitimen                         ; $01B1BF |/
-  JSL $108B61                               ; $01B1C2 |
+  JSL CODE_108B61                           ; $01B1C2 |
   REP #$20                                  ; $01B1C6 |
 
 CODE_01B1C8:
@@ -5989,19 +5994,19 @@ CODE_01B1C8:
 CODE_01B1F3:
   DEC A                                     ; $01B1F3 |\
   BNE CODE_01B1FA                           ; $01B1F4 | | build MAP16 table
-  JSL $108B61                               ; $01B1F6 |/  if loadtype < 2
+  JSL CODE_108B61                           ; $01B1F6 |/  if loadtype < 2
 
 CODE_01B1FA:
-  JSL $04DB68                               ; $01B1FA |
-  JSL $03954E                               ; $01B1FE |
+  JSL CODE_04DB68                           ; $01B1FA |
+  JSL CODE_03954E                           ; $01B1FE |
   LDA !s_cam_x_right_boundary               ; $01B202 |
   CMP #$0F                                  ; $01B205 |
   BEQ CODE_01B211                           ; $01B207 |
-  JSL $04DCC4                               ; $01B209 |
-  JSL $03954E                               ; $01B20D |
+  JSL CODE_04DCC4                           ; $01B209 |
+  JSL CODE_03954E                           ; $01B20D |
 
 CODE_01B211:
-  JSL $108FD6                               ; $01B211 |
+  JSL CODE_108FD6                           ; $01B211 |
   STZ !r_level_load_type                    ; $01B215 |
   STZ !r_stage_intro_flag                   ; $01B218 |
   LDA #$02                                  ; $01B21B |
@@ -6016,7 +6021,7 @@ CODE_01B211:
 
 CODE_01B22F:
   REP #$30                                  ; $01B22F |
-  JSL $04DCF9                               ; $01B231 |
+  JSL CODE_04DCF9                           ; $01B231 |
   SEP #$30                                  ; $01B235 |
   LDA !r_reg_bgmode_mirror                  ; $01B237 |
   AND #$07                                  ; $01B23A |
@@ -6025,7 +6030,7 @@ CODE_01B22F:
   INC !s_opt_mode                           ; $01B240 |
 
 CODE_01B243:
-  JSL $01B25E                               ; $01B243 |
+  JSL CODE_01B25E                           ; $01B243 |
   JML increment_gamemode                    ; $01B247 |
 
 ; table of music values to use for each level music setting
@@ -6035,7 +6040,7 @@ CODE_01B243:
   db $00, $01, $00, $00                     ; $01B257 |
   db $00, $02, $01                          ; $01B25B |
 
-; l sub
+CODE_01B25E:
   PHP                                       ; $01B25E |
   SEP #$30                                  ; $01B25F |
   LDA $0205                                 ; $01B261 |
@@ -6051,6 +6056,7 @@ CODE_01B273:
   PLP                                       ; $01B279 |
   RTL                                       ; $01B27A |
 
+CODE_01B27B:
   LDA #$70                                  ; $01B27B |
   STA $22                                   ; $01B27D |
   REP #$20                                  ; $01B27F |
@@ -6087,6 +6093,8 @@ CODE_01B2A8:
 ; Saves egg inventory in RAM
 ; for between levels
 save_egg_inventory:
+
+CODE_01B2B7:
   PHP                                       ; $01B2B7 |
   REP #$20                                  ; $01B2B8 |
   SEP #$10                                  ; $01B2BA |
@@ -6107,6 +6115,7 @@ save_egg_inventory:
   PLP                                       ; $01B2D4 |
   RTL                                       ; $01B2D5 |
 
+CODE_01B2D6:
   PHP                                       ; $01B2D6 |
   REP #$20                                  ; $01B2D7 |
   SEP #$10                                  ; $01B2D9 |
@@ -6138,7 +6147,7 @@ CODE_01B2ED:
   ORA $6126                                 ; $01B314 |
   STA !s_spr_oam_yxppccct,x                 ; $01B317 |
   STX $12                                   ; $01B31A |
-  JSL $03BEB9                               ; $01B31C |
+  JSL CODE_03BEB9                           ; $01B31C |
   STZ !r_sound_queue_size                   ; $01B320 |
 
 CODE_01B323:
@@ -7377,7 +7386,7 @@ CODE_01BE60:
   ORA $35                                   ; $01BEA2 |
   AND #$F0                                  ; $01BEA4 |
   BEQ CODE_01BEE3                           ; $01BEA6 |
-  JSL $01B2B7                               ; $01BEA8 |
+  JSL CODE_01B2B7                           ; $01BEA8 |
   LDX #$1F                                  ; $01BEAC |
   LDA $0385                                 ; $01BEAE |\
   BPL CODE_01BEB8                           ; $01BEB1 | |
@@ -7601,7 +7610,7 @@ gm0f_run_level:
   STZ $0B84                                 ; $01C0DE |
   LDA !r_msg_box_state                      ; $01C0E1 |\ are we in a message box?
   BEQ .check_pause                          ; $01C0E4 |/ if not, continue onto pause
-  JSL $01DE5A                               ; $01C0E6 | message box handler
+  JSL CODE_01DE5A                           ; $01C0E6 | message box handler
   JMP .check_item                           ; $01C0EA |
 
 .item_use_ptr
@@ -7769,7 +7778,7 @@ main_gamemode_0F:
   JSL spr_edge_despawn_draw_check_warp      ; $01C202 | screen edge, despawn & draw sprites
   JSL draw_player                           ; $01C206 | yoshi drawing (OAM placing)
   JSL main_player                           ; $01C20A |
-  JSL $0397DF                               ; $01C20E |
+  JSL CODE_0397DF                           ; $01C20E |
   JSR CODE_01D6B1                           ; $01C212 |
   LDA !r_header_level_mode                  ; $01C215 |
   CMP #$09                                  ; $01C218 |\
@@ -8944,7 +8953,7 @@ CODE_01CAFC:
 .still_fading
   REP #$20                                  ; $01CB0C |
   PLA                                       ; $01CB0E |
-  JML $01C2E2                               ; $01CB0F |
+  JML CODE_01C2E2                           ; $01CB0F |
 
 
   DEC A                                     ; $01CB13 |
@@ -11128,7 +11137,7 @@ full_egg_item:
   JSL spawn_sprite_active                   ; $01DB16 |/ Spawn fill eggs item
   BCC .ret                                  ; $01DB1A |  Return if failed to spawn
   TYX                                       ; $01DB1C |  Sprite slot to X
-  JSL $029AC6                               ; $01DB1D |  Setup sprite position
+  JSL CODE_029AC6                           ; $01DB1D |  Setup sprite position
   INC $039A                                 ; $01DB21 |  Set item in use flag
 .ret
   RTS                                       ; $01DB24 |
@@ -11384,7 +11393,7 @@ CODE_01DCB1:
   RTS                                       ; $01DCC0 |
 
 CODE_01DCC1:
-  JSL $04F74A                               ; $01DCC1 |
+  JSL CODE_04F74A                           ; $01DCC1 |
   RTS                                       ; $01DCC5 |
 
 CODE_01DCC6:
@@ -11572,9 +11581,13 @@ window_mask_settings_bg3_4_obj:
   db $00, $22, $22, $88, $88, $88, $22      ; $01DE4D |
 
 message_box_handler:
+
+CODE_01DE54:
   LDA #$01                                  ; $01DE54 |
   STA $10                                   ; $01DE56 |
   BRA CODE_01DE5C                           ; $01DE58 |
+
+CODE_01DE5A:
   STZ $10                                   ; $01DE5A |
 
 CODE_01DE5C:
@@ -12473,6 +12486,7 @@ CODE_01E4D1:
   dw $0080, $0040, $0020, $0010             ; $01E4F1 |
   dw $0008, $0004, $0002, $0001             ; $01E4F9 |
 
+CODE_01E501:
   PHX                                       ; $01E501 |
   TXA                                       ; $01E502 |
   AND #$001E                                ; $01E503 |

@@ -112,7 +112,7 @@ CODE_0580BB:
 
 ; the ones that give you a single red/yellow/flashing egg
 init_egg_block:
-  JSL $03D406                               ; $0580C4 |
+  JSL CODE_03D406                           ; $0580C4 |
   LDA !s_spr_id,x                           ; $0580C8 |
   SEC                                       ; $0580CB |
   SBC #$0068                                ; $0580CC |
@@ -126,7 +126,7 @@ init_egg_block:
   dw $827D                                  ; $0580DB |
 
 main_flashing_egg_block:
-  JSL $03B75E                               ; $0580DD |
+  JSL CODE_03B75E                           ; $0580DD |
 
 ; the ones that give you a single red/yellow egg
 main_egg_block:
@@ -153,14 +153,14 @@ CODE_058104:
   RTL                                       ; $058108 |
 
 CODE_058109:
-  JSL $03D291                               ; $058109 |
+  JSL CODE_03D291                           ; $058109 |
   LDY !s_on_sprite_platform_flag            ; $05810D |
   PHY                                       ; $058110 |
-  JSL $03D22D                               ; $058111 |
+  JSL CODE_03D22D                           ; $058111 |
   PLY                                       ; $058115 |
   CPY !s_on_sprite_platform_flag            ; $058116 |
   BNE CODE_05811F                           ; $058119 |
-  JSL $03D127                               ; $05811B |
+  JSL CODE_03D127                           ; $05811B |
 
 CODE_05811F:
   RTL                                       ; $05811F |
@@ -317,7 +317,7 @@ CODE_058222:
   BEQ CODE_05827C                           ; $058252 |
   STZ !s_player_y_speed                     ; $058254 |
   STZ !s_player_flutter_state               ; $058257 |
-  JSL $03AD74                               ; $05825A |
+  JSL CODE_03AD74                           ; $05825A |
   BCC CODE_058263                           ; $05825E |
   INC !s_spr_anim_frame,x                   ; $058260 |
 
@@ -340,7 +340,7 @@ CODE_05827C:
   CMP !s_spr_y_pixel_pos,x                  ; $058281 |
   BCS CODE_05827C                           ; $058284 |
   STA !s_spr_y_pixel_pos,x                  ; $058286 |
-  JSL $03AEFD                               ; $058289 |
+  JSL CODE_03AEFD                           ; $058289 |
   SEP #$20                                  ; $05828D |
   LDA #$FF                                  ; $05828F |
   STA !s_spr_stage_id,x                     ; $058291 |
@@ -351,10 +351,10 @@ CODE_05827C:
   CLC                                       ; $05829A |
   ADC #$0022                                ; $05829B |
   JSL spawn_sprite                          ; $05829E |
-  JSL $0ED844                               ; $0582A2 |
+  JSL CODE_0ED844                           ; $0582A2 |
   PHX                                       ; $0582A6 |
   TYX                                       ; $0582A7 |
-  JSL $03B8A8                               ; $0582A8 |
+  JSL CODE_03B8A8                           ; $0582A8 |
   PLX                                       ; $0582AC |
   PLA                                       ; $0582AD |
   LDA #$003A                                ; $0582AE |\ play sound #$3A
@@ -362,9 +362,11 @@ CODE_05827C:
 
 ; both sprite IDs
 init_large_spring_ball:
+
+CODE_0582B5:
   LDA !s_spr_dyntile_index,x                ; $0582B5 |
   BPL CODE_0582E1                           ; $0582B8 |
-  JSL $03AE60                               ; $0582BA |
+  JSL CODE_03AE60                           ; $0582BA |
   INC !s_spr_anim_frame,x                   ; $0582BE |
   LDA #$0100                                ; $0582C1 |
   STA !s_spr_wildcard_1_lo,x                ; $0582C4 |
@@ -375,7 +377,7 @@ init_large_spring_ball:
   STA !s_spr_hitbox_width,x                 ; $0582D3 |
   STA !s_spr_hitbox_height,x                ; $0582D6 |
   LDY #$02                                  ; $0582D9 |
-  JSL $0582FD                               ; $0582DB |
+  JSL CODE_0582FD                           ; $0582DB |
   BRA CODE_0582E5                           ; $0582DF |
 
 CODE_0582E1:
@@ -393,6 +395,8 @@ CODE_0582E5:
 init_spring_ball:
   JSL CODE_02A007                           ; $0582F7 |
   LDY #$00                                  ; $0582FB |
+
+CODE_0582FD:
   STY $0E                                   ; $0582FD |
   LDA #$0004                                ; $0582FF |
   STA !s_spr_hitbox_width,x                 ; $058302 |
@@ -496,7 +500,7 @@ CODE_0583A1:
   BNE CODE_0583D7                           ; $0583C7 |
   LDA !s_spr_dyntile_index,x                ; $0583C9 |
   BPL CODE_0583DB                           ; $0583CC |
-  JSL $03AD74                               ; $0583CE |
+  JSL CODE_03AD74                           ; $0583CE |
   BCC CODE_0583DB                           ; $0583D2 |
   INC !s_spr_anim_frame,x                   ; $0583D4 |
 
@@ -608,7 +612,7 @@ CODE_058490:
   BNE CODE_0584AC                           ; $058494 |
   LDY $0E                                   ; $058496 |
   BNE CODE_0584A1                           ; $058498 |
-  JSL $03AEFD                               ; $05849A |
+  JSL CODE_03AEFD                           ; $05849A |
   STZ !s_spr_anim_frame,x                   ; $05849E |
 
 CODE_0584A1:
@@ -879,7 +883,7 @@ CODE_0586A2:
   STA !s_spr_wildcard_2_hi,x                ; $0586BA |
   BNE CODE_0586C5                           ; $0586BD |
   REP #$20                                  ; $0586BF |
-  JSL $03AEFD                               ; $0586C1 |
+  JSL CODE_03AEFD                           ; $0586C1 |
 
 CODE_0586C5:
   REP #$20                                  ; $0586C5 |
@@ -895,7 +899,7 @@ CODE_0586C8:
   LDA !s_spr_collision_state,y              ; $0586D6 |
   BEQ CODE_058710                           ; $0586D9 |
   TYX                                       ; $0586DB |
-  JSL $03B25B                               ; $0586DC |
+  JSL CODE_03B25B                           ; $0586DC |
   DEC !s_spr_wildcard_2_lo,x                ; $0586E0 |
   LDY !s_spr_wildcard_2_lo,x                ; $0586E3 |
   BNE CODE_058709                           ; $0586E6 |
@@ -921,7 +925,7 @@ CODE_058709:
 CODE_058710:
   PLA                                       ; $058710 |
   STA $00                                   ; $058711 |
-  JSL $03A5B7                               ; $058713 |
+  JSL CODE_03A5B7                           ; $058713 |
   LDA $00                                   ; $058717 |
   PHA                                       ; $058719 |
   RTS                                       ; $05871A |
@@ -1004,7 +1008,7 @@ CODE_058796:
   TYX                                       ; $0587B7 |
   LDA !s_spr_dyntile_index,x                ; $0587B8 |
   BMI CODE_0587C1                           ; $0587BB |
-  JSL $03AEFD                               ; $0587BD |
+  JSL CODE_03AEFD                           ; $0587BD |
 
 CODE_0587C1:
   LDA !s_spr_timer_3,x                      ; $0587C1 |
@@ -1034,7 +1038,7 @@ CODE_0587C1:
   BRA CODE_058837                           ; $0587FF |
 
 CODE_058801:
-  JSL $03AD74                               ; $058801 |
+  JSL CODE_03AD74                           ; $058801 |
   BCC CODE_058837                           ; $058805 |
   LDY #$00                                  ; $058807 |
   LDA !s_spr_x_player_delta,x               ; $058809 |
@@ -1452,7 +1456,7 @@ CODE_058A87:
   CMP $0E                                   ; $058B3F |
   BCS CODE_058B48                           ; $058B41 |
   TYX                                       ; $058B43 |
-  JSL $03B25B                               ; $058B44 |
+  JSL CODE_03B25B                           ; $058B44 |
 
 CODE_058B48:
   LDA !s_spr_x_player_delta,x               ; $058B48 |
@@ -1478,7 +1482,7 @@ CODE_058B6F:
   CLC                                       ; $058B6F |
   RTS                                       ; $058B70 |
 
-  JSL $03AE60                               ; $058B71 |
+  JSL CODE_03AE60                           ; $058B71 |
   LDA #$0049                                ; $058B75 |
   STA !s_spr_gsu_morph_1_lo,x               ; $058B78 |
   JSR CODE_058C74                           ; $058B7B |
@@ -1658,7 +1662,7 @@ CODE_058CE3:
   BRA CODE_058CF8                           ; $058CF0 |
 
 CODE_058CF2:
-  JSL $0DC14C                               ; $058CF2 |
+  JSL CODE_0DC14C                           ; $058CF2 |
   BCS CODE_058D40                           ; $058CF6 |
 
 CODE_058CF8:
@@ -1705,7 +1709,7 @@ CODE_058D40:
   TYX                                       ; $058D45 |
   LDA !s_spr_timer_2,x                      ; $058D46 |
   BNE CODE_058D81                           ; $058D49 |
-  JSL $03AD74                               ; $058D4B |
+  JSL CODE_03AD74                           ; $058D4B |
   BCC CODE_058D81                           ; $058D4F |
   LDA $10                                   ; $058D51 |
   AND #$0002                                ; $058D53 |
@@ -1737,7 +1741,7 @@ CODE_058D81:
   STA !s_spr_y_pixel_pos,x                  ; $058D8B |
   STZ !s_spr_y_speed_lo,x                   ; $058D8E |
   STZ !s_spr_y_accel,x                      ; $058D91 |
-  JSL $03AEFD                               ; $058D94 |
+  JSL CODE_03AEFD                           ; $058D94 |
   SEP #$20                                  ; $058D98 |
   LDA #$FF                                  ; $058D9A |
   STA !s_spr_draw_priority,x                ; $058D9C |
@@ -1919,7 +1923,7 @@ CODE_058F0C:
   TYX                                       ; $058F11 |
   LDA !s_spr_timer_2,x                      ; $058F12 |
   BNE CODE_058F47                           ; $058F15 |
-  JSL $03AD74                               ; $058F17 |
+  JSL CODE_03AD74                           ; $058F17 |
   BCC CODE_058F47                           ; $058F1B |
   LDA !s_spr_x_player_dir,x                 ; $058F1D |
   TAY                                       ; $058F20 |
@@ -1952,7 +1956,7 @@ CODE_058F47:
   STZ !s_spr_x_speed_lo,x                   ; $058F63 |
   STZ !s_spr_y_speed_lo,x                   ; $058F66 |
   STZ !s_spr_y_accel,x                      ; $058F69 |
-  JSL $03AEFD                               ; $058F6C |
+  JSL CODE_03AEFD                           ; $058F6C |
   SEP #$20                                  ; $058F70 |
   LDA #$FF                                  ; $058F72 |
   STA !s_spr_draw_priority,x                ; $058F74 |
@@ -2219,7 +2223,7 @@ CODE_05917C:
   RTS                                       ; $05917C |
 
 init_chain_chomp:
-  JSL $03AE60                               ; $05917D |
+  JSL CODE_03AE60                           ; $05917D |
   LDA !s_spr_x_pixel_pos,x                  ; $059181 |
   CLC                                       ; $059184 |
   ADC #$0004                                ; $059185 |
@@ -2257,7 +2261,7 @@ init_chain_chomp:
 main_chain_chomp:
   LDY !s_spr_oam_count,x                    ; $0591DA |
   BPL CODE_0591E8                           ; $0591DD |
-  JSL $03ABFA                               ; $0591DF |
+  JSL CODE_03ABFA                           ; $0591DF |
   LDA #$0080                                ; $0591E3 |
   BRA CODE_0591EF                           ; $0591E6 |
 
@@ -2420,7 +2424,7 @@ CODE_059304:
   RTL                                       ; $05930A |
 
 CODE_05930B:
-  JSL $03A5B7                               ; $05930B |
+  JSL CODE_03A5B7                           ; $05930B |
   LDY !s_spr_collision_id,x                 ; $05930F |
   DEY                                       ; $059312 |
   BMI CODE_059371                           ; $059313 |
@@ -2463,7 +2467,7 @@ CODE_05934D:
   TYX                                       ; $05935C |
   LDA #$0079                                ; $05935D |\ play sound #$79
   JSL push_sound_queue                      ; $059360 |/
-  JSL $03B25B                               ; $059364 |
+  JSL CODE_03B25B                           ; $059364 |
   LDA #$0001                                ; $059368 |
   STA !s_spr_wildcard_3_lo_dp,x             ; $05936B |
   LDY #$01                                  ; $05936D |
@@ -2687,14 +2691,14 @@ CODE_0594E5:
   STA $0E0D                                 ; $059512 |
   LDA #$0050                                ; $059515 |
   STA !s_spr_wildcard_3_lo_dp,x             ; $059518 |
-  JSL $03AEFD                               ; $05951A |
+  JSL CODE_03AEFD                           ; $05951A |
   LDA #$0083                                ; $05951E |\ play sound #$83
   JSL push_sound_queue                      ; $059521 |/
-  JSL $03ADD0                               ; $059525 |
+  JSL CODE_03ADD0                           ; $059525 |
   BCS CODE_059537                           ; $059529 |
   LDA #$0100                                ; $05952B |
   STA $0E0D                                 ; $05952E |
-  JSL $03AD74                               ; $059531 |
+  JSL CODE_03AD74                           ; $059531 |
   BRA CODE_059540                           ; $059535 |
 
 CODE_059537:
@@ -2960,8 +2964,8 @@ CODE_0596FB:
   STA !s_spr_timer_3,x                      ; $059719 |
   LDY !s_spr_oam_count,x                    ; $05971C |
   BPL CODE_059741                           ; $05971F |
-  JSL $03AEFD                               ; $059721 |
-  JSL $03AD74                               ; $059725 |
+  JSL CODE_03AEFD                           ; $059721 |
+  JSL CODE_03AD74                           ; $059725 |
   DEC !s_spr_anim_frame,x                   ; $059729 |
   LDA #$4005                                ; $05972C |
   STA !s_spr_oam_1,x                        ; $05972F |
@@ -2983,10 +2987,10 @@ CODE_059748:
   RTS                                       ; $05974B |
 
 init_swing_of_grinders:
-  JSL $03AE60                               ; $05974C |
+  JSL CODE_03AE60                           ; $05974C |
   LDA !s_spr_dyntile_index,x                ; $059750 |
   STA !s_spr_wildcard_4_lo_dp,x             ; $059753 |
-  JSL $03AE60                               ; $059755 |
+  JSL CODE_03AE60                           ; $059755 |
   LDA #$FE40                                ; $059759 |
   STA !s_spr_x_accel_ceiling,x              ; $05975C |
   STA !s_spr_y_accel_ceiling,x              ; $05975F |
@@ -3005,12 +3009,12 @@ main_swing_of_grinders:
   BNE CODE_059792                           ; $05977E |
   LDA !s_spr_dyntile_index,x                ; $059780 |
   BMI CODE_059789                           ; $059783 |
-  JSL $03AEFD                               ; $059785 |
+  JSL CODE_03AEFD                           ; $059785 |
 
 CODE_059789:
   LDA !s_spr_wildcard_4_lo_dp,x             ; $059789 |
   STA !s_spr_dyntile_index,x                ; $05978B |
-  JSL $03AEFD                               ; $05978E |
+  JSL CODE_03AEFD                           ; $05978E |
 
 CODE_059792:
   JSL CODE_03AF23                           ; $059792 |
@@ -3058,7 +3062,7 @@ CODE_0597CD:
   ADC #$0020                                ; $0597EC |
   PHA                                       ; $0597EF |
   TAY                                       ; $0597F0 |
-  JSL $03AA60                               ; $0597F1 |
+  JSL CODE_03AA60                           ; $0597F1 |
   LDA !s_spr_dyntile_index,x                ; $0597F5 |
   STA $00                                   ; $0597F8 |
   LDA !s_spr_wildcard_4_lo_dp,x             ; $0597FA |
@@ -3069,13 +3073,13 @@ CODE_0597CD:
   ADC #$0020                                ; $059803 |
   PHA                                       ; $059806 |
   TAY                                       ; $059807 |
-  JSL $03AA60                               ; $059808 |
+  JSL CODE_03AA60                           ; $059808 |
   REP #$10                                  ; $05980C |
   PLA                                       ; $05980E |
   CLC                                       ; $05980F |
   ADC #$0020                                ; $059810 |
   TAY                                       ; $059813 |
-  JSL $03AA60                               ; $059814 |
+  JSL CODE_03AA60                           ; $059814 |
   LDA $00                                   ; $059818 |
   STA !s_spr_dyntile_index,x                ; $05981A |
   LDA !s_spr_cam_x_pos,x                    ; $05981D |
@@ -3141,7 +3145,7 @@ CODE_05988A:
   LDA !s_spr_wildcard_4_lo_dp,x             ; $059890 |
   STA !s_spr_dyntile_index,x                ; $059892 |
   PLA                                       ; $059895 |
-  JML $03AEFD                               ; $059896 |
+  JML CODE_03AEFD                           ; $059896 |
 
 CODE_05989A:
   LDY #$0C                                  ; $05989A |
@@ -3266,7 +3270,7 @@ CODE_059959:
   LDA #$0008                                ; $059980 |
   STA !s_spr_wildcard_1_lo,y                ; $059983 |
   TYX                                       ; $059986 |
-  JSL $02BC22                               ; $059987 |
+  JSL CODE_02BC22                           ; $059987 |
   LDX $12                                   ; $05998B |
   LDY #$0C                                  ; $05998D |
 
@@ -3299,7 +3303,7 @@ CODE_0599C0:
   SBC #$0004                                ; $0599C4 |
   TAY                                       ; $0599C7 |
   BPL CODE_05998F                           ; $0599C8 |
-  JSL $03AEFD                               ; $0599CA |
+  JSL CODE_03AEFD                           ; $0599CA |
   LDA !s_spr_wildcard_4_lo_dp,x             ; $0599CE |
   STA !s_spr_dyntile_index,x                ; $0599D0 |
   PLA                                       ; $0599D3 |
@@ -3475,7 +3479,7 @@ CODE_059AB7:
   RTS                                       ; $059B2F |
 
 init_expansion_block:
-  JSL $03AE60                               ; $059B30 |
+  JSL CODE_03AE60                           ; $059B30 |
   LDA !s_spr_y_pixel_pos,x                  ; $059B34 |
   STA !s_spr_wildcard_6_lo_dp,x             ; $059B37 |
   LDA #$0100                                ; $059B39 |
@@ -3524,7 +3528,7 @@ CODE_059B70:
   STZ !gsu_r3                               ; $059B8D |
   LDA !s_spr_gsu_morph_1_lo,x               ; $059B90 |
   STA !gsu_r6                               ; $059B93 |
-  JSL $059C6F                               ; $059B96 |
+  JSL CODE_059C6F                           ; $059B96 |
   PLA                                       ; $059B9A |
   CMP !s_spr_wildcard_5_lo_dp,x             ; $059B9B |
   BEQ CODE_059BA6                           ; $059B9D |
@@ -3638,6 +3642,7 @@ CODE_059C6B:
   STA !s_spr_gsu_morph_1_lo,x               ; $059C6B |
   RTS                                       ; $059C6E |
 
+CODE_059C6F:
   STA !gsu_r9                               ; $059C6F |
   STY $08                                   ; $059C72 |
   LDA !s_player_hitbox_half_width           ; $059C74 |
@@ -3801,7 +3806,7 @@ CODE_059D6C:
 
 ; blue and red
 init_checkered_block:
-  JSL $03AE60                               ; $059D95 |
+  JSL CODE_03AE60                           ; $059D95 |
   LDA #$0100                                ; $059D99 |
   STA !s_spr_gsu_morph_1_lo,x               ; $059D9C |
   STA !s_spr_gsu_morph_2_lo,x               ; $059D9F |
@@ -3836,7 +3841,7 @@ CODE_059DCC:
 CODE_059DD3:
   JSR CODE_059E06                           ; $059DD3 |
   JSR CODE_059E6F                           ; $059DD6 |
-  JSL $059C6F                               ; $059DD9 |
+  JSL CODE_059C6F                           ; $059DD9 |
   BCS CODE_059DF3                           ; $059DDD |
   LDA !s_player_x                           ; $059DDF |
   CLC                                       ; $059DE2 |
@@ -3985,7 +3990,7 @@ CODE_059EED:
   LDA !s_spr_collision_state,y              ; $059F04 |
   BEQ CODE_059F4F                           ; $059F07 |
   TYX                                       ; $059F09 |
-  JSL $03B25B                               ; $059F0A |
+  JSL CODE_03B25B                           ; $059F0A |
   BRA CODE_059F19                           ; $059F0E |
 
 CODE_059F10:
@@ -3999,7 +4004,7 @@ CODE_059F19:
   LDA !s_spr_y_hitbox_center,x              ; $059F1E |
   STA $02                                   ; $059F21 |
   LDA #$01E7                                ; $059F23 |
-  JSL $03B56E                               ; $059F26 |
+  JSL CODE_03B56E                           ; $059F26 |
   LDY #$02                                  ; $059F2A |
   STY !s_spr_wildcard_3_lo_dp,x             ; $059F2C |
   LDA #$0021                                ; $059F2E |
@@ -4044,11 +4049,11 @@ CODE_059F77:
   LDA !s_spr_id,x                           ; $059F82 |
   CMP #$0095                                ; $059F85 |
   BNE CODE_059F90                           ; $059F88 |
-  JSL $04A6AE                               ; $059F8A |
+  JSL CODE_04A6AE                           ; $059F8A |
   BRA CODE_059F96                           ; $059F8E |
 
 CODE_059F90:
-  JSL $04A725                               ; $059F90 |
+  JSL CODE_04A725                           ; $059F90 |
   INC !s_spr_wildcard_5_lo_dp,x             ; $059F94 |
 
 CODE_059F96:
@@ -4067,7 +4072,7 @@ init_wild_piranha:
   LDA !s_spr_y_pixel_pos,x                  ; $059FA8 |
   CLC                                       ; $059FAB |
   ADC #$0010                                ; $059FAC |
-  JSL $0EB8B7                               ; $059FAF |
+  JSL CODE_0EB8B7                           ; $059FAF |
   BNE CODE_059FBF                           ; $059FB3 |
   LDA !s_spr_x_pixel_pos,x                  ; $059FB5 |
   CLC                                       ; $059FB8 |
@@ -4196,7 +4201,7 @@ CODE_05A07B:
   LDA !s_spr_collision_state,y              ; $05A08F |
   BEQ CODE_05A0A2                           ; $05A092 |
   TYX                                       ; $05A094 |
-  JSL $03B25B                               ; $05A095 |
+  JSL CODE_03B25B                           ; $05A095 |
   LDY #$10                                  ; $05A099 |
   STY !s_spr_wildcard_5_lo_dp,x             ; $05A09B |
   BRA CODE_05A0A2                           ; $05A09D |
@@ -4274,7 +4279,7 @@ CODE_05A11D:
   TYX                                       ; $05A11E |
   PLA                                       ; $05A11F |
   STA $00                                   ; $05A120 |
-  JSL $03A5B7                               ; $05A122 |
+  JSL CODE_03A5B7                           ; $05A122 |
   LDA $00                                   ; $05A126 |
   PHA                                       ; $05A128 |
   LDA !s_spr_timer_2,x                      ; $05A129 |
@@ -4292,7 +4297,7 @@ CODE_05A11D:
   LDA !s_player_form                        ; $05A146 |
   CMP #$0010                                ; $05A149 |
   BEQ CODE_05A168                           ; $05A14C |
-  JSL $03AD74                               ; $05A14E |
+  JSL CODE_03AD74                           ; $05A14E |
   BCC CODE_05A168                           ; $05A152 |
   LDA #$84A8                                ; $05A154 |
   STA !s_spr_bitwise_settings_1,x           ; $05A157 |
@@ -4387,7 +4392,7 @@ CODE_05A1C1:
   ORA !s_player_invincibility_timer         ; $05A200 |
   ORA $0D94                                 ; $05A203 |
   BNE CODE_05A249                           ; $05A206 |
-  JSL $03BFF7                               ; $05A208 |
+  JSL CODE_03BFF7                           ; $05A208 |
   LDA #$A041                                ; $05A20C |
   STA !s_spr_bitwise_settings_3,x           ; $05A20F |
   LDA #$3D01                                ; $05A212 |
@@ -4403,7 +4408,7 @@ CODE_05A224:
   STA !s_spr_wildcard_1_lo,x                ; $05A226 |
   LDA $02                                   ; $05A229 |
   STA !s_spr_wildcard_2_lo,x                ; $05A22B |
-  JSL $04F74A                               ; $05A22E |
+  JSL CODE_04F74A                           ; $05A22E |
   LDA #$001A                                ; $05A232 |
   STA !s_player_state                       ; $05A235 |
   LDA #$0021                                ; $05A238 |
@@ -4447,7 +4452,7 @@ CODE_05A27F:
   SBC #$0020                                ; $05A283 |
   CMP #$0055                                ; $05A286 |
   BPL CODE_05A2C7                           ; $05A289 |
-  JSL $03AEFD                               ; $05A28B |
+  JSL CODE_03AEFD                           ; $05A28B |
   LDY !s_spr_wildcard_2_lo,x                ; $05A28F |
   BEQ CODE_05A29D                           ; $05A292 |
   STZ !s_spr_wildcard_2_lo,x                ; $05A294 |
@@ -4902,7 +4907,7 @@ CODE_05A621:
   TYX                                       ; $05A622 |
   LDY $105A                                 ; $05A623 |
   BEQ CODE_05A65D                           ; $05A626 |
-  JSL $03AD74                               ; $05A628 |
+  JSL CODE_03AD74                           ; $05A628 |
   BCC CODE_05A65D                           ; $05A62C |
   LDA #$84A8                                ; $05A62E |
   STA !s_spr_bitwise_settings_1,x           ; $05A631 |
@@ -5190,7 +5195,7 @@ CODE_05A87B:
   RTS                                       ; $05A87B |
 
 init_wild_ptooie_piranha:
-  JSL $03AE60                               ; $05A87C |
+  JSL CODE_03AE60                           ; $05A87C |
   LDA #$0100                                ; $05A880 |
   STA !s_spr_gsu_morph_1_lo,x               ; $05A883 |
   LDA #$01C0                                ; $05A886 |
@@ -5324,7 +5329,7 @@ CODE_05A96C:
   LDA !s_spr_x_speed_lo,y                   ; $05A96C |
   PHP                                       ; $05A96F |
   TYX                                       ; $05A970 |
-  JSL $03B25B                               ; $05A971 |
+  JSL CODE_03B25B                           ; $05A971 |
   LDA #$000B                                ; $05A975 |\ play sound #$0B
   JSL push_sound_queue                      ; $05A978 |/
   LDY #$00                                  ; $05A97C |
@@ -5598,7 +5603,7 @@ CODE_05AB77:
   STA !s_spr_stage_id,x                     ; $05AB88 |
   REP #$20                                  ; $05AB8B |
   PLA                                       ; $05AB8D |
-  JML $03B25B                               ; $05AB8E |
+  JML CODE_03B25B                           ; $05AB8E |
 
 CODE_05AB92:
   STA !s_spr_gsu_morph_1_lo,x               ; $05AB92 |
@@ -5618,7 +5623,7 @@ CODE_05ABA9:
   dw $FEC0, $0140                           ; $05ABAE |
 
 init_small_burt:
-  JSL $03AE60                               ; $05ABB2 |
+  JSL CODE_03AE60                           ; $05ABB2 |
   LDA #$0003                                ; $05ABB6 |
   STA !s_spr_gsu_morph_2_lo,x               ; $05ABB9 |
   LDA #$0100                                ; $05ABBC |
@@ -5659,7 +5664,7 @@ CODE_05ABFA:
   BCC CODE_05AC1F                           ; $05AC0E |
   STY $02                                   ; $05AC10 |
   TYX                                       ; $05AC12 |
-  JSL $03AD74                               ; $05AC13 |
+  JSL CODE_03AD74                           ; $05AC13 |
   BCS CODE_05AC23                           ; $05AC17 |
   JSL despawn_sprite_stage_ID               ; $05AC19 |
   LDX $12                                   ; $05AC1D |
@@ -5758,6 +5763,7 @@ CODE_05ACB6:
 CODE_05AD00:
   RTL                                       ; $05AD00 |
 
+CODE_05AD01:
   CMP #$00E7                                ; $05AD01 |
   BNE CODE_05AD00                           ; $05AD04 |
   JSR CODE_05AE7E                           ; $05AD06 |
@@ -5820,7 +5826,7 @@ CODE_05AD50:
   ADC #$0010                                ; $05AD7A |
   TAY                                       ; $05AD7D |
   PHY                                       ; $05AD7E |
-  JSL $03AA60                               ; $05AD7F |
+  JSL CODE_03AA60                           ; $05AD7F |
   REP #$10                                  ; $05AD83 |
   PLY                                       ; $05AD85 |
   LDA #$0004                                ; $05AD86 |
@@ -5874,10 +5880,10 @@ CODE_05ADD2:
   AND #$4000                                ; $05ADD5 |
   BNE CODE_05ADC7                           ; $05ADD8 |
   TYX                                       ; $05ADDA |
-  JSL $03B25B                               ; $05ADDB |
+  JSL CODE_03B25B                           ; $05ADDB |
 
 CODE_05ADDF:
-  JSL $05AE0B                               ; $05ADDF |
+  JSL CODE_05AE0B                           ; $05ADDF |
   LDY !s_spr_wildcard_1_hi,x                ; $05ADE3 |
   BMI CODE_05ADF1                           ; $05ADE6 |
   SEP #$20                                  ; $05ADE8 |
@@ -5891,12 +5897,13 @@ CODE_05ADF1:
   STA !s_spr_stage_id,x                     ; $05ADF5 |
   REP #$20                                  ; $05ADF8 |
   PLA                                       ; $05ADFA |
-  JML $03B273                               ; $05ADFB |
+  JML CODE_03B273                           ; $05ADFB |
 
   dw $0000, $FE6B                           ; $05ADFF |
 
   dw $0195, $FE00, $FE11, $FE11             ; $05AE03 |
 
+CODE_05AE0B:
   PHB                                       ; $05AE0B |
   PHK                                       ; $05AE0C |
   PLB                                       ; $05AE0D |
@@ -6005,12 +6012,12 @@ CODE_05AED2:
   RTL                                       ; $05AED3 |
 
 CODE_05AED4:
-  JSL $03A2B0                               ; $05AED4 |
+  JSL CODE_03A2B0                           ; $05AED4 |
   BCC CODE_05AF04                           ; $05AED8 |
   LDY !s_spr_wildcard_2_lo,x                ; $05AEDA |
   BMI CODE_05AEEA                           ; $05AEDD |
   TYX                                       ; $05AEDF |
-  JSL $03A2B0                               ; $05AEE0 |
+  JSL CODE_03A2B0                           ; $05AEE0 |
   BCC CODE_05AF02                           ; $05AEE4 |
   JSL despawn_sprite_stage_ID               ; $05AEE6 |
 
@@ -6735,7 +6742,7 @@ CODE_05B454:
 CODE_05B455:
   LDY $0FEB                                 ; $05B455 |
   BNE CODE_05B469                           ; $05B458 |
-  JSL $03AE60                               ; $05B45A |
+  JSL CODE_03AE60                           ; $05B45A |
   INC $0FEB                                 ; $05B45E |
   LDA !s_spr_dyntile_index,x                ; $05B461 |
   STA $0FE9                                 ; $05B464 |
@@ -6794,7 +6801,7 @@ CODE_05B4D3:
   LDA !s_spr_dyntile_index,x                ; $05B4E1 |
   CMP $0FE9                                 ; $05B4E4 |
   BEQ CODE_05B4F3                           ; $05B4E7 |
-  JSL $03AEFD                               ; $05B4E9 |
+  JSL CODE_03AEFD                           ; $05B4E9 |
   LDA $0FE9                                 ; $05B4ED |
   STA !s_spr_dyntile_index,x                ; $05B4F0 |
 
@@ -6923,7 +6930,7 @@ CODE_05B5CE:
   BPL CODE_05B5ED                           ; $05B5DD |
   STZ !s_spr_wildcard_4_lo_dp,x             ; $05B5DF |
   STZ !s_spr_wildcard_6_lo_dp,x             ; $05B5E1 |
-  JSL $03AEFD                               ; $05B5E3 |
+  JSL CODE_03AEFD                           ; $05B5E3 |
   LDA $0FE9                                 ; $05B5E7 |
   STA !s_spr_dyntile_index,x                ; $05B5EA |
 
@@ -6967,7 +6974,7 @@ CODE_05B618:
   ADC !s_spr_x_speed_lo,x                   ; $05B631 |
   STA !s_spr_x_speed_lo,x                   ; $05B634 |
   STZ !s_spr_x_accel_ceiling,x              ; $05B637 |
-  JSL $03AD74                               ; $05B63A |
+  JSL CODE_03AD74                           ; $05B63A |
   BCC CODE_05B64D                           ; $05B63E |
   STZ !s_spr_wildcard_6_lo_dp,x             ; $05B640 |
   STZ !s_spr_gsu_morph_2_lo,x               ; $05B642 |
@@ -7069,8 +7076,8 @@ CODE_05B6F3:
   LDA !s_spr_y_pixel_pos,x                  ; $05B6F8 |
   STA $02                                   ; $05B6FB |
   LDA #$01E6                                ; $05B6FD |
-  JSL $03B56E                               ; $05B700 |
-  JSL $03AE60                               ; $05B704 |
+  JSL CODE_03B56E                           ; $05B700 |
+  JSL CODE_03AE60                           ; $05B704 |
   LDA !s_spr_x_pixel_pos,x                  ; $05B708 |
   STA !s_spr_wildcard_4_lo_dp,x             ; $05B70B |
   DEC !s_spr_y_pixel_pos,x                  ; $05B70D |
@@ -7110,7 +7117,7 @@ main_yoshi_block:
   ORA !r_mosaic_freeze_timer                ; $05B761 | | Continue processing if all sprite freeze flags are clear
   ORA !r_cur_item_used                      ; $05B764 | |
   BEQ .CODE_05B76D                          ; $05B767 |/
-  JSL $03B69D                               ; $05B769 |
+  JSL CODE_03B69D                           ; $05B769 |
 
 .CODE_05B76D:
   LDA !s_player_state                       ; $05B76D |
@@ -7127,7 +7134,7 @@ main_yoshi_block:
   LDA #$0002                                ; $05B787 |
   STA !s_spr_draw_priority,x                ; $05B78A |
   STZ !s_spr_wildcard_5_lo_dp,x             ; $05B78D |
-  JML $05B6F3                               ; $05B78F |
+  JML CODE_05B6F3                           ; $05B78F |
 
 .CODE_05B793:
   ASL A                                     ; $05B793 |
@@ -7155,7 +7162,7 @@ main_yoshi_block:
   LDA !s_spr_y_pixel_pos,x                  ; $05B7C0 |
   STA $02                                   ; $05B7C3 |
   LDA #$01E6                                ; $05B7C5 |
-  JSL $03B56E                               ; $05B7C8 |
+  JSL CODE_03B56E                           ; $05B7C8 |
   JML despawn_sprite_stage_ID               ; $05B7CC |
 
 .ret:
@@ -7248,7 +7255,7 @@ CODE_05B859:
 CODE_05B88C:
   LDY !s_spr_wildcard_5_lo_dp,x             ; $05B88C |
   BEQ CODE_05B896                           ; $05B88E |
-  JSL $03D127                               ; $05B890 |
+  JSL CODE_03D127                           ; $05B890 |
   SEC                                       ; $05B894 |
 
 CODE_05B895:
@@ -7714,7 +7721,7 @@ CODE_05BC21:
 CODE_05BC2D:
   LDA !s_spr_dyntile_index,x                ; $05BC2D |
   BPL CODE_05BC38                           ; $05BC30 |
-  JSL $03AD74                               ; $05BC32 |
+  JSL CODE_03AD74                           ; $05BC32 |
   BCC CODE_05BC13                           ; $05BC36 |
 
 CODE_05BC38:
@@ -7959,7 +7966,7 @@ CODE_05BDEA:
   STZ !s_spr_wildcard_4_lo_dp,x             ; $05BDF6 |
   STZ !s_spr_wildcard_2_lo,x                ; $05BDF8 |
   STZ !s_spr_wildcard_5_lo_dp,x             ; $05BDFB |
-  JSL $03AEFD                               ; $05BDFD |
+  JSL CODE_03AEFD                           ; $05BDFD |
   RTS                                       ; $05BE01 |
 
 init_eggo_dil_petal:
@@ -8002,10 +8009,10 @@ CODE_05BE4B:
   LDY !s_spr_collision_id,x                 ; $05BE4B |
   DEY                                       ; $05BE4E |
   BMI CODE_05BE55                           ; $05BE4F |
-  JML $0DC0F0                               ; $05BE51 |
+  JML CODE_0DC0F0                           ; $05BE51 |
 
 CODE_05BE55:
-  JSL $03A5B7                               ; $05BE55 |
+  JSL CODE_03A5B7                           ; $05BE55 |
   RTL                                       ; $05BE59 |
 
 CODE_05BE5A:
@@ -8024,14 +8031,14 @@ init_flamer_guy:
   BNE CODE_05BE83                           ; $05BE6F |
   CMP !s_spr_wildcard_2_lo,x                ; $05BE71 |
   BNE CODE_05BE83                           ; $05BE74 |
-  JSL $03AD74                               ; $05BE76 |
+  JSL CODE_03AD74                           ; $05BE76 |
   BCS CODE_05BE89                           ; $05BE7A |
   LDA #$0002                                ; $05BE7C |
   STA !s_spr_state,x                        ; $05BE7F |
   RTL                                       ; $05BE82 |
 
 CODE_05BE83:
-  JSL $03AE60                               ; $05BE83 |
+  JSL CODE_03AE60                           ; $05BE83 |
   INC !s_spr_wildcard_6_lo_dp,x             ; $05BE87 |
 
 CODE_05BE89:
@@ -8158,7 +8165,7 @@ CODE_05BF69:
 CODE_05BF8F:
   LDY !s_spr_facing_dir,x                   ; $05BF8F |
   STY !s_spr_wildcard_6_hi_dp,x             ; $05BF92 |
-  JSL $03A5B7                               ; $05BF94 |
+  JSL CODE_03A5B7                           ; $05BF94 |
   RTL                                       ; $05BF98 |
 
 CODE_05BF99:
@@ -8296,7 +8303,7 @@ CODE_05C06E:
 
 CODE_05C07D:
   PHY                                       ; $05C07D |
-  JSL $03AA60                               ; $05C07E |
+  JSL CODE_03AA60                           ; $05C07E |
   LDA !s_spr_timer_4,x                      ; $05C082 |
   BNE CODE_05C096                           ; $05C085 |
   LDA #$0004                                ; $05C087 |
@@ -8791,7 +8798,7 @@ CODE_05C46A:
 
 ; 3 bucket inits point here
 init_bucket:
-  JSL $03AE60                               ; $05C46B |
+  JSL CODE_03AE60                           ; $05C46B |
   LDA #$0100                                ; $05C46F |
   STA !s_spr_gsu_morph_1_lo,x               ; $05C472 |
   LDA !s_spr_x_pixel_pos,x                  ; $05C475 |
@@ -8928,7 +8935,7 @@ CODE_05C571:
   LDA !s_spr_collision_state,y              ; $05C57F |
   BEQ CODE_05C590                           ; $05C582 |
   TYX                                       ; $05C584 |
-  JSL $03B25B                               ; $05C585 |
+  JSL CODE_03B25B                           ; $05C585 |
   LDA #$002E                                ; $05C589 |\ play sound #$2E
   JSL push_sound_queue                      ; $05C58C |/
 
@@ -9672,7 +9679,7 @@ CODE_05CB07:
 init_freezegood:
   LDY !s_spr_wildcard_5_hi_dp,x             ; $05CB0B |
   BEQ CODE_05CB25                           ; $05CB0D |
-  JSL $03AD74                               ; $05CB0F |
+  JSL CODE_03AD74                           ; $05CB0F |
   BCS CODE_05CB21                           ; $05CB13 |
   LDY !s_spr_wildcard_5_hi_dp,x             ; $05CB15 |
   LDA #$0000                                ; $05CB17 |
@@ -9684,14 +9691,14 @@ CODE_05CB21:
   RTL                                       ; $05CB24 |
 
 CODE_05CB25:
-  JSL $03AE60                               ; $05CB25 |
+  JSL CODE_03AE60                           ; $05CB25 |
   JSR CODE_05CC2E                           ; $05CB29 |
   LDA !s_spr_x_pixel_pos,x                  ; $05CB2C |
   STA !s_spr_wildcard_1_lo,x                ; $05CB2F |
   STA $04                                   ; $05CB32 |
   LDA !s_spr_y_pixel_pos,x                  ; $05CB34 |
   STA !s_spr_wildcard_2_lo,x                ; $05CB37 |
-  JSL $03D400                               ; $05CB3A |
+  JSL CODE_03D400                           ; $05CB3A |
   BNE CODE_05CB59                           ; $05CB3E |
   SEP #$20                                  ; $05CB40 |
   LDA !s_spr_x_pixel_pos,x                  ; $05CB42 |
@@ -9882,7 +9889,7 @@ CODE_05CC68:
   STA $00                                   ; $05CC87 |
   TYX                                       ; $05CC89 |
   DEX                                       ; $05CC8A |
-  JSL $03B24B                               ; $05CC8B |
+  JSL CODE_03B24B                           ; $05CC8B |
   BCC CODE_05CC9C                           ; $05CC8F |
   LDA !s_spr_bitwise_settings_1,x           ; $05CC91 |
   ORA #$0200                                ; $05CC94 |
@@ -9939,7 +9946,7 @@ CODE_05CCE8:
   BRA CODE_05CCF9                           ; $05CCF3 |
 
 CODE_05CCF5:
-  JSL $05CDF9                               ; $05CCF5 |
+  JSL CODE_05CDF9                           ; $05CCF5 |
 
 CODE_05CCF9:
   LDA !s_player_tile_collision              ; $05CCF9 |
@@ -10081,6 +10088,7 @@ CODE_05CDF8:
   RTS                                       ; $05CDF8 |
 
 ; freezegood sub
+CODE_05CDF9:
   LDY !s_player_jump_state                  ; $05CDF9 |
   BEQ CODE_05CE01                           ; $05CDFC |
   JMP CODE_05CE4B                           ; $05CDFE |
@@ -10179,6 +10187,8 @@ CODE_05CE9F:
   ASL A                                     ; $05CEA7 |
   CLC                                       ; $05CEA8 |
   ADC $06                                   ; $05CEA9 |
+
+CODE_05CEAB:
   STA !gsu_r12                              ; $05CEAB |
   LDA !s_player_hitbox_half_width           ; $05CEAE |
   LDY !s_spr_x_player_dir,x                 ; $05CEB1 |
@@ -10543,14 +10553,14 @@ CODE_05D152:
   DEY                                       ; $05D156 |
   DEY                                       ; $05D157 |
   BNE CODE_05D160                           ; $05D158 |
-  JSL $0D9329                               ; $05D15A |
+  JSL CODE_0D9329                           ; $05D15A |
   BRA CODE_05D17F                           ; $05D15E |
 
 CODE_05D160:
   DEY                                       ; $05D160 |
   DEY                                       ; $05D161 |
   BNE CODE_05D16A                           ; $05D162 |
-  JSL $03A496                               ; $05D164 |
+  JSL CODE_03A496                           ; $05D164 |
   BRA CODE_05D17F                           ; $05D168 |
 
 CODE_05D16A:
@@ -10566,7 +10576,7 @@ CODE_05D17F:
   LDA !s_spr_wildcard_1_lo,x                ; $05D17F |
   STA $04                                   ; $05D182 |
   LDA !s_spr_wildcard_2_lo,x                ; $05D184 |
-  JSL $03D3F3                               ; $05D187 |
+  JSL CODE_03D3F3                           ; $05D187 |
 
 CODE_05D18B:
   LDA #$01CC                                ; $05D18B |
@@ -10614,7 +10624,7 @@ init_bullet_bill_blaster:
   STA !s_spr_oam_yxppccct,x                 ; $05D1EB |
   CPY #$02                                  ; $05D1EE |
   BNE CODE_05D22E                           ; $05D1F0 |
-  JSL $03AE60                               ; $05D1F2 |
+  JSL CODE_03AE60                           ; $05D1F2 |
   LDY #$04                                  ; $05D1F6 |
   STY !s_spr_wildcard_5_hi_dp,x             ; $05D1F8 |
   JSR CODE_05D32B                           ; $05D1FA |
@@ -10757,7 +10767,7 @@ CODE_05D2D6:
   STA $600E,y                               ; $05D315 |
   STA $6016,y                               ; $05D318 |
   STA $601E,y                               ; $05D31B |
-  JSL $03AA60                               ; $05D31E |
+  JSL CODE_03AA60                           ; $05D31E |
   SEP #$10                                  ; $05D322 |
 
 CODE_05D324:
@@ -11023,11 +11033,11 @@ CODE_05D531:
   STY !s_spr_wildcard_4_hi_dp,x             ; $05D558 |
 
 CODE_05D55A:
-  JSL $03AD74                               ; $05D55A |
+  JSL CODE_03AD74                           ; $05D55A |
   BCC CODE_05D576                           ; $05D55E |
   JSR CODE_05D602                           ; $05D560 |
   BCS CODE_05D56B                           ; $05D563 |
-  JSL $03AEFD                               ; $05D565 |
+  JSL CODE_03AEFD                           ; $05D565 |
   BRA CODE_05D576                           ; $05D569 |
 
 CODE_05D56B:
@@ -11102,7 +11112,7 @@ CODE_05D5E1:
   STA !s_spr_gsu_morph_1_lo,x               ; $05D5EF |
   TYA                                       ; $05D5F2 |
   BEQ CODE_05D5F9                           ; $05D5F3 |
-  JSL $03AEFD                               ; $05D5F5 |
+  JSL CODE_03AEFD                           ; $05D5F5 |
 
 CODE_05D5F9:
   LDY #$00                                  ; $05D5F9 |
@@ -11128,14 +11138,14 @@ CODE_05D613:
   CLC                                       ; $05D615 |
   ADC #$007B                                ; $05D616 |
   TXY                                       ; $05D619 |
-  JSL $03A34E                               ; $05D61A |
+  JSL CODE_03A34E                           ; $05D61A |
   BCC CODE_05D635                           ; $05D61E |
   LDA !s_spr_id,y                           ; $05D620 |
   CMP #$007D                                ; $05D623 |
   BEQ CODE_05D639                           ; $05D626 |
   PHX                                       ; $05D628 |
   TYX                                       ; $05D629 |
-  JSL $03AD74                               ; $05D62A |
+  JSL CODE_03AD74                           ; $05D62A |
   BCS CODE_05D637                           ; $05D62E |
   JSL despawn_sprite_stage_ID               ; $05D630 |
   PLX                                       ; $05D634 |
@@ -11273,7 +11283,7 @@ CODE_05D71D:
   BEQ CODE_05D765                           ; $05D720 |
   LDY !s_spr_dyntile_index,x                ; $05D722 |
   BMI CODE_05D72B                           ; $05D725 |
-  JSL $03AEFD                               ; $05D727 |
+  JSL CODE_03AEFD                           ; $05D727 |
 
 CODE_05D72B:
   LDA !s_spr_x_speed_lo,x                   ; $05D72B |
@@ -11484,7 +11494,7 @@ head_bop_special_bullet_bill:
   RTL                                       ; $05D8D5 |
 
 head_bop_bullet_bill:
-  JML $039F9F                               ; $05D8D6 |
+  JML CODE_039F9F                           ; $05D8D6 |
 
 init_bouncing_bullet_bill:
   JSR CODE_05D923                           ; $05D8DA |
@@ -11709,7 +11719,7 @@ CODE_05DA96:
   BRA CODE_05DA5D                           ; $05DA96 |
 
 init_hint_block:
-  JSL $03AE60                               ; $05DA98 |
+  JSL CODE_03AE60                           ; $05DA98 |
   LDA #$0100                                ; $05DA9C |
   STA !s_spr_gsu_morph_1_lo,x               ; $05DA9F |
   LDA !s_spr_y_pixel_pos,x                  ; $05DAA2 |
@@ -11735,7 +11745,7 @@ main_hint_block:
   ORA !r_mosaic_freeze_timer                ; $05DACA | | Continue processing if all sprite freeze flags are clear
   ORA !r_cur_item_used                      ; $05DACD | |
   BEQ .CODE_05DADA                          ; $05DAD0 |/
-  JSL $03B69D                               ; $05DAD2 |
+  JSL CODE_03B69D                           ; $05DAD2 |
   JSL CODE_03B716                           ; $05DAD6 |
 
 .CODE_05DADA:
@@ -11799,7 +11809,7 @@ main_hint_block:
   LDA !s_spr_collision_state,y              ; $05DB54 |
   BEQ .CODE_05DB60                          ; $05DB57 |
   TYX                                       ; $05DB59 |
-  JSL $03B25B                               ; $05DB5A |
+  JSL CODE_03B25B                           ; $05DB5A |
   BRA .CODE_05DB24                          ; $05DB5E |
 
 .CODE_05DB60:
@@ -11812,7 +11822,7 @@ main_hint_block:
   STA !s_spr_gsu_morph_2_lo,x               ; $05DB71 |
 
 .CODE_05DB74:
-  JSL $03D127                               ; $05DB74 |
+  JSL CODE_03D127                           ; $05DB74 |
   RTL                                       ; $05DB78 |
 
 CODE_05DB79:
@@ -12003,7 +12013,7 @@ main_boo_man_bluff:
   BRA CODE_05DCFF                           ; $05DCF9 |
 
 CODE_05DCFB:
-  JSL $03A5B7                               ; $05DCFB |
+  JSL CODE_03A5B7                           ; $05DCFB |
 
 CODE_05DCFF:
   JSR CODE_05DD1A                           ; $05DCFF |
@@ -12601,7 +12611,7 @@ main_heading_cactus:
   JSL CODE_03AF23                           ; $05E13D |
   LDY !s_spr_wildcard_4_lo_dp,x             ; $05E141 |
   BMI CODE_05E149                           ; $05E143 |
-  JSL $03A5B7                               ; $05E145 |
+  JSL CODE_03A5B7                           ; $05E145 |
 
 CODE_05E149:
   LDY !s_spr_wildcard_4_lo_dp,x             ; $05E149 |
@@ -12840,7 +12850,7 @@ CODE_05E31C:
   RTS                                       ; $05E31C |
 
 init_muddy_buddy:
-  JSL $03AE60                               ; $05E31D |
+  JSL CODE_03AE60                           ; $05E31D |
   LDA #$0100                                ; $05E321 |
   STA !s_spr_gsu_morph_1_lo,x               ; $05E324 |
   STA !s_spr_gsu_morph_2_lo,x               ; $05E327 |
@@ -12921,7 +12931,7 @@ CODE_05E3B4:
   AND #$4000                                ; $05E3B7 |
   BNE CODE_05E388                           ; $05E3BA |
   TYX                                       ; $05E3BC |
-  JSL $03B25B                               ; $05E3BD |
+  JSL CODE_03B25B                           ; $05E3BD |
   BRA CODE_05E388                           ; $05E3C1 |
 
 CODE_05E3C3:
@@ -13267,7 +13277,7 @@ CODE_05E68F:
   LDA !s_spr_collision_state,y              ; $05E6A0 |
   BNE CODE_05E6BC                           ; $05E6A3 |
   TYX                                       ; $05E6A5 |
-  JSL $03B24B                               ; $05E6A6 |
+  JSL CODE_03B24B                           ; $05E6A6 |
   LDA #$001D                                ; $05E6AA |\ play sound #$1D
   JSL push_sound_queue                      ; $05E6AD |/
   LDX #$09                                  ; $05E6B1 |
@@ -13698,7 +13708,7 @@ CODE_05EA05:
   RTS                                       ; $05EA09 |
 
 init_spooky:
-  JSL $03AE60                               ; $05EA0A |
+  JSL CODE_03AE60                           ; $05EA0A |
   LDA #$0004                                ; $05EA0E |
   STA !s_spr_y_terrain_offset,x             ; $05EA11 |
   STZ !s_spr_wildcard_1_lo,x                ; $05EA14 |
@@ -13728,7 +13738,7 @@ CODE_05EA40:
   LDY !s_spr_wildcard_6_lo_dp,x             ; $05EA40 |
   BEQ CODE_05EA4B                           ; $05EA42 |
   JSR CODE_05EBD0                           ; $05EA44 |
-  JSL $06BEC1                               ; $05EA47 |
+  JSL CODE_06BEC1                           ; $05EA47 |
 
 CODE_05EA4B:
   JMP CODE_05EAAF                           ; $05EA4B |
@@ -13812,7 +13822,7 @@ CODE_05EAAF:
   BMI CODE_05EAD7                           ; $05EAD1 |
 
 CODE_05EAD3:
-  JSL $03A5B7                               ; $05EAD3 |
+  JSL CODE_03A5B7                           ; $05EAD3 |
 
 CODE_05EAD7:
   JSR CODE_05EBA4                           ; $05EAD7 |
@@ -14371,7 +14381,7 @@ CODE_05EF30:
   dw $FFF8, $0008                           ; $05EF4E |
 
 CODE_05EF52:
-  JSL $06BEBA                               ; $05EF52 |
+  JSL CODE_06BEBA                           ; $05EF52 |
   LDY #$04                                  ; $05EF56 |
   STY !s_spr_draw_priority                  ; $05EF58 |
   STZ $18                                   ; $05EF5B |
@@ -14392,7 +14402,7 @@ CODE_05EF52:
   ADC #$0010                                ; $05EF80 |
   STA !s_spr_y_pixel_pos,y                  ; $05EF83 |
   STA $06                                   ; $05EF86 |
-  JSL $048D5F                               ; $05EF88 |
+  JSL CODE_048D5F                           ; $05EF88 |
   JMP CODE_05EF30                           ; $05EF8C |
 
   dw $0008, $FFF8                           ; $05EF8F |
@@ -14528,7 +14538,7 @@ CODE_05F074:
 
 ; brown and blue
 init_arrow_wheel:
-  JSL $03AE60                               ; $05F07F |
+  JSL CODE_03AE60                           ; $05F07F |
   LDA !s_spr_id,x                           ; $05F083 |
   SEC                                       ; $05F086 |
   SBC #$011E                                ; $05F087 |
@@ -14546,7 +14556,7 @@ init_arrow_wheel:
 main_arrow_wheel:
   STZ !s_spr_facing_dir,x                   ; $05F09F |
   JSL CODE_03AA52                           ; $05F0A2 |
-  JSL $05F0FA                               ; $05F0A6 |
+  JSL CODE_05F0FA                           ; $05F0A6 |
   JSR CODE_05F0F3                           ; $05F0AA |
   JSR CODE_05F1F6                           ; $05F0AD |
   JSR CODE_05F2F6                           ; $05F0B0 |
@@ -14590,6 +14600,7 @@ CODE_05F0F3:
   BCS .ret_pla                              ; $05F0F7 |
   RTS                                       ; $05F0F9 |
 
+CODE_05F0FA:
   LDA !s_sprite_disable_flag                ; $05F0FA |\
   ORA !r_mosaic_freeze_timer                ; $05F0FD | | Return if any sprite freeze flag is set
   ORA !r_cur_item_used                      ; $05F100 | |
@@ -14646,7 +14657,7 @@ CODE_05F0F3:
   BNE CODE_05F1BB                           ; $05F161 |
   PHY                                       ; $05F163 |
   TYX                                       ; $05F164 |
-  JSL $03B24B                               ; $05F165 |
+  JSL CODE_03B24B                           ; $05F165 |
   PLY                                       ; $05F169 |
   LDA #$0000                                ; $05F16A |
   STA !s_spr_x_accel,y                      ; $05F16D |
@@ -14659,10 +14670,10 @@ CODE_05F0F3:
   CMP #$8000                                ; $05F181 |
   ROR A                                     ; $05F184 |
   STA !s_spr_x_speed_lo,y                   ; $05F185 |
-  JSL $03B53D                               ; $05F188 |
+  JSL CODE_03B53D                           ; $05F188 |
 
 CODE_05F18C:
-  JSL $03AEFD                               ; $05F18C |
+  JSL CODE_03AEFD                           ; $05F18C |
   LDA !s_spr_wildcard_6_lo_dp,x             ; $05F190 |
   PHA                                       ; $05F192 |
   LDA !s_spr_gsu_morph_1_lo,x               ; $05F193 |
@@ -14964,7 +14975,7 @@ CODE_05F3C1:
   RTS                                       ; $05F3EF |
 
 init_double_ended_arrow_lift:
-  JSL $03AE60                               ; $05F3F0 |
+  JSL CODE_03AE60                           ; $05F3F0 |
   LDA !s_spr_wildcard_2_lo,x                ; $05F3F4 |
   INC A                                     ; $05F3F7 |
   BEQ CODE_05F40B                           ; $05F3F8 |
@@ -15019,7 +15030,7 @@ main_double_ended_arrow_lift:
   DEC !s_spr_wildcard_2_lo,x                ; $05F458 |
 
 CODE_05F45B:
-  JSL $05F0FA                               ; $05F45B |
+  JSL CODE_05F0FA                           ; $05F45B |
   JSR CODE_05F0F3                           ; $05F45F |
   JSR CODE_05F1F6                           ; $05F462 |
   JSR CODE_05F2F6                           ; $05F465 |
@@ -15050,7 +15061,7 @@ CODE_05F47B:
   STZ !s_spr_wildcard_2_lo,x                ; $05F493 |
   PHY                                       ; $05F496 |
   TYX                                       ; $05F497 |
-  JSL $03B25B                               ; $05F498 |
+  JSL CODE_03B25B                           ; $05F498 |
   PLY                                       ; $05F49C |
   LDA #$0020                                ; $05F49D |
   STA !s_spr_timer_1,x                      ; $05F4A0 |
@@ -15206,7 +15217,7 @@ init_POW:
   JML despawn_sprite_stage_ID               ; $05F5B4 |
 
 CODE_05F5B8:
-  JSL $03AE60                               ; $05F5B8 |
+  JSL CODE_03AE60                           ; $05F5B8 |
   LDY $0E25                                 ; $05F5BC |
   LDA $F5A7,y                               ; $05F5BF |
   STA !s_spr_gsu_morph_1_lo,x               ; $05F5C2 |
@@ -15251,7 +15262,7 @@ CODE_05F5F4:
   LDA #$0100                                ; $05F60F |
   STA !gsu_r6                               ; $05F612 |
   LDA !s_spr_gsu_morph_1_lo,x               ; $05F615 |
-  JSL $059C6F                               ; $05F618 |
+  JSL CODE_059C6F                           ; $05F618 |
   LDY $04                                   ; $05F61C |
   BNE CODE_05F629                           ; $05F61E |
   LDY !s_spr_wildcard_5_lo_dp,x             ; $05F620 |
@@ -15290,7 +15301,7 @@ CODE_05F629:
   STA $7E4C,y                               ; $05F66B |
   LDA #$0006                                ; $05F66E |
   STA $7782,y                               ; $05F671 |
-  JSL $03AEFD                               ; $05F674 |
+  JSL CODE_03AEFD                           ; $05F674 |
   JSL despawn_sprite_stage_ID               ; $05F678 |
 
 CODE_05F67C:
@@ -15375,7 +15386,7 @@ CODE_05F719:
   BPL CODE_05F733                           ; $05F71C |
 
 CODE_05F71E:
-  JSL $03AE60                               ; $05F71E |
+  JSL CODE_03AE60                           ; $05F71E |
   LDY #$03                                  ; $05F722 |
   STY !s_spr_wildcard_3_lo_dp,x             ; $05F724 |
   JSR CODE_05F872                           ; $05F726 |
@@ -15404,7 +15415,7 @@ CODE_05F737:
 ; swim & jumps in an arc and jumps 3 times
 main_flopsy_fish_jumps:
   JSR CODE_05F76D                           ; $05F74E |
-  JSL $05F79A                               ; $05F751 |
+  JSL CODE_05F79A                           ; $05F751 |
   JSL CODE_03AF23                           ; $05F755 |
   TXY                                       ; $05F759 |
   LDA !s_spr_wildcard_5_lo_dp,x             ; $05F75A |
@@ -15412,7 +15423,7 @@ main_flopsy_fish_jumps:
   TAX                                       ; $05F75D |
   JSR ($F746,x)                             ; $05F75E |
   JSR CODE_05F7C3                           ; $05F761 |
-  JSL $03A5B7                               ; $05F764 |
+  JSL CODE_03A5B7                           ; $05F764 |
   RTL                                       ; $05F768 |
 
   dw $0403, $0405                           ; $05F769 |
@@ -15438,6 +15449,7 @@ CODE_05F76D:
 CODE_05F799:
   RTS                                       ; $05F799 |
 
+CODE_05F79A:
   LDA !s_spr_state,x                        ; $05F79A |
   CMP #$000C                                ; $05F79D |
   BNE CODE_05F7C2                           ; $05F7A0 |
@@ -15448,7 +15460,7 @@ CODE_05F799:
 CODE_05F7AA:
   LDA !s_spr_dyntile_index,x                ; $05F7AA |
   BMI CODE_05F7B3                           ; $05F7AD |
-  JSL $03AEFD                               ; $05F7AF |
+  JSL CODE_03AEFD                           ; $05F7AF |
 
 CODE_05F7B3:
   LDA #$0004                                ; $05F7B3 |
@@ -15536,7 +15548,7 @@ CODE_05F83F:
   SBC #$0020                                ; $05F862 |
   CMP #$0040                                ; $05F865 |
   BCS CODE_05F8AF                           ; $05F868 |
-  JSL $03AD74                               ; $05F86A |
+  JSL CODE_03AD74                           ; $05F86A |
   BCC CODE_05F88C                           ; $05F86E |
   INC !s_spr_wildcard_3_lo_dp,x             ; $05F870 |
 
@@ -15647,7 +15659,7 @@ CODE_05F921:
   RTS                                       ; $05F93B |
 
 CODE_05F93C:
-  JSL $03AEFD                               ; $05F93C |
+  JSL CODE_03AEFD                           ; $05F93C |
   STZ !s_spr_y_speed_lo,x                   ; $05F940 |
   STZ !s_spr_y_accel,x                      ; $05F943 |
   STZ !s_spr_anim_frame,x                   ; $05F946 |
@@ -15753,7 +15765,7 @@ CODE_05F9F6:
   CMP #$002C                                ; $05FA09 |
   BPL CODE_05FA13                           ; $05FA0C |
   TYX                                       ; $05FA0E |
-  JML $03B24B                               ; $05FA0F |
+  JML CODE_03B24B                           ; $05FA0F |
 
 CODE_05FA13:
   CMP #$0167                                ; $05FA13 |
@@ -15776,7 +15788,7 @@ CODE_05FA21:
   STA !s_spr_wildcard_5_lo_dp,x             ; $05FA3B |
 
 CODE_05FA3D:
-  JSL $03A5B7                               ; $05FA3D |
+  JSL CODE_03A5B7                           ; $05FA3D |
   RTL                                       ; $05FA41 |
 
   TYX                                       ; $05FA42 |
@@ -15982,7 +15994,7 @@ CODE_05FBB7:
 
 CODE_05FBBF:
   STA $06                                   ; $05FBBF |
-  JSL $05CE7A                               ; $05FBC1 |
+  JSL CODE_05CE7A                           ; $05FBC1 |
   LDA !s_egg_throw_state                    ; $05FBC5 |
   ORA !s_player_mouth_state                 ; $05FBC8 |
   BNE CODE_05FBD4                           ; $05FBCB |
@@ -16065,7 +16077,7 @@ CODE_05FC3C:
   LDA !s_spr_wildcard_6_lo,y                ; $05FC6C |
   BNE CODE_05FC9C                           ; $05FC6F |
   TYX                                       ; $05FC71 |
-  JSL $03B24B                               ; $05FC72 |
+  JSL CODE_03B24B                           ; $05FC72 |
   JMP CODE_05FD58                           ; $05FC76 |
 
 CODE_05FC79:
@@ -16112,7 +16124,7 @@ CODE_05FCB0:
 CODE_05FCC0:
   PHY                                       ; $05FCC0 |
   TYX                                       ; $05FCC1 |
-  JSL $03B25B                               ; $05FCC2 |
+  JSL CODE_03B25B                           ; $05FCC2 |
   PLY                                       ; $05FCC6 |
 
 CODE_05FCC7:
@@ -16120,7 +16132,7 @@ CODE_05FCC7:
   CMP #$0008                                ; $05FCCA |
   BMI CODE_05FCD6                           ; $05FCCD |
   TYX                                       ; $05FCCF |
-  JSL $03A496                               ; $05FCD0 |
+  JSL CODE_03A496                           ; $05FCD0 |
   BRA CODE_05FCE1                           ; $05FCD4 |
 
 CODE_05FCD6:
@@ -16169,8 +16181,8 @@ CODE_05FD0D:
 CODE_05FD1A:
   PHY                                       ; $05FD1A |
   TYX                                       ; $05FD1B |
-  JSL $0CFF61                               ; $05FD1C |
-  JSL $03B24B                               ; $05FD20 |
+  JSL CODE_0CFF61                           ; $05FD1C |
+  JSL CODE_03B24B                           ; $05FD20 |
   PLY                                       ; $05FD24 |
   LDA !s_spr_x_hitbox_center,x              ; $05FD25 |
   LDX #$00                                  ; $05FD28 |
@@ -16197,7 +16209,7 @@ CODE_05FD31:
 
 CODE_05FD58:
   PHY                                       ; $05FD58 |
-  JSL $03B288                               ; $05FD59 |
+  JSL CODE_03B288                           ; $05FD59 |
   PLY                                       ; $05FD5D |
   PHY                                       ; $05FD5E |
   LDA !s_spr_x_hitbox_center,y              ; $05FD5F |
@@ -16300,9 +16312,9 @@ CODE_05FE1B:
   RTS                                       ; $05FE1E |
 
 init_hit_green_egg_block:
-  JSL $03AD74                               ; $05FE1F |
+  JSL CODE_03AD74                           ; $05FE1F |
   BCC CODE_05FE33                           ; $05FE23 |
-  JSL $05FF7E                               ; $05FE25 |
+  JSL CODE_05FF7E                           ; $05FE25 |
   LDA !s_spr_oam_1,x                        ; $05FE29 |
   CLC                                       ; $05FE2C |
   ADC #$1801                                ; $05FE2D |
@@ -16335,7 +16347,7 @@ main_hit_green_egg_block:
 
 CODE_05FE7A:
   JSL CODE_03AF23                           ; $05FE7A |
-  JSL $03D127                               ; $05FE7E |
+  JSL CODE_03D127                           ; $05FE7E |
   LDY !s_spr_collision_id,x                 ; $05FE82 |
   DEY                                       ; $05FE85 |
   BMI CODE_05FE9D                           ; $05FE86 |
@@ -16346,7 +16358,7 @@ CODE_05FE7A:
   AND #$0800                                ; $05FE93 |
   BEQ CODE_05FE9D                           ; $05FE96 |
   TYX                                       ; $05FE98 |
-  JSL $03B24B                               ; $05FE99 |
+  JSL CODE_03B24B                           ; $05FE99 |
 
 CODE_05FE9D:
   LDA !s_spr_gsu_morph_2_lo,x               ; $05FE9D |
@@ -16450,6 +16462,8 @@ CODE_05FF73:
   STA !s_spr_x_pixel_pos,x                  ; $05FF76 |
   LDA !s_spr_dyntile_index,x                ; $05FF79 |
   BMI CODE_05FFC3                           ; $05FF7C |
+
+CODE_05FF7E:
   LDA !s_spr_gsu_morph_2_hi,x               ; $05FF7E |
   BIT !s_spr_wildcard_6_lo_dp,x             ; $05FF81 |
   BMI CODE_05FF89                           ; $05FF83 |

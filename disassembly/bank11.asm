@@ -2,6 +2,8 @@ org $118000
 ; handles bandit minigame
 ; 7E03A7 has bandit minigame type
 gm2e_main_bandit_minigame:
+
+CODE_118000:
   SEP #$30                                  ; $118000 |
   JSL CODE_119D5A                           ; $118002 |
   JSL init_oam_and_bg3_tilemap              ; $118006 |
@@ -210,7 +212,7 @@ CODE_118194:
 gm30_miniboss_battle:
   LDA !r_msg_box_state                      ; $1181D9 |
   BEQ CODE_1181EA                           ; $1181DC |
-  JSL $01DE5A                               ; $1181DE |
+  JSL CODE_01DE5A                           ; $1181DE |
   LDA !r_msg_box_state                      ; $1181E2 |
   BNE CODE_1181EA                           ; $1181E5 |
   JSR CODE_118216                           ; $1181E7 |
@@ -286,7 +288,7 @@ CODE_11823C:
   BIT #$08                                  ; $118285 |
   BNE CODE_118290                           ; $118287 |
   JSR CODE_11942C                           ; $118289 |
-  JSL $119C27                               ; $11828C |
+  JSL CODE_119C27                           ; $11828C |
 
 CODE_118290:
   JSR CODE_1182BB                           ; $118290 |
@@ -2010,7 +2012,7 @@ CODE_1191FE:
   STA $10F4                                 ; $119201 |
   DEC $10E4                                 ; $119204 |
   BNE CODE_11920D                           ; $119207 |
-  JSL $11AD2A                               ; $119209 |
+  JSL CODE_11AD2A                           ; $119209 |
 
 CODE_11920D:
   SEP #$20                                  ; $11920D |
@@ -2082,7 +2084,7 @@ CODE_119229:
 
 CODE_1192AB:
   JSR CODE_119305                           ; $1192AB |
-  JSL $119CCB                               ; $1192AE |
+  JSL CODE_119CCB                           ; $1192AE |
   RTS                                       ; $1192B2 |
 
   db $05, $07, $06                          ; $1192B3 |
@@ -2999,6 +3001,7 @@ CODE_119CA7:
 
   db $F8, $2C, $55, $F8, $1C, $56, $00      ; $119CC4 |
 
+CODE_119CCB:
   LDX #$00                                  ; $119CCB |
 
 CODE_119CCD:
@@ -3670,12 +3673,12 @@ CODE_11A256:
   TYX                                       ; $11A271 |
   CMP #$022B                                ; $11A272 |
   BNE CODE_11A280                           ; $11A275 |
-  JSL $11A30D                               ; $11A277 |
+  JSL CODE_11A30D                           ; $11A277 |
   JSR CODE_11A2CC                           ; $11A27B |
   BRA CODE_11A284                           ; $11A27E |
 
 CODE_11A280:
-  JSL $11A2E1                               ; $11A280 |
+  JSL CODE_11A2E1                           ; $11A280 |
 
 CODE_11A284:
   PLX                                       ; $11A284 |
@@ -3720,6 +3723,7 @@ CODE_11A2CC:
   STA $7142,x                               ; $11A2DD |
   RTS                                       ; $11A2E0 |
 
+CODE_11A2E1:
   LDA #$0003                                ; $11A2E1 |
   STA $7782,x                               ; $11A2E4 |
   STZ $7E4E,x                               ; $11A2E7 |
@@ -3736,6 +3740,7 @@ CODE_11A2CC:
   STA $7462,x                               ; $11A309 |
   RTL                                       ; $11A30C |
 
+CODE_11A30D:
   LDA #$0002                                ; $11A30D |
   STA $7782,x                               ; $11A310 |
   STA $7E4C,x                               ; $11A313 |
@@ -4037,7 +4042,7 @@ CODE_11A55B:
 
 CODE_11A566:
   LDA #$0011                                ; $11A566 |
-  JSL $03A34E                               ; $11A569 |
+  JSL CODE_03A34E                           ; $11A569 |
   BCC CODE_11A5AD                           ; $11A56D |
   LDA $113C                                 ; $11A56F |
   ASL A                                     ; $11A572 |
@@ -4086,7 +4091,7 @@ CODE_11A5B3:
   TYX                                       ; $11A5D4 |
   CMP #$022B                                ; $11A5D5 |
   BNE CODE_11A5F4                           ; $11A5D8 |
-  JSL $11A30D                               ; $11A5DA |
+  JSL CODE_11A30D                           ; $11A5DA |
   LDA $70A2,x                               ; $11A5DE |
   CLC                                       ; $11A5E1 |
   ADC #$FFF4                                ; $11A5E2 |
@@ -4098,7 +4103,7 @@ CODE_11A5B3:
   BRA CODE_11A5F8                           ; $11A5F2 |
 
 CODE_11A5F4:
-  JSL $11A2E1                               ; $11A5F4 |
+  JSL CODE_11A2E1                           ; $11A5F4 |
 
 CODE_11A5F8:
   PLX                                       ; $11A5F8 |
@@ -4464,7 +4469,7 @@ CODE_11A89B:
   SBC #$0010                                ; $11A8D5 |
   STA $02                                   ; $11A8D8 |
   LDY #$3A                                  ; $11A8DA |
-  JSL $03A0E7                               ; $11A8DC |
+  JSL CODE_03A0E7                           ; $11A8DC |
   BRA CODE_11A8FB                           ; $11A8E0 |
 
 CODE_11A8E2:
@@ -4473,7 +4478,7 @@ CODE_11A8E2:
   LDA !s_player_y                           ; $11A8E7 |
   STA $02                                   ; $11A8EA |
   LDY #$3A                                  ; $11A8EC |
-  JSL $03A0E7                               ; $11A8EE |
+  JSL CODE_03A0E7                           ; $11A8EE |
   LDA #$006B                                ; $11A8F2 |
   STA !s_player_cur_anim_frame              ; $11A8F5 |
   INC $1104                                 ; $11A8F8 |
@@ -4642,7 +4647,7 @@ CODE_11AA24:
   LDA $10                                   ; $11AA30 |
   AND #$0007                                ; $11AA32 |
   BNE CODE_11AA3B                           ; $11AA35 |
-  JSL $029BD9                               ; $11AA37 |
+  JSL CODE_029BD9                           ; $11AA37 |
 
 CODE_11AA3B:
   LDA #$001A                                ; $11AA3B |
@@ -5036,13 +5041,14 @@ CODE_11AD0F:
 CODE_11AD29:
   RTS                                       ; $11AD29 |
 
+CODE_11AD2A:
   PHP                                       ; $11AD2A |
   SEP #$30                                  ; $11AD2B |
   LDA $1135                                 ; $11AD2D |
   PHA                                       ; $11AD30 |
   LDA #$7F                                  ; $11AD31 |
   STA $1135                                 ; $11AD33 |
-  JSL $108279                               ; $11AD36 |
+  JSL CODE_108279                           ; $11AD36 |
   PLA                                       ; $11AD3A |
   STA $1135                                 ; $11AD3B |
   LDA $0374                                 ; $11AD3E |
@@ -5425,6 +5431,8 @@ init_coin_cannon:
   STA !s_spr_wildcard_1_lo,x                ; $11B0B4 |
   STZ !s_spr_wildcard_3_lo_dp,x             ; $11B0B7 |
   STZ !s_spr_dyntile_index,x                ; $11B0B9 |
+
+CODE_11B0BC:
   LDA #$0080                                ; $11B0BC |
   STA !gsu_r12                              ; $11B0BF |
   LDA #$0055                                ; $11B0C2 |
@@ -5576,7 +5584,7 @@ CODE_11B1F3:
   STA !s_spr_timer_1,x                      ; $11B211 |
 
 CODE_11B214:
-  JSL $11B0BC                               ; $11B214 |
+  JSL CODE_11B0BC                           ; $11B214 |
 
 CODE_11B218:
   LDY !s_spr_wildcard_2_lo,x                ; $11B218 |
@@ -5653,7 +5661,7 @@ CODE_11B284:
 
 CODE_11B2A0:
   LDA #$0003                                ; $11B2A0 |
-  JSL $03B481                               ; $11B2A3 |
+  JSL CODE_03B481                           ; $11B2A3 |
   LDA !s_spr_wildcard_2_lo,x                ; $11B2A7 |
   TAX                                       ; $11B2AA |
   LDA $7002,y                               ; $11B2AB |
@@ -6015,7 +6023,7 @@ CODE_11B570:
   CMP #$FFF8                                ; $11B57B |
   BCC CODE_11B5D7                           ; $11B57E |
   LDY #$3A                                  ; $11B580 |
-  JSL $03A0E7                               ; $11B582 |
+  JSL CODE_03A0E7                           ; $11B582 |
   LDA #$001C                                ; $11B586 |\ play sound #$1C
   JSL push_sound_queue                      ; $11B589 |/
   LDA #$0001                                ; $11B58D |
@@ -6065,7 +6073,7 @@ CODE_11B5D7:
 CODE_11B5F0:
   LDA #$0017                                ; $11B5F0 |\ play sound #$17
   JSL push_sound_queue                      ; $11B5F3 |/
-  JSL $04F74A                               ; $11B5F7 |
+  JSL CODE_04F74A                           ; $11B5F7 |
   LDA #$00C0                                ; $11B5FB |
   STA !s_player_invincibility_timer         ; $11B5FE |
   STZ !s_player_ground_pound_state          ; $11B601 |
@@ -6096,11 +6104,11 @@ CODE_11B62C:
   BNE CODE_11B640                           ; $11B635 |
   LDY !s_spr_collision_id,x                 ; $11B637 |
   BPL CODE_11B640                           ; $11B63A |
-  JSL $11B570                               ; $11B63C |
+  JSL CODE_11B570                           ; $11B63C |
 
 CODE_11B640:
   LDY #$BD18                                ; $11B640 |
-  JSL $011072                               ; $11B643 |
+  JSL CODE_011072                           ; $11B643 |
   DEY                                       ; $11B647 |
   TYA                                       ; $11B648 |
   STA !s_spr_anim_frame,x                   ; $11B649 |
@@ -6254,7 +6262,7 @@ CODE_11B6DB:
   JSL handle_sprites                        ; $11B84F |
   LDA #$15                                  ; $11B853 |
   STA $34                                   ; $11B855 |
-  JSL $108B61                               ; $11B857 |
+  JSL CODE_108B61                           ; $11B857 |
   RTS                                       ; $11B85B |
 
   JSL init_oam_buffer                       ; $11B85C |
@@ -6307,7 +6315,7 @@ CODE_11B8BF:
   REP #$20                                  ; $11B8CA |
   DEC $10F0                                 ; $11B8CC |
   BNE CODE_11B8D5                           ; $11B8CF |
-  JSL $11AD2A                               ; $11B8D1 |
+  JSL CODE_11AD2A                           ; $11B8D1 |
 
 CODE_11B8D5:
   LDA #$0001                                ; $11B8D5 |
@@ -6497,7 +6505,7 @@ CODE_11BA28:
   SEP #$10                                  ; $11BA3B |
   LDA #$0011                                ; $11BA3D |
   LDY #$04                                  ; $11BA40 |
-  JSL $03A34E                               ; $11BA42 |
+  JSL CODE_03A34E                           ; $11BA42 |
   JSL random_number_gen                     ; $11BA46 |
   AND #$0003                                ; $11BA4A |
   CMP #$0003                                ; $11BA4D |
@@ -6607,7 +6615,7 @@ CODE_11BB55:
   LDA !s_spr_timer_3,x                      ; $11BB8C |
   BNE CODE_11BBD9                           ; $11BB8F |
   TYX                                       ; $11BB91 |
-  JSL $03B24B                               ; $11BB92 |
+  JSL CODE_03B24B                           ; $11BB92 |
   BRA CODE_11BBB0                           ; $11BB96 |
 
 CODE_11BB98:
@@ -7864,7 +7872,7 @@ CODE_11C505:
   JSL handle_sprites                        ; $11C5ED |
   LDA #$15                                  ; $11C5F1 |
   STA $34                                   ; $11C5F3 |
-  JSL $108B61                               ; $11C5F5 |
+  JSL CODE_108B61                           ; $11C5F5 |
   RTS                                       ; $11C5F9 |
 
   JSL init_oam_buffer                       ; $11C5FA |
@@ -7934,7 +7942,7 @@ main_mini_battle_bandit_4:
   LDA !s_spr_gsu_morph_2_lo,y               ; $11C696 |
   BNE CODE_11C6D8                           ; $11C699 |
   TYX                                       ; $11C69B |
-  JSL $03B24B                               ; $11C69C |
+  JSL CODE_03B24B                           ; $11C69C |
   BRA CODE_11C6BA                           ; $11C6A0 |
 
 CODE_11C6A2:
@@ -8252,7 +8260,7 @@ CODE_11C8BF:
   dw $C860                                  ; $11C8EE |
 
 init_item_card:
-  JSL $03AE60                               ; $11C8F0 |
+  JSL CODE_03AE60                           ; $11C8F0 |
   LDA !s_spr_wildcard_4_lo_dp,x             ; $11C8F4 |
   ASL A                                     ; $11C8F6 |
   TAY                                       ; $11C8F7 |
@@ -8277,6 +8285,8 @@ CODE_11C905:
   LDX !s_cur_sprite_slot                    ; $11C912 |
   LDA #$0020                                ; $11C915 |
   STA !s_spr_wildcard_5_lo_dp,x             ; $11C918 |
+
+CODE_11C91A:
   LDA !s_spr_wildcard_5_lo_dp,x             ; $11C91A |
   STA !gsu_r3                               ; $11C91C |
   LDA !s_spr_wildcard_6_lo_dp,x             ; $11C91F |
@@ -8339,8 +8349,8 @@ main_item_card:
   LDA $C9BD,y                               ; $11C9A8 |
   STA $00                                   ; $11C9AB |
   JMP ($7960)                               ; $11C9AD |
-  JSL $11C91A                               ; $11C9B0 | return here after JMP
-  JSL $02DABA                               ; $11C9B4 |
+  JSL CODE_11C91A                           ; $11C9B0 | return here after JMP
+  JSL CODE_02DABA                           ; $11C9B4 |
   JSL CODE_03AA52                           ; $11C9B8 |
   RTL                                       ; $11C9BC |
 
@@ -8371,13 +8381,13 @@ CODE_11C9D1:
   BPL CODE_11CA04                           ; $11C9E2 |
   LDA #$0036                                ; $11C9E4 |\ play sound #$36
   JSL push_sound_queue                      ; $11C9E7 |/
-  JSL $02A4F4                               ; $11C9EB |
+  JSL CODE_02A4F4                           ; $11C9EB |
   JSL despawn_sprite_stage_ID               ; $11C9EF |
   INC $10FA                                 ; $11C9F3 |
   LDA !s_spr_wildcard_4_lo,x                ; $11C9F6 |
   CMP #$000A                                ; $11C9F9 |
   BCS CODE_11CA07                           ; $11C9FC |
-  JSL $109CA6                               ; $11C9FE |
+  JSL CODE_109CA6                           ; $11C9FE |
   LDX $12                                   ; $11CA02 |
 
 CODE_11CA04:
