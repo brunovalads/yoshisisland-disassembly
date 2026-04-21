@@ -45,7 +45,7 @@ if %errorlevel% equ 0 (echo SHA256 match succeeded^^!) else (echo SHA256 match F
 :: Compare build with user-provided rom if match failed
 if %match% == false (
     echo.
-    set /p rom_path= Enter path to your Yoshi's Island rom to check where build differs: 
+    set /p rom_path= "Enter path to your Yoshi's Island rom to check where build differs (leave blank to skip): "
     if not "!rom_path!"=="" (
         echo.
         fc /b %ROM_NAME% !rom_path!

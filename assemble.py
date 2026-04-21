@@ -26,7 +26,6 @@ def build_rom():
     assemble_path = os.path.join(BASE_DIR, ASSEMBLE_RELATIVE_PATH)
     
     try:
-        # Running asar
         result = subprocess.run([asar_path, assemble_path, ROM_NAME])
         if result.returncode != 0:
             print("\nBuild FAILED!")
@@ -63,7 +62,6 @@ def check_build():
     return all_match
 
 def get_file_hash(filepath, algorithm):
-    """Calculates the hash of a file using the specified algorithm."""
     hash_func = hashlib.new(algorithm)
     with open(filepath, "rb") as f:
         for chunk in iter(lambda: f.read(4096), b""):
@@ -71,7 +69,6 @@ def get_file_hash(filepath, algorithm):
     return hash_func.hexdigest()
 
 def check_hash_match(current_hash, hash_file_path):
-    """Checks if the calculated hash exists within the provided hash file."""
     if not os.path.exists(hash_file_path):
         return False
     with open(hash_file_path, "r") as f:
@@ -79,9 +76,6 @@ def check_hash_match(current_hash, hash_file_path):
         return current_hash.lower() in content
 
 def compare_binaries(file1_path, file2_path, max_diffs=10):
-    """
-    Compares two binary files and prints differences in a hex format.
-    """
     if not os.path.exists(file1_path) or not os.path.exists(file2_path):
         print("Error: One or both files missing for comparison.")
         return
@@ -107,11 +101,9 @@ def compare_binaries(file1_path, file2_path, max_diffs=10):
 
             if byte1 != byte2:
                 diff_count += 1
-                # Format: Offset: File1_Byte File2_Byte
-                # Example: 0x00A2F0: 0x45 0x47
+                
                 val1 = f"0x{byte1[0]:02X}" if byte1 else "NONE"
                 val2 = f"0x{byte2[0]:02X}" if byte2 else "NONE"
-                
                 print(f"${offset:06X} | ${pc_to_snes(offset):06X}   | {val1:<5} | {val2:<5}")
 
                 if diff_count >= max_diffs:
@@ -140,7 +132,7 @@ if not build_success:
 # Check build
 all_match = check_build()
 
-# Compare build if match failed
+# Compare build with user-provided rom if match failed
 if not all_match:
     rom_path = input("\nEnter path to your Yoshi's Island rom to check where build differs (leave blank to skip): ").strip()
     if rom_path and os.path.exists(rom_path):
