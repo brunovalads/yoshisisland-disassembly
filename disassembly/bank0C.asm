@@ -10874,7 +10874,7 @@ CODE_0CD745:
 CODE_0CD77C:
   LDY !s_spr_collision_id,x                 ; $0CD77C |
   BPL CODE_0CD785                           ; $0CD77F |
-  JML CODE_03A858                           ; $0CD781 |
+  JML player_hit_sprite                     ; $0CD781 |
 
 CODE_0CD785:
   LDY !s_spr_wildcard_4_lo_dp,x             ; $0CD785 |
@@ -10940,7 +10940,7 @@ CODE_0CD7D0:
   CMP $0C                                   ; $0CD7F0 |
   BCS CODE_0CD7FA                           ; $0CD7F2 |
   SEP #$10                                  ; $0CD7F4 |
-  JML CODE_03A858                           ; $0CD7F6 |
+  JML player_hit_sprite                     ; $0CD7F6 |
 
 CODE_0CD7FA:
   DEC $04                                   ; $0CD7FA |
@@ -11202,7 +11202,7 @@ CODE_0CD9D3:
 CODE_0CDA0C:
   LDY !s_spr_collision_id,x                 ; $0CDA0C |
   BPL CODE_0CDA15                           ; $0CDA0F |
-  JML CODE_03A858                           ; $0CDA11 |
+  JML player_hit_sprite                     ; $0CDA11 |
 
 CODE_0CDA15:
   RTL                                       ; $0CDA15 |

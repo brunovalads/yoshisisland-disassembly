@@ -11814,7 +11814,7 @@ main_hint_block:
 
 .CODE_05DB60:
   LDA !s_spr_timer_2,x                      ; $05DB60 |
-  BNE CODE_05DB74                           ; $05DB63 |
+  BNE .CODE_05DB74                          ; $05DB63 |
   LDA #$0008                                ; $05DB65 |
   STA !s_spr_timer_2,x                      ; $05DB68 |
   LDA !s_spr_gsu_morph_2_lo,x               ; $05DB6B |
@@ -14563,41 +14563,41 @@ main_arrow_wheel:
   JSR CODE_05F34C                           ; $05F0B3 |
   JSR CODE_05F3B6                           ; $05F0B6 |
   LDY !s_spr_wildcard_4_lo_dp,x             ; $05F0B9 |
-  BEQ CODE_05F0F2                           ; $05F0BB |
+  BEQ .ret                                  ; $05F0BB |
   LDA !s_spr_timer_1,x                      ; $05F0BD |
-  BNE CODE_05F0F2                           ; $05F0C0 |
+  BNE .ret                                  ; $05F0C0 |
   LDA !s_spr_timer_2,x                      ; $05F0C2 |
-  BNE CODE_05F0E2                           ; $05F0C5 |
+  BNE .CODE_05F0E2                          ; $05F0C5 |
   LDA !s_spr_gsu_morph_1_lo,x               ; $05F0C7 |
   SEC                                       ; $05F0CA |
   SBC #$0020                                ; $05F0CB |
   STA !s_spr_gsu_morph_1_lo,x               ; $05F0CE |
   CMP #$0010                                ; $05F0D1 |
-  BPL CODE_05F0E2                           ; $05F0D4 |
+  BPL .CODE_05F0E2                          ; $05F0D4 |
   CPX $61B6                                 ; $05F0D6 |
-  BNE CODE_05F0DE                           ; $05F0D9 |
+  BNE .CODE_05F0DE                          ; $05F0D9 |
   STZ $61B6                                 ; $05F0DB |
 
-CODE_05F0DE:
+.CODE_05F0DE:
   JML despawn_sprite_stage_ID               ; $05F0DE |
 
-CODE_05F0E2:
+.CODE_05F0E2:
   LDY #$FF                                  ; $05F0E2 |
   LDA $7974                                 ; $05F0E4 |
   AND #$0001                                ; $05F0E7 |
-  BNE CODE_05F0EE                           ; $05F0EA |
+  BNE .CODE_05F0EE                          ; $05F0EA |
   LDY #$05                                  ; $05F0EC |
 
-CODE_05F0EE:
+.CODE_05F0EE:
   TYA                                       ; $05F0EE |
   STA !s_spr_draw_priority,x                ; $05F0EF |
 
-CODE_05F0F2:
+.ret:
   RTL                                       ; $05F0F2 |
 
 CODE_05F0F3:
   JSL despawn_sprite_threshold_B            ; $05F0F3 |
-  BCS .ret_pla                              ; $05F0F7 |
+  BCS CODE_05F0FA_ret_pla                   ; $05F0F7 |
   RTS                                       ; $05F0F9 |
 
 CODE_05F0FA:

@@ -990,7 +990,7 @@ head_bop_stilt_guy:
   STA $7782,y                               ; $078861 |
   PLX                                       ; $078864 |
   PHY                                       ; $078865 |
-  JSL CODE_03A331                           ; $078866 |
+  JSL despawn_sprite_clear_graphics         ; $078866 |
   PLY                                       ; $07886A |
   LDA #$001E                                ; $07886B |
   TXY                                       ; $07886E |
@@ -2131,7 +2131,7 @@ CODE_0791B9:
 
 CODE_0791BF:
   JSR CODE_0791E7                           ; $0791BF |
-  JSL CODE_03A331                           ; $0791C2 |
+  JSL despawn_sprite_clear_graphics         ; $0791C2 |
   LDA #$001E                                ; $0791C6 |
   TXY                                       ; $0791C9 |
   JSL spawn_sprite                          ; $0791CA |
@@ -5687,7 +5687,7 @@ CODE_07AF90:
   BEQ CODE_07AF8F                           ; $07AF9B |
 
 CODE_07AF9D:
-  JML CODE_03A858                           ; $07AF9D |
+  JML player_hit_sprite                     ; $07AF9D |
 
 CODE_07AFA1:
   LDA !s_player_ground_pound_state          ; $07AFA1 |
@@ -6678,6 +6678,7 @@ CODE_07B74F:
 
   db $04, $03, $02, $01, $00                ; $07B76F |
 
+CODE_07B774:
   LDX $12                                   ; $07B774 |
   LDA !s_spr_timer_1,x                      ; $07B776 |
   BNE .ret                                  ; $07B779 |
@@ -6776,7 +6777,7 @@ CODE_07B830:
   BEQ CODE_07B852                           ; $07B843 |
 
 CODE_07B845:
-  JML CODE_03A858                           ; $07B845 |
+  JML player_hit_sprite                     ; $07B845 |
 
 CODE_07B849:
   LDA #$000E                                ; $07B849 |
@@ -7220,7 +7221,7 @@ CODE_07BBC9:
   BRA CODE_07BC1B                           ; $07BBED |
 
 CODE_07BBEF:
-  JML CODE_03A858                           ; $07BBEF |
+  JML player_hit_sprite                     ; $07BBEF |
 
 CODE_07BBF3:
   DEY                                       ; $07BBF3 |
@@ -7483,7 +7484,7 @@ CODE_07BE33:
   JML CODE_03B20B                           ; $07BE47 |
 
 CODE_07BE4B:
-  JML CODE_03A858                           ; $07BE4B |
+  JML player_hit_sprite                     ; $07BE4B |
 
 CODE_07BE4F:
   DEY                                       ; $07BE4F |
@@ -8424,7 +8425,7 @@ CODE_07C60C:
   REP #$20                                  ; $07C62B |
   RTL                                       ; $07C62D |
 
-  JML CODE_03A858                           ; $07C62E |
+  JML player_hit_sprite                     ; $07C62E |
 
 CODE_07C632:
   LDA !s_spr_wildcard_1_lo,x                ; $07C632 |

@@ -3747,7 +3747,10 @@ despawn_sprite:
 .free_slot
   STZ !s_spr_state,x                        ; $03A32E | free sprite slot
 
-CODE_03A331:
+; Yet another shortcut,
+; but without zeroing the state 
+; despawn_sprite_clear_graphics
+.clear_graphics:
   LDA #$00FF                                ; $03A331 |\ clear drawing priority
   STA !s_spr_draw_priority,x                ; $03A334 |/
   LDY !s_spr_dyntile_index,x                ; $03A337 |\
@@ -4504,9 +4507,8 @@ CODE_03A850:
 player_hit:
   STZ !s_cur_sprite_slot                    ; $03A853 |
   BRA .check_invulnerability                ; $03A856 |
-.sprite
 
-CODE_03A858:
+.sprite
   LDA !s_super_mario_timer                  ; $03A858 |\
   BEQ .check_invulnerability                ; $03A85B |/ If not Super baby mario
   LDY !s_cur_sprite_slot                    ; $03A85D |\
@@ -8568,7 +8570,7 @@ CODE_03C640:
 pop_1up_bubbled:
   SEP #$10                                  ; $03C654 |
   LDX $12                                   ; $03C656 |
-  JSL CODE_03A331                           ; $03C658 |
+  JSL despawn_sprite_clear_graphics         ; $03C658 |
   LDA #$0100                                ; $03C65C |
   TXY                                       ; $03C65F |
   JSL spawn_sprite                          ; $03C660 |
@@ -8589,7 +8591,7 @@ CODE_03C67D:
 pop_flower:
   SEP #$10                                  ; $03C681 |
   LDX $12                                   ; $03C683 |
-  JSL CODE_03A331                           ; $03C685 |
+  JSL despawn_sprite_clear_graphics         ; $03C685 |
   LDY #$71                                  ; $03C689 |
   JSL CODE_03C878                           ; $03C68B |
   LDA #$0110                                ; $03C68F |
@@ -8637,7 +8639,7 @@ CODE_03C6D0:
 pop_bandit:
   SEP #$10                                  ; $03C6E3 |
   LDX $12                                   ; $03C6E5 |
-  JSL CODE_03A331                           ; $03C6E7 |
+  JSL despawn_sprite_clear_graphics         ; $03C6E7 |
   LDA #$0020                                ; $03C6EB |
   TXY                                       ; $03C6EE |
   JSL spawn_sprite                          ; $03C6EF |
@@ -8672,7 +8674,7 @@ pop_1up:
 pop_key:
   SEP #$10                                  ; $03C735 |
   LDX $12                                   ; $03C737 |
-  JSL CODE_03A331                           ; $03C739 |
+  JSL despawn_sprite_clear_graphics         ; $03C739 |
   LDA #$0027                                ; $03C73D |
   TXY                                       ; $03C740 |
   JSL spawn_sprite                          ; $03C741 |
@@ -8772,7 +8774,7 @@ pop_5_stars:
 pop_door:
   SEP #$10                                  ; $03C7FB |
   LDX $12                                   ; $03C7FD |
-  JSL CODE_03A331                           ; $03C7FF |
+  JSL despawn_sprite_clear_graphics         ; $03C7FF |
   LDA #$0093                                ; $03C803 |
   TXY                                       ; $03C806 |
   JSL spawn_sprite                          ; $03C807 |
@@ -8789,7 +8791,7 @@ pop_door:
 pop_watermelon:
   SEP #$10                                  ; $03C81E |
   LDX $12                                   ; $03C820 |
-  JSL CODE_03A331                           ; $03C822 |
+  JSL despawn_sprite_clear_graphics         ; $03C822 |
   LDA !s_spr_id,x                           ; $03C826 |
   SEC                                       ; $03C829 |
   SBC #$00C4                                ; $03C82A |
@@ -8884,7 +8886,7 @@ pop_switch:
   SEP #$10                                  ; $03C8C9 |
   LDX $12                                   ; $03C8CB |
   JSL CODE_03C640                           ; $03C8CD |
-  JSL CODE_03A331                           ; $03C8D1 |
+  JSL despawn_sprite_clear_graphics         ; $03C8D1 |
   LDA #$009D                                ; $03C8D5 |
   TXY                                       ; $03C8D8 |
   JSL spawn_sprite                          ; $03C8D9 |

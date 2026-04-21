@@ -5300,7 +5300,7 @@ CODE_0DA911:
   ORA !r_cur_item_used                      ; $0DA91D | |
   BEQ .CODE_0DA916                          ; $0DA920 |/
 
-CODE_0DA922:
+.CODE_0DA922:
   JSL CODE_03AA52                           ; $0DA922 |
   REP #$10                                  ; $0DA926 |
   LDA !s_spr_oam_pointer,x                  ; $0DA928 |
@@ -5336,7 +5336,7 @@ CODE_0DA922:
   STA $06                                   ; $0DA96D |
   REP #$10                                  ; $0DA96F |
   LDY !s_spr_oam_pointer,x                  ; $0DA971 |
-  BMI CODE_0DA916                           ; $0DA974 |
+  BMI .CODE_0DA916                          ; $0DA974 |
   LDA $6000,y                               ; $0DA976 |
   SEC                                       ; $0DA979 |
   SBC $00                                   ; $0DA97A |
@@ -5562,7 +5562,7 @@ CODE_0DAB54:
   JSR CODE_0DAB6A                           ; $0DAB54 |
 
 CODE_0DAB57:
-  JSR CODE_0DA922                           ; $0DAB57 |
+  JSR CODE_0DA911_CODE_0DA922               ; $0DAB57 |
   RTS                                       ; $0DAB5A |
 
 CODE_0DAB5B:

@@ -9384,8 +9384,8 @@ CODE_06CF42:
 .CODE_06CF55:
   JSR .CODE_06CF66                          ; $06CF55 |
   JSR .CODE_06CFA5                          ; $06CF58 |
-  JSR .CODE_06CFC4                           ; $06CF5B |
-  JSR .CODE_06D019                           ; $06CF5E |
+  JSR .CODE_06CFC4                          ; $06CF5B |
+  JSR .CODE_06D019                          ; $06CF5E |
   RTL                                       ; $06CF61 |
 
   dw $0003, $FFFB                           ; $06CF62 |
@@ -9427,7 +9427,7 @@ CODE_06CF42:
   LDA !s_player_invincibility_timer         ; $06CFAD |
   SEC                                       ; $06CFB0 |
   SBC #$009F                                ; $06CFB1 |
-  BNE ..ret                                 ; $06CFB4 |
+  BNE .ret                                  ; $06CFB4 |
 
 .CODE_06CFB6:
   JSR CODE_06D110                           ; $06CFB6 |
@@ -9436,13 +9436,13 @@ CODE_06CF42:
   ADC #$0004                                ; $06CFBD |
   STA !s_spr_y_pixel_pos                    ; $06CFC0 |
 
-..ret:
+.ret:
   RTS                                       ; $06CFC3 |
 
 .CODE_06CFC4:
   LDA #$FFFF                                ; $06CFC4 |
   LDY !s_spr_draw_priority                  ; $06CFC7 |
-  BMI ..ret                                 ; $06CFCA |
+  BMI .CODE_06CFED_ret                      ; $06CFCA |
   REP #$10                                  ; $06CFCC |
   LDY !s_player_form                        ; $06CFCE |
   CPY #$000E                                ; $06CFD1 |
@@ -9465,6 +9465,8 @@ CODE_06CF42:
 ..ret:
   RTS                                       ; $06CFF2 |
 
+; Seems unreachable
+.CODE_06CFF3:
   LDY $0E15                                 ; $06CFF3 |
   BEQ ..ret                                 ; $06CFF6 |
   LDY #$1B                                  ; $06CFF8 |
