@@ -6107,9 +6107,12 @@ CODE_11B62C:
   JSL CODE_11B570                           ; $11B63C |
 
 CODE_11B640:
-  LDY #$BD18                                ; $11B640 |
-  JSL CODE_011072                           ; $11B643 |
+  LDY #$18                                  ; $11B640 |
+  LDA !s_spr_y_speed_lo,x                   ; $11B642 |
+  BPL .CODE_11B648                          ; $11B645 |
   DEY                                       ; $11B647 |
+  
+.CODE_11B648:
   TYA                                       ; $11B648 |
   STA !s_spr_anim_frame,x                   ; $11B649 |
   LDA $7860,x                               ; $11B64C |
