@@ -11301,7 +11301,7 @@ CODE_0ED83C:
 
 head_bop_bandit:
   JSR CODE_0ECCC7                           ; $0ED83D |
-  JML CODE_039F9F                           ; $0ED840 |
+  JML head_bop_common                       ; $0ED840 |
 
 CODE_0ED844:
   TXY                                       ; $0ED844 |
@@ -12381,8 +12381,6 @@ frog_ptr:
   dw $EC2C                                  ; $0EE021 | 14: intro over
 
 main_frog_pirate:
-
-CODE_0EE023:
   JSR CODE_0EE112                           ; $0EE023 |
   LDY !s_spr_wildcard_5_lo_dp,x             ; $0EE026 |
   CPY #$0D                                  ; $0EE028 |
@@ -14822,7 +14820,7 @@ headbop_frog:
   JSR CODE_0EEB53                           ; $0EF7DC |
 
 CODE_0EF7DF:
-  JSL CODE_0EE023                           ; $0EF7DF |
+  JSL main_frog_pirate                      ; $0EF7DF |
   LDA !s_spr_timer_1,x                      ; $0EF7E3 |
   BNE CODE_0EF7FC                           ; $0EF7E6 |
   LDA $105C                                 ; $0EF7E8 |

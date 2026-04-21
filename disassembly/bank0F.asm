@@ -1408,8 +1408,6 @@ init_nipper_spore:
   RTL                                       ; $0F8B5A |
 
 init_nipper_plant:
-
-CODE_0F8B5B:
   LDA #$0002                                ; $0F8B5B |
   STA !s_spr_wildcard_3_lo_dp,x             ; $0F8B5E |
   LDA !s_spr_oam_1,x                        ; $0F8B60 |
@@ -1439,7 +1437,7 @@ main_nipper_spore:
   LDA #$0164                                ; $0F8B9D |
   TXY                                       ; $0F8BA0 |
   JSL spawn_sprite                          ; $0F8BA1 |
-  JSL CODE_0F8B5B                           ; $0F8BA5 |
+  JSL init_nipper_plant                     ; $0F8BA5 |
 
 main_nipper_plant:
   JSL CODE_03AF23                           ; $0F8BA9 |

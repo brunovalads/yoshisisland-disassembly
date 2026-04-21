@@ -5803,7 +5803,7 @@ gm0c_level_fadein_and_name:
   STA $0375                                 ; $01B04D | | Set return X/Y
   LDA !r_stars_amount                       ; $01B050 | |
   STA $0377                                 ; $01B053 | | Save current star count
-  JML CODE_118000                           ; $01B056 |/  Jump to bandit minigame
+  JML gm2e_main_bandit_minigame             ; $01B056 |/  Jump to bandit minigame
 
 .set_entrance_data
   LDA $7F7E01,x                             ; $01B05A |\
@@ -5998,12 +5998,12 @@ CODE_01B1F3:
 
 CODE_01B1FA:
   JSL CODE_04DB68                           ; $01B1FA |
-  JSL CODE_03954E                           ; $01B1FE |
+  JSL check_newspr_screen                   ; $01B1FE |
   LDA !s_cam_x_right_boundary               ; $01B202 |
   CMP #$0F                                  ; $01B205 |
   BEQ CODE_01B211                           ; $01B207 |
   JSL CODE_04DCC4                           ; $01B209 |
-  JSL CODE_03954E                           ; $01B20D |
+  JSL check_newspr_screen                   ; $01B20D |
 
 CODE_01B211:
   JSL CODE_108FD6                           ; $01B211 |
@@ -6093,8 +6093,6 @@ CODE_01B2A8:
 ; Saves egg inventory in RAM
 ; for between levels
 save_egg_inventory:
-
-CODE_01B2B7:
   PHP                                       ; $01B2B7 |
   REP #$20                                  ; $01B2B8 |
   SEP #$10                                  ; $01B2BA |
@@ -7386,7 +7384,7 @@ CODE_01BE60:
   ORA $35                                   ; $01BEA2 |
   AND #$F0                                  ; $01BEA4 |
   BEQ CODE_01BEE3                           ; $01BEA6 |
-  JSL CODE_01B2B7                           ; $01BEA8 |
+  JSL save_egg_inventory                    ; $01BEA8 |
   LDX #$1F                                  ; $01BEAC |
   LDA $0385                                 ; $01BEAE |\
   BPL CODE_01BEB8                           ; $01BEB1 | |
@@ -11581,8 +11579,6 @@ window_mask_settings_bg3_4_obj:
   db $00, $22, $22, $88, $88, $88, $22      ; $01DE4D |
 
 message_box_handler:
-
-CODE_01DE54:
   LDA #$01                                  ; $01DE54 |
   STA $10                                   ; $01DE56 |
   BRA CODE_01DE5C                           ; $01DE58 |

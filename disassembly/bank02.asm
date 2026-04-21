@@ -3916,7 +3916,7 @@ CODE_02A4CB:
   STA !r_level_load_type                    ; $02A4D7 |
   LDA #$000B                                ; $02A4DA |
   STA !r_game_mode                          ; $02A4DD |
-  JSL CODE_01B2B7                           ; $02A4E0 |
+  JSL save_egg_inventory                    ; $02A4E0 |
   LDX $12                                   ; $02A4E4 |
   RTL                                       ; $02A4E6 |
 

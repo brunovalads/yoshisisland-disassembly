@@ -1897,8 +1897,6 @@ spr_edge_despawn_draw:
 
 ; checks new sprites for the entire screen
 check_newspr_screen:
-
-CODE_03954E:
   PHB                                       ; $03954E |
   PHK                                       ; $03954F |
   PLB                                       ; $039550 |
@@ -2368,7 +2366,7 @@ CODE_0398C5:
   LDA !reg_ophct                            ; $0398D3 | |
   ADC $10                                   ; $0398D6 | | adds horizontal & vertical scanlines -> RNG
   STA $10                                   ; $0398D8 | | this way each sprite gets fresh value
-  JSL CODE_039A12                           ; $0398DA | |
+  JSL handle_sprite                         ; $0398DA | |
   PLB                                       ; $0398DE | |
 
 CODE_0398DF:
@@ -2525,8 +2523,6 @@ CODE_039A0A:
 
 ; does a high-level handling of sprite based on state
 handle_sprite:
-
-CODE_039A12:
   LDA !s_spr_x_pixel_pos,x                  ; $039A12 |
   STA !s_cur_spr_x_prev                     ; $039A15 |
   LDA !s_spr_y_pixel_pos,x                  ; $039A18 |
@@ -2608,8 +2604,6 @@ spr_state_init:
 
 ; sprite state $10: sprite is alive / active, needs updating
 spr_state_main:
-
-CODE_039A90:
   LDA !s_spr_id,x                           ; $039A90 |
   ASL A                                     ; $039A93 |
   ADC !s_spr_id,x                           ; $039A94 |
@@ -3239,7 +3233,7 @@ CODE_039F8C:
 
 ; sprite state $0C: dying from collision
 spr_state_die_collision:
-  JSL CODE_039A90                           ; $039F8D |
+  JSL spr_state_main                        ; $039F8D |
 
 CODE_039F91:
   JSL despawn_sprite_stage_ID               ; $039F91 |
@@ -3257,9 +3251,7 @@ head_bop_flashing_egg:
 ; watermelons, seeds, eggs, keys, chickens, mice, giant shy guys,
 ; toadies, woozy guys, stretch guys, penguins, monkeys
 head_bop_common:
-
-CODE_039F9F:
-  JSL CODE_039A90                           ; $039F9F |
+  JSL spr_state_main                        ; $039F9F |
   LDA !s_spr_oam_1,x                        ; $039FA3 |
   AND #$FFF3                                ; $039FA6 |
   ORA #$0004                                ; $039FA9 |
@@ -3313,7 +3305,7 @@ CODE_03A004:
 
 ; sprite state $12: burning to death
 spr_state_die_burning:
-  JSL CODE_039A90                           ; $03A00B | call $10 first
+  JSL spr_state_main                        ; $03A00B | call $10 first
   LDA #$0060                                ; $03A00F |
   STA !s_spr_bitwise_settings_1,x           ; $03A012 |
   LDA !s_spr_bitwise_settings_3,x           ; $03A015 |
@@ -3440,7 +3432,7 @@ CODE_03A0E7:
 
 ; sprite state $0A: riding yoshi
 spr_state_ride_yoshi:
-  JSL CODE_039A90                           ; $03A11D |
+  JSL spr_state_main                        ; $03A11D |
   PHK                                       ; $03A121 |
   PLB                                       ; $03A122 |
   STZ !s_spr_x_speed_lo,x                   ; $03A123 |
@@ -3607,7 +3599,7 @@ CODE_03A229:
 ; sprite state $06: turning into a star
 spr_state_turn_star:
   JSL CODE_02808C                           ; $03A247 |
-  JSL CODE_039A90                           ; $03A24B |
+  JSL spr_state_main                        ; $03A24B |
   PHK                                       ; $03A24F |
   PLB                                       ; $03A250 |
   LDA #$003B                                ; $03A251 |\ play sound #$3B

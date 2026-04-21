@@ -2374,8 +2374,6 @@ CODE_079377:
   dw $0006, $0008, $0010                    ; $0793F4 |
 
 init_snifit:
-
-CODE_0793FA:
   LDY !s_spr_facing_dir,x                   ; $0793FA |
   LDA $93C0,y                               ; $0793FD |
   STA !s_spr_x_speed_lo,x                   ; $079400 |
@@ -2485,7 +2483,7 @@ CODE_0794B8:
   STA !s_spr_bitwise_settings_3,x           ; $0794C5 |
   LDA #$0080                                ; $0794C8 |
   STA !s_spr_timer_2,x                      ; $0794CB |
-  JSL CODE_0793FA                           ; $0794CE |
+  JSL init_snifit                           ; $0794CE |
   RTS                                       ; $0794D2 |
 
   LDX $12                                   ; $0794D3 |
@@ -9450,8 +9448,6 @@ CODE_07CE98:
   dw $FF00, $0100                           ; $07CE99 |
 
 init_zeus_guy:
-
-CODE_07CE9D:
   STZ !s_spr_wildcard_3_lo_dp,x             ; $07CE9D |
   STZ !s_spr_wildcard_6_lo,x                ; $07CE9F |
   LDA #$D08D                                ; $07CEA2 |
@@ -10650,7 +10646,7 @@ CODE_07D8AB:
 CODE_07D8B0:
   LDA #$0010                                ; $07D8B0 |
   STA !s_spr_state,x                        ; $07D8B3 |
-  JML CODE_07CE9D                           ; $07D8B6 |
+  JML init_zeus_guy                         ; $07D8B6 |
 
   db $01, $02, $03, $04, $05, $06, $07, $08 ; $07D8BA |
   db $09, $0A, $0B, $0A, $09, $08, $07, $06 ; $07D8C2 |
@@ -14653,7 +14649,7 @@ CODE_07F8C9:
   LDY #$0D                                  ; $07F8F0 |
   PHY                                       ; $07F8F2 |
   PLB                                       ; $07F8F3 |
-  JSL CODE_0D8E60                           ; $07F8F4 |
+  JSL init_crate                            ; $07F8F4 |
   PLB                                       ; $07F8F8 |
   LDA #$0010                                ; $07F8F9 |
   STA !s_spr_state,x                        ; $07F8FC |
@@ -14664,7 +14660,7 @@ CODE_07F8C9:
   LDX $12                                   ; $07F908 |
   TXY                                       ; $07F90A |
   JSL spawn_sprite                          ; $07F90B |
-  JSL CODE_04C968                           ; $07F90F |
+  JSL init_coin_with_gravity                ; $07F90F |
   SEP #$20                                  ; $07F913 |
   LDA #$FF                                  ; $07F915 |
   STA !s_spr_stage_id,x                     ; $07F917 |
@@ -14732,7 +14728,7 @@ CODE_07F974:
   LDY #$05                                  ; $07F99D |
   PHY                                       ; $07F99F |
   PLB                                       ; $07F9A0 |
-  JSL CODE_0582B5                           ; $07F9A1 |
+  JSL init_large_spring_ball                ; $07F9A1 |
   PLB                                       ; $07F9A5 |
   LDA #$0010                                ; $07F9A6 |
   STA !s_spr_state,x                        ; $07F9A9 |

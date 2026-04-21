@@ -1,9 +1,8 @@
 org $118000
+
 ; handles bandit minigame
 ; 7E03A7 has bandit minigame type
 gm2e_main_bandit_minigame:
-
-CODE_118000:
   SEP #$30                                  ; $118000 |
   JSL CODE_119D5A                           ; $118002 |
   JSL init_oam_and_bg3_tilemap              ; $118006 |
@@ -5048,7 +5047,7 @@ CODE_11AD2A:
   PHA                                       ; $11AD30 |
   LDA #$7F                                  ; $11AD31 |
   STA $1135                                 ; $11AD33 |
-  JSL CODE_108279                           ; $11AD36 |
+  JSL save_game                             ; $11AD36 |
   PLA                                       ; $11AD3A |
   STA $1135                                 ; $11AD3B |
   LDA $0374                                 ; $11AD3E |

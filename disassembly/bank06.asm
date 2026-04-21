@@ -7135,8 +7135,6 @@ init_baby_mario:
   dw $C61F                                  ; $06BCEA |
 
 main_baby_mario:
-
-CODE_06BCEC:
   LDY #$06                                  ; $06BCEC |
   LDA !s_spr_oam_1                          ; $06BCEE |
   AND #$E000                                ; $06BCF1 |

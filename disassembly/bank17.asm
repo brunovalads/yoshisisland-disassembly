@@ -729,7 +729,7 @@ CODE_178630:
   LDA #$0F                                  ; $17863D |
   STA !r_reg_inidisp_mirror                 ; $17863F |
   JSR CODE_178649                           ; $178642 |
-  JML CODE_1083E2                           ; $178645 |
+  JML increment_gamemode                    ; $178645 |
 
 CODE_178649:
   LDA $0201                                 ; $178649 |
@@ -4791,7 +4791,7 @@ CODE_17A8B1:
   ASL A                                     ; $17A8BD |
   STA !r_cur_world                          ; $17A8BE |
   SEP #$30                                  ; $17A8C1 |
-  JSL CODE_108279                           ; $17A8C3 |
+  JSL save_game                             ; $17A8C3 |
   LDA #$23                                  ; $17A8C7 |
   STA !r_game_mode                          ; $17A8C9 |
   LDA !r_cur_world                          ; $17A8CC |
@@ -4817,7 +4817,7 @@ CODE_17A8F1:
   BPL CODE_17A904                           ; $17A8F4 |
   AND #$7F                                  ; $17A8F6 |
   STA $1135                                 ; $17A8F8 |
-  JSL CODE_108279                           ; $17A8FB |
+  JSL save_game                             ; $17A8FB |
   LDA #$25                                  ; $17A8FF |
   STA !r_game_mode                          ; $17A901 |
 
@@ -6069,7 +6069,7 @@ CODE_17B320:
   LDA #$0A09                                ; $17B344 |
   STA $0317,y                               ; $17B347 |
   SEP #$20                                  ; $17B34A |
-  JSL CODE_108279                           ; $17B34C |
+  JSL save_game                             ; $17B34C |
   LDX #$22                                  ; $17B350 |
   LDA !r_game_mode                          ; $17B352 |
   CMP #$28                                  ; $17B355 |

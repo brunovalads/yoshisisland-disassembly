@@ -362,8 +362,6 @@ CODE_05827C:
 
 ; both sprite IDs
 init_large_spring_ball:
-
-CODE_0582B5:
   LDA !s_spr_dyntile_index,x                ; $0582B5 |
   BPL CODE_0582E1                           ; $0582B8 |
   JSL CODE_03AE60                           ; $0582BA |
@@ -4049,11 +4047,11 @@ CODE_059F77:
   LDA !s_spr_id,x                           ; $059F82 |
   CMP #$0095                                ; $059F85 |
   BNE CODE_059F90                           ; $059F88 |
-  JSL CODE_04A6AE                           ; $059F8A |
+  JSL init_red_platform                     ; $059F8A |
   BRA CODE_059F96                           ; $059F8E |
 
 CODE_059F90:
-  JSL CODE_04A725                           ; $059F90 |
+  JSL init_pink_platform                    ; $059F90 |
   INC !s_spr_wildcard_5_lo_dp,x             ; $059F94 |
 
 CODE_059F96:
@@ -11494,7 +11492,7 @@ head_bop_special_bullet_bill:
   RTL                                       ; $05D8D5 |
 
 head_bop_bullet_bill:
-  JML CODE_039F9F                           ; $05D8D6 |
+  JML head_bop_common                       ; $05D8D6 |
 
 init_bouncing_bullet_bill:
   JSR CODE_05D923                           ; $05D8DA |

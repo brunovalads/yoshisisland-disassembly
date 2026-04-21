@@ -2211,7 +2211,7 @@ head_bonk_lantern_ghost:
   JSR CODE_048B20                           ; $049087 |
   LDA #$0001                                ; $04908A |
   STA !s_spr_anim_frame,x                   ; $04908D |
-  JML CODE_039F9F                           ; $049090 |
+  JML head_bop_common                       ; $049090 |
 
 ride_bandit_shyguy:
   JSR CODE_04909B                           ; $049094 |
@@ -5050,8 +5050,6 @@ CODE_04A6AD:
   RTS                                       ; $04A6AD |
 
 init_red_platform:
-
-CODE_04A6AE:
   LDA !s_spr_y_pixel_pos,x                  ; $04A6AE |
   AND #$0010                                ; $04A6B1 |
   BEQ CODE_04A6BB                           ; $04A6B4 |
@@ -5115,8 +5113,6 @@ CODE_04A722:
   JMP CODE_04A77C                           ; $04A722 |
 
 init_pink_platform:
-
-CODE_04A725:
   LDA !s_spr_x_pixel_pos,x                  ; $04A725 |
   AND #$0010                                ; $04A728 |
   BEQ CODE_04A732                           ; $04A72B |
@@ -9157,8 +9153,6 @@ CODE_04C967:
   RTL                                       ; $04C967 |
 
 init_coin_with_gravity:
-
-CODE_04C968:
   LDA #$0100                                ; $04C968 |
   STA !s_spr_timer_1,x                      ; $04C96B |
   LDA #$0140                                ; $04C96E |
@@ -9180,7 +9174,7 @@ main_coin_with_gravity:
   LDA $7860,x                               ; $04C98F |
   LSR A                                     ; $04C992 |
   BCC CODE_04C9BE                           ; $04C993 |
-  JSL CODE_04C968                           ; $04C995 |
+  JSL init_coin_with_gravity                ; $04C995 |
   LDA $10                                   ; $04C999 |
   AND #$01FF                                ; $04C99B |
   CLC                                       ; $04C99E |
@@ -11642,7 +11636,7 @@ CODE_04DC70:
   SEP #$20                                  ; $04DCC2 |
 
 CODE_04DCC4:
-  JSL CODE_04FD28                           ; $04DCC4 |
+  JSL main_camera                           ; $04DCC4 |
   LDY !r_header_bg3_tileset                 ; $04DCC8 |
   CPY #$1A                                  ; $04DCCB |
   BNE CODE_04DCE5                           ; $04DCCD |
@@ -15022,8 +15016,6 @@ CODE_04FB58:
   dw $0008                                  ; $04FD26 |
 
 main_camera:
-
-CODE_04FD28:
   PHB                                       ; $04FD28 |
   PHK                                       ; $04FD29 |
   PLB                                       ; $04FD2A |

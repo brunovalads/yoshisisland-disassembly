@@ -1864,8 +1864,6 @@ CODE_0D8E5F:
   RTS                                       ; $0D8E5F |
 
 init_crate:
-
-CODE_0D8E60:
   JSL CODE_03AE60                           ; $0D8E60 |
   LDA #$0100                                ; $0D8E64 |
   STA !s_spr_gsu_morph_1_lo,x               ; $0D8E67 |
@@ -13875,7 +13873,7 @@ CODE_0DFC53:
 
 CODE_0DFC77:
   SEP #$20                                  ; $0DFC77 |
-  JSL CODE_108279                           ; $0DFC79 |
+  JSL save_game                             ; $0DFC79 |
   REP #$20                                  ; $0DFC7D |
   LDX $12                                   ; $0DFC7F |
   PLD                                       ; $0DFC81 |

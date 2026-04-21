@@ -250,8 +250,6 @@ CODE_1081B5:
   dw $0353, $0354, $0355, $0356             ; $108271 |
 
 save_game:
-
-CODE_108279:
   PHB                                       ; $108279 |
   PHK                                       ; $10827A |
   PLB                                       ; $10827B |
@@ -418,9 +416,8 @@ CODE_1083C2:
 
 CODE_1083DE:
   JSL enable_nmi                            ; $1083DE |
-increment_gamemode:
 
-CODE_1083E2:
+increment_gamemode:
   INC !r_game_mode                          ; $1083E2 |
 
 CODE_1083E5:
@@ -1229,8 +1226,6 @@ CODE_108C81:
   RTL                                       ; $108C99 |
 
 check_cross_section_spawn:
-
-CODE_108C9A:
   LDA !r_header_bg3_tileset                 ; $108C9A |\
   CMP #$0A                                  ; $108C9D | | BG3 Tileset $0A
   BEQ .check_new_spawn                      ; $108C9F |/  (Cross section)
@@ -1329,7 +1324,7 @@ gm0e_level_fadein_to_control:
   JSL CODE_00C71E                           ; $108D57 |
   DEC $8D                                   ; $108D5B |
   BNE CODE_108D73                           ; $108D5D |
-  JSL CODE_03954E                           ; $108D5F |
+  JSL check_newspr_screen                   ; $108D5F |
   LDX #$5C                                  ; $108D63 |
 
 CODE_108D65:
@@ -1641,7 +1636,7 @@ CODE_108F88:
   ADC #$0010                                ; $108F92 |
   STA !s_leftmost_tile_x                    ; $108F95 |
   SEP #$30                                  ; $108F98 |
-  JSL CODE_108C9A                           ; $108F9A |
+  JSL check_cross_section_spawn             ; $108F9A |
   REP #$30                                  ; $108F9E |
   RTS                                       ; $108FA0 |
 
@@ -4007,7 +4002,7 @@ CODE_10A35E:
   TCD                                       ; $10A369 |
   LDX #$00                                  ; $10A36A |
   STX !s_cur_sprite_slot                    ; $10A36C |
-  JSL CODE_06BCEC                           ; $10A36F |
+  JSL main_baby_mario                       ; $10A36F |
   JSL handle_ambient_sprites                ; $10A373 |
   PLD                                       ; $10A377 |
   PLB                                       ; $10A378 |
@@ -4134,7 +4129,7 @@ CODE_10A459:
   dw $0009, $000C                           ; $10A462 |
 
   SEP #$30                                  ; $10A466 |
-  JSL CODE_01DE54                           ; $10A468 |
+  JSL message_box_handler                   ; $10A468 |
   REP #$30                                  ; $10A46C |
   JSR CODE_109CB2                           ; $10A46E |
   LDA !r_msg_box_state                      ; $10A471 |
@@ -4350,7 +4345,7 @@ CODE_10A632:
   STA !r_game_mode                          ; $10A635 |
   STZ $0385                                 ; $10A638 |
   SEP #$30                                  ; $10A63B |
-  JSL CODE_108279                           ; $10A63D |
+  JSL save_game                             ; $10A63D |
   REP #$30                                  ; $10A641 |
 
 CODE_10A643:
@@ -10799,7 +10794,7 @@ gm39_intro_cutscene:
   LDA #$0081                                ; $10DCBB |
   STA !s_cam_x_window_min                   ; $10DCBE |
   SEP #$20                                  ; $10DCC1 |
-  JSL CODE_04FD28                           ; $10DCC3 |
+  JSL main_camera                           ; $10DCC3 |
   JSL spr_edge_despawn_draw_check_warp      ; $10DCC7 |
   JSL draw_player                           ; $10DCCB |
   JSL main_player                           ; $10DCCF |
