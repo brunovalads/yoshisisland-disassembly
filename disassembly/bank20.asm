@@ -559,11 +559,7 @@ CODE_06ac:
 CODE_06c3:
   mov   a,$1a                               ; $06c3 |
   eor   a,#$ff                              ; $06c5 |
-
-; asar does not support this instruction yet
-; CODE_06c7: tset1 $0046
-db $0E, $46, $00
-
+  tset  $0046,a                             ; $06c7 |
   mov   $04,#$00                            ; $06ca |
   mov   $47,#$00                            ; $06cd |
   mov   $59,#$c0                            ; $06d0 |
@@ -603,9 +599,7 @@ CODE_06fb:
   mov   $0c,#$02                            ; $0700 |
   mov   a,$1a                               ; $0703 |
   eor   a,#$ff                              ; $0705 |
-; asar does not support this yet?
-; CODE_0707: tset1 $0046
-db $0E, $46, $00
+  tset  $0046,a                             ; $0707 |
   ret                                       ; $070a |
 
 ; reset song params
@@ -929,21 +923,14 @@ CODE_08bd:
   bpl   CODE_08ea                           ; $08da |
   and   a,#$1f                              ; $08dc | sample > 80: noise, freq in low bits
   and   $48,#$20                            ; $08de |  keep echo bit from FLG
-
-; asar does not support this instruction yet
-; CODE_08e1: tset1 $0048             ;  OR in noise freq
-db $0E, $48, $00
-
+  tset  $0048,a                             ; $08e1 |  OR in noise freq
   or    ($49),($47)                         ; $08e4 |  set vbit in noise enable
   mov   a,y                                 ; $08e7 |  set SRCN to 0
   bra   CODE_08f1                           ; $08e8 | else
 
 CODE_08ea:
   mov   a,$47                               ; $08ea |
-
-; asar does not support this instruction yet
-; CODE_08ec: tclr1 $0049             ;  clear noise vbit
-db $4E, $49, $00
+  tclr  $0049,a                             ; $08ec |  clear noise vbit
 
 CODE_08ef:
   mov   a,($14)+y                           ; $08ef |  set SRCN from table
