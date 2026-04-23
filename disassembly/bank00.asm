@@ -1316,7 +1316,7 @@ ambient_sprite_routines:
   dw CODE_008EFE-1                          ; $0089E8 | 1C8 - ?
   dw CODE_008F0B-1                          ; $0089EA | 1C9 - ?
   dw ambient_snow_puff-1                    ; $0089EC | 1CA
-  dw CODE_008F6A-1                          ; $0089EE | 1CB - ?
+  dw ambient_snow_puff_after_roll-1         ; $0089EE | 1CB - Puff of snow after Ski Yoshi rolling
   dw ambient_dr_freezegood_bop-1            ; $0089F0 | 1CC
   dw ambient_sparkles_1-1                   ; $0089F2 | 1CD
   dw CODE_009007-1                          ; $0089F4 | 1CE - ?
@@ -1341,7 +1341,7 @@ ambient_sprite_routines:
   dw ambient_baby_mario_bubble_burst-1      ; $008A1A | 1E1
   dw ambient_aiming_reticle-1               ; $008A1C | 1E2
   dw CODE_009519-1                          ; $008A1E | 1E3 - ?
-  dw CODE_009548-1                          ; $008A20 | 1E4 - Coin sparkle
+  dw ambient_sparkles_3-1                   ; $008A20 | 1E4 - Coin sparkle
   dw CODE_00955F-1                          ; $008A22 | 1E5 - ?
   dw ambient_large_smoke_puff-1             ; $008A24 | 1E6
   dw CODE_0092A5-1                          ; $008A26 | 1E7 - checkered block activation splash effect
@@ -1350,7 +1350,7 @@ ambient_sprite_routines:
   dw CODE_009519-1                          ; $008A2C | 1EA - spear guy (sprites $0FB, $0FC) shield
   dw CODE_009519-1                          ; $008A2E | 1EB - spear guy (sprites $0FB, $0FC) spear
   dw CODE_009519-1                          ; $008A30 | 1EC - sparkle from bomb (sprite $060) falling
-  dw CODE_009548-1                          ; $008A32 | 1ED - Bomb (sprite $060) explosion
+  dw ambient_sparkles_3-1                   ; $008A32 | 1ED - Bomb (sprite $060) explosion
   dw ambient_explosion_splash-1             ; $008A34 | 1EE
   dw CODE_009531-1                          ; $008A36 | 1EF - Baron Von Zeppelin explosion
   dw ambient_ice_watermelon_sparkle-1       ; $008A38 | 1F0
@@ -1366,8 +1366,8 @@ ambient_sprite_routines:
   dw ambient_lava_drop_fire-1               ; $008A4C | 1FA - from horiz lava drop (sprite $12F)
   dw ambient_lava_drop_fire-1               ; $008A4E | 1FB - from vert lava drop (sprite $130)
   dw CODE_009519-1                          ; $008A50 | 1FC - Fang (sprites $13D, $13E) path
-  dw CODE_009548-1                          ; $008A52 | 1FD - ?
-  dw CODE_009416-1                          ; $008A54 | 1FE - ?
+  dw ambient_sparkles_3-1                   ; $008A52 | 1FD - Sparkles of water from Flopsy Fish on air after jumping
+  dw ambient_water_splash_flopsy_jump-1     ; $008A54 | 1FE - Splash of water from Flopsy Fish jumping
   dw CODE_009ADD-1                          ; $008A56 | 1FF - ?
   dw ambient_arrow_cloud_arrow-1            ; $008A58 | 200
   dw CODE_009531-1                          ; $008A5A | 201 - water splash (passing through current on ground/wall)
@@ -2054,12 +2054,12 @@ CODE_008F5B:
   db $05, $04, $03, $01, $01, $02, $01, $03 ; $008F5C |
   db $03, $03, $03, $03, $04, $04           ; $008F64 |
 
-CODE_008F6A:
+ambient_snow_puff_after_roll:
   JSR check_ambient_sprite_freeze           ; $008F6A |
   LDA $7782,x                               ; $008F6D |
-  BNE CODE_008F8A                           ; $008F70 |
+  BNE .ret                                  ; $008F70 |
   DEC $7E4C,x                               ; $008F72 |
-  BMI CODE_008F8A                           ; $008F75 |
+  BMI .ret                                  ; $008F75 |
   SEP #$20                                  ; $008F77 |
   LDY $7E4C,x                               ; $008F79 |
   LDA $8F5C,y                               ; $008F7C |
@@ -2068,7 +2068,7 @@ CODE_008F6A:
   STA $7782,x                               ; $008F85 |
   REP #$20                                  ; $008F88 |
 
-CODE_008F8A:
+.ret:
   RTS                                       ; $008F8A |
 
   db $08, $07, $06, $05, $04, $03, $02, $01 ; $008F8B |
@@ -2647,21 +2647,21 @@ CODE_00940F:
 
   db $02, $04, $06, $0A, $06, $04           ; $009410 |
 
-CODE_009416:
+ambient_water_splash_flopsy_jump:
   JSR check_ambient_sprite_freeze           ; $009416 |
   LDA $7782,x                               ; $009419 |
-  BNE CODE_009432                           ; $00941C |
+  BNE .ret                                  ; $00941C |
   DEC $73C2,x                               ; $00941E |
-  BPL CODE_009426                           ; $009421 |
+  BPL .CODE_009426                          ; $009421 |
   JMP CODE_008AF8                           ; $009423 |
 
-CODE_009426:
+.CODE_009426:
   LDY $73C2,x                               ; $009426 |
   LDA $9410,y                               ; $009429 |
   AND #$00FF                                ; $00942C |
   STA $7782,x                               ; $00942F |
 
-CODE_009432:
+.ret:
   RTS                                       ; $009432 |
 
 ambient_aiming_reticle:
@@ -2814,34 +2814,34 @@ CODE_009544:
 CODE_009545:
   JMP CODE_008AF8                           ; $009545 |
 
-CODE_009548:
+ambient_sparkles_3:
   JSR check_ambient_sprite_freeze           ; $009548 |
   LDA $7782,x                               ; $00954B |
-  BNE CODE_00955B                           ; $00954E |
+  BNE .ret                                  ; $00954E |
   LDA #$0003                                ; $009550 |
   STA $7782,x                               ; $009553 |
   DEC $73C2,x                               ; $009556 |
-  BMI CODE_00955C                           ; $009559 |
+  BMI .CODE_00955C                          ; $009559 |
 
-CODE_00955B:
+.ret:
   RTS                                       ; $00955B |
 
-CODE_00955C:
+.CODE_00955C:
   JMP CODE_008AF8                           ; $00955C |
 
 CODE_00955F:
   JSR check_ambient_sprite_freeze           ; $00955F |
   LDA $7782,x                               ; $009562 |
-  BNE CODE_009572                           ; $009565 |
+  BNE .ret                                  ; $009565 |
   LDA #$0004                                ; $009567 |
   STA $7782,x                               ; $00956A |
   DEC $73C2,x                               ; $00956D |
-  BMI CODE_009573                           ; $009570 |
+  BMI .CODE_009573                          ; $009570 |
 
-CODE_009572:
+ret:
   RTS                                       ; $009572 |
 
-CODE_009573:
+.CODE_009573:
   JMP CODE_008AF8                           ; $009573 |
 
 ambient_lava_drop_fire:
