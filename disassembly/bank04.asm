@@ -4112,27 +4112,28 @@ CODE_049F25:
 CODE_049F6D:
   RTS                                       ; $049F6D |
 
+CODE_049F6E:
   TYX                                       ; $049F6E |
   JSR CODE_04A085                           ; $049F6F |
   LDA !s_spr_gsu_morph_2_lo,x               ; $049F72 |
-  BPL CODE_049F7B                           ; $049F75 |
+  BPL .CODE_049F7B                          ; $049F75 |
   EOR #$FFFF                                ; $049F77 |
   INC A                                     ; $049F7A |
 
-CODE_049F7B:
+.CODE_049F7B:
   LSR A                                     ; $049F7B |
   STA !s_spr_y_speed_lo,x                   ; $049F7C |
   LDA !s_spr_x_speed_lo,x                   ; $049F7F |
   CLC                                       ; $049F82 |
   ADC #$0040                                ; $049F83 |
   CMP #$0080                                ; $049F86 |
-  BCC CODE_049F95                           ; $049F89 |
+  BCC .CODE_049F95                          ; $049F89 |
   LDA !s_spr_x_accel_ceiling,x              ; $049F8B |
   EOR #$FFFF                                ; $049F8E |
   INC A                                     ; $049F91 |
   STA !s_spr_x_accel_ceiling,x              ; $049F92 |
 
-CODE_049F95:
+.CODE_049F95:
   LDA !s_spr_timer_1,x                      ; $049F95 |
   BNE CODE_049FA1                           ; $049F98 |
   RTS                                       ; $049F9A |
@@ -4143,7 +4144,7 @@ CODE_049F95:
 
 CODE_049FA1:
   LDA !s_spr_timer_2,x                      ; $049FA1 |
-  BNE CODE_049FB9                           ; $049FA4 |
+  BNE .ret                                  ; $049FA4 |
   LDA #$0008                                ; $049FA6 |
   STA !s_spr_timer_2,x                      ; $049FA9 |
   LDA $6116                                 ; $049FAC |
@@ -4151,7 +4152,7 @@ CODE_049FA1:
   STA $6116                                 ; $049FB2 |
   JSL CODE_04FB41                           ; $049FB5 |
 
-CODE_049FB9:
+.ret:
   RTS                                       ; $049FB9 |
 
 CODE_049FBA:
@@ -11639,7 +11640,7 @@ CODE_04DCC4:
   JSL main_camera                           ; $04DCC4 |
   LDY !r_header_bg3_tileset                 ; $04DCC8 |
   CPY #$1A                                  ; $04DCCB |
-  BNE CODE_04DCE5                           ; $04DCCD |
+  BNE .CODE_04DCE5                          ; $04DCCD |
   REP #$20                                  ; $04DCCF |
   LDA #$0000                                ; $04DCD1 |
   SEC                                       ; $04DCD4 |
@@ -11651,18 +11652,18 @@ CODE_04DCC4:
   STA $0C92                                 ; $04DCE0 |
   SEP #$20                                  ; $04DCE3 |
 
-CODE_04DCE5:
+.CODE_04DCE5:
   PHB                                       ; $04DCE5 |
   PHK                                       ; $04DCE6 |
   PLB                                       ; $04DCE7 |
   LDA !s_player_state                       ; $04DCE8 |
   CMP #$0C                                  ; $04DCEB |
-  BEQ CODE_04DCF7                           ; $04DCED |
-  JSR CODE_04FA33                           ; $04DCEF |
-  BNE CODE_04DCF7                           ; $04DCF2 |
-  INC $0C8E                                 ; $04DCF4 |
+  BEQ .ret                                  ; $04DCED |
+  JSR check_if_ski_translevel               ; $04DCEF |
+  BNE .ret                                  ; $04DCF2 |
+  INC !r_cam_freeze_flag                    ; $04DCF4 |
 
-CODE_04DCF7:
+.ret:
   PLB                                       ; $04DCF7 |
   RTL                                       ; $04DCF8 |
 
@@ -11673,29 +11674,29 @@ CODE_04DCF9:
   SEC                                       ; $04DD00 |
   SBC #$000C                                ; $04DD01 |
   CMP #$0030                                ; $04DD04 |
-  BPL CODE_04DD0C                           ; $04DD07 |
+  BPL .CODE_04DD0C                          ; $04DD07 |
   LDA #$0030                                ; $04DD09 |
 
-CODE_04DD0C:
+.CODE_04DD0C:
   CMP #$00A8                                ; $04DD0C |
-  BMI CODE_04DD14                           ; $04DD0F |
+  BMI .CODE_04DD14                          ; $04DD0F |
   LDA #$00A8                                ; $04DD11 |
 
-CODE_04DD14:
+.CODE_04DD14:
   STA !s_cam_x_window_min                   ; $04DD14 |
   LDA !s_player_y                           ; $04DD17 |
   SEC                                       ; $04DD1A |
   SBC !r_bg1_cam_y                          ; $04DD1B |
   CMP #$0040                                ; $04DD1E |
-  BPL CODE_04DD26                           ; $04DD21 |
+  BPL .CODE_04DD26                          ; $04DD21 |
   LDA #$0040                                ; $04DD23 |
 
-CODE_04DD26:
+.CODE_04DD26:
   CMP #$00A0                                ; $04DD26 |
-  BMI CODE_04DD2E                           ; $04DD29 |
+  BMI .CODE_04DD2E                          ; $04DD29 |
   LDA #$00A0                                ; $04DD2B |
 
-CODE_04DD2E:
+.CODE_04DD2E:
   STA !s_cam_y_window_min                   ; $04DD2E |
   RTL                                       ; $04DD31 |
 
@@ -14720,26 +14721,26 @@ CODE_04F997:
 CODE_04F998:
   LDA !s_door_exit_type                     ; $04F998 |
   CMP #$0100                                ; $04F99B |
-  BEQ CODE_04F9AD                           ; $04F99E |
+  BEQ .CODE_04F9AD                          ; $04F99E |
   SEP #$30                                  ; $04F9A0 |
-  JSR CODE_04FA33                           ; $04F9A2 |
+  JSR check_if_ski_translevel               ; $04F9A2 |
   REP #$30                                  ; $04F9A5 |
-  BEQ CODE_04F9B2                           ; $04F9A7 |
+  BEQ .CODE_04F9B2                          ; $04F9A7 |
   STZ !s_door_exit_type                     ; $04F9A9 |
   RTS                                       ; $04F9AC |
 
-CODE_04F9AD:
+.CODE_04F9AD:
   JSL CODE_02A4B5                           ; $04F9AD |
   RTS                                       ; $04F9B1 |
 
-CODE_04F9B2:
+.CODE_04F9B2:
   LDA #$0200                                ; $04F9B2 |
   STA !s_door_exit_type                     ; $04F9B5 |
   STZ !s_player_x_speed                     ; $04F9B8 |
   LDA !s_player_form                        ; $04F9BB |
   BNE CODE_04FA22                           ; $04F9BE |
   LDA $0C8C                                 ; $04F9C0 |
-  BEQ CODE_04FA21                           ; $04F9C3 |
+  BEQ .ret                                  ; $04F9C3 |
   LDA #$000E                                ; $04F9C5 |
   STA !s_player_form                        ; $04F9C8 |
   JSL CODE_04EF27                           ; $04F9CB |
@@ -14768,18 +14769,18 @@ CODE_04F9B2:
   STA $70336C                               ; $04FA0E |
   LDX #$001C                                ; $04FA12 |
 
-CODE_04FA15:
+.loop:
   STA $7021A2,x                             ; $04FA15 |
   STA $702F0E,x                             ; $04FA19 |
   DEX                                       ; $04FA1D |
   DEX                                       ; $04FA1E |
-  BPL CODE_04FA15                           ; $04FA1F |
+  BPL .loop                                 ; $04FA1F |
 
-CODE_04FA21:
+.ret:
   RTS                                       ; $04FA21 |
 
 CODE_04FA22:
-  LDA $0C8E                                 ; $04FA22 |
+  LDA !r_cam_freeze_flag                    ; $04FA22 |
   BNE CODE_04FA30                           ; $04FA25 |
   STZ !s_player_state                       ; $04FA27 |
   STZ !s_player_direction                   ; $04FA2A |
@@ -14788,25 +14789,26 @@ CODE_04FA22:
 CODE_04FA30:
   RTS                                       ; $04FA30 |
 
-  db $32, $38                               ; $04FA31 |
+level_with_ski_ids:
+  db $32, $38                               ; $04FA31 | 5-3 and 5-E
 
-CODE_04FA33:
-  LDA !r_header_bg1_tileset                 ; $04FA33 |
-  CMP #$04                                  ; $04FA36 |
-  BNE CODE_04FA4E                           ; $04FA38 |
-  LDX !r_header_item_memory                 ; $04FA3A |
-  CPX #$03                                  ; $04FA3D |
-  BNE CODE_04FA4E                           ; $04FA3F |
-  LDX #$01                                  ; $04FA41 |
-  LDA !r_cur_stage                          ; $04FA43 |
+check_if_ski_translevel:
+  LDA !r_header_bg1_tileset                 ; $04FA33 |\
+  CMP #$04                                  ; $04FA36 | | Check if header contains key
+  BNE .ret                                  ; $04FA38 | | values for Ski Yoshi section, 
+  LDX !r_header_item_memory                 ; $04FA3A | | which happens only in rooms
+  CPX #$03                                  ; $04FA3D | | $63 (5-E) and $AF (5-3)
+  BNE .ret                                  ; $04FA3F |/
+  LDX #$01                                  ; $04FA41 |\
+  LDA !r_cur_stage                          ; $04FA43 | |
 
-CODE_04FA46:
-  CMP $FA31,x                               ; $04FA46 |
-  BEQ CODE_04FA4E                           ; $04FA49 |
-  DEX                                       ; $04FA4B |
-  BPL CODE_04FA46                           ; $04FA4C |
+.loop:
+  CMP level_with_ski_ids,x                  ; $04FA46 | | Check if level is one with
+  BEQ .ret                                  ; $04FA49 | | Ski Yoshi section
+  DEX                                       ; $04FA4B | |
+  BPL .loop                                 ; $04FA4C |/
 
-CODE_04FA4E:
+.ret:
   RTS                                       ; $04FA4E |
 
 ; indexed by $00x0 of timer value of
@@ -14934,7 +14936,7 @@ CODE_04FB41:
   TAX                                       ; $04FB54 |
   LDY #$001C                                ; $04FB55 |
 
-CODE_04FB58:
+.loop:
   LDA hirom_mirror($3FA000),x               ; $04FB58 |
   STA $21A2,y                               ; $04FB5C |
   STA $2F0E,y                               ; $04FB5F |
@@ -14942,7 +14944,7 @@ CODE_04FB58:
   DEX                                       ; $04FB63 |
   DEY                                       ; $04FB64 |
   DEY                                       ; $04FB65 |
-  BPL CODE_04FB58                           ; $04FB66 |
+  BPL .loop                                 ; $04FB66 |
   PLB                                       ; $04FB68 |
   PLY                                       ; $04FB69 |
   PLX                                       ; $04FB6A |
@@ -15029,7 +15031,7 @@ main_camera:
   ORA $0B57                                 ; $04FD38 | | still camera update
   BNE .check_autoscroll_sprite              ; $04FD3B |/
   LDA !s_player_disable_flag                ; $04FD3D |\
-  ORA $0C8E                                 ; $04FD40 | | these inactive flags
+  ORA !r_cam_freeze_flag                    ; $04FD40 | | these inactive flags
   ORA !r_mosaic_freeze_timer                ; $04FD43 | | skip camera updating
   ORA !r_cur_item_used                      ; $04FD46 | |
   BNE .store_autoscroll_X                   ; $04FD49 |/

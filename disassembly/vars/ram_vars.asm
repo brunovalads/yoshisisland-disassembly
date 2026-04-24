@@ -564,6 +564,8 @@
 ; !r_spcsprite_unknown_3 = $0C7E
 ; !r_spcsprite_unknown_3_l = $7E0C7E
 
+!r_cam_freeze_flag = $0C8E
+!r_cam_freeze_flag_l = $7E0C8E
 
 !r_y_cam_offset = $0CB0
 !r_y_cam_offset_l = $7E0CB0

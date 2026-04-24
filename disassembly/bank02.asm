@@ -3766,7 +3766,7 @@ CODE_02A3BD:
   STA !s_player_state                       ; $02A3C0 |
   STZ $0C8C                                 ; $02A3C3 |
   STZ !s_door_exit_type                     ; $02A3C6 |
-  INC $0C8E                                 ; $02A3C9 |
+  INC !r_cam_freeze_flag                    ; $02A3C9 |
   LDA !s_spr_id,x                           ; $02A3CC |
   CMP #$004E                                ; $02A3CF |
   BNE CODE_02A3D7                           ; $02A3D2 |
@@ -3879,7 +3879,7 @@ CODE_02A480:
   BNE CODE_02A4E7                           ; $02A490 |
   LDA !s_player_form                        ; $02A492 |
   BEQ CODE_02A4A2                           ; $02A495 |
-  STZ $0C8E                                 ; $02A497 |
+  STZ !r_cam_freeze_flag                    ; $02A497 |
   STZ !s_sprite_disable_flag                ; $02A49A |
   STZ $0C8C                                 ; $02A49D |
   BRA CODE_02A4E7                           ; $02A4A0 |
