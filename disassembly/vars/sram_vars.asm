@@ -236,6 +236,9 @@
 !s_player_transforming_flag = $614E
 !s_player_transforming_flag_l = $70014E
 
+!s_critical_damage_timer = $614A
+!s_critical_damage_timer_l = $70614A
+
 !s_player_mouth_state = $6150
 !s_player_mouth_state_l = $700150
 

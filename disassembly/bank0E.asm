@@ -14166,7 +14166,7 @@ CODE_0EED35:
   LDA !s_baby_mario_state                   ; $0EED35 |
   BPL CODE_0EED51                           ; $0EED38 |
   LDA #$0100                                ; $0EED3A |
-  STA $614A                                 ; $0EED3D |
+  STA !s_critical_damage_timer              ; $0EED3D |
   LSR A                                     ; $0EED40 |
   STA !s_player_invincibility_timer         ; $0EED41 |
   STZ !s_player_x_speed_prev                ; $0EED44 |

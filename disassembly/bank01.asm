@@ -5432,7 +5432,7 @@ CODE_01AD64:
   STA !s_spr_timer_1,x                      ; $01AD76 |
   ASL A                                     ; $01AD79 |
   ASL A                                     ; $01AD7A |
-  STA $614A                                 ; $01AD7B |
+  STA !s_critical_damage_timer              ; $01AD7B |
   LDY !s_spr_facing_dir,x                   ; $01AD7E |
   LDA $AD13,y                               ; $01AD81 |
   CLC                                       ; $01AD84 |

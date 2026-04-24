@@ -4582,7 +4582,7 @@ player_hit:
   LDA #$0240                                ; $03A8EC |
 
 CODE_03A8EF:
-  STA $614A                                 ; $03A8EF |
+  STA !s_critical_damage_timer              ; $03A8EF |
   LDA #$0080                                ; $03A8F2 |
   BRA CODE_03A904                           ; $03A8F5 |
 

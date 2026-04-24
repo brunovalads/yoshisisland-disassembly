@@ -7769,7 +7769,7 @@ CODE_06C1DF:
 
 CODE_06C1EF:
   LDA $0D94                                 ; $06C1EF |
-  ORA $614A                                 ; $06C1F2 |
+  ORA !s_critical_damage_timer              ; $06C1F2 |
   ORA $0D9C                                 ; $06C1F5 |
   BEQ CODE_06C1FB                           ; $06C1F8 |
 
