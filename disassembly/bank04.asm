@@ -14853,7 +14853,7 @@ draw_player:
   BEQ .ret                                  ; $04FAA6 |/ $00 means don't draw player
   LDA !s_player_disable_flag                ; $04FAA8 |\
   ORA !r_mosaic_freeze_timer                ; $04FAAB | | any of these pause
-  ORA $614A                                 ; $04FAAE | | flags on?
+  ORA !s_critical_damage_timer              ; $04FAAE | | flags on?
   ORA !r_cur_item_used                      ; $04FAB1 | | skip timer checks
   BNE .gsu                                  ; $04FAB4 |/
   LDA !s_super_mario_timer                  ; $04FAB6 |\  super baby or
