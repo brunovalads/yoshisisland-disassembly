@@ -3653,30 +3653,103 @@ CODE_22E5:
   mov   $44, x                  ; $2306 |
   call  CODE_0b1d               ; $2308 |
   jmp   CODE_229a               ; $230b |
-  
+
   ;separate from the above, not uploaded with it
+  db $9B, $00, $20, $3E                     ; $20A380 |
+
+CODE_3e20: 
+  MOV   X,#$00                              ; $3E20 |
+  INCW  $2C                                 ; $3E22 |
+  MOV   A,($2C+X)                           ; $3E24 |
+  MOV   Y,#$06                              ; $3E26 |
+  MUL   YA                                  ; $3E28 |
+  MOV   $D2,#$97                            ; $3E29 |
+  MOV   $D3,#$1D                            ; $3E2C |
+  ADDW  YA,$D2                              ; $3E2F |
+  MOVW  $D2,YA                              ; $3E31 |
+  MOV   Y,#$00                              ; $3E33 |
+  MOV   A,$03C2                             ; $3E35 |
+  OR    A,#$04                              ; $3E38 |
+  MOV   X,A                                 ; $3E3A |
+  MOV   $12,#$04                            ; $3E3B |
+
+CODE_3E3E:
+  MOV   A,($D2)+Y                           ; $3E3E |
+  PUSH  Y                                   ; $3E40 |
+  PUSH  X                                   ; $3E41 |
+  POP   Y                                   ; $3E42 |
+  CALL  CODE_05fa                           ; $3E43 |
+  PUSH  Y                                   ; $3E46 |
+  POP   X                                   ; $3E47 |
+  POP   Y                                   ; $3E48 |
+  INC   X                                   ; $3E49 |
+  INC   Y                                   ; $3E4A |
+  DBNZ  $12,CODE_3E3E                       ; $3E4B |
+  MOV   A,($D2)+Y                           ; $3E4E |
+  MOV   X,$03C0                             ; $3E50 |
+  MOV   $0221+X,A                           ; $3E53 |
+  INC   Y                                   ; $3E56 |
+  MOV   A,($D2)+Y                           ; $3E57 |
+  MOV   $0220+X,A                           ; $3E59 |
+  JMP   CODE_2236                           ; $3E5C |
+
+CODE_3e5f:
+  SET1  $13.7                               ; $3E5F |
+  MOV   A,#$60                              ; $3E61 |
+  MOV   Y,#$03                              ; $3E63 |
+  DEC   $A0+X                               ; $3E65 |
+  CALL  CODE_0c46                           ; $3E67 |
+  MOV   A,$0361+X                           ; $3E6A |
+  MOV   Y,A                                 ; $3E6D |
+  MOV   A,$0360+X                           ; $3E6E |
+  MOVW  $10,YA                              ; $3E71 |
+  MOV   $47,#$00                            ; $3E73 |
+  JMP   CODE_056f                           ; $3E76 |
+
+CODE_3e79:
+  PUSH  A                                   ; $3E79 |
+  MOV   Y,#$5C                              ; $3E7A |
+  MOV   A,#$00                              ; $3E7C |
+  CALL  CODE_05fa                           ; $3E7E |
+  POP   A                                   ; $3E81 |
+  MOV   Y,#$4C                              ; $3E82 |
+  JMP   CODE_05fa                           ; $3E84 |
+
+CODE_3E87:
+  MOV   A,$03F1                             ; $3E87 |
+  BNE   CODE_3EA5                           ; $3E8A |
+  MOV   A,$59                               ; $3E8C |
+  MOV   $03F1,A                             ; $3E8E |
+  MOV   A,#$88                              ; $3E91 |
+  MOV   $59,A                               ; $3E93 |
+  RET                                       ; $3E95 |
+
+CODE_3e96:  
+  MOV   A,$03F1                             ; $3E96 |
+  BEQ   CODE_3EA5                           ; $3E99 |
+  MOV   A,$03F1                             ; $3E9B |
+  MOV   $59,A                               ; $3E9E |
+  MOV   A,#$00                              ; $3EA0 |
+  MOV   $03F1,A                             ; $3EA2 |
+
+CODE_3EA5:
+  RET                                       ; $3EA5 |
+
+CODE_3ea6:
+  MOV   A,$03C1                             ; $3EA6 |
+  AND   A,$4A                               ; $3EA9 |
+  BEQ   CODE_3eba                           ; $3EAB |
+  MOV   A,$4A                               ; $3EAD |
+  SETC                                      ; $3EAF |
+  SBC   A,$03C1                             ; $3EB0 |
+  MOV   $4A,A                               ; $3EB3 |
+  MOV   Y,#$4D                              ; $3EB5 |
+  CALL  CODE_05fa                           ; $3EB7 |
+
+CODE_3eba:
+  RET                                       ; $3EBA |
   
-  db $9B, $00, $20                          ; $20A380 |
-  db $3E, $CD, $00, $3A, $2C, $E7, $2C, $8D ; $20A383 |
-  db $06, $CF, $8F, $97, $D2, $8F, $1D, $D3 ; $20A38B |
-  db $7A, $D2, $DA, $D2, $8D, $00, $E5, $C2 ; $20A393 |
-  db $03, $08, $04, $5D, $8F, $04, $12, $F7 ; $20A39B |
-  db $D2, $6D, $4D, $EE, $3F, $FA, $05, $6D ; $20A3A3 |
-  db $CE, $EE, $3D, $FC, $6E, $12, $F0, $F7 ; $20A3AB |
-  db $D2, $E9, $C0, $03, $D5, $21, $02, $FC ; $20A3B3 |
-  db $F7, $D2, $D5, $20, $02, $5F, $36, $22 ; $20A3BB |
-  db $E2, $13, $E8, $60, $8D, $03, $9B, $A0 ; $20A3C3 |
-  db $3F, $46, $0C, $F5, $61, $03, $FD, $F5 ; $20A3CB |
-  db $60, $03, $DA, $10, $8F, $00, $47, $5F ; $20A3D3 |
-  db $6F, $05, $2D, $8D, $5C, $E8, $00, $3F ; $20A3DB |
-  db $FA, $05, $AE, $8D, $4C, $5F, $FA, $05 ; $20A3E3 |
-  db $E5, $F1, $03, $D0, $19, $E4, $59, $C5 ; $20A3EB |
-  db $F1, $03, $E8, $88, $C4, $59, $6F, $E5 ; $20A3F3 |
-  db $F1, $03, $F0, $0A, $E5, $F1, $03, $C4 ; $20A3FB |
-  db $59, $E8, $00, $C5, $F1, $03, $6F, $E5 ; $20A403 |
-  db $C1, $03, $24, $4A, $F0, $0D, $E4, $4A ; $20A40B |
-  db $80, $A5, $C1, $03, $C4, $4A, $8D, $4D ; $20A413 |
-  db $3F, $FA, $05, $6F, $51, $0C, $00, $D0 ; $20A41B |
+  db $51, $0C, $00, $D0                     ; $20A41F |
   db $1E, $D0, $2E, $D0, $2E, $D0, $4E, $D0 ; $20A423 |
   db $4E, $D0, $3E, $D0, $7E, $D0, $5E, $D0 ; $20A42B |
   db $8E, $D0, $AE, $D0, $9E, $D0, $8E, $D0 ; $20A433 |
