@@ -15,6 +15,7 @@ ASSEMBLE_RELATIVE_PATH = "disassembly\\assemble.asm"
 HASH_MD5 = "yi.md5sum"
 HASH_SHA1 = "yi.sha1sum"
 HASH_SHA256 = "yi.sha256sum"
+MAX_DIFFS = 500
 
 #############################################################################################################
 # Functions
@@ -75,7 +76,7 @@ def check_hash_match(current_hash, hash_file_path):
         content = f.read().lower()
         return current_hash.lower() in content
 
-def compare_binaries(file1_path, file2_path, max_diffs=10):
+def compare_binaries(file1_path, file2_path, max_diffs=100):
     if not os.path.exists(file1_path) or not os.path.exists(file2_path):
         print("Error: One or both files missing for comparison.")
         return
@@ -137,7 +138,7 @@ if not all_match:
     rom_path = input("\nEnter path to your Yoshi's Island rom to check where build differs (leave blank to skip): ").strip()
     if rom_path and os.path.exists(rom_path):
         print("\nComparing files...\n")
-        compare_binaries(ROM_NAME, rom_path, max_diffs=100)
+        compare_binaries(ROM_NAME, rom_path, MAX_DIFFS)
     elif rom_path:
         print("Provided ROM path does not exist.")
 
