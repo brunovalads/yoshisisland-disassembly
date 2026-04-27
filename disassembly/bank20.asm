@@ -123,6 +123,11 @@ org $208000
   db $8C, $99, $A5, $B2, $BF, $CC, $D8, $E5 ; $20839A |
   db $F2, $FC, $A3, $0A, $00, $04           ; $2083A2 |
 
+; Offsets for call/jmp instructions
+MAPPING_OFFSET_1 = $6564 ; For call/jmp CODE_$3XXX
+MAPPING_OFFSET_2 = $7FA8 ; For call/jmp CODE_$0XXX
+MAPPING_OFFSET_3 = $8072 ; For call/jmp CODE_$1XXX/CODE_$2XXX
+
 ; Yoshi's Island - loveemu labo
 ; Disassembler: spcdas v0.01
 ; some other infos available at:
@@ -151,16 +156,16 @@ CODE_0414:
   inc   x                                   ; $0417 |
   bne   CODE_0414                           ; $0418 | zero 0300-03ff
   inc   a                                   ; $041a |
-  call  CODE_0a96-$7FA8                     ; $041b | set echo delay to 1 (16ms)
+  call  CODE_0a96-MAPPING_OFFSET_2          ; $041b | set echo delay to 1 (16ms)
   set5  $48                                 ; $041e |
   mov   a,#$60                              ; $0420 |
   mov   y,#$0c                              ; $0422 |
-  call  CODE_05fa-$7FA8                     ; $0424 | master vol L = $60
+  call  CODE_05fa-MAPPING_OFFSET_2          ; $0424 | master vol L = $60
   mov   y,#$1c                              ; $0427 |
-  call  CODE_05fa-$7FA8                     ; $0429 | master vol R = $60
+  call  CODE_05fa-MAPPING_OFFSET_2          ; $0429 | master vol R = $60
   mov   a,#$3c                              ; $042c |
   mov   y,#$5d                              ; $042e |
-  call  CODE_05fa-$7FA8                     ; $0430 | source dir = $3c00
+  call  CODE_05fa-MAPPING_OFFSET_2          ; $0430 | source dir = $3c00
   mov   a,#$f0                              ; $0433 |
   mov   $00f1,a                             ; $0435 | reset ports, disable timers
   mov   a,#$10                              ; $0438 |
@@ -212,13 +217,13 @@ CODE_0473:
   adc   a,$43                               ; $047d |
   mov   $43,a                               ; $047f |
   bcc   CODE_04a6                           ; $0481 |
-  call  CODE_1edc-$8072                     ; $0483 |
+  call  CODE_1edc-MAPPING_OFFSET_3          ; $0483 |
   mov   x,#$01                              ; $0486 |
-  call  CODE_04da-$7FA8                     ; $0488 |
+  call  CODE_04da-MAPPING_OFFSET_2          ; $0488 |
   mov   x,#$02                              ; $048b |
-  call  CODE_04da-$7FA8                     ; $048d |
-  call  CODE_2137-$8072                     ; $0490 |
-  call  CODE_2066-$8072                     ; $0493 |
+  call  CODE_04da-MAPPING_OFFSET_2          ; $048d |
+  call  CODE_2137-MAPPING_OFFSET_3          ; $0490 |
+  call  CODE_2066-MAPPING_OFFSET_3          ; $0493 |
   cmp   ($4c),($4d)                         ; $0496 |
   beq   CODE_04a6                           ; $0499 |
   inc   $03c7                               ; $049b |
@@ -237,12 +242,12 @@ CODE_04a6:
   bcc   CODE_04c1                           ; $04af |
   mov   a,$03f8                             ; $04b1 |
   bne   CODE_04be                           ; $04b4 |
-  call  CODE_0754-$7FA8                     ; $04b6 |
+  call  CODE_0754-MAPPING_OFFSET_2          ; $04b6 |
   mov   x,#$00                              ; $04b9 |
-  call  CODE_04eb-$7FA8                     ; $04bb |
+  call  CODE_04eb-MAPPING_OFFSET_2          ; $04bb |
 
 CODE_04be:
-  jmp   CODE_0444-$7FA8                     ; $04be |
+  jmp   CODE_0444-MAPPING_OFFSET_2          ; $04be |
 
 CODE_04c1:
   mov   a,$04                               ; $04c1 |
@@ -253,7 +258,7 @@ CODE_04c1:
 CODE_04ca:
   mov   a,$31+x                             ; $04ca |
   beq   CODE_04d1                           ; $04cc |
-  call  CODE_0d46-$7FA8                     ; $04ce |
+  call  CODE_0d46-MAPPING_OFFSET_2          ; $04ce |
 
 CODE_04d1:
   inc   x                                   ; $04d1 |
@@ -262,7 +267,7 @@ CODE_04d1:
   bne   CODE_04ca                           ; $04d5 |
 
 CODE_04d7:
-  jmp   CODE_0444-$7FA8                     ; $04d7 |
+  jmp   CODE_0444-MAPPING_OFFSET_2          ; $04d7 |
 
 CODE_04da:
   mov   a,$04+x                             ; $04da |
@@ -301,7 +306,7 @@ CODE_0505:
   cmp   y,#$ca                              ; $0505 |
   bcc   CODE_050e                           ; $0507 |
 ; vcmds ca-df - percussion note
-  call  CODE_08b1-$7FA8                     ; $0509 | set sample
+  call  CODE_08b1-MAPPING_OFFSET_2          ; $0509 | set sample
   mov   y,#$a4                              ; $050c | dispatch as note $a4
 ; vcmds 80-c7,c8,c9 - note/tie/rest
 
@@ -350,10 +355,10 @@ CODE_0562:
   clrc                                      ; $0565 |
 ; set DSP pitch from $10/1
   adc   a,$0361+x                           ; $0566 |
-  call  CODE_0b1d-$7FA8                     ; $0569 |
+  call  CODE_0b1d-MAPPING_OFFSET_2          ; $0569 |
 
 CODE_056c:
-  call  CODE_0b35-$7FA8                     ; $056c |
+  call  CODE_0b35-MAPPING_OFFSET_2          ; $056c |
 
 CODE_056f:
   mov   y,#$00                              ; $056f |
@@ -437,7 +442,7 @@ CODE_05b8:
   or    a,#$02                              ; $05e7 |
   mov   y,a                                 ; $05e9 | Y = voice X pitch DSP reg
   mov   a,$16                               ; $05ea |
-  call  CODE_05f2-$7FA8                     ; $05ec |
+  call  CODE_05f2-MAPPING_OFFSET_2          ; $05ec |
   inc   y                                   ; $05ef |
   mov   a,$17                               ; $05f0 |
 ; write A to DSP reg Y if vbit clear in $1a
@@ -458,13 +463,13 @@ CODE_0600:
 CODE_0601:
   mov   a,#$00                              ; $0601 |
   mov   y,#$2c                              ; $0603 |
-  call  CODE_05fa-$7FA8                     ; $0605 |
+  call  CODE_05fa-MAPPING_OFFSET_2          ; $0605 |
   mov   y,#$3c                              ; $0608 |
-  call  CODE_05fa-$7FA8                     ; $060a |
+  call  CODE_05fa-MAPPING_OFFSET_2          ; $060a |
   mov   a,#$ff                              ; $060d |
   mov   y,#$5c                              ; $060f |
-  call  CODE_05fa-$7FA8                     ; $0611 |
-  call  CODE_0e57-$7FA8                     ; $0614 |
+  call  CODE_05fa-MAPPING_OFFSET_2          ; $0611 |
+  call  CODE_0e57-MAPPING_OFFSET_2          ; $0614 |
   mov   a,#$00                              ; $0617 |
   mov   $03ca,a                             ; $0619 |
   mov   $04,a                               ; $061c |
@@ -489,11 +494,11 @@ CODE_0631:
   mov   $5b,a                               ; $063f |
   setc                                      ; $0641 |
   sbc   a,$59                               ; $0642 |
-  call  CODE_0b40-$7FA8                     ; $0644 |
+  call  CODE_0b40-MAPPING_OFFSET_2          ; $0644 |
   movw  $5c,ya                              ; $0647 |
 
 CODE_0649:
-  jmp   CODE_075b-$7FA8                     ; $0649 |
+  jmp   CODE_075b-MAPPING_OFFSET_2          ; $0649 |
 
 CODE_064c:
   mov   a,$03f1                             ; $064c |
@@ -502,7 +507,7 @@ CODE_064c:
   mov   $03f1,a                             ; $0653 |
   mov   a,#$70                              ; $0656 |
   mov   $59,a                               ; $0658 |
-  jmp   CODE_075b-$7FA8                     ; $065a |
+  jmp   CODE_075b-MAPPING_OFFSET_2          ; $065a |
 
 CODE_065d:
   mov   a,$03f1                             ; $065d |
@@ -511,7 +516,7 @@ CODE_065d:
   mov   $59,a                               ; $0665 |
   mov   a,#$00                              ; $0667 |
   mov   $03f1,a                             ; $0669 |
-  jmp   CODE_075b-$7FA8                     ; $066c |
+  jmp   CODE_075b-MAPPING_OFFSET_2          ; $066c |
 
 CODE_066f:
   ret                                       ; $066f |
@@ -541,7 +546,7 @@ CODE_0695:
   mov   a,$03cf                             ; $0695 |
   mov   $53,a                               ; $0698 |
   mov   $54,#$00                            ; $069a |
-  jmp   CODE_075b-$7FA8                     ; $069d |
+  jmp   CODE_075b-MAPPING_OFFSET_2          ; $069d |
 
 CODE_06a0:
   mov   $54,#$ef                            ; $06a0 |
@@ -557,14 +562,14 @@ CODE_06ac:
   setc                                      ; $06ae |
   sbc   a,$53                               ; $06af |
   mov   x,$54                               ; $06b1 |
-  call  CODE_0b40-$7FA8                     ; $06b3 |
+  call  CODE_0b40-MAPPING_OFFSET_2          ; $06b3 |
   movw  $56,ya                              ; $06b6 |
-  jmp   CODE_075b-$7FA8                     ; $06b8 |
+  jmp   CODE_075b-MAPPING_OFFSET_2          ; $06b8 |
 
 CODE_06bb:
   dec   $03ca                               ; $06bb |
   beq   CODE_06c3                           ; $06be |
-  jmp   CODE_0767-$7FA8                     ; $06c0 |
+  jmp   CODE_0767-MAPPING_OFFSET_2          ; $06c0 |
 
 CODE_06c3:
   mov   a,$1a                               ; $06c3 |
@@ -627,7 +632,7 @@ CODE_0710:
   mov   a,#$ff                              ; $0718 |
   mov   $0301+x,a                           ; $071a | voice volume = $ff
   mov   a,#$0a                              ; $071d |
-  call  CODE_090a-$7FA8                     ; $071f | pan = $0a.00
+  call  CODE_090a-MAPPING_OFFSET_2          ; $071f | pan = $0a.00
   mov   $0211+x,a                           ; $0722 | zero instrument
   mov   $0381+x,a                           ; $0725 |
   mov   $02f0+x,a                           ; $0728 |
@@ -658,14 +663,14 @@ CODE_0753:
 CODE_0754:
   mov   a,$00                               ; $0754 |
   beq   CODE_075b                           ; $0756 |
-  jmp   CODE_0670-$7FA8                     ; $0758 |
+  jmp   CODE_0670-MAPPING_OFFSET_2          ; $0758 |
 
 CODE_075b:
   mov   a,$04                               ; $075b |
   beq   CODE_0753                           ; $075d |
   mov   a,$03ca                             ; $075f |
   beq   CODE_0767                           ; $0762 |
-  jmp   CODE_06bb-$7FA8                     ; $0764 |
+  jmp   CODE_06bb-MAPPING_OFFSET_2          ; $0764 |
 
 CODE_0767:
   mov   a,$0c                               ; $0767 |
@@ -673,11 +678,11 @@ CODE_0767:
   dbnz  $0c,CODE_070b                       ; $076b |
 
 CODE_076e:
-  call  CODE_06d7-$7FA8                     ; $076e | read block addr from $40/1, advance ptr
+  call  CODE_06d7-MAPPING_OFFSET_2          ; $076e | read block addr from $40/1, advance ptr
   bne   CODE_078a                           ; $0771 | load start addresses, if hi-byte is non zero
   mov   y,a                                 ; $0773 | refetch lo-byte
   bne   CODE_0779                           ; $0774 | set/dec repeat count
-  jmp   CODE_06c3-$7FA8                     ; $0776 | key off, return if also zero
+  jmp   CODE_06c3-MAPPING_OFFSET_2          ; $0776 | key off, return if also zero
 
 ; set/dec repeat count
 
@@ -687,7 +692,7 @@ CODE_0779:
   mov   $42,a                               ; $077d |
 
 CODE_077f:
-  call  CODE_06d7-$7FA8                     ; $077f | read next word as well
+  call  CODE_06d7-MAPPING_OFFSET_2          ; $077f | read next word as well
   mov   x,$42                               ; $0782 |
   beq   CODE_076e                           ; $0784 |
   movw  $40,ya                              ; $0786 |   "goto" that address
@@ -713,7 +718,7 @@ CODE_079b:
   mov   a,$0211+x                           ; $079f |
   bne   CODE_07a9                           ; $07a2 |
   mov   a,#$00                              ; $07a4 |
-  call  CODE_08b1-$7FA8                     ; $07a6 | set instrument #0 if not set
+  call  CODE_08b1-MAPPING_OFFSET_2          ; $07a6 | set instrument #0 if not set
 
 CODE_07a9:
   mov   a,#$00                              ; $07a9 |
@@ -748,13 +753,13 @@ CODE_07cb:
   bne   CODE_0839                           ; $07d3 | if not zero, skip to voice readahead
 
 CODE_07d5:
-  call  CODE_08a7-$7FA8                     ; $07d5 | read vcmd into A and Y
+  call  CODE_08a7-MAPPING_OFFSET_2          ; $07d5 | read vcmd into A and Y
   bne   CODE_07f1                           ; $07d8 |
 ; vcmd 00 - end repeat/return
   mov   a,$80+x                             ; $07da |
   beq   CODE_076e                           ; $07dc | read next block if loop has been done
 ; repeat / return from subroutine
-  call  CODE_0a2b-$7FA8                     ; $07de | jump to loop start addr
+  call  CODE_0a2b-MAPPING_OFFSET_2          ; $07de | jump to loop start addr
   dec   $80+x                               ; $07e1 | dec repeat count
   bne   CODE_07d5                           ; $07e3 | if the loop has been done
   mov   a,$0230+x                           ; $07e5 |
@@ -768,7 +773,7 @@ CODE_07d5:
 CODE_07f1:
   bmi   CODE_0813                           ; $07f1 | vcmds 01-7f - note info:
   mov   $0200+x,a                           ; $07f3 |   set cmd as duration
-  call  CODE_08a7-$7FA8                     ; $07f6 |   read next byte
+  call  CODE_08a7-MAPPING_OFFSET_2          ; $07f6 |   read next byte
   bmi   CODE_0813                           ; $07f9 |   if note note then
   push  a                                   ; $07fb |
   xcn   a                                   ; $07fc |
@@ -781,13 +786,13 @@ CODE_07f1:
   mov   y,a                                 ; $0809 |
   mov   a,$3ff0+y                           ; $080a |
   mov   $0210+x,a                           ; $080d |   set per-note vol from low nybble
-  call  CODE_08a7-$7FA8                     ; $0810 |   read vcmd into A and Y
+  call  CODE_08a7-MAPPING_OFFSET_2          ; $0810 |   read vcmd into A and Y
 ; vcmd branches 80-ff
 
 CODE_0813:
   cmp   a,#$e0                              ; $0813 |
   bcc   CODE_081c                           ; $0815 |
-  call  CODE_0895-$7FA8                     ; $0817 | vcmds e0-ff
+  call  CODE_0895-MAPPING_OFFSET_2          ; $0817 | vcmds e0-ff
   bra   CODE_07d5                           ; $081a |
 
 ; vcmds 80-df - note
@@ -798,7 +803,7 @@ CODE_081c:
   and   a,$1a                               ; $081f |
   pop   a                                   ; $0821 |
   bne   CODE_0827                           ; $0822 |
-  call  CODE_0505-$7FA8                     ; $0824 | handle note cmd if vbit $1a clear
+  call  CODE_0505-MAPPING_OFFSET_2          ; $0824 | handle note cmd if vbit $1a clear
 
 CODE_0827:
   mov   a,$0200+x                           ; $0827 |
@@ -815,17 +820,17 @@ CODE_0835:
   bra   CODE_083c                           ; $0837 |
 
 CODE_0839:
-  call  CODE_0c67-$7FA8                     ; $0839 | do readahead
+  call  CODE_0c67-MAPPING_OFFSET_2          ; $0839 | do readahead
 
 CODE_083c:
-  call  CODE_0aec-$7FA8                     ; $083c |
+  call  CODE_0aec-MAPPING_OFFSET_2          ; $083c |
 
 CODE_083f:
   inc   x                                   ; $083f |
   inc   x                                   ; $0840 |
   asl   $47                                 ; $0841 |
   beq   CODE_0848                           ; $0843 |
-  jmp   CODE_07cb-$7FA8                     ; $0845 |
+  jmp   CODE_07cb-MAPPING_OFFSET_2          ; $0845 |
 
 CODE_0848:
   mov   a,$54                               ; $0848 | tempo fade counter
@@ -873,7 +878,7 @@ CODE_0882:
 CODE_0887:
   mov   a,$31+x                             ; $0887 |
   beq   CODE_088e                           ; $0889 |
-  call  CODE_0bad-$7FA8                     ; $088b | do per-voice fades
+  call  CODE_0bad-MAPPING_OFFSET_2          ; $088b | do per-voice fades
 
 CODE_088e:
   inc   x                                   ; $088e |
@@ -982,12 +987,12 @@ CODE_090a:
 ; vcmd e2 - pan fade
   mov   $91+x,a                             ; $0918 |
   push  a                                   ; $091a |
-  call  CODE_08a7-$7FA8                     ; $091b |
+  call  CODE_08a7-MAPPING_OFFSET_2          ; $091b |
   mov   $0350+x,a                           ; $091e |
   setc                                      ; $0921 |
   sbc   a,$0331+x                           ; $0922 | current pan value
   pop   x                                   ; $0925 |
-  call  CODE_0b40-$7FA8                     ; $0926 | delta = pan value / steps
+  call  CODE_0b40-MAPPING_OFFSET_2          ; $0926 | delta = pan value / steps
   mov   $0340+x,a                           ; $0929 |
   mov   a,y                                 ; $092c |
   mov   $0341+x,a                           ; $092d |
@@ -995,9 +1000,9 @@ CODE_090a:
 
 ; vcmd e3 - vibrato on
   mov   $02b0+x,a                           ; $0931 |
-  call  CODE_08a7-$7FA8                     ; $0934 |
+  call  CODE_08a7-MAPPING_OFFSET_2          ; $0934 |
   mov   $02a1+x,a                           ; $0937 |
-  call  CODE_08a7-$7FA8                     ; $093a |
+  call  CODE_08a7-MAPPING_OFFSET_2          ; $093a |
 
 ; vcmd e4 - vibrato off
   mov   $b1+x,a                             ; $093d |
@@ -1030,12 +1035,12 @@ CODE_0966:
 
 ; vcmd e6 - master volume fade
   mov   $5a,a                               ; $0967 |
-  call  CODE_08a7-$7FA8                     ; $0969 |
+  call  CODE_08a7-MAPPING_OFFSET_2          ; $0969 |
   mov   $5b,a                               ; $096c |
   setc                                      ; $096e |
   sbc   a,$59                               ; $096f |
   mov   x,$5a                               ; $0971 |
-  call  CODE_0b40-$7FA8                     ; $0973 |
+  call  CODE_0b40-MAPPING_OFFSET_2          ; $0973 |
   movw  $5c,ya                              ; $0976 |
   ret                                       ; $0978 |
 
@@ -1047,12 +1052,12 @@ CODE_0966:
 
 ; vcmd e8 - tempo fade
   mov   $54,a                               ; $0981 |
-  call  CODE_08a7-$7FA8                     ; $0983 |
+  call  CODE_08a7-MAPPING_OFFSET_2          ; $0983 |
   mov   $55,a                               ; $0986 |
   setc                                      ; $0988 |
   sbc   a,$53                               ; $0989 |
   mov   x,$54                               ; $098b |
-  call  CODE_0b40-$7FA8                     ; $098d |
+  call  CODE_0b40-MAPPING_OFFSET_2          ; $098d |
   movw  $56,ya                              ; $0990 |
   ret                                       ; $0992 |
 
@@ -1072,9 +1077,9 @@ CODE_09a4:
 
 ; vcmd eb - tremolo on
   mov   $02e0+x,a                           ; $09a5 |
-  call  CODE_08a7-$7FA8                     ; $09a8 |
+  call  CODE_08a7-MAPPING_OFFSET_2          ; $09a8 |
   mov   $02d1+x,a                           ; $09ab |
-  call  CODE_08a7-$7FA8                     ; $09ae |
+  call  CODE_08a7-MAPPING_OFFSET_2          ; $09ae |
 ; vcmd ec -ff
   mov   $c1+x,a                             ; $09b1 |
   ret                                       ; $09b3 |
@@ -1090,7 +1095,7 @@ CODE_09ba:
   mov   $0290+x,a                           ; $09ba |
   mov   a,y                                 ; $09bd |
   mov   $0281+x,a                           ; $09be |
-  call  CODE_08a7-$7FA8                     ; $09c1 |
+  call  CODE_08a7-MAPPING_OFFSET_2          ; $09c1 |
   mov   $03e1+x,a                           ; $09c4 |
   push  a                                   ; $09c7 |
   mov   a,$47                               ; $09c8 |
@@ -1101,7 +1106,7 @@ CODE_09ba:
 
 CODE_09d1:
   mov   $0280+x,a                           ; $09d1 |
-  call  CODE_08a7-$7FA8                     ; $09d4 |
+  call  CODE_08a7-MAPPING_OFFSET_2          ; $09d4 |
   mov   $0291+x,a                           ; $09d7 |
   ret                                       ; $09da |
 
@@ -1119,12 +1124,12 @@ CODE_09d1:
 ; vcmd ee - volume fade
   mov   $90+x,a                             ; $09eb |
   push  a                                   ; $09ed |
-  call  CODE_08a7-$7FA8                     ; $09ee |
+  call  CODE_08a7-MAPPING_OFFSET_2          ; $09ee |
   mov   $0320+x,a                           ; $09f1 |
   setc                                      ; $09f4 |
   sbc   a,$0301+x                           ; $09f5 |
   pop   x                                   ; $09f8 |
-  call  CODE_0b40-$7FA8                     ; $09f9 |
+  call  CODE_0b40-MAPPING_OFFSET_2          ; $09f9 |
   mov   $0310+x,a                           ; $09fc |
   mov   a,y                                 ; $09ff |
   mov   $0311+x,a                           ; $0a00 |
@@ -1142,9 +1147,9 @@ CODE_0a12:
 
 ; vcmd ef - call subroutine
   mov   $0240+x,a                           ; $0a13 |
-  call  CODE_08a7-$7FA8                     ; $0a16 |
+  call  CODE_08a7-MAPPING_OFFSET_2          ; $0a16 |
   mov   $0241+x,a                           ; $0a19 | $0240/1+X - destination (arg1/2)
-  call  CODE_08a7-$7FA8                     ; $0a1c |
+  call  CODE_08a7-MAPPING_OFFSET_2          ; $0a1c |
   mov   $80+x,a                             ; $0a1f | repeat count from arg3
   mov   a,$30+x                             ; $0a21 |
   mov   $0230+x,a                           ; $0a23 |
@@ -1162,10 +1167,10 @@ CODE_0a2b:
 ; vcmd f5 - echo vbits/volume
   mov   $03c3,a                             ; $0a36 |
   mov   $4a,a                               ; $0a39 | echo vbit shadow = arg1
-  call  CODE_08a7-$7FA8                     ; $0a3b |
+  call  CODE_08a7-MAPPING_OFFSET_2          ; $0a3b |
   mov   a,#$00                              ; $0a3e |
   movw  $60,ya                              ; $0a40 | echo vol L shadow = arg2
-  call  CODE_08a7-$7FA8                     ; $0a42 |
+  call  CODE_08a7-MAPPING_OFFSET_2          ; $0a42 |
   mov   a,#$00                              ; $0a45 |
   movw  $62,ya                              ; $0a47 | echo vol R shadow = arg3
   clr5  $48                                 ; $0a49 |
@@ -1173,19 +1178,19 @@ CODE_0a2b:
 
 ; vcmd f8 - echo volume fade
   mov   $68,a                               ; $0a4c |
-  call  CODE_08a7-$7FA8                     ; $0a4e |
+  call  CODE_08a7-MAPPING_OFFSET_2          ; $0a4e |
   mov   $69,a                               ; $0a51 |
   setc                                      ; $0a53 |
   sbc   a,$61                               ; $0a54 |
   mov   x,$68                               ; $0a56 |
-  call  CODE_0b40-$7FA8                     ; $0a58 |
+  call  CODE_0b40-MAPPING_OFFSET_2          ; $0a58 |
   movw  $64,ya                              ; $0a5b |
-  call  CODE_08a7-$7FA8                     ; $0a5d |
+  call  CODE_08a7-MAPPING_OFFSET_2          ; $0a5d |
   mov   $6a,a                               ; $0a60 |
   setc                                      ; $0a62 |
   sbc   a,$63                               ; $0a63 |
   mov   x,$68                               ; $0a65 |
-  call  CODE_0b40-$7FA8                     ; $0a67 |
+  call  CODE_0b40-MAPPING_OFFSET_2          ; $0a67 |
   movw  $66,ya                              ; $0a6a |
   ret                                       ; $0a6c |
 
@@ -1196,10 +1201,10 @@ CODE_0a2b:
   ret                                       ; $0a73 |
 
 ; vcmd f7 - set echo params
-  call  CODE_0a96-$7FA8                     ; $0a74 | set echo delay from arg1
-  call  CODE_08a7-$7FA8                     ; $0a77 |
+  call  CODE_0a96-MAPPING_OFFSET_2          ; $0a74 | set echo delay from arg1
+  call  CODE_08a7-MAPPING_OFFSET_2          ; $0a77 |
   mov   $4e,a                               ; $0a7a | set echo feedback shadow from arg2
-  call  CODE_08a7-$7FA8                     ; $0a7c |
+  call  CODE_08a7-MAPPING_OFFSET_2          ; $0a7c |
   mov   y,#$08                              ; $0a7f |
   mul   ya                                  ; $0a81 |
   mov   x,a                                 ; $0a82 |
@@ -1207,7 +1212,7 @@ CODE_0a2b:
 
 CODE_0a85:
   mov   a,$0dfe+x                           ; $0a85 | filter table
-  call  CODE_05fa-$7FA8                     ; $0a88 |
+  call  CODE_05fa-MAPPING_OFFSET_2          ; $0a88 |
   inc   x                                   ; $0a8b |
   mov   a,y                                 ; $0a8c |
   clrc                                      ; $0a8d |
@@ -1244,10 +1249,10 @@ CODE_0ab2:
   mov   a,$48                               ; $0abf |
   or    a,#$20                              ; $0ac1 |
   mov   y,#$6c                              ; $0ac3 |
-  call  CODE_05fa-$7FA8                     ; $0ac5 | set FLG from shadow but disable echo
+  call  CODE_05fa-MAPPING_OFFSET_2          ; $0ac5 | set FLG from shadow but disable echo
   mov   a,$4d                               ; $0ac8 |
   mov   y,#$7d                              ; $0aca |
-  call  CODE_05fa-$7FA8                     ; $0acc | set echo delay from $4d
+  call  CODE_05fa-MAPPING_OFFSET_2          ; $0acc | set echo delay from $4d
 
 CODE_0acf:
   asl   a                                   ; $0acf |
@@ -1257,7 +1262,7 @@ CODE_0acf:
   setc                                      ; $0ad4 |
   adc   a,#$3c                              ; $0ad5 |
   mov   y,#$6d                              ; $0ad7 |
-  jmp   CODE_05fa-$7FA8                     ; $0ad9 | set echo region to $3c00-8*delay
+  jmp   CODE_05fa-MAPPING_OFFSET_2          ; $0ad9 | set echo region to $3c00-8*delay
 
 ; vcmd fa - set perc patch base
   mov   $5f,a                               ; $0adc |
@@ -1284,19 +1289,19 @@ CODE_0aec:
   mov   $10,#$04                            ; $0afc |
 
 CODE_0aff:
-  call  CODE_08a9-$7FA8                     ; $0aff |
+  call  CODE_08a9-MAPPING_OFFSET_2          ; $0aff |
   dbnz  $10,CODE_0aff                       ; $0b02 |
   bra   CODE_0b34                           ; $0b05 |
 
 CODE_0b07:
-  call  CODE_08a9-$7FA8                     ; $0b07 |
-  call  CODE_08a7-$7FA8                     ; $0b0a |
+  call  CODE_08a9-MAPPING_OFFSET_2          ; $0b07 |
+  call  CODE_08a7-MAPPING_OFFSET_2          ; $0b0a |
 
 CODE_0b0d:
   mov   $a1+x,a                             ; $0b0d |
-  call  CODE_08a7-$7FA8                     ; $0b0f |
+  call  CODE_08a7-MAPPING_OFFSET_2          ; $0b0f |
   mov   $a0+x,a                             ; $0b12 |
-  call  CODE_08a7-$7FA8                     ; $0b14 |
+  call  CODE_08a7-MAPPING_OFFSET_2          ; $0b14 |
   clrc                                      ; $0b17 |
   adc   a,$50                               ; $0b18 | add global transpose
   adc   a,$02f0+x                           ; $0b1a | per-voice transpose
@@ -1310,7 +1315,7 @@ CODE_0b1d:
   mov   y,$a0+x                             ; $0b26 | portamento steps
   push  y                                   ; $0b28 |
   pop   x                                   ; $0b29 |
-  call  CODE_0b40-$7FA8                     ; $0b2a |
+  call  CODE_0b40-MAPPING_OFFSET_2          ; $0b2a |
   mov   $0370+x,a                           ; $0b2d |
   mov   a,y                                 ; $0b30 |
   mov   $0371+x,a                           ; $0b31 | portamento delta
@@ -1397,7 +1402,7 @@ CODE_0bad:
   mov   a,#$00                              ; $0bb1 |
   mov   y,#$03                              ; $0bb3 |
   dec   $90+x                               ; $0bb5 | dec voice vol fade counter
-  call  CODE_0c43-$7FA8                     ; $0bb7 |
+  call  CODE_0c43-MAPPING_OFFSET_2          ; $0bb7 |
 
 CODE_0bba:
   mov   y,$c1+x                             ; $0bba |
@@ -1418,7 +1423,7 @@ CODE_0bd3:
 
 CODE_0bd7:
   mov   $02d0+x,a                           ; $0bd7 |
-  call  CODE_0dcc-$7FA8                     ; $0bda |
+  call  CODE_0dcc-MAPPING_OFFSET_2          ; $0bda |
   bra   CODE_0be6                           ; $0bdd |
 
 CODE_0bdf:
@@ -1426,7 +1431,7 @@ CODE_0bdf:
 
 CODE_0be1:
   mov   a,#$ff                              ; $0be1 |
-  call  CODE_0dd7-$7FA8                     ; $0be3 |
+  call  CODE_0dd7-MAPPING_OFFSET_2          ; $0be3 |
 
 CODE_0be6:
   mov   a,$91+x                             ; $0be6 |
@@ -1434,7 +1439,7 @@ CODE_0be6:
   mov   a,#$30                              ; $0bea |
   mov   y,#$03                              ; $0bec |
   dec   $91+x                               ; $0bee |
-  call  CODE_0c43-$7FA8                     ; $0bf0 |
+  call  CODE_0c43-MAPPING_OFFSET_2          ; $0bf0 |
 
 CODE_0bf3:
   mov   a,$47                               ; $0bf3 |
@@ -1479,7 +1484,7 @@ CODE_0c2a:
 
 CODE_0c30:
   mov   y,$12                               ; $0c30 |
-  call  CODE_05f2-$7FA8                     ; $0c32 |
+  call  CODE_05f2-MAPPING_OFFSET_2          ; $0c32 |
   mov   y,#$14                              ; $0c35 |
   mov   a,#$00                              ; $0c37 |
   subw  ya,$10                              ; $0c39 |
@@ -1508,7 +1513,7 @@ CODE_0c46:
 
 CODE_0c59:
   adc   $16,#$10                            ; $0c59 |
-  call  CODE_0c60-$7FA8                     ; $0c5c |
+  call  CODE_0c60-MAPPING_OFFSET_2          ; $0c5c |
   inc   y                                   ; $0c5f |
 
 CODE_0c60:
@@ -1598,7 +1603,7 @@ CODE_0cbe:
 CODE_0cc9:
   mov   a,$47                               ; $0cc9 |
   mov   y,#$5c                              ; $0ccb |
-  call  CODE_05f2-$7FA8                     ; $0ccd |
+  call  CODE_05f2-MAPPING_OFFSET_2          ; $0ccd |
 
 CODE_0cd0:
   clr7  $13                                 ; $0cd0 |
@@ -1617,10 +1622,10 @@ CODE_0cde:
   mov   a,#$60                              ; $0ce6 |
   mov   y,#$03                              ; $0ce8 |
   dec   $a0+x                               ; $0cea |
-  call  CODE_0c46-$7FA8                     ; $0cec |
+  call  CODE_0c46-MAPPING_OFFSET_2          ; $0cec |
 
 CODE_0cef:
-  call  CODE_0b35-$7FA8                     ; $0cef |
+  call  CODE_0b35-MAPPING_OFFSET_2          ; $0cef |
   mov   a,$b1+x                             ; $0cf2 |
   beq   CODE_0d42                           ; $0cf4 |
   mov   a,$02b0+x                           ; $0cf6 |
@@ -1672,10 +1677,10 @@ CODE_0d36:
   mov   y,#$00                              ; $0d38 |
 
 CODE_0d3a:
-  call  CODE_0db7-$7FA8                     ; $0d3a |
+  call  CODE_0db7-MAPPING_OFFSET_2          ; $0d3a |
 
 CODE_0d3d:
-  jmp   CODE_056f-$7FA8                     ; $0d3d |
+  jmp   CODE_056f-MAPPING_OFFSET_2          ; $0d3d |
 
 CODE_0d40:
   inc   $b0+x                               ; $0d40 |
@@ -1691,7 +1696,7 @@ CODE_0d46:
   beq   CODE_0d55                           ; $0d4a |
   mov   a,$02e0+x                           ; $0d4c |
   cbne  $c0+x,CODE_0d55                     ; $0d4f |
-  call  CODE_0dbf-$7FA8                     ; $0d52 | voice vol calculations
+  call  CODE_0dbf-MAPPING_OFFSET_2          ; $0d52 | voice vol calculations
 
 CODE_0d55:
   mov   a,$0331+x                           ; $0d55 |
@@ -1703,15 +1708,15 @@ CODE_0d55:
   mov   a,$0341+x                           ; $0d62 |
   mov   y,a                                 ; $0d65 |
   mov   a,$0340+x                           ; $0d66 | pan fade delta
-  call  CODE_0da1-$7FA8                     ; $0d69 | add delta (with mutations)?
+  call  CODE_0da1-MAPPING_OFFSET_2          ; $0d69 | add delta (with mutations)?
 
 CODE_0d6c:
   bbc7  $13,CODE_0d72                       ; $0d6c |
-  call  CODE_0c02-$7FA8                     ; $0d6f |
+  call  CODE_0c02-MAPPING_OFFSET_2          ; $0d6f |
 
 CODE_0d72:
   clr7  $13                                 ; $0d72 |
-  call  CODE_0b35-$7FA8                     ; $0d74 |
+  call  CODE_0b35-MAPPING_OFFSET_2          ; $0d74 |
   mov   a,$a0+x                             ; $0d77 |
   beq   CODE_0d89                           ; $0d79 |
   mov   a,$a1+x                             ; $0d7b |
@@ -1719,7 +1724,7 @@ CODE_0d72:
   mov   a,$0371+x                           ; $0d7f |
   mov   y,a                                 ; $0d82 |
   mov   a,$0370+x                           ; $0d83 |
-  call  CODE_0da1-$7FA8                     ; $0d86 |
+  call  CODE_0da1-MAPPING_OFFSET_2          ; $0d86 |
 
 CODE_0d89:
   mov   a,$b1+x                             ; $0d89 |
@@ -1732,12 +1737,12 @@ CODE_0d89:
   mov   a,y                                 ; $0d99 |
   clrc                                      ; $0d9a |
   adc   a,$02a0+x                           ; $0d9b |
-  jmp   CODE_0d22-$7FA8                     ; $0d9e |
+  jmp   CODE_0d22-MAPPING_OFFSET_2          ; $0d9e |
 
 CODE_0da1:
   set7  $13                                 ; $0da1 |
   mov   $12,y                               ; $0da3 |
-  call  CODE_0b52-$7FA8                     ; $0da5 |
+  call  CODE_0b52-MAPPING_OFFSET_2          ; $0da5 |
   push  y                                   ; $0da8 |
   mov   y,$51                               ; $0da9 |
   mul   ya                                  ; $0dab |
@@ -1749,7 +1754,7 @@ CODE_0da1:
   addw  ya,$14                              ; $0db5 |
 
 CODE_0db7:
-  call  CODE_0b52-$7FA8                     ; $0db7 |
+  call  CODE_0b52-MAPPING_OFFSET_2          ; $0db7 |
   addw  ya,$10                              ; $0dba |
   movw  $10,ya                              ; $0dbc |
   ret                                       ; $0dbe |
@@ -3678,7 +3683,7 @@ CODE_3E3E:
   PUSH  Y                                   ; $3E40 |
   PUSH  X                                   ; $3E41 |
   POP   Y                                   ; $3E42 |
-  CALL  CODE_05fa-$7FA8                     ; $3E43 |
+  CALL  CODE_05fa-MAPPING_OFFSET_2          ; $3E43 |
   PUSH  Y                                   ; $3E46 |
   POP   X                                   ; $3E47 |
   POP   Y                                   ; $3E48 |
@@ -3691,29 +3696,29 @@ CODE_3E3E:
   INC   Y                                   ; $3E56 |
   MOV   A,($D2)+Y                           ; $3E57 |
   MOV   $0220+X,A                           ; $3E59 |
-  JMP   CODE_2236-$8072                     ; $3E5C |
+  JMP   CODE_2236-MAPPING_OFFSET_3          ; $3E5C |
 
 CODE_3e5f:
   SET1  $13.7                               ; $3E5F |
   MOV   A,#$60                              ; $3E61 |
   MOV   Y,#$03                              ; $3E63 |
   DEC   $A0+X                               ; $3E65 |
-  CALL  CODE_0c46-$7FA8                     ; $3E67 |
+  CALL  CODE_0c46-MAPPING_OFFSET_2          ; $3E67 |
   MOV   A,$0361+X                           ; $3E6A |
   MOV   Y,A                                 ; $3E6D |
   MOV   A,$0360+X                           ; $3E6E |
   MOVW  $10,YA                              ; $3E71 |
   MOV   $47,#$00                            ; $3E73 |
-  JMP   CODE_056f-$7FA8                     ; $3E76 |
+  JMP   CODE_056f-MAPPING_OFFSET_2          ; $3E76 |
 
 CODE_3e79:
   PUSH  A                                   ; $3E79 |
   MOV   Y,#$5C                              ; $3E7A |
   MOV   A,#$00                              ; $3E7C |
-  CALL  CODE_05fa-$7FA8                     ; $3E7E |
+  CALL  CODE_05fa-MAPPING_OFFSET_2          ; $3E7E |
   POP   A                                   ; $3E81 |
   MOV   Y,#$4C                              ; $3E82 |
-  JMP   CODE_05fa-$7FA8                     ; $3E84 |
+  JMP   CODE_05fa-MAPPING_OFFSET_2          ; $3E84 |
 
 CODE_3E87:
   MOV   A,$03F1                             ; $3E87 |
@@ -3744,7 +3749,7 @@ CODE_3ea6:
   SBC   A,$03C1                             ; $3EB0 |
   MOV   $4A,A                               ; $3EB3 |
   MOV   Y,#$4D                              ; $3EB5 |
-  CALL  CODE_05fa-$7FA8                     ; $3EB7 |
+  CALL  CODE_05fa-MAPPING_OFFSET_2          ; $3EB7 |
 
 CODE_3eba:
   RET                                       ; $3EBA |
