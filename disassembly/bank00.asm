@@ -1309,7 +1309,7 @@ ambient_sprite_routines:
   dw CODE_008DE7-1                          ; $0089DA | 1C1 - ?
   dw ambient_transform_smoke_puff-1         ; $0089DC | 1C2
   dw ambient_terrain_destroy_smoke_puff-1   ; $0089DE | 1C3
-  dw CODE_008E37-1                          ; $0089E0 | 1C4 - ?
+  dw ambient_torpedo_puff-1                 ; $0089E0 | 1C4 - Puff from Torpedo explosion
   dw ambient_train_enter_track_ani-1        ; $0089E2 | 1C5
   dw ambient_train_transformation_smoke-1   ; $0089E4 | 1C6
   dw ambient_floating_log_lava_drop-1       ; $0089E6 | 1C7
@@ -1891,22 +1891,22 @@ CODE_008E2F:
 
   db $09, $07, $06, $03, $02, $01, $00      ; $008E30 |
 
-CODE_008E37:
+ambient_torpedo_puff:
   JSR check_ambient_sprite_freeze           ; $008E37 |
   SEP #$20                                  ; $008E3A |
   LDY $7E4C,x                               ; $008E3C |
   LDA $7782,x                               ; $008E3F |
-  BNE CODE_008E4F                           ; $008E42 |
+  BNE .CODE_008E4F                          ; $008E42 |
   DEC $7E4C,x                               ; $008E44 |
-  BMI CODE_008E55                           ; $008E47 |
+  BMI .ret                                  ; $008E47 |
   LDA $8E2F,y                               ; $008E49 |
   STA $7782,x                               ; $008E4C |
 
-CODE_008E4F:
+.CODE_008E4F:
   LDA $8E33,y                               ; $008E4F |
   STA $73C2,x                               ; $008E52 |
 
-CODE_008E55:
+.ret:
   REP #$20                                  ; $008E55 |
   RTS                                       ; $008E57 |
 
