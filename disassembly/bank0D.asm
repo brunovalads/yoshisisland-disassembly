@@ -8870,73 +8870,74 @@ CODE_0DC504:
 init_baby_bowser:
   RTL                                       ; $0DC50C |
 
-; baby bowser states
-  dw $C7D5				                              ; $0DC50D | 00: prepare to jump attack / idle
-  dw $C81A				                              ; $0DC50F | 01: jump attack
-  dw $C834				                              ; $0DC511 | 02: pre-slam flip at apex of jump
-  dw $C876				                              ; $0DC513 | 03: jump slam
-  dw $C916				                              ; $0DC515 | 04: idle after slam attack
-  dw $C985				                              ; $0DC517 | 05: prepare to idle jump
-  dw $C9B3				                              ; $0DC519 | 06: idle jump to prepare for next slam attack
-  dw $C9E4				                              ; $0DC51B | 07:
-  dw $CA06				                              ; $0DC51D | 08:
-  dw $CA0E				                              ; $0DC51F | 09: idle animations after non-attack (flying off yoshi / hit by eggs)
-  dw $CADC				                              ; $0DC521 | 0A: hit by yoshi
-  dw $CAFD				                              ; $0DC523 | 0B: flip around on ground after being hit
-  dw $CB4C				                              ; $0DC525 | 0C: laying on ground after being hit
-  dw $CB6C				                              ; $0DC527 | 0D: prepare to jump attack after being hit
-  dw $CB82				                              ; $0DC529 | 0E: idle after last hit (before cutscene)
-  dw $CBC9				                              ; $0DC52B | 0F: idle after last (during cutscene)
-  dw $CC11				                              ; $0DC52D | 10: prepare to expand
-  dw $CC28				                              ; $0DC52F | 11: fade baby bowser's color to black
-  dw $CE3C				                              ; $0DC531 | 12: pre-fight cutscene (with kamek)
+baby_bowser_state_ptr:
+; small baby bowser states
+  dw baby_bowser_state_00                   ; $0DC50D | 00: prepare to jump attack / idle
+  dw baby_bowser_state_01                   ; $0DC50F | 01: jump attack
+  dw baby_bowser_state_02                   ; $0DC511 | 02: pre-slam flip at apex of jump
+  dw baby_bowser_state_03                   ; $0DC513 | 03: jump slam
+  dw baby_bowser_state_04                   ; $0DC515 | 04: idle after slam attack
+  dw baby_bowser_state_05                   ; $0DC517 | 05: prepare to idle jump
+  dw baby_bowser_state_06                   ; $0DC519 | 06: idle jump to prepare for next slam attack
+  dw baby_bowser_state_07                   ; $0DC51B | 07:
+  dw baby_bowser_state_08                   ; $0DC51D | 08:
+  dw baby_bowser_state_09                   ; $0DC51F | 09: idle animations after non-attack (flying off yoshi / hit by eggs)
+  dw baby_bowser_state_0A                   ; $0DC521 | 0A: hit by yoshi
+  dw baby_bowser_state_0B                   ; $0DC523 | 0B: flip around on ground after being hit
+  dw baby_bowser_state_0C                   ; $0DC525 | 0C: laying on ground after being hit
+  dw baby_bowser_state_0D                   ; $0DC527 | 0D: prepare to jump attack after being hit
+  dw baby_bowser_state_0E                   ; $0DC529 | 0E: idle after last hit (before cutscene)
+  dw baby_bowser_state_0F                   ; $0DC52B | 0F: idle after last (during cutscene)
+  dw baby_bowser_state_10                   ; $0DC52D | 10: prepare to expand
+  dw baby_bowser_state_11                   ; $0DC52F | 11: fade baby bowser's color to black
+  dw baby_bowser_state_12                   ; $0DC531 | 12: pre-fight cutscene (with kamek)
 
 ; midpoint respawn cutscene states
-  dw $EBAA				                              ; $0DC533 | 13: pre-cutscene idle (without kamek)
-  dw $EBE7				                              ; $0DC535 | 14: pre-cutscene centering screen on baby bowser (without kamek)
-  dw $CE3C				                              ; $0DC537 | 15: pre-fight cutscene (without kamek)
+  dw baby_bowser_state_13                   ; $0DC533 | 13: pre-cutscene idle (without kamek)
+  dw baby_bowser_state_14                   ; $0DC535 | 14: pre-cutscene centering screen on baby bowser (without kamek)
+  dw baby_bowser_state_15                   ; $0DC537 | 15: pre-fight cutscene (without kamek)
 
 ; prepare big bowser states
-  dw $D267				                              ; $0DC539 | 16: baby bowser expanding
-  dw $D300				                              ; $0DC53B | 17: prepare fight (black screen)
-  dw $D4AC				                              ; $0DC53D | 18: prepare fade in (black screen)
-  dw $D617				                              ; $0DC53F | 19: idle before fight (no bowser)
-  dw $D65E				                              ; $0DC541 | 1A: big bowser rising into frame
-  dw $D71D				                              ; $0DC543 | 1B: idle (summon rocks)
-  dw $DA15				                              ; $0DC545 | 1C: walk forward
+  dw baby_bowser_state_16                   ; $0DC539 | 16: baby bowser expanding
+  dw baby_bowser_state_17                   ; $0DC53B | 17: prepare fight (black screen)
+  dw baby_bowser_state_18                   ; $0DC53D | 18: prepare fade in (black screen)
+  dw baby_bowser_state_19                   ; $0DC53F | 19: idle before fight (no bowser)
+  dw baby_bowser_state_1A                   ; $0DC541 | 1A: big bowser rising into frame
+  dw baby_bowser_state_1B                   ; $0DC543 | 1B: idle (summon rocks)
+  dw baby_bowser_state_1C                   ; $0DC545 | 1C: walk forward
 
 ; big bowser states
-  dw $D77B				                              ; $0DC547 | 1D: shoot fireballs
-  dw $D913				                              ; $0DC549 | 1E: knockback after hit by egg
-  dw $F1A9				                              ; $0DC54B | 1F: explode after final hit
+  dw baby_bowser_state_1D                   ; $0DC547 | 1D: shoot fireballs
+  dw baby_bowser_state_1E                   ; $0DC549 | 1E: knockback after hit by egg
+  dw baby_bowser_state_1F                   ; $0DC54B | 1F: explode after final hit
 
 ; post-fight cutscene states
-  dw $D617				                              ; $0DC54D | 20: fade into victory cutscene (no bowser)
-  dw $F32A				                              ; $0DC54F | 21: baby bowser falling in frame
-  dw $F358				                              ; $0DC551 | 22: flopping around on the ground
-  dw $F360				                              ; $0DC553 | 23: cutscene with kamek
-  dw $F383				                              ; $0DC555 | 24: unload baby bowser sprite
-  dw $F4F7				                              ; $0DC557 | 25: prepare stork cutscene
-  dw $F5B2				                              ; $0DC559 | 26: stork cutscene
+  dw baby_bowser_state_20                   ; $0DC54D | 20: fade into victory cutscene (no bowser)
+  dw baby_bowser_state_21                   ; $0DC54F | 21: baby bowser falling in frame
+  dw baby_bowser_state_22                   ; $0DC551 | 22: flopping around on the ground
+  dw baby_bowser_state_23                   ; $0DC553 | 23: cutscene with kamek
+  dw baby_bowser_state_24                   ; $0DC555 | 24: unload baby bowser sprite
+  dw baby_bowser_state_25                   ; $0DC557 | 25: prepare stork cutscene
+  dw baby_bowser_state_26                   ; $0DC559 | 26: stork cutscene
 
 main_baby_bowser:
   LDY !s_spr_wildcard_5_lo_dp,x             ; $0DC55B |
   CPY #$24                                  ; $0DC55D |
-  BPL CODE_0DC569                           ; $0DC55F |
+  BPL .CODE_0DC569                          ; $0DC55F |
   CPY #$21                                  ; $0DC561 |
-  BPL CODE_0DC56C                           ; $0DC563 |
+  BPL .CODE_0DC56C                          ; $0DC563 |
   CPY #$16                                  ; $0DC565 |
-  BMI CODE_0DC56C                           ; $0DC567 |
+  BMI .CODE_0DC56C                          ; $0DC567 |
 
-CODE_0DC569:
-  JMP CODE_0DC5E6                           ; $0DC569 | make baby bowser grow
+.CODE_0DC569:
+  JMP .CODE_0DC5E6                          ; $0DC569 | make baby bowser grow
 
-CODE_0DC56C:
-  JSR CODE_0DC5F9                           ; $0DC56C |
+.CODE_0DC56C:
+  JSR .CODE_0DC5F9                          ; $0DC56C |
   LDY !s_spr_wildcard_5_lo_dp,x             ; $0DC56F |
   CPY #$21                                  ; $0DC571 |
-  BPL CODE_0DC5E6                           ; $0DC573 |
-  JSR CODE_0DC64B                           ; $0DC575 |
+  BPL .CODE_0DC5E6                          ; $0DC573 |
+  JSR .CODE_0DC64B                          ; $0DC575 |
   LDY !s_spr_wildcard_5_lo_dp,x             ; $0DC578 |
   CPY #$12                                  ; $0DC57A |
   BPL .CODE_0DC5C5                          ; $0DC57C |
@@ -8987,30 +8988,30 @@ CODE_0DC56C:
 .CODE_0DC5D8:
   LDY !s_spr_wildcard_5_lo_dp,x             ; $0DC5D8 |
   CPY #$0A                                  ; $0DC5DA |
-  BPL CODE_0DC5F0                           ; $0DC5DC |
+  BPL .execute_ai_state                     ; $0DC5DC |
   JSR CODE_0DC6CE                           ; $0DC5DE | baby bowser attack
   JSR CODE_0DC77A                           ; $0DC5E1 |
-  BRA CODE_0DC5F0                           ; $0DC5E4 |
+  BRA .execute_ai_state                     ; $0DC5E4 |
 
 ; make baby bowser grow
-CODE_0DC5E6:
+.CODE_0DC5E6:
   LDA #$0011                                ; $0DC5E6 |
   STA $0B83                                 ; $0DC5E9 |
   JSL CODE_03AF23                           ; $0DC5EC |
 
-CODE_0DC5F0:
-  TXY                                       ; $0DC5F0 |
-  LDA !s_spr_wildcard_5_lo_dp,x             ; $0DC5F1 |
-  ASL A                                     ; $0DC5F3 |
-  TAX                                       ; $0DC5F4 |
-  JSR ($C50D,x)                             ; $0DC5F5 |
+.execute_ai_state:
+  TXY                                       ; $0DC5F0 | Store sprite slot for later
+  LDA !s_spr_wildcard_5_lo_dp,x             ; $0DC5F1 |\
+  ASL A                                     ; $0DC5F3 | | Execute AI state from pointer
+  TAX                                       ; $0DC5F4 | |
+  JSR (baby_bowser_state_ptr,x)             ; $0DC5F5 |/
   RTL                                       ; $0DC5F8 |
 
-CODE_0DC5F9:
+.CODE_0DC5F9:
   LDA !s_spr_oam_pointer,x                  ; $0DC5F9 |
-  BMI CODE_0DC642                           ; $0DC5FC |
+  BMI ..ret                                 ; $0DC5FC |
   LDY !s_spr_draw_priority,x                ; $0DC5FE |
-  BMI CODE_0DC642                           ; $0DC601 |
+  BMI ..ret                                 ; $0DC601 |
   LDA !s_spr_cam_x_pos,x                    ; $0DC603 |
   STA !gsu_r1                               ; $0DC606 |
   LDA !s_spr_cam_y_pos,x                    ; $0DC609 |
@@ -9034,21 +9035,21 @@ CODE_0DC5F9:
   JSL r_gsu_init_1                          ; $0DC63C | GSU init
   LDX $12                                   ; $0DC640 |
 
-CODE_0DC642:
+..ret:
   RTS                                       ; $0DC642 |
 
   dw $0008, $FFE8                           ; $0DC643 |
 
   dw $FD00, $0300                           ; $0DC647 |
 
-CODE_0DC64B:
+.CODE_0DC64B:
   LDY !s_player_ground_pound_state          ; $0DC64B |
-  BEQ CODE_0DC670                           ; $0DC64E |
+  BEQ .CODE_0DC670                          ; $0DC64E |
   LDA !s_player_tile_collision              ; $0DC650 |
   AND #$0007                                ; $0DC653 |
-  BEQ CODE_0DC670                           ; $0DC656 |
+  BEQ .CODE_0DC670                          ; $0DC656 |
   LDY $1064                                 ; $0DC658 |
-  BNE CODE_0DC673                           ; $0DC65B |
+  BNE .ret                                  ; $0DC65B |
   INC $1064                                 ; $0DC65D |
   STZ $0A                                   ; $0DC660 |
   LDA #$0010                                ; $0DC662 |
@@ -9058,10 +9059,10 @@ CODE_0DC64B:
   JSR CODE_0DC674                           ; $0DC66C |
   RTS                                       ; $0DC66F |
 
-CODE_0DC670:
+.CODE_0DC670:
   STZ $1064                                 ; $0DC670 |
 
-CODE_0DC673:
+.ret:
   RTS                                       ; $0DC673 |
 
 CODE_0DC674:
@@ -9230,6 +9231,7 @@ CODE_0DC7BE:
   RTS                                       ; $0DC7D4 |
 
 ; state 0x00 - prepare to jump attack / idle
+baby_bowser_state_00:
   TYX                                       ; $0DC7D5 |
   LDY !s_spr_x_player_dir,x                 ; $0DC7D6 |
   TYA                                       ; $0DC7D9 |
@@ -9262,6 +9264,7 @@ CODE_0DC819:
   RTS                                       ; $0DC819 |
 
 ; state 0x01 - jump attack
+baby_bowser_state_01:
   JSR CODE_0DCF8F                           ; $0DC81A |
   BCC CODE_0DC833                           ; $0DC81D |
   LDA #$001A                                ; $0DC81F |
@@ -9276,6 +9279,7 @@ CODE_0DC833:
   RTS                                       ; $0DC833 |
 
 ; state 0x02 - pre-slam flip at apex of jump
+baby_bowser_state_02:
   TYX                                       ; $0DC834 |
   LDY !s_spr_y_speed_hi,x                   ; $0DC835 |
   BMI CODE_0DC875                           ; $0DC838 |
@@ -9307,6 +9311,7 @@ CODE_0DC875:
   RTS                                       ; $0DC875 |
 
 ; state 0x03 - jump slam
+baby_bowser_state_03:
   TYX                                       ; $0DC876 |
   LDA $7860,x                               ; $0DC877 |
   AND #$0001                                ; $0DC87A |
@@ -9379,6 +9384,7 @@ CODE_0DC915:
   RTS                                       ; $0DC915 |
 
 ; state 0x04 - idle after slam attack
+baby_bowser_state_04:
   JSR CODE_0DCF8F                           ; $0DC916 |
   BCS CODE_0DC920                           ; $0DC919 |
   JSR CODE_0DC935                           ; $0DC91B |
@@ -9440,6 +9446,7 @@ CODE_0DC983:
   RTS                                       ; $0DC984 |
 
 ; state 0x05 - prepare to idle jump
+baby_bowser_state_05:
   JSR CODE_0DCF8F                           ; $0DC985 |
   BCS CODE_0DC998                           ; $0DC988 |
   LDY !s_spr_anim_frame,x                   ; $0DC98A |
@@ -9464,6 +9471,7 @@ CODE_0DC9B2:
   RTS                                       ; $0DC9B2 |
 
 ; state 0x06 - idle jump to prepare for next slam attack
+baby_bowser_state_06:
   TYX                                       ; $0DC9B3 |
   LDA $7860,x                               ; $0DC9B4 |
   AND #$0001                                ; $0DC9B7 |
@@ -9493,6 +9501,7 @@ CODE_0DC9E3:
   RTS                                       ; $0DC9E3 |
 
 ; state 0x07
+baby_bowser_state_07:
   TYX                                       ; $0DC9E4 |
   LDA $7860,x                               ; $0DC9E5 |
   AND #$0001                                ; $0DC9E8 |
@@ -9511,11 +9520,13 @@ CODE_0DCA03:
   JMP CODE_0DCB51                           ; $0DCA03 |
 
 ; state 0x08
+baby_bowser_state_08:
   JSR CODE_0DCF8F                           ; $0DCA06 |
   BCC CODE_0DCA22                           ; $0DCA09 |
   JMP CODE_0DCB74                           ; $0DCA0B |
 
 ; state 0x09 - idle animations after non-attack (flying off yoshi / hit by eggs)
+baby_bowser_state_09:
   TYX                                       ; $0DCA0E |
   LDY !s_spr_y_speed_hi,x                   ; $0DCA0F |
   BMI CODE_0DC9E3                           ; $0DCA12 |
@@ -9611,6 +9622,7 @@ CODE_0DCADB:
   RTS                                       ; $0DCADB |
 
 ; state 0x0A - hit by yoshi
+baby_bowser_state_0A:
   JSR CODE_0DCF8F                           ; $0DCADC |
   LDA $7860,x                               ; $0DCADF |
   AND #$0001                                ; $0DCAE2 |
@@ -9627,6 +9639,7 @@ CODE_0DCAFB:
   BRA CODE_0DCB22                           ; $0DCAFB |
 
 ; state 0x0B - flip around on ground after being hit
+baby_bowser_state_0B:
   TYX                                       ; $0DCAFD |
   JSR CODE_0DCA59                           ; $0DCAFE |
   TXY                                       ; $0DCB01 |
@@ -9678,6 +9691,7 @@ CODE_0DCB3D:
   RTS                                       ; $0DCB4B |
 
 ; state 0x0C - laying on ground after being hit
+baby_bowser_state_0C:
   JSR CODE_0DCF8F                           ; $0DCB4C |
   BCC CODE_0DCB22                           ; $0DCB4F |
 
@@ -9694,6 +9708,7 @@ CODE_0DCB51:
   RTS                                       ; $0DCB6B |
 
 ; state 0x0D - prepare to jump attack after being hit
+baby_bowser_state_0D:
   JSR CODE_0DCF8F                           ; $0DCB6C |
   BCC CODE_0DCB22                           ; $0DCB6F |
   JSR CODE_0DCB2A                           ; $0DCB71 |
@@ -9707,6 +9722,7 @@ CODE_0DCB74:
   JMP CODE_0DC7E4                           ; $0DCB7F |
 
 ; state 0xE - idle after last hit (before cutscene)
+baby_bowser_state_0E:
   TYX                                       ; $0DCB82 |
   LDA #$0128                                ; $0DCB83 |
   STA !gsu_r4                               ; $0DCB86 |
@@ -9739,6 +9755,7 @@ CODE_0DCBC8:
   RTS                                       ; $0DCBC8 |
 
 ; state 0x0F - idle after last (during cutscene)
+baby_bowser_state_0F:
   TYX                                       ; $0DCBC9 |
   LDY $1015                                 ; $0DCBCA |
   BPL CODE_0DCC10                           ; $0DCBCD |
@@ -9777,6 +9794,7 @@ CODE_0DCC10:
   RTS                                       ; $0DCC10 |
 
 ; state 0x10 - prepare to expand
+baby_bowser_state_10:
   JSR CODE_0DCF8F                           ; $0DCC11 |
   BCC CODE_0DCC27                           ; $0DCC14 |
   STZ $1015                                 ; $0DCC16 |
@@ -9790,6 +9808,7 @@ CODE_0DCC27:
   RTS                                       ; $0DCC27 |
 
 ; state 0x11 - fade baby bowser's color to black
+baby_bowser_state_11:
   TYX                                       ; $0DCC28 |
   LDA $7974                                 ; $0DCC29 |
   AND #$0003                                ; $0DCC2C |
@@ -9893,6 +9912,8 @@ CODE_0DCC7A:
 
 ; state 0x12 - pre-fight cutscene (with kamek)
 ; state 0x15 - pre-fight cutscene (without kamek)
+baby_bowser_state_12:
+baby_bowser_state_15:
   TYX                                       ; $0DCE3C |
   BRA CODE_0DCE63                           ; $0DCE3D |
   LDA #$0048                                ; $0DCE3F |
@@ -10226,6 +10247,7 @@ CODE_0DD0AC:
   db $65                                    ; $0DD266 |
 
 ; state 0x16 - baby bowser expanding
+baby_bowser_state_16:
   TYX                                       ; $0DD267 |
   LDA #$000D                                ; $0DD268 |
   STA !gsu_r0                               ; $0DD26B | #$000D -> r0
@@ -10284,6 +10306,7 @@ CODE_0DD2CE:
   dw $00B4, $00B5, $00B6                    ; $0DD2FA |
 
 ; state 0x17 - prepare fight (black screen)
+baby_bowser_state_17:
   PHD                                       ; $0DD300 |
   LDA #$0000                                ; $0DD301 |
   TCD                                       ; $0DD304 |
@@ -10474,6 +10497,7 @@ CODE_0DD464:
   dw $0020, $0040                           ; $0DD4A8 |
 
 ; state 0x18 - prepare fade in (black screen)
+baby_bowser_state_18:
   LDA $0C18                                 ; $0DD4AC |
   CMP #$4000                                ; $0DD4AF |
   BCS CODE_0DD4CC                           ; $0DD4B2 |
@@ -10629,6 +10653,8 @@ CODE_0DD5F7:
 
 ; state 0x19 - idle before fight (no bowser)
 ; state 0x20 - fade into victory cutscene (no bowser)
+baby_bowser_state_19:
+baby_bowser_state_20:
   TYX                                       ; $0DD617 |
   LDA #$7FFF                                ; $0DD618 |
   STA !gsu_r1                               ; $0DD61B |
@@ -10667,6 +10693,7 @@ CODE_0DD655:
   dw $4030, $1020                           ; $0DD65A |
 
 ; state 0x1A - big bowser rising into frame
+baby_bowser_state_1A:
   TYX                                       ; $0DD65E |
   JSR CODE_0DDEAA                           ; $0DD65F |
   LDA #$0990                                ; $0DD662 |
@@ -10753,6 +10780,7 @@ CODE_0DD708:
   dw $00E0, $0004, $0130, $0004, $0080      ; $0DD713 |
 
 ; state 0x1B - idle (summon rocks)
+baby_bowser_state_1B:
   TYX                                       ; $0DD71D |
   JSR CODE_0DDEAA                           ; $0DD71E |
   LDY $1070                                 ; $0DD721 |
@@ -10795,6 +10823,7 @@ CODE_0DD760:
   db $40, $04, $60, $04, $04                ; $0DD776 |
 
 ; state 0x1D - big bowser rising into frame
+baby_bowser_state_1D:
   TYX                                       ; $0DD77B |
   JSR CODE_0DDEAA                           ; $0DD77C |
   JSR spawn_balloon_egg                     ; $0DD77F |
@@ -10986,6 +11015,7 @@ spawn_balloon_egg:
   RTS                                       ; $0DD912 |
 
 ; state 0x1E - knockback after hit by egg
+baby_bowser_state_1E:
   TYX                                       ; $0DD913 |
   JSR CODE_0DDEAA                           ; $0DD914 |
   JSR spawn_balloon_egg                     ; $0DD917 |
@@ -11099,6 +11129,7 @@ CODE_0DD9F6:
   dw $0300, $0200, $0000                    ; $0DDA0F |
 
 ; state 0x1C - walk forward
+baby_bowser_state_1C:
   TYX                                       ; $0DDA15 |
   JSR CODE_0DDEAA                           ; $0DDA16 |
   JSR spawn_balloon_egg                     ; $0DDA19 |
@@ -11968,9 +11999,16 @@ CODE_0DEB58:
   INC !s_spr_anim_frame,x                   ; $0DEB58 |
   RTL                                       ; $0DEB5B |
 
-  dw $EBAA, $EBE7, $EC74, $ECE2             ; $0DEB5C |
-  dw $ED47, $EDAC, $EE00, $EEAB             ; $0DEB64 |
-  dw $EEEC, $EFF1                           ; $0DEB6C |
+  dw baby_bowser_state_13                   ; $0DEB5C |
+  dw baby_bowser_state_14                   ; $0DEB5E |
+  dw $EC74                                  ; $0DEB60 |
+  dw $ECE2                                  ; $0DEB62 |
+  dw $ED47                                  ; $0DEB64 |
+  dw $EDAC                                  ; $0DEB66 |
+  dw $EE00                                  ; $0DEB68 |
+  dw $EEAB                                  ; $0DEB6A |
+  dw $EEEC                                  ; $0DEB6C |
+  dw $EFF1                                  ; $0DEB6E |
 
 main_bower_room_kamek:
   LDY !s_spr_anim_frame,x                   ; $0DEB70 |
@@ -12003,6 +12041,7 @@ main_bower_room_kamek:
   RTL                                       ; $0DEBA9 |
 
 ; state 0x13 - pre-cutscene idle (without kamek)
+baby_bowser_state_13:
   TYX                                       ; $0DEBAA |
   LDA !s_player_x                           ; $0DEBAB |
   CMP #$0060                                ; $0DEBAE |
@@ -12033,6 +12072,7 @@ CODE_0DEBE6:
   RTS                                       ; $0DEBE6 |
 
 ; state 0x14 - pre-cutscene centering screen on baby bowser (without kamek)
+baby_bowser_state_14:
   TYX                                       ; $0DEBE7 |
   STY !r_autoscr_x_active                   ; $0DEBE8 |
   LDA !s_player_x_cam_rel                   ; $0DEBEB |
@@ -12686,7 +12726,8 @@ CODE_0DF19A:
   dw $0459, $052B, $0528, $0525             ; $0DF19B |
   dw $0522, $004E, $004D                    ; $0DF1A3 |
 
-; state 0x3E
+; state 0x1F
+baby_bowser_state_1F:
   TYX                                       ; $0DF1A9 |
   LDA !s_spr_timer_1,x                      ; $0DF1AA |
   BEQ CODE_0DF20F                           ; $0DF1AD |
@@ -12849,6 +12890,7 @@ CODE_0DF2AA:
   RTS                                       ; $0DF329 |
 
 ; state 0x21 - baby bowser falling in frame
+baby_bowser_state_21:
   JSR CODE_0DCF8F                           ; $0DF32A |
   LDA $7860,x                               ; $0DF32D |
   AND #$0001                                ; $0DF330 |
@@ -12872,6 +12914,7 @@ CODE_0DF357:
   RTS                                       ; $0DF357 |
 
 ; state 0x22 - flopping around on the ground
+baby_bowser_state_22:
   JSR CODE_0DCF8F                           ; $0DF358 |
   BCC CODE_0DF35F                           ; $0DF35B |
   INC !s_spr_wildcard_5_lo_dp,x             ; $0DF35D |
@@ -12880,6 +12923,7 @@ CODE_0DF35F:
   RTS                                       ; $0DF35F |
 
 ; state 0x23 - cutscene with kamek
+baby_bowser_state_23:
   TYX                                       ; $0DF360 |
   LDY !s_spr_wildcard_3_lo_dp,x             ; $0DF361 |
   BNE CODE_0DF382                           ; $0DF363 |
@@ -12898,6 +12942,7 @@ CODE_0DF382:
   RTS                                       ; $0DF382 |
 
 ; state 0x24 - unload baby bowser sprite
+baby_bowser_state_24:
   TYX                                       ; $0DF383 |
   REP #$10                                  ; $0DF384 |
   LDA #$005E                                ; $0DF386 |
@@ -12976,6 +13021,7 @@ CODE_0DF3A4:
   db $E6, $E5, $C7, $FF, $09, $FF, $FF      ; $0DF4F0 |
 
 ; state 0x25 - prepare stork cutscene
+baby_bowser_state_25:
   TYX                                       ; $0DF4F7 |
   LDA #$000D                                ; $0DF4F8 |
   STA !gsu_r3                               ; $0DF4FB |
@@ -13048,6 +13094,7 @@ CODE_0DF528:
   RTS                                       ; $0DF5B1 |
 
 ; state 0x26 - stork cutscene
+baby_bowser_state_26:
   TYX                                       ; $0DF5B2 |
   LDA !s_bg3_cam_y                          ; $0DF5B3 |
   CMP #$00F0                                ; $0DF5B6 |
